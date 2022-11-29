@@ -1,0 +1,60 @@
+//11:12
+// Body
+$body-bg: #f8fafc;
+
+// Typography
+$font-family-sans-serif: 'Nunito', sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+// color for rras3k
+$color1: #6c757d;
+$color2: #f8f9fa;
+$color3: white;
+$color4: whitesmoke;
+$color5: #f5f6fa;
+$color6: rgb(241, 240, 246);
+$color7: white;
+$color8: #274cac;
+
+// Body
+$body-bg: $color3;
+
+// Sidebar
+$sideBar-color: $color3;
+$sideBar-backgroundcolor: $color8;
+
+// Header
+$header-backgroundcolor: $color7;
+$header-height: 50px;
+
+// // Barre titre page
+// $zmheader-backgroundcolor : $color2;
+
+
+
+
+
+
+// Bootstrap modifiable
+$white: #fff;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$black: #000;
+$gray: gray;
+
+$primary: #0d6efd;
+$secondary: $gray-600;
+$success: #198754;
+$info: #0dcaf0;
+$warning: #ffc107;
+$danger: #dc3545;
+$light: $gray-100;
+$dark: $gray-900;
