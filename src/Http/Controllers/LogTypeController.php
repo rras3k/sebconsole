@@ -1,8 +1,8 @@
 <?php
 
-namespace Rras3k\console\app\Http\Controllers;
+namespace Rras3k\Sebconsole\Http\Controllers;
 
-use App\Models\Sb\Sys\LogType;
+use Rras3k\Sebconsole\Models\LogType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

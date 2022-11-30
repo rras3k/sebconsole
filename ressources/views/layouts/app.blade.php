@@ -93,7 +93,7 @@ use Illuminate\Support\Facades\Auth;
     <div class="container-fluide">
         <div class="row" style="--bs-gutter-x:0rem !important;">
             <nav id="sidebarMenu" class="col-md-3 g-0 col-lg-2 d-md-block  sidebar collapse">
-                @include('console::menu')
+                @include('sebconsoleviews::menu')
             </nav>
             <div class="offset-md-3 col-md-9  offset-lg-2 col-lg-10 g-0 p-0">
                 @yield('content')

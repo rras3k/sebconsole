@@ -1,9 +1,9 @@
 <?php
 
-namespace Rras3k\console\app\Http\Controllers;
+namespace Rras3k\Sebconsole\Http\Controllers;
 
 
-use Rras3k\console\app\Models\Role;
+use Rras3k\Sebconsole\Models\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

@@ -1,10 +1,12 @@
 <?php
 
-namespace Rras3k\Console\app\Http\Controllers;
+namespace Rras3k\Sebconsole\Http\Controllers;
 
-use App\Models\Sb\Sys\LogDetail;
+use Rras3k\Sebconsole\Models\LogDetail;
 use Illuminate\Http\Request;
-use Rras3k\Console\app\Http\Controllers\SbController;
+use Rras3k\Sebconsole\Http\Controllers\SbController;
+use Illuminate\Support\Facades\View;
+
 
 
 class LogDetailController extends SbController
@@ -18,7 +20,9 @@ class LogDetailController extends SbController
     {
         //
         $data = array();
-        return view('console::logDetail-index', compact('data'));
+        View::addNamespace('sebconsoleviews', 'Rras3k/SebconsoleRoot/ressources/views');
+
+        return view('sebconsoleviews::logDetail-index', compact('data'));
 
     }
     public function listeBt()

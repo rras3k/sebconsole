@@ -5,7 +5,8 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Rras3k\\Sebconsole\\": "src/"
+            "Rras3k\\Sebconsole\\": "src/",
+            "Rras3k\\SebconsoleRoot\\": "/"
         }
     },
     "authors": [
@@ -14,5 +15,16 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {}
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Rras3k\\Sebconsole\\Provider\\SebconsoleServiceProvider"
+            ],
+            "aliases": {
+                "RoleUser": "Rras3k\\SebconsoleRoot\\facades\\RoleUser",
+                "MenuMaker": "Rras3k\\SebconsoleRoot\\facades\\MenuMaker"
+            }
+        }
+    }
 }

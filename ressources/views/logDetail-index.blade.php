@@ -1,7 +1,7 @@
 <?php
 
 ?>
-@extends('console::layout')
+@extends('sebconsoleviews::layouts.app')
 
 @section('head-link')
     <script src="{{ asset('js/bt.js') }}"></script>

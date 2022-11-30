@@ -1,6 +1,6 @@
 <?php
 
-namespace Rras3k\Console\app\Http\Controllers;
+namespace Rras3k\Sebconsole\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
@@ -10,9 +10,9 @@ class ConsoleController extends Controller
     //
     public function show(){
         $data=[];
-        // View::addNamespace('console', 'Rras3k/console/views');
+        View::addNamespace('sebconsoleviews', 'Rras3k/SebconsoleRoot/ressources/views');
 
-        return View::make('console::console-show', compact('data'));
+        return View::make('sebconsoleviews::console-show', compact('data'));
         // return view('console.console-show', compact('data'));
     }
 }

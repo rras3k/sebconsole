@@ -1,6 +1,6 @@
 <?php
 
-namespace Rras3k\console\app\Http\Controllers;
+namespace Rras3k\Sebconsole\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 

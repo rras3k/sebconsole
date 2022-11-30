@@ -1,10 +1,10 @@
 <?php
 
-namespace Rras3k\console\app\Lib;
+namespace Rras3k\Sebconsole\Lib;
 
 use Illuminate\Support\Facades\Auth;
 
-
+use Rras3k\SebconsoleRoot\facades\RoleUser;
 
 use Illuminate\Support\Facades\Storage;
 
@@ -22,7 +22,7 @@ class MenuMaker
         // $droitsByRole = Auth::user()->liste();
         $droitsByRole = RoleUser::liste();
         //  dd($droitsByRole);
-        $menus = config('console.menu');
+        $menus = config('sebconsole.menu');
         foreach ($menus as $ind => $menu) {
             $enable = false;
             foreach ($menu['droits'] as $roleId) {

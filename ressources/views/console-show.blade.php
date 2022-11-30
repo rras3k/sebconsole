@@ -3,7 +3,7 @@
 // dd(Auth()->user());
 ?>
 
-@extends('console::layout')
+@extends('sebconsoleviews::layouts.app')
 
 @section('content')
     <div class="zm-header">

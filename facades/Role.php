@@ -5,10 +5,10 @@ namespace Rras3k\SebconsoleRoot\facades;
 use Illuminate\Support\Facades\Facade;
 
 
-class RoleUser extends Facade
+class Role extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'RoleUser';
+        return 'Role';
     }
 }

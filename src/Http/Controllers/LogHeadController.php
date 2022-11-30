@@ -1,11 +1,13 @@
 <?php
 
-namespace Rras3k\Console\app\Http\Controllers;
+namespace Rras3k\Sebconsole\Http\Controllers;
 
-use Rras3k\Console\app\Models\LogHead;
-use Rras3k\Console\app\Models\LogType;
+use Rras3k\Sebconsole\Models\LogHead;
+use Rras3k\Sebconsole\Models\LogType;
 use Illuminate\Http\Request;
-use Rras3k\Console\app\Http\Controllers\SbController;
+use Rras3k\Sebconsole\Http\Controllers\SbController;
+use Illuminate\Support\Facades\View;
+
 
 
 
@@ -19,9 +21,11 @@ class LogHeadController extends SbController
      */
     public function index()
     {
+        View::addNamespace('sebconsoleviews', 'Rras3k/SebconsoleRoot/ressources/views');
+
         $data = array();
         $data['log_types'] = LogType::liste();
-        return view('console::logHead-index', compact('data'));
+        return view('sebconsoleviews::logHead-index', compact('data'));
 
     }
     public function listeBt()

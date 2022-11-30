@@ -1,13 +1,15 @@
 <?php
 
-namespace Rras3k\Console\app\Models;
+namespace Rras3k\Sebconsole\Lib;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
-use Rras3k\Console\app\Models\Role;
-use Rras3k\Console\app\Models\Role_user;
+use Rras3k\Sebconsole\Models\Role;
+use Rras3k\Sebconsole\Models\Role_user;
 use Illuminate\Support\Facades\Auth;
+
+
 
 
 class RoleUser extends Model
@@ -19,9 +21,20 @@ class RoleUser extends Model
 
     public function __construct()
     {
-        $this->listeRoleUser = Role_user::liste(Auth::user()->id);
+        $this->listeRoleUser = $this->listeInit(Auth::user()->id);
     }
+    public function liste(){
+        return $this->listeRoleUser;
+    }
+    public function listeInit($userId)
+    {
+        $table = new Role();
+        // dd($table->leftjoin('role_user', 'role_user.role_id', '=', 'roles.id')->where('user_id', $userId)->toSql());
 
+        // return $table->leftjoin('role_user', 'role_user.role_id', '=', 'roles.id')->where('user_id', $userId)->get()->keyBy('nom')->toArray();
+
+        return $table->leftjoin('role_user', 'role_user.role_id', '=', 'roles.id')->where('user_id', $userId)->get()->keyBy('id')->toArray();
+    }
     public function roles()
     {
 
@@ -36,7 +49,7 @@ class RoleUser extends Model
         return isset($this->listeRoleUser[$role]);
         // return $this->roles()->where('nom', $role)->exists();
     }
-    public function liste()
+    public function listeOld()
     {
         return [
             Role::ROOT => $this->isRoot(),

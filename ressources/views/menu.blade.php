@@ -1,7 +1,7 @@
 <?php
 
-use Rras3k\Console\app\Models\AuthRole;
-use Rras3k\Console\facades\MenuMaker;
+// use Rras3k\Console\app\Models\AuthRole;
+use Rras3k\SebconsoleRoot\facades\MenuMaker;
 
 $menus = MenuMaker::get();
 
@@ -10,7 +10,7 @@ $menus = MenuMaker::get();
     <div class="position-sticky pt-3">
         <ul class="nav flex-column">
 
-            @if (config('console.affiche_icon_libre'))
+            @if (config('sebconsole.affiche_icon_libre'))
                 <div class="row w-100 ms-auto me-auto">
                     @foreach ($menus as $fav)
                         @if ($fav['enable'])
@@ -43,7 +43,7 @@ $menus = MenuMaker::get();
                 @foreach ($menus as  $menu)
                     @if ($menu['enable'])
 
-                        @if (config('console.menu_accordeon',false))
+                        @if (config('sebconsole.menu_accordeon',false))
 
                             @if ($rubriqueLive != $menu['rubrique'])
                                 @if($accordeonAuMoinsUn)
@@ -81,7 +81,7 @@ $menus = MenuMaker::get();
 
                         @endif
 
-                        @if (!config('console.menu_accordeon',false))
+                        @if (!config('sebconsole.menu_accordeon',false))
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page" href="{{ route($menu['route']) }}"
                                         sb-route="dashboard.index">
@@ -99,7 +99,7 @@ $menus = MenuMaker::get();
 
                     @endif
                 @endforeach
-                @if (config('console.menu_accordeon',false))
+                @if (config('sebconsole.menu_accordeon',false))
                             </div>
                         </div>
                     </div>

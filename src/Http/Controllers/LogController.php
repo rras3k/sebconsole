@@ -2,11 +2,11 @@
 
 
 
-namespace Rras3k\Console\app\Http\Controllers;
+namespace Rras3k\Sebconsole\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Rras3k\Console\app\Models\LogHead;
-use Rras3k\Console\app\Models\LogDetail;
+use Rras3k\Sebconsole\Models\LogHead;
+use Rras3k\Sebconsole\Models\LogDetail;
 use Illuminate\Support\Facades\Auth;
 
 

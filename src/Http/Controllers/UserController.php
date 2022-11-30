@@ -1,9 +1,11 @@
 <?php
 
-namespace Rras3k\Console\app\Http\Controllers;
+namespace Rras3k\Sebconsole\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Rras3k\Console\app\Http\Controllers\SbController;
+use Rras3k\Sebconsole\Http\Controllers\SbController;
+use Illuminate\Support\Facades\View;
+
 
 
 class UserController extends SbController
@@ -16,8 +18,10 @@ class UserController extends SbController
     public function index()
     {
         //
+        View::addNamespace('sebconsoleviews', 'Rras3k/SebconsoleRoot/ressources/views');
+
         $data = array();
-        return view('console::user-index', compact('data'));
+        return view('sebconsoleviews::user-index', compact('data'));
     }
     public function listeBt()
     {

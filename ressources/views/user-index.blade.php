@@ -1,7 +1,7 @@
 <?php
 $menuPage = [['titre' => 'Menu1', 'url' => '#', 'classIcon' => 'fa-solid fa-building'], ['titre' => 'Menu2', 'url' => '#', 'classIcon' => 'fa-solid fa-building']];
 ?>
-@extends('console::layout')
+@extends('sebconsoleviews::layouts.app')
 
 @section('head-link')
 @endsection

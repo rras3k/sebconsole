@@ -1,6 +1,6 @@
 <?php
 
-namespace Rras3k\Console\facades;
+namespace Rras3k\SebconsoleRoot\facades;
 
 use Illuminate\Support\Facades\Facade;
 
