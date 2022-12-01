@@ -33,7 +33,7 @@ class RoleUser extends Model
 
         // return $table->leftjoin('role_user', 'role_user.role_id', '=', 'roles.id')->where('user_id', $userId)->get()->keyBy('nom')->toArray();
 
-        return $table->leftjoin('role_user', 'role_user.role_id', '=', 'roles.id')->where('user_id', $userId)->get()->keyBy('id')->toArray();
+        return $table->leftjoin('role_user', 'role_user.role_id', '=', 'roles.id')->where('user_id', $userId)->get()->keyBy('role_id')->toArray();
     }
     public function roles()
     {
