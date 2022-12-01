@@ -15,27 +15,24 @@
 
 
     <div class="zm-content d-flex justify-content-evenly">
-        <div class="panel w-600 ">
-
-        </div>
         <div class="panel w-600 d-inline-block">
             <div class="row">
                 <div class="col-12 panel-header">
-                    Statistiques
+                    Panel 1 
                 </div>
             </div>
         </div>
         <div class="panel w-600 d-inline-block">
             <div class="row">
                 <div class="col-12 panel-header">
-                    Messages
+                    Panel 2
                 </div>
             </div>
         </div>
         <div class="panel w-600 d-inline-block">
             <div class="row">
                 <div class="col-12 panel-header">
-                    Favoris
+                    Panel 3
                 </div>
             </div>
         </div>

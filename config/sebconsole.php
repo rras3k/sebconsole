@@ -18,8 +18,10 @@ return [
         ['rubrique' => 'Système', 'nom' => 'Logs', 'route' => 'logDetail.index', 'icon' => 'fa-solid fa-braille', 'droits' => [Role::ADMIN]],
 
         // Localisation
-        [ 'rubrique' => 'Localisation', 'nom' => 'Villes', 'route' => 'logDetail.index', 'icon' => 'fa-solid fa-city', 'droits'=> [Role::ADMIN]],
-
+        //[ 'rubrique' => 'Localisation', 'nom' => 'Villes', 'route' => 'logDetail.index', 'icon' => 'fa-solid fa-city', 'droits'=> [Role::ADMIN]],
+        
         // Root
+        [ 'rubrique' => 'Dev', 'nom' => 'Villes', 'route' => 'page-pasgit.index', 'icon' => 'fa-solid fa-city', 'droits'=> [Role::ADMIN]],
+        
     ]
 ];
