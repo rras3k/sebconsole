@@ -12,6 +12,7 @@ Route::group(
 
         // Pages Pasgit
         Route::get($prefix . '/pages-pasgit', [Rras3k\Sebconsole\Http\Controllers\PagePasgitController::class, 'index'])->name('page-pasgit.index');
+        Route::get($prefix . '/pages-pasgit/page/{nompage}', [Rras3k\Sebconsole\Http\Controllers\PagePasgitController::class, 'getPage']);
 
 
         // Console

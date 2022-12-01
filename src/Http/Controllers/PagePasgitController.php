@@ -4,6 +4,8 @@ namespace Rras3k\Sebconsole\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Rras3k\Sebconsole\Http\Controllers\SbController;
+use Illuminate\Support\Facades\View;
+
 
 class PagePasgitController extends SbController
 {
@@ -17,9 +19,35 @@ class PagePasgitController extends SbController
         View::addNamespace('sebconsoleviews', 'Rras3k/SebconsoleRoot/ressources/views');
 
         $data = array();
+
+        $data['pages'] = $this->getListePagesPasgit();
+        // $data['pages'] = [ 'page-1','page-2'];
+            
+        
         return view('sebconsoleviews::page-pasgit', compact('data'));
 
     }
+    private function getListePagesPasgit(){
+        $ret = [];
+        $path = resource_path('views/page-dev');
+        
+        $files = scandir($path);
+        foreach ($files as $key => $value) {
+            if (strlen($value)>10 && ($ind=stripos($value,'.blade.php'))!==false)    {
+                $ret[] = substr($value,0, $ind);
+            }
+        }
+        
+
+        return $ret;
+
+    }
+
+    public function getPage($nomPage){
+        // dd($nomPag);
+        return view('page-dev.'.$nomPage);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -27,7 +55,6 @@ class PagePasgitController extends SbController
      */
     public function create()
     {
-        //
     }
 
     /**

@@ -79,7 +79,7 @@ class SebconsoleServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__ . '/../../config/sebconsole.php' => config_path('sebconsole.php'),
-            // __DIR__ . '/views' => resource_path('views/rras3k/console'),
+            __DIR__ . '/../../ressources/views/pasgit' => resource_path('views/page-dev'),
             // __DIR__ . '/database/migrations/' => database_path('migrations')
         ]);
 

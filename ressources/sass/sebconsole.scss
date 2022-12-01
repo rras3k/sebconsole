@@ -85,6 +85,14 @@ $header_burger_top: calc(($header-height - $header_burger_height)/2);
     border-right-width: 1px;
     border-right-style: solid;
     border-right-color: $border-color;
+
+    & #liste-icons i {
+        color: white;
+    }
+
+    & .accordeion-body {
+        background: red;
+    }
 }
 
 @media (max-width: 767.98px) {

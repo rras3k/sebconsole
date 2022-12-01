@@ -21,7 +21,7 @@ return [
         //[ 'rubrique' => 'Localisation', 'nom' => 'Villes', 'route' => 'logDetail.index', 'icon' => 'fa-solid fa-city', 'droits'=> [Role::ADMIN]],
         
         // Root
-        [ 'rubrique' => 'Dev', 'nom' => 'Villes', 'route' => 'page-pasgit.index', 'icon' => 'fa-solid fa-city', 'droits'=> [Role::ADMIN]],
+        [ 'rubrique' => 'Dev', 'nom' => 'Pages pas Git', 'route' => 'page-pasgit.index', 'icon' => 'fa-solid fa-city', 'droits'=> [Role::ADMIN]],
         
     ]
 ];

@@ -11,7 +11,7 @@ $menus = MenuMaker::get();
         <ul class="nav flex-column">
 
             @if (config('sebconsole.affiche_icon_libre'))
-                <div class="row w-100 ms-auto me-auto">
+                <div id="liste-icons" class="row w-100 ms-auto me-auto">
                     @foreach ($menus as $fav)
                         @if ($fav['enable'])
                             <div class="col-xxl-2 col-md-3  container-fav">
