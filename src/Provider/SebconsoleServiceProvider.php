@@ -56,13 +56,16 @@ class SebconsoleServiceProvider extends ServiceProvider
                 Menu::class, // registering the new command
             ]);
         }
+        // composants view
+        $this->loadViewsFrom(__DIR__ . '/../../resources/views/components', 'forms.input');
+
 
     }
 
 
     private function importPublishOnce()
     // php artisan db:seed --class=RoleSeeder
-
+    //php artisan vendor:publish --force --tag=force
 
     {
         // dd("oo");
