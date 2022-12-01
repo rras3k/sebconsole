@@ -69,23 +69,19 @@ class SebconsoleServiceProvider extends ServiceProvider
         // Asset
         $this->publishes([
             __DIR__ . '/../../public/js' => public_path('js'),
-        ]);
-
-        // console.css
-        $this->publishes([
             __DIR__ . '/../../ressources/sass/sebconsole.scss' => resource_path('/sass/sebconsole.scss'),
             __DIR__ . '/../../ressources/sass/_variables.scss' => resource_path('/sass/_variables.example.scss'),
-        ], 'files_sass');
+            __DIR__ . '/../../ressources/views/pasgit' => resource_path('views/page-dev'),
+            __DIR__ . '/../../database/seeders/RoleSeeder.php' => database_path('seeders/RoleSeeder.php'),
+        ],'force');
+
+        
 
         $this->publishes([
             __DIR__ . '/../../config/sebconsole.php' => config_path('sebconsole.php'),
-            __DIR__ . '/../../ressources/views/pasgit' => resource_path('views/page-dev'),
             // __DIR__ . '/database/migrations/' => database_path('migrations')
         ]);
 
-        $this->publishes([
-            __DIR__ . '/../../database/seeders/RoleSeeder.php' => database_path('seeders/RoleSeeder.php'),
-        ]);
     }
 }
 
