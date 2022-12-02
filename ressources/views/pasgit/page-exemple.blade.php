@@ -96,6 +96,8 @@ $input_textarea = "La Déclaration des droits de l'homme et du citoyen est née 
                                 </x-sebconsoleviews>
                 </div>
             </div>
+                    <br />
+
             <div class="row">
                 <div class="col">
 
