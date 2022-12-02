@@ -80,22 +80,38 @@ $input_textarea = "La Déclaration des droits de l'homme et du citoyen est née 
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <x-sebconsoleviews::forms.textarea col="12" rows="5" :value="$input_textarea" nom="description" label="Description"
-                        placeholder="Saisir la description détaillées de votre activité">
-                    </x-sebconsoleviews>
+                    <x-sebconsoleviews::forms.textarea col="12" rows="5" :value="$input_textarea" nom="description"
+                        label="Description" placeholder="Saisir la description détaillées de votre activité">
+                        </x-sebconsoleviews>
                 </div>
                 <div class="col-md-6">
                     <x-sebconsoleviews::forms.input type="text" :value="$input_text1" nom="resp_nom"
                         label="Saisir le texte 1" placeholder="">
                         </x-sebconsoleviews>
-                    <x-sebconsoleviews::forms.input type="text" :value="$input_text2" nom="resp_nom"
-                        label="Saisir le texte 2" placeholder="">
-                        </x-sebconsoleviews>
-                    <x-sebconsoleviews::forms.input type="text" :value="$input_text2" nom="resp_nom"
-                        label="Saisir le texte 2" placeholder="">
-                        </x-sebconsoleviews>
+                        <x-sebconsoleviews::forms.input type="text" :value="$input_text2" nom="resp_nom"
+                            label="Saisir le texte 2" placeholder="">
+                            </x-sebconsoleviews>
+                            <x-sebconsoleviews::forms.input type="text" :value="$input_text2" nom="resp_nom"
+                                label="Saisir le texte 2" placeholder="">
+                                </x-sebconsoleviews>
                 </div>
             </div>
+            <div class="row">
+                <div class="col">
+
+                    <button type="button" class="btn btn-primary">Primary</button>
+                    <button type="button" class="btn btn-secondary">Secondary</button>
+                    <button type="button" class="btn btn-success">Success</button>
+                    <button type="button" class="btn btn-danger">Danger</button>
+                    <button type="button" class="btn btn-warning">Warning</button>
+                    <button type="button" class="btn btn-info">Info</button>
+                    <button type="button" class="btn btn-light">Light</button>
+                    <button type="button" class="btn btn-dark">Dark</button>
+
+                    <button type="button" class="btn btn-link">Link</button>
+                </div>
+            </div>
+
         </div>
         <br />
         <div class="panel">
