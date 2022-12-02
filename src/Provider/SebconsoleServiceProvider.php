@@ -82,6 +82,8 @@ class SebconsoleServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__ . '/../../config/sebconsole.php' => config_path('sebconsole.php'),
+            __DIR__ . '/../../ressources/sass/ajout.scss' => resource_path('/sass/ajout.scss'),
+
             // __DIR__ . '/database/migrations/' => database_path('migrations')
         ]);
 
