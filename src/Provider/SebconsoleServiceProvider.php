@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 use Rras3k\SebconsoleRoot\commands\Console;
 use Rras3k\SebconsoleRoot\commands\Menu;
 use Rras3k\SebconsoleRoot\commands\Choix;
+use Illuminate\Contracts\Http\Kernel;
+use Rras3k\Sebconsole\Http\Middleware\EnsureUserHasRole;
+use Illuminate\Routing\Router;
+
 
 
 use Illuminate\Support\ServiceProvider;
@@ -46,6 +50,18 @@ class SebconsoleServiceProvider extends ServiceProvider
             __DIR__ . '/../../config/sebconsole.php',
             'sebconsole'
         );
+        // Middleware
+        // $kernel->pushMiddleware(EnsureUserHasRole::class);
+
+        // $router = $this->app->make(Router::class);
+        // $router->pushMiddlewareToGroup('web', EnsureUserHasRole::class);        
+
+        $this->app->booted(function () {
+            $router = $this->app->make(Router::class);
+            $router->aliasMiddleware('role',EnsureUserHasRole::class);            
+            $router->pushMiddleWareToGroup('role', EnsureUserHasRole::class);
+        });
+
         $this->importPublishOnce();
 
         // Console
@@ -64,9 +80,10 @@ class SebconsoleServiceProvider extends ServiceProvider
 
 
     private function importPublishOnce()
-    // php artisan db:seed --class=RoleSeeder
-    //php artisan vendor:publish --force --tag=force
-
+    /*
+    php artisan db:seed --class=RoleSeeder
+    php artisan vendor:publish --force --tag=force
+    */
     {
         // dd("oo");
         // Asset

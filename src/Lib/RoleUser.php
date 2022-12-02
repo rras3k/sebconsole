@@ -44,7 +44,7 @@ class RoleUser extends Model
     //     return $this->belongsToMany(Role::class);
     // }
 
-    public  function hasRole(String $role)
+    public  function hasRole( $role)
     {
         return isset($this->listeRoleUser[$role]);
         // return $this->roles()->where('nom', $role)->exists();
