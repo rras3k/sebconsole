@@ -63,36 +63,32 @@ class RoleUser extends Model
         ];
     }
 
-    public  function isRoot()
-    {
-        return $this->HasRole('root');
-    }
     public  function isAdmin()
     {
-        return $this->HasRole('admin');
+        return $this->HasRole(Role::ADMIN);
     }
     public  function isConsole()
     {
-        return $this->HasRole('console');
+        return $this->HasRole(Role::CONSOLE);
     }
     public  function isMember1()
     {
-        return $this->HasRole('member1');
+        return $this->HasRole(Role::MEMBRE_1);
     }
     public  function isMember2()
     {
-        return $this->HasRole('member2');
+        return $this->HasRole(Role::MEMBRE_2);
     }
     public  function isMember3()
     {
-        return $this->HasRole('member3');
+        return $this->HasRole(Role::MEMBRE_3);
     }
     public  function isMember4()
     {
-        return $this->HasRole('member4');
+        return $this->HasRole(Role::MEMBRE_4);
     }
     public  function isMember5()
     {
-        return $this->HasRole('member5');
+        return $this->HasRole(Role::MEMBRE_5);
     }
 }
