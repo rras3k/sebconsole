@@ -73,7 +73,7 @@ class SebconsoleServiceProvider extends ServiceProvider
             ]);
         }
         // composants view
-        $this->loadViewsFrom(__DIR__ . '/../../resources/views/components', 'forms.input');
+        // $this->loadViewsFrom(__DIR__ . '/../../resources/views/components', 'forms.input');
 
 
     }
