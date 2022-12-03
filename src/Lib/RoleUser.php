@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 
 class RoleUser extends Model
 {
-    use HasFactory;
+    use HasFactory; 
 
 
     private $listeRoleUser = [];
