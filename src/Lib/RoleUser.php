@@ -21,9 +21,11 @@ class RoleUser extends Model
 
     public function __construct()
     {
-        $this->listeRoleUser = $this->listeInit(Auth::user()->id);
+        if (isset(Auth::user()->id))
+            $this->listeRoleUser = $this->listeInit(Auth::user()->id);
     }
-    public function liste(){
+    public function liste()
+    {
         return $this->listeRoleUser;
     }
     public function listeInit($userId)
@@ -37,14 +39,13 @@ class RoleUser extends Model
     }
     public function roles()
     {
-
     }
     // public  function roles()
     // {
     //     return $this->belongsToMany(Role::class);
     // }
 
-    public  function hasRole( $role)
+    public  function hasRole($role)
     {
         return isset($this->listeRoleUser[$role]);
         // return $this->roles()->where('nom', $role)->exists();
