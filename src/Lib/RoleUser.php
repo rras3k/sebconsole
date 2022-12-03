@@ -64,6 +64,10 @@ class RoleUser extends Model
         ];
     }
 
+    public  function isRoot()
+    {
+        return $this->HasRole(Role::ROOT);
+    }
     public  function isAdmin()
     {
         return $this->HasRole(Role::ADMIN);
