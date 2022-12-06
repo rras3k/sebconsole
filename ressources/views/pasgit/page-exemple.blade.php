@@ -29,6 +29,49 @@ $input_textarea = "La Déclaration des droits de l'homme et du citoyen est née 
     </div>
 
     <div class="zm-content">
+
+
+        <div class="panel w-600 d-inline-block">
+            <div class="row">
+                <div class="col-12 panel-header">
+                    Panel 1
+                </div>
+            </div>
+        </div>
+        <div class="panel w-600 d-inline-block">
+            <div class="row">
+                <div class="col-12 panel-header">
+                    Panel 2
+                </div>
+            </div>
+        </div>
+        <div class="panel w-600 d-inline-block">
+            <div class="row">
+                <div class="col-12 panel-header">
+                    Panel 3
+                </div>
+            </div>
+        </div>
+
+        <div class="panel mt-3 mb-3 w-900">
+            <div class="row">
+                <div class="col-12 panel-header">
+                    Résultat du loto
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 panel-rubrique">
+                    Résultat du loto
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    Le 1,2,3,4,5,6 et le 7
+                </div>
+            </div>
+        </div>
+
+
         <div class="panel">
             <div class="row">
                 <div class="col-12 panel-header">
@@ -97,27 +140,7 @@ $input_textarea = "La Déclaration des droits de l'homme et du citoyen est née 
                 </div>
             </div>
             <br />
-            <div class="panel w-600 d-inline-block">
-                <div class="row">
-                    <div class="col-12 panel-header">
-                        Panel 1
-                    </div>
-                </div>
-            </div>
-            <div class="panel w-600 d-inline-block">
-                <div class="row">
-                    <div class="col-12 panel-header">
-                        Panel 2
-                    </div>
-                </div>
-            </div>
-            <div class="panel w-600 d-inline-block">
-                <div class="row">
-                    <div class="col-12 panel-header">
-                        Panel 3
-                    </div>
-                </div>
-            </div>
+
 
             <div class="row">
                 <div class="col">
@@ -136,6 +159,8 @@ $input_textarea = "La Déclaration des droits de l'homme et du citoyen est née 
             </div>
 
         </div>
+
+
         <br />
         <div class="panel">
             <div class="row">

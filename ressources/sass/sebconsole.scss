@@ -491,7 +491,7 @@ $header_burger_top: calc(($header-height - $header_burger_height)/2);
     border-style: solid;
     border-width: 1px;
     border-radius: 10px;
-    // max-width: 900px; 
+    // max-width: 900px;
     margin-right: auto;
     margin-left: auto;
 }
@@ -502,6 +502,8 @@ $header_burger_top: calc(($header-height - $header_burger_height)/2);
     margin-top: 0px;
     margin-bottom: 10px;
     font-size: xx-large;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .panel-footer {
