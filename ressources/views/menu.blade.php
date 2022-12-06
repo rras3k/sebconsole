@@ -125,6 +125,8 @@ $menus = MenuMaker::get();
     <style>
         .w-icon {
             width: 25px;
+                margin-right: 5px;
+}
         }
 
         .a-icon-fav {
