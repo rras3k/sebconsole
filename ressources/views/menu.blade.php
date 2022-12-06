@@ -74,7 +74,7 @@ $menus = MenuMaker::get();
                                             <li class="nav-item">
                                                 <a class="nav-link" aria-current="page"
                                                     href="{{ route($menu['route']) }}" sb-route="dashboard.index">
-                                                    <i class="fa-solid {{ $menu['icon'] }} w-icon"></i>
+                                                    <i class="{{ $menu['icon'] }} w-icon"></i>
                                                     {{ $menu['nom'] }}
                                                 </a>
                                             </li>
@@ -85,7 +85,7 @@ $menus = MenuMaker::get();
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page" href="{{ route($menu['route']) }}"
                                         sb-route="dashboard.index">
-                                        <i class="fa-solid {{ $menu['icon'] }} w-icon"></i>
+                                        <i class=" {{ $menu['icon'] }} w-icon"></i>
                                         {{ $menu['nom'] }}
                                     </a>
                                 </li>
