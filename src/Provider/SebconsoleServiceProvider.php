@@ -5,6 +5,7 @@ namespace Rras3k\Sebconsole\Provider;
 use Rras3k\Sebconsole\Lib\RoleUser;
 use Rras3k\Sebconsole\Lib\MenuMaker;
 use Rras3k\Sebconsole\Models\Role;
+use Rras3k\Sebconsole\Models\LogDetail;
 use Illuminate\Support\Facades\Auth;
 use Rras3k\SebconsoleRoot\commands\Console;
 use Rras3k\SebconsoleRoot\commands\Menu;
@@ -26,8 +27,11 @@ class SebconsoleServiceProvider extends ServiceProvider
             return new RoleUser();
         });
         $this->app->bind('Role', function ($app) {
-            dd("ooo1");
+            // dd("ooo1");
             return new Role();
+        });
+        $this->app->bind('Log', function ($app) {
+            return new LogDetail();
         });
         $this->app->bind('MenuMaker', function ($app) {
             return new MenuMaker();
@@ -37,7 +41,7 @@ class SebconsoleServiceProvider extends ServiceProvider
     public function boot()
     {
         // Migration
-        $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
+        // $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
 
         // Routes
         $this->loadRoutesFrom(__DIR__ . '/../../routes/web.php');
@@ -82,14 +86,20 @@ class SebconsoleServiceProvider extends ServiceProvider
     private function importPublishOnce()
     /*
     php artisan db:seed --class=RoleSeeder
+    php artisan vendor:publish
     php artisan vendor:publish --force --tag=force
+    php artisan vendor:publish --force --tag=config
+    php artisan vendor:publish --force --tag=install
     */
     {
         // dd("oo");
         // Asset
         $this->publishes([
             __DIR__ . '/../../public/js' => public_path('js'),
-            __DIR__ . '/../../ressources/sass/sebconsole.scss' => resource_path('/sass/sebconsole.scss'),
+            __DIR__ . '/../../ressources/sass/_rras3k/console.scss' => resource_path('/sass/_rras3k/console.scss'),
+            __DIR__ . '/../../ressources/sass/_rras3k/def.scss' => resource_path('/sass/_rras3k/def.scss'),
+            __DIR__ . '/../../ressources/sass/_rras3k/panel.scss' => resource_path('/sass/_rras3k/panel.scss'),
+            __DIR__ . '/../../ressources/sass/_rras3k/sidebar.scss' => resource_path('/sass/_rras3k/sidebar.scss'),
             __DIR__ . '/../../ressources/sass/_variables.scss' => resource_path('/sass/_variables.example.scss'),
             __DIR__ . '/../../ressources/views/pasgit' => resource_path('views/page-dev'),
             __DIR__ . '/../../database/seeders/RoleSeeder.php' => database_path('seeders/RoleSeeder.php'),
@@ -99,10 +109,12 @@ class SebconsoleServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__ . '/../../config/sebconsole.php' => config_path('sebconsole.php'),
+        ],'config');
+        $this->publishes([
             __DIR__ . '/../../ressources/sass/ajout.scss' => resource_path('/sass/ajout.scss'),
+            __DIR__ . '/../../database/migrations/' => database_path('migrations')
 
-            // __DIR__ . '/database/migrations/' => database_path('migrations')
-        ]);
+        ],'install');
 
     }
 }

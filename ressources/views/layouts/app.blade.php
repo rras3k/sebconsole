@@ -1,9 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-
-// dd(Auth()->user());
-
 ?>
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -70,7 +67,8 @@ use Illuminate\Support\Facades\Auth;
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="dropstart position-absolute d-none d-md-block top-0 end-0 header-div">
+            <div class="dropstart position-absolute   top-0 end-0 header-div">
+            {{-- <div class="dropstart position-absolute d-none d-md-block top-0 end-0 header-div"> --}}
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
                     {{ Auth()->user()->name }}
@@ -91,7 +89,16 @@ use Illuminate\Support\Facades\Auth;
     </header>
 
 
-    <div class="container-fluide">
+            <nav id="sidebarMenu" class="col-md-3 g-0 col-xxl-2 col-12 d-md-block sidebar collapse">
+                @include('sebconsoleviews::menu')
+            </nav>
+            {{-- <nav id="sidebarMenu" class="col-md-3 g-0 col-lg-2 d-md-block  sidebar collapse">
+                @include('sebconsoleviews::menu')
+            </nav> --}}
+            <main class="offset-md-3 col-md-9  offset-xxl-2 col-xxl-10 g-0 p-0">
+                @yield('content')
+            </main>
+    {{-- <div class="container-fluide">
         <div class="row" style="--bs-gutter-x:0rem !important;">
             <nav id="sidebarMenu" class="col-md-3 g-0 col-lg-2 d-md-block  sidebar collapse">
                 @include('sebconsoleviews::menu')
@@ -100,11 +107,9 @@ use Illuminate\Support\Facades\Auth;
                 @yield('content')
             </div>
         </div>
-    </div>
+    </div> --}}
 
-    {{-- <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
-        integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous">
-    </script> --}}
+   
 
     @yield('foot-link')
 

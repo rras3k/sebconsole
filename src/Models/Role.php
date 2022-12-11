@@ -21,6 +21,9 @@ class Role extends Model
     public  const MEMBRE_4 = 7;
     public  const MEMBRE_5 = 8;
 
+    protected $fillable = ['nom', 'fonction'];
+
+
     public function users()
     {
         return $this->belongsToMany(User::class);

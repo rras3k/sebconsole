@@ -1,9 +1,15 @@
-// @import '_variables';
+// ------ Couleur par défaut
+// $panel-header-backgroundcolor: green !default;
 
+
+@import 'def';
+@import 'panel';
+@import 'sidebar';
+  
 $_color_fond_1: #f5f6fa;
+$_body_color: black; 
 
-$_body_color: black;
-
+$panel-background: red;
 // -------------------- modifiable dans _varisables.scss
 
 // Variables par défaut
@@ -15,7 +21,7 @@ $color5: if(variable-exists(color5), $color5, #f5f6fa);
 $color6: if(variable-exists(color6), $color6, #f5f6fa);
 $color7: if(variable-exists(color7), $color7, white);
 $color8: if(variable-exists(color8), $color8, whitesmoke);
-$color9: if(variable-exists(color9), $color9, whitesmoke);
+// $color9: if(variable-exists(color9), $color9, whitesmoke);
 
 
 $body_color: $_body_color !default;
@@ -29,22 +35,26 @@ $zmheader-backgroundcolor: $_color_fond_1 !default;
 // -------------------- Fin modifiable
 
 
-
 // @debug "header-height" $header-height;
 
 
 
-$border-color: #dfe2e4;
+$border-color: #acaeaf;
 
-$container-bg-SB: $color2;
+// $container-bg-SB: $color2;
 
 @debug $body_color;
+
+
+html{
+    font-size: 100%;
+}
 
 body {
     font-size: .875rem;
     color: $body_color;
     background: $body-bg;
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
 }
 
 header {
@@ -55,6 +65,18 @@ header {
 .header-div {
     line-height: $header-height;
     margin-right: 20px;
+    display:none;
+
+    @include media-breakpoint-up(md) {
+        display: block !important;
+
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        top: $header-height;
+    }
 }
 
 // .feather {
@@ -70,69 +92,6 @@ $header_burger_top: calc(($header-height - $header_burger_height)/2);
     margin-right: 10px;
 }
 
-/*
-   * Sidebar
-   */
-
-.sidebar {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 100;
-    padding: 29px 0 0;
-    background: $sideBar-backgroundcolor;
-    border-right-width: 1px;
-    border-right-style: solid;
-    border-right-color: $border-color;
-
-    & #liste-icons i {
-        color: white;
-    }
-
-    & .accordeion-body {
-        background: red;
-    }
-}
-
-@media (max-width: 767.98px) {
-    .sidebar {
-        top: $header-height;
-    }
-}
-
-.sidebar-sticky {
-    position: relative;
-    top: 0;
-    height: calc(100vh - 48px);
-    padding-top: .5rem;
-    overflow-x: hidden;
-    overflow-y: auto;
-    /* Scrollable contents if viewport is shorter than content. */
-}
-
-.sidebar .nav-link {
-    font-weight: 500;
-    color: $sideBar-color;
-}
-
-.sidebar .nav-link .feather {
-    margin-right: 4px;
-    color: #727272;
-}
-
-.sidebar .nav-link.active {
-    color: #2470dc;
-}
-
-.sidebar .nav-link:hover .feather,
-.sidebar .nav-link.active .feather {
-    color: inherit;
-}
-
-.sidebar-heading {
-    font-size: .75rem;
-}
 
 /*
    * Navbar
@@ -374,31 +333,8 @@ $header_burger_top: calc(($header-height - $header_burger_height)/2);
     margin-bottom: 10px;
 }
 
-// ==========================================================================
 
-.w-500 {
-    max-width: 500px !important;
-}
 
-.w-600 {
-    max-width: 600px !important;
-}
-
-.w-700 {
-    max-width: 700px !important;
-}
-
-.w-800 {
-    max-width: 800px !important;
-}
-
-.w-900 {
-    width: 900px !important;
-}
-
-.w-100pourcent {
-    width: 100% !important;
-}
 
 .display-inline-grid {
     display: inline-grid;
@@ -482,52 +418,7 @@ $header_burger_top: calc(($header-height - $header_burger_height)/2);
     padding-right: 20px;
 }
 
-// -------------------- classes génériques
-.panel {
-    background: $color5;
-    padding: 10px;
-    padding-top: 0px;
-    border-color: $border-color;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 10px;
-    // max-width: 900px;
-    margin-right: auto;
-    margin-left: auto;
-}
 
-.panel-header {
-    text-align: center;
-    height: 30px;
-    margin-top: 0px;
-    margin-bottom: 10px;
-    font-size: xx-large;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-.panel-footer {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-.panel-rubrique {
-    height: 30px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding: 5px;
-    padding-left: 10px;
-    color: #5273a1;
-    text-align: start;
-    background: #d8eaf6;
-    border-style: solid;
-    border-color: #8dabd5b6;
-    border-left-width: 0;
-    border-right-width: 0;
-    border-top-width: 1px;
-    border-bottom-width: 1px;
-}
 
 .m-rl-auto {
     margin-right: auto;
@@ -553,7 +444,7 @@ $header_burger_top: calc(($header-height - $header_burger_height)/2);
     .x-fs-2 {
         font-size: calc(1.325rem + 0.9vw);
     }
-
+ 
     .x-mt-3 {
         margin-top: 1rem;
     }

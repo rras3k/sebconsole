@@ -6,9 +6,13 @@ namespace Rras3k\Sebconsole\Http\Controllers;
 use Rras3k\Sebconsole\Models\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\View;
+use Rras3k\Sebconsole\Http\Controllers\SbController;
 
 
-class RoleController extends Controller
+
+
+class RoleController extends SbController
 {
     /**
      * Display a listing of the resource.
@@ -18,6 +22,27 @@ class RoleController extends Controller
     public function index()
     {
         //
+        View::addNamespace('sebconsoleviews', 'Rras3k/SebconsoleRoot/ressources/views');
+        $data = array();       
+        return view('sebconsoleviews::role-index', compact('data'));
+    }
+    public function listeBt()
+    {
+        $para = [
+            'table_principale' => 'roles',
+            'jointure' => [],
+            'champs' => [
+                'id' => ['table' => 'roles', 'champ_table' => 'id'],
+                'name' => ['table' => 'roles', 'champ_table' => 'nom'],
+                'fonction' => ['table' => 'roles', 'champ_table' => 'fonction']
+            ],
+            'filtre' => [],
+            'filtre_fixe' => [],
+            'sort_defaut' => 'id',
+            'order_defaut' => 'asc',
+        ];
+
+        return $this->listeBootstrapTable($para);
     }
 
     /**
@@ -61,6 +86,16 @@ class RoleController extends Controller
     public function edit(Role $role)
     {
         //
+        View::addNamespace('sebconsoleviews', 'Rras3k/SebconsoleRoot/ressources/views');
+        $data = array();
+        $data['form'] = [];
+        $data['isCreate'] = false;
+        $data['form']['role'] = $this->PrepareToEdit($role);
+
+        $this->menuPage_add('role_id', null, '?filtre[role]=' . $role->id);
+        $data['menu_page'] = $this->menuPage_get();
+
+        return view('sebconsoleviews::role-edit', compact('data'));
     }
 
     /**
@@ -73,6 +108,8 @@ class RoleController extends Controller
     public function update(Request $request, Role $role)
     {
         //
+        dump($role);
+        dd($request);
     }
 
     /**

@@ -24,9 +24,11 @@ Route::group(
 
                 // Users
                 Route::get($prefix . '/user-listeBt', [Rras3k\Sebconsole\Http\Controllers\UserController::class, 'listeBt'])->name('user.listeBt');
-
-
                 Route::resource($prefix . "/user", Rras3k\Sebconsole\Http\Controllers\UserController::class);
+
+                // Roles
+                Route::get($prefix . '/role-listeBt', [Rras3k\Sebconsole\Http\Controllers\RoleController::class, 'listeBt'])->name('role.listeBt');
+                Route::resource($prefix . "/role", Rras3k\Sebconsole\Http\Controllers\RoleController::class);
 
                 // LogHeads
                 Route::get($prefix . '/logHead-listeBt', [Rras3k\Sebconsole\Http\Controllers\LogHeadController::class, 'listeBt'])->name('logHead.listeBt');
