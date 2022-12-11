@@ -41,7 +41,7 @@ class SebconsoleServiceProvider extends ServiceProvider
     public function boot()
     {
         // Migration
-        // $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
 
         // Routes
         $this->loadRoutesFrom(__DIR__ . '/../../routes/web.php');
@@ -112,7 +112,7 @@ class SebconsoleServiceProvider extends ServiceProvider
         ],'config');
         $this->publishes([
             __DIR__ . '/../../ressources/sass/ajout.scss' => resource_path('/sass/ajout.scss'),
-            __DIR__ . '/../../database/migrations/' => database_path('migrations')
+            // __DIR__ . '/../../database/migrations/' => database_path('migrations')
 
         ],'install');
 
