@@ -14,6 +14,23 @@ use Rras3k\Sebconsole\Http\Controllers\SbController;
 
 class RoleController extends SbController
 {
+    public function getPara()
+    {
+        return
+        [
+            'table_principale' => 'roles',
+            'jointure' => [],
+            'champs' => [
+                'id' => ['table' => 'roles', 'champ_table' => 'id'],
+                'name' => ['table' => 'roles', 'champ_table' => 'nom'],
+                'fonction' => ['table' => 'roles', 'champ_table' => 'fonction']
+            ],
+            'filtre' => [],
+            'filtre_fixe' => [],
+            'sort_defaut' => 'id',
+            'order_defaut' => 'asc',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -28,21 +45,8 @@ class RoleController extends SbController
     }
     public function listeBt()
     {
-        $para = [
-            'table_principale' => 'roles',
-            'jointure' => [],
-            'champs' => [
-                'id' => ['table' => 'roles', 'champ_table' => 'id'],
-                'name' => ['table' => 'roles', 'champ_table' => 'nom'],
-                'fonction' => ['table' => 'roles', 'champ_table' => 'fonction']
-            ],
-            'filtre' => [],
-            'filtre_fixe' => [],
-            'sort_defaut' => 'id',
-            'order_defaut' => 'asc',
-        ];
 
-        return $this->listeBootstrapTable($para);
+        return $this->listeBootstrapTable();
     }
 
     /**

@@ -22,7 +22,7 @@ $menuPage = [['titre' => 'Menu1', 'url' => '#', 'classIcon' => 'fa-solid fa-buil
                     <select class="form-control width-auto" name="filtre[role]" id="filtre_role">
                         <option value="">Tous les rôles</option>
                         @foreach ($data['rras3k']['listForFiltre']['role'] as $key => $role)
-                            <option value="{{ $role->id }}">{{ $role->nom }}</option>
+                            <option value="{{ $role->id }}">{{ $role->fonction }}</option>
                         @endforeach
                     </select>
                 </div>

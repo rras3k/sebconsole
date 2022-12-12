@@ -14,28 +14,30 @@ use Illuminate\Support\Facades\Route;
 /*
 
 [
-    'table_principale' => 'users',
-    'jointure' => [
-    ],
-    'champs' => [
-        'id' => ['table' => 'users', 'champ_table' => 'id'],
-        'name' => ['table' => 'users', 'champ_table' => 'name']
-    ],
-    'filtre' => [
-        'role' => [
-            'table' => 'roles',
-            'champ' => 'roles.id',
-            'champToStr' => 'roles.nom',
-            'jointure'=>[
-                ['type' => 'left join', 'table' => 'role_user', 'on' => 'role_user.user_id', 'cible' => 'users.id'],
-                ['type' => 'left join', 'table' => 'roles', 'on' => 'roles.id', 'cible' => 'role_user.role_id'],
-            ]
+            'table_principale' => 'users',
+            'jointure' => [
+            ],
+            'champs' => [
+                'id' => ['table' => 'users', 'champ_table' => 'id'],
+                'name' => ['table' => 'users', 'champ_table' => 'name']
+            ],
+            'filtre' => [
+                'role' => [
+                    'table' => 'roles',
+                    'champ' => 'roles.id',
+                    'affichage_order' => 'roles.fonction',
+                    'affichage_by' => 'asc',
+                    'champToStr' => 'roles.fonction',
+                    'jointure'=>[
+                        ['type' => 'left join', 'table' => 'role_user', 'on' => 'role_user.user_id', 'cible' => 'users.id'],
+                        ['type' => 'left join', 'table' => 'roles', 'on' => 'roles.id', 'cible' => 'role_user.role_id'],
+                    ]
+                ]
+            ],
+            'filtre_fixe' => [],
+            'sort_defaut' => 'id',
+            'order_defaut' => 'asc',
         ]
-    ],
-    'filtre_fixe' => [],
-    'sort_defaut' => 'id',
-    'order_defaut' => 'asc',
-]
 
 
 
@@ -380,7 +382,7 @@ abstract class SbController extends Controller
                 // dd( $this->para['filtre'][$filtre]['table']);
                 // dd( $this->para['filtre'][$filtre]['champ']);
                 // dd($this->para['filtre'][$filtre]['champToStr']);
-                $ret[$filtre] = DB::table($this->para['filtre'][$filtre]['table'])->select($this->para['filtre'][$filtre]['champ'], $this->para['filtre'][$filtre]['champToStr'])->orderBy($this->para['filtre'][$filtre]['champToStr'], 'asc')->get()->toArray();
+                $ret[$filtre] = DB::table($this->para['filtre'][$filtre]['table'])->select($this->para['filtre'][$filtre]['champ'], $this->para['filtre'][$filtre]['champToStr'])->orderBy($this->para['filtre'][$filtre]['affichage_order'], $this->para['filtre'][$filtre]['affichage_by'])->get()->toArray();
                 // dump($ret[$filtre]);
             }
         }

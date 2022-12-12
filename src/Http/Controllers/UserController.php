@@ -22,7 +22,6 @@ class UserController extends SbController
         View::addNamespace('sebconsoleviews', 'Rras3k/SebconsoleRoot/ressources/views');
 
         $data = array();
-        // $data['route'] = route('user.listeBt').$this->filtreUrl();
         $data['route'] = route('user.listeBt');
         $data['rras3k'] = $this->dataToView();
         return view('sebconsoleviews::user-index', compact('data'));
@@ -40,7 +39,9 @@ class UserController extends SbController
                 'role' => [
                     'table' => 'roles',
                     'champ' => 'roles.id',
-                    'champToStr' => 'roles.nom',
+                    'affichage_order' => 'roles.fonction',
+                    'affichage_by' => 'asc',
+                    'champToStr' => 'roles.fonction',
                     'jointure'=>[
                         ['type' => 'left join', 'table' => 'role_user', 'on' => 'role_user.user_id', 'cible' => 'users.id'],
                         ['type' => 'left join', 'table' => 'roles', 'on' => 'roles.id', 'cible' => 'role_user.role_id'],
