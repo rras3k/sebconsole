@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\View;
 
 class PagePasgitController extends SbController
 {
+    public function getPara()
+    {
+    }
     /**
      * Display a listing of the resource.
      *
