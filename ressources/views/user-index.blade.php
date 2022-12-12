@@ -16,6 +16,7 @@ $menuPage = [['titre' => 'Menu1', 'url' => '#', 'classIcon' => 'fa-solid fa-buil
     </div>
 
     <div class="zm-content">
+
         <div class="panel">
             <div class="panel-content">
                 <div id="toolbar" class="col text-start">

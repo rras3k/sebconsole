@@ -22,6 +22,8 @@ $input_textarea = "La Déclaration des droits de l'homme et du citoyen est née 
 @endsection
 
 @section('content')
+
+
     <div class="zm-header">
         <div class="zmh-titre">Page exemple</div>
         <div class="zmh-menus">
@@ -40,7 +42,7 @@ $input_textarea = "La Déclaration des droits de l'homme et du citoyen est née 
                     Loto
                 </div>
                 <div class="panel-content">
-                    Le 1,2,3,4,5,6 et le 78
+                    Le 1,2,3
                 </div>
                 <div class="panel-footer">
                     <button type="button" class="btn btn-primary">Primary</button>

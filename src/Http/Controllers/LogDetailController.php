@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\View;
 
 class LogDetailController extends SbController
 {
+    public function getPara()
+    {
+    }
     /**
      * Display a listing of the resource.
      *
