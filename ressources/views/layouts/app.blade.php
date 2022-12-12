@@ -40,9 +40,9 @@ use Illuminate\Support\Facades\Auth;
 
 
     <header class="navbar sticky-top flex-md-nowrap p-0  pt-1 pb-1 ">
-        <div class="text-light col-md-3 col-lg-2 me-0 px-3 fs-6 text-center">
+        <div class="navbar-brand text-light col-md-3 col-lg-2 me-0 px-3 fs-6 text-center">
             @if (config('sebconsole.affiche_logo'))
-                <img src="/img/logo.png" width="175">
+                <img src="/img/logo.png" >
             @else
                 {{ env('APP_NAME') }}
             @endif

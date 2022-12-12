@@ -17,7 +17,7 @@ $menuPage = [['titre' => 'Menu1', 'url' => '#', 'classIcon' => 'fa-solid fa-buil
 
     <div class="zm-content">
         <div class="panel">
-            <div class="row">
+            <div class="panel-content">
                 <div id="toolbar" class="col text-start">
                     <select class="form-control width-auto" name="filtre[role]" id="filtre_role">
                         <option value="">Tous les rôles</option>

@@ -42,15 +42,22 @@ $panel-footer-color: $panel-content-color !default;
 	margin-left: 5px;
 	vertical-align: top;
 	& >div:last-child {
-		// background: green;
 		border-style: solid;
 		border-color: $border-color;
 		border-bottom-left-radius: $panel-border-radius;
 		border-bottom-right-radius: $panel-border-radius;
 	}
+	& >div:first-child {
+		border-style: solid;
+		border-color: $border-color;
+		border-top-left-radius: $panel-border-radius;
+		border-top-right-radius: $panel-border-radius;
+	}
 	@include media-max("md") {
 		width: 100%;
-		margin-bottom: 10px;
+	}
+	& .panel-main{
+		// padding: 10px;
 	}
 }
 .panel{
@@ -69,8 +76,8 @@ $panel-footer-color: $panel-content-color !default;
 	margin-top: 0px;
 	// margin-bottom: 10px;
 	font-size: xx-large;
-	border-top-left-radius: $panel-border-radius;
-	border-top-right-radius: $panel-border-radius;
+	// border-top-left-radius: $panel-border-radius;
+	// border-top-right-radius: $panel-border-radius;
 }
 
 

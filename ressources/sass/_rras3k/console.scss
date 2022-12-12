@@ -5,9 +5,9 @@
 @import 'def';
 @import 'panel';
 @import 'sidebar';
-  
+
 $_color_fond_1: #f5f6fa;
-$_body_color: black; 
+$_body_color: black;
 
 $panel-background: red;
 // -------------------- modifiable dans _varisables.scss
@@ -46,7 +46,7 @@ $border-color: #acaeaf;
 @debug $body_color;
 
 
-html{
+html {
     font-size: 100%;
 }
 
@@ -65,7 +65,7 @@ header {
 .header-div {
     line-height: $header-height;
     margin-right: 20px;
-    display:none;
+    display: none;
 
     @include media-breakpoint-up(md) {
         display: block !important;
@@ -100,8 +100,10 @@ $header_burger_top: calc(($header-height - $header_burger_height)/2);
 .navbar-brand {
     padding-top: .75rem;
     padding-bottom: .75rem;
-    background-color: rgba(0, 0, 0, .25);
-    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+
+    & img {
+        height: $header-height;
+    }
 }
 
 .navbar .navbar-toggler {
@@ -444,7 +446,7 @@ $header_burger_top: calc(($header-height - $header_burger_height)/2);
     .x-fs-2 {
         font-size: calc(1.325rem + 0.9vw);
     }
- 
+
     .x-mt-3 {
         margin-top: 1rem;
     }
