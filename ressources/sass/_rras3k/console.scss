@@ -102,7 +102,7 @@ $header_burger_top: calc(($header-height - $header_burger_height)/2);
     padding-bottom: .75rem;
 
     & img {
-        height: $header-height;
+        height: calc($header-height - 5px);
     }
 }
 

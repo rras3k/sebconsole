@@ -56,9 +56,6 @@ $panel-footer-color: $panel-content-color !default;
 	@include media-max("md") {
 		width: 100%;
 	}
-	& .panel-main{
-		// padding: 10px;
-	}
 }
 .panel{
 	@extend %panel-base;
