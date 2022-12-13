@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Auth;
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
     </script>
 
-<link rel="stylesheet"
+    <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.2/font/bootstrap-icons.min.css"
         integrity="sha512-YFENbnqHbCRmJt5d+9lHimyEMt8LKSNTMLSaHjvsclnZGICeY/0KYEeiHwD1Ux4Tcao0h60tdcMv+0GljvWyHg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -38,11 +38,10 @@ use Illuminate\Support\Facades\Auth;
 
 <body>
 
-
     <header class="navbar sticky-top flex-md-nowrap p-0  pt-1 pb-1 ">
         <div class="navbar-brand text-light col-md-3 col-lg-2 me-0 px-3 fs-6 text-center">
             @if (config('sebconsole.affiche_logo'))
-                <img src="/img/logo.png" >
+                <img src="/img/logo.png">
             @else
                 {{ env('APP_NAME') }}
             @endif
@@ -68,7 +67,7 @@ use Illuminate\Support\Facades\Auth;
             </button>
 
             <div class="dropstart position-absolute   top-0 end-0 header-div">
-            {{-- <div class="dropstart position-absolute d-none d-md-block top-0 end-0 header-div"> --}}
+                {{-- <div class="dropstart position-absolute d-none d-md-block top-0 end-0 header-div"> --}}
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
                     {{ Auth()->user()->name }}
@@ -89,27 +88,30 @@ use Illuminate\Support\Facades\Auth;
     </header>
 
 
-            <nav id="sidebarMenu" class="col-md-3 g-0 col-xxl-2 col-12 d-md-block sidebar collapse">
-                @include('sebconsoleviews::menu')
-            </nav>
-            {{-- <nav id="sidebarMenu" class="col-md-3 g-0 col-lg-2 d-md-block  sidebar collapse">
-                @include('sebconsoleviews::menu')
-            </nav> --}}
-            <main class="offset-md-3 col-md-9  offset-xxl-2 col-xxl-10 g-0 p-0">
-                @yield('content')
-            </main>
-    {{-- <div class="container-fluide">
-        <div class="row" style="--bs-gutter-x:0rem !important;">
-            <nav id="sidebarMenu" class="col-md-3 g-0 col-lg-2 d-md-block  sidebar collapse">
-                @include('sebconsoleviews::menu')
-            </nav>
-            <div class="offset-md-3 col-md-9  offset-lg-2 col-lg-10 g-0 p-0">
-                @yield('content')
-            </div>
-        </div>
-    </div> --}}
+    <main class="offset-md-3 col-md-9  offset-xxl-2 col-xxl-10 g-0 p-0">
+    <nav id="sidebarMenu" class="col-md-3 g-0 col-xxl-2 col-12 d-md-block sidebar collapse">
+        @include('sebconsoleviews::menu')
+    </nav>
 
-   
+        @yield('content')
+    </main>
+
+
+    {{-- <nav id="sidebarMenu" class="col-md-3 g-0 col-xxl-2 col-12 d-md-block sidebar collapse">
+        @include('sebconsoleviews::menu')
+    </nav>
+
+    <main class="offset-md-3 col-md-9  offset-xxl-2 col-xxl-10 g-0 p-0">
+        @yield('content')
+    </main> --}}
+
+
+
+
+    <footer class="xxxfixed-bottom ">
+        @include('footer')
+    </footer>
+
 
     @yield('foot-link')
 

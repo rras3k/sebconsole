@@ -23,7 +23,6 @@ $color7: if(variable-exists(color7), $color7, white);
 $color8: if(variable-exists(color8), $color8, whitesmoke);
 // $color9: if(variable-exists(color9), $color9, whitesmoke);
 
-
 $body_color: $_body_color !default;
 $sideBar-color : if(variable-exists(sideBar-color), $sideBar-color, $color1);
 $sideBar-backgroundcolor: if(variable-exists(sideBar-backgroundcolor), $sideBar-backgroundcolor, $color8);
@@ -32,6 +31,8 @@ $header-backgroundcolor : if(variable-exists(header-backgroundcolor), $header-ba
 $header-height: 50px !default;
 
 $zmheader-backgroundcolor: $_color_fond_1 !default;
+
+$footer-height : 100px !default;
 // -------------------- Fin modifiable
 
 
@@ -54,7 +55,11 @@ body {
     font-size: .875rem;
     color: $body_color;
     background: $body-bg;
-    // margin-bottom: 20px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
 }
 
 header {
@@ -71,6 +76,12 @@ header {
         display: block !important;
 
     }
+}
+
+footer {
+    height: $footer-height;
+    z-index: 200;
+    background: white;
 }
 
 @media (max-width: 768px) {
@@ -113,6 +124,10 @@ $header_burger_top: calc(($header-height - $header_burger_height)/2);
 
 .navbar .form-control {
     padding: .75rem 1rem;
+}
+
+main {
+    margin-bottom: $footer-height;
 }
 
 .form-control-dark {

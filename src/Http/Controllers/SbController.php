@@ -186,7 +186,18 @@ abstract class SbController extends Controller
         return $ret;
     }
 
-
+    public function getInfoTable($table)
+    {
+        $ret = [];
+//        dd("SELECT COLUMN_NAME,COLUMN_DEFAULT,COLUMN_COMMENT FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '" . env('DB_DATABASE') . "' AND TABLE_NAME = '" . $table . "' ORDER BY ORDINAL_POSITION");
+        $colomns = DB::select("SELECT COLUMN_NAME,COLUMN_DEFAULT,COLUMN_COMMENT FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '" . env('DB_DATABASE') . "' AND TABLE_NAME = '" . $table . "' ORDER BY ORDINAL_POSITION");
+        // dd($colomns);
+        foreach ($colomns as $ind => $column) {
+            $ret[$column->COLUMN_NAME] = $colomns[$ind];
+        }
+        // dd($ret['id']);
+        return $ret;
+    }
     /**
      * Update the specified resource in storage.
      *

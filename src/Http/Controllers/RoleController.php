@@ -39,6 +39,7 @@ class RoleController extends SbController
     public function index()
     {
         //
+        // $this->getInfoTable('roles');
         View::addNamespace('sebconsoleviews', 'Rras3k/SebconsoleRoot/ressources/views');
         $data = array();       
         return view('sebconsoleviews::role-index', compact('data'));
