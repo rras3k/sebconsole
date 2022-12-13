@@ -167,6 +167,25 @@ abstract class SbController extends Controller
         }
         return $ret;
     }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Role  $role
+     * @return \Illuminate\Http\Response
+     */
+    public function getDataSet($list)
+    {
+        $ret = [];
+        $list = $list->toArray();
+        if ($list) {
+            foreach ($list as $key => $elt) {
+                $ret[$key] = old($key) ? old($key) : $elt;
+            }
+        }
+        return $ret;
+    }
+
 
     /**
      * Update the specified resource in storage.
