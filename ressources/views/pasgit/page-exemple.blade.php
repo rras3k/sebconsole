@@ -19,6 +19,8 @@ $input_textarea = "La Déclaration des droits de l'homme et du citoyen est née 
 @extends('sebconsoleviews::layouts.app')
 
 @section('head-link')
+{{-- <script type="module" src="https://md-block.verou.me/md-block.js"></script> --}}
+
 @endsection
 
 @section('content')
@@ -34,6 +36,11 @@ $input_textarea = "La Déclaration des droits de l'homme et du citoyen est née 
     </div> 
 
     <div class="zm-content">
+
+
+
+
+
 
         <h2> Un composant panel centré à l'aide d'un panel-groupe. (100% en version mobile) </h2>
         <div class="panel-group ">

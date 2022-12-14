@@ -33,6 +33,7 @@ use Illuminate\Support\Facades\Auth;
     @yield('head-link')
 
     @vite(['resources/js/app.js'])
+    <script src="{{asset('js/rras3k-core.js')}}"></script>
     {{-- @vite(['resources/js/sb/bt.js']) --}}
 </head>
 
@@ -89,32 +90,29 @@ use Illuminate\Support\Facades\Auth;
 
 
     <main class="offset-md-3 col-md-9  offset-xxl-2 col-xxl-10 g-0 p-0">
-    <nav id="sidebarMenu" class="col-md-3 g-0 col-xxl-2 col-12 d-md-block sidebar collapse">
-        @include('sebconsoleviews::menu')
-    </nav>
-
+        <nav id="sidebarMenu" class="col-md-3 g-0 col-xxl-2 col-12 d-md-block sidebar collapse">
+            @include('sebconsoleviews::menu')
+        </nav>
         @yield('content')
     </main>
 
+    <div id="rras3k-alerte">
+    </div>
 
-    {{-- <nav id="sidebarMenu" class="col-md-3 g-0 col-xxl-2 col-12 d-md-block sidebar collapse">
-        @include('sebconsoleviews::menu')
-    </nav>
-
-    <main class="offset-md-3 col-md-9  offset-xxl-2 col-xxl-10 g-0 p-0">
-        @yield('content')
-    </main> --}}
-
-
-
-
-    <footer class="xxxfixed-bottom ">
+    <footer>
         @include('footer')
     </footer>
-
 
     @yield('foot-link')
 
 </body>
+<style>
+    
+</style>
+<script>
+window.onload = function () {	
+    showAlertes(<?php if (isset($data['alerts'])) echo json_encode($data['alerts']); else ""; ?>)
+}
+</script>
 
 </html>

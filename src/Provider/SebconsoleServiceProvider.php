@@ -114,7 +114,7 @@ class SebconsoleServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../../ressources/sass/ajout.scss' => resource_path('/sass/ajout.scss'),
             // __DIR__ . '/../../database/migrations/' => database_path('migrations')
-            __DIR__ . '/../../ressources/views/footer' => resource_path('views'),
+            __DIR__ . '/../../ressources/views/footer.blade.php' => resource_path('views/footer.blade.php'),
         ],'install');
 
     }
