@@ -82,7 +82,7 @@
         }
     </style>
     <script>
-        function test(pthis) {
+        function test(pthis) { 
             
             alerte("ça commence")
             rras3k_xhr("GET", "{{ route('user.listeBt') }}", "", 'application/json', testCallback)
