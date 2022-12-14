@@ -52,7 +52,7 @@
                                 </x-sebconsoleviews>
                         </div>
                     </div>
-                    <button type="button" onclick="test()" class="btn btn-primary">Primary</button>
+
 
                     </form>
                 </div>
@@ -63,24 +63,34 @@
                                 class="btn btn-secondary">Rafraichir</a>
                         @endif
                         <button form="role" type="submit" class="btn btn-primary">
-                                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
 
                             Enregistrer</button>
                     </div>
                 </div>
             </div>
         </div>
+        <button type="button" onclick="test(this)" class="spinable btn btn-primary">
+            <span class="spinOff spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Primary</button>
     </div>
-
-    <script>
-
-        function test() {
-            alerte("ça commence")
-            rras3k_xhr("GET", "{{route('user.listeBt')}}", "", 'application/json',testCallback)
+    <style>
+        /* .spinable>.spinner-border {
+            display: none;
+        } */
+        .spinOff{
+            display: none;
         }
-        function testCallback(data){
-            alerte('testCallback','danger')
-            alerte (JSON.stringify(data))
+    </style>
+    <script>
+        function test(pthis) {
+            
+            alerte("ça commence")
+            rras3k_xhr("GET", "{{ route('user.listeBt') }}", "", 'application/json', testCallback)
+        }
+
+        function testCallback(data) {
+            alerte('testCallback', 'danger')
+            alerte(JSON.stringify(data))
         }
     </script>
 @endsection

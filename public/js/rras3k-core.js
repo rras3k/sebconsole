@@ -15,14 +15,22 @@ const alerte = (message, type = "success") => {
 function showAlertes(alertes = null) {
 	if (alertes) {
 		alertes.forEach(element => {
-			console.log(element)
+			// console.log(element)
 			alerte(element.texte, element.type)
 		});
 	}
 }
 
 
-// XHR
+// ------------------------------- XHR
+function spin(pthis) {
+	a = pthis.querySelector('.spinOff')
+	alerte(a)
+	a.classList.remove('spinOff')
+}
+
+
+// ------------------------------- XHR
 /*
 contentType = "text/plain",'application/json'
 */
