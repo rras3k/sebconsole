@@ -87,9 +87,9 @@ class SebconsoleServiceProvider extends ServiceProvider
     /*
     php artisan db:seed --class=RoleSeeder
     php artisan vendor:publish
-    php artisan vendor:publish --force --tag=rras3K.force
-    php artisan vendor:publish --force --tag=rras3K.config
-    php artisan vendor:publish --force --tag=rras3K.install
+    php artisan vendor:publish --force --tag=rras3K-force
+    php artisan vendor:publish --force --tag=rras3K-config
+    php artisan vendor:publish --force --tag=rras3K-install
     */
     {
         // dd("oo");
@@ -103,19 +103,19 @@ class SebconsoleServiceProvider extends ServiceProvider
             __DIR__ . '/../../ressources/sass/_variables.scss' => resource_path('/sass/_variables.example.scss'),
             __DIR__ . '/../../ressources/views/pasgit' => resource_path('views/page-dev'),
             __DIR__ . '/../../database/seeders/RoleSeeder.php' => database_path('seeders/RoleSeeder.php'),
-        ], 'rras3K.force');
+        ], 'rras3K-force');
 
         
 
         $this->publishes([
             __DIR__ . '/../../config/sebconsole.php' => config_path('sebconsole.php'),
-        ],'rras3K.config');
+        ],'rras3K-config');
 
         $this->publishes([
             __DIR__ . '/../../ressources/sass/ajout.scss' => resource_path('/sass/ajout.scss'),
             // __DIR__ . '/../../database/migrations/' => database_path('migrations')
             __DIR__ . '/../../ressources/views/footer.blade.php' => resource_path('views/footer.blade.php'),
-        ], 'rras3K.install');
+        ], 'rras3K-install');
 
     }
 }
