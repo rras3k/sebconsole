@@ -77,9 +77,7 @@
         /* .spinable>.spinner-border {
             display: none;
         } */
-        .spinOff{
-            display: none;
-        }
+        
     </style>
     <script>
         function test(pthis) { 
