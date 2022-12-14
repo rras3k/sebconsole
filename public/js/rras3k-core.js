@@ -1,7 +1,8 @@
 
 // -------------------------------- alerte
 
-const alerte = (message, type) => {
+const alerte = (message, type = "success") => {
+	console.log(type)
 	const wrapper = document.createElement('div')
 	wrapper.innerHTML = [
 		`<div class="alert alert-${type} alert-dismissible" role="alert">`,
@@ -18,4 +19,41 @@ function showAlertes(alertes = null) {
 			alerte(element.texte, element.type)
 		});
 	}
+}
+
+
+// XHR
+/*
+contentType = "text/plain",'application/json'
+*/
+function rras3k_xhr(type, url, data, contentType = "text/plain", fctCallback = null) {	
+	para = {
+		method: type,
+		headers: {
+			"Content-type": contentType
+		}
+		}
+	if(type == "POST") {
+		para['body'] = JSON.stringify(data)
+	}
+	
+	fetch(url, {para})
+		.then((response) => response.json())
+		.then((data) => {
+			if (fctCallback != null) {
+				fctCallback(data)
+			}
+			else {
+				alerte("réponse ok")
+				alerte(JSON.stringify(data))
+				
+			}
+			
+		})
+		.catch((erreur) => { 
+			alerte(erreur)
+		}
+		);
+	
+	
 }

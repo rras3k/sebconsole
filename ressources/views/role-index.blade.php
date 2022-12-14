@@ -1,4 +1,7 @@
 <?php
+// $data['alerts']=[
+//     ['texte'=>"coucou","type"=>"danger"],
+// ];
 ?>
 @extends('sebconsoleviews::layouts.app')
 

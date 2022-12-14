@@ -1,10 +1,6 @@
 <?php
 // dd($data['rras3k']['filtreToString']);
-// $data['alerts']=[
-//     ['texte'=>"coucou","type"=>"danger"],
-//     ['texte'=>"coucou","type"=>"danger"],
-//     ['texte'=>"coucou","type"=>"danger"]
-// ];
+
 $menuPage = [['titre' => 'Menu1', 'url' => '#', 'classIcon' => 'fa-solid fa-building'], ['titre' => 'Menu2', 'url' => '#', 'classIcon' => 'fa-solid fa-building']];
 ?>
 @extends('sebconsoleviews::layouts.app')
@@ -57,7 +53,11 @@ $menuPage = [['titre' => 'Menu1', 'url' => '#', 'classIcon' => 'fa-solid fa-buil
             btAddTable('table')
             btAddFiltreSelect('table', 'filtre_role')
 
+            // showAlertes(<?php if (isset($data['alerts'])) echo json_encode($data['alerts']); else ""; ?>)
         }
+
+
+ 
     </script>
 @endsection
 @section('foot-link')

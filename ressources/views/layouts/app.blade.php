@@ -104,15 +104,14 @@ use Illuminate\Support\Facades\Auth;
     </footer>
 
     @yield('foot-link')
-
 </body>
 <style>
     
 </style>
 <script>
-window.onload = function () {	
-    showAlertes(<?php if (isset($data['alerts'])) echo json_encode($data['alerts']); else ""; ?>)
-}
+    // chargement des messages
+showAlertes(<?php if (isset($data['alerts'])) echo json_encode($data['alerts']); else ""; ?>)
+
 </script>
 
 </html>

@@ -1,5 +1,8 @@
 <?php
 // dd();
+// $data['alerts']=[
+//     ['texte'=>"coucou","type"=>"danger"],
+// ];
 ?>
 @extends('sebconsoleviews::layouts.app')
 
@@ -25,9 +28,10 @@
                 <div class="panel-content">
 
                     @if ($data['isCreate'])
-                        <form id="role" method="POST" action="{{ route('role.store') }}" enctype="multipart/form-data" name="role">
+                        <form id="role" method="POST" action="{{ route('role.store') }}" enctype="multipart/form-data"
+                            name="role">
                         @else
-                            <form  id="role" method="POST"
+                            <form id="role" method="POST"
                                 action="{{ route('role.update', $data['form']['role']['id']) }}"
                                 enctype="multipart/form-data" name="role">
                                 <input type="hidden" name="role_id" value="{{ $data['form']['role']['id'] }}">
@@ -48,6 +52,8 @@
                                 </x-sebconsoleviews>
                         </div>
                     </div>
+                    <button type="button" onclick="test()" class="btn btn-primary">Primary</button>
+
                     </form>
                 </div>
                 <div class="panel-footer">
@@ -63,7 +69,17 @@
         </div>
     </div>
 
-    <script></script>
+    <script>
+
+        function test() {
+            alerte("ça commence")
+            rras3k_xhr("GET", "{{route('user.listeBt')}}", "", 'application/json',testCallback)
+        }
+        function testCallback(data){
+            alerte('testCallback','danger')
+            alerte (JSON.stringify(data))
+        }
+    </script>
 @endsection
 {{-- @section('foot-link')
     @include('sebconsoleviews::include.load-bootstrap-table')
