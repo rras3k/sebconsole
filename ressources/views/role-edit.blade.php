@@ -62,7 +62,10 @@
                             <a href="{{ route('role.edit', $data['form']['role']['id']) }}"
                                 class="btn btn-secondary">Rafraichir</a>
                         @endif
-                        <button form="role" type="submit" class="btn btn-primary">Enregistrer</button>
+                        <button form="role" type="submit" class="btn btn-primary">
+                                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+
+                            Enregistrer</button>
                     </div>
                 </div>
             </div>
