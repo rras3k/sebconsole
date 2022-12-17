@@ -388,54 +388,56 @@ main {
     border-bottom-style: solid;
     padding-top: 7px;
     background: $zmheader-backgroundcolor;
+    flex-direction: column;
 }
 
-@media (min-width: 0px) {
-    .zm-header {
-        flex-direction: column;
-    }
-}
+// @media (min-width: 0px) {
+//     .zm-header {
+//         flex-direction: column;
+//     }
+// }
 
-@media (min-width: 768px) {
-    .zm-header {
-        flex-direction: row;
-    }
-}
+// @media (min-width: 768px) {
+//     .zm-header {
+//         flex-direction: row;
+//     }
+// }
 
 .zmh-titre {
     color: $color1;
     font-size: xx-large;
-    // font-weight: bold;
+    width: 100%;
 }
 
-@media (min-width: 0px) {
-    .zmh-titre {
-        width: 100%;
-    }
-}
+// @media (min-width: 0px) {
+//     .zmh-titre {
+//     }
+// }
 
-@media (min-width: 768px) {
-    .zmh-titre {
-        width: 50%;
-    }
-}
+// @media (min-width: 768px) {
+//     .zmh-titre {
+//         width: 50%;
+//     }
+// }
 
 .zmh-menus {
     flex: 0 0 auto;
     padding-top: 3px;
+    width: 100%;
+    padding-bottom: 10px;
+    
 }
 
-@media (min-width: 0px) {
-    .zmh-menus {
-        width: 100%;
-    }
-}
+// @media (min-width: 0px) {
+//     .zmh-menus {
+//     }
+// }
 
-@media (min-width: 768px) {
-    .zmh-menus {
-        width: 50%;
-    }
-}
+// @media (min-width: 768px) {
+//     .zmh-menus {
+//         width: 50%;
+//     }
+// }
 
 .zm-content {
     margin-top: 1rem;

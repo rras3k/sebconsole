@@ -405,6 +405,7 @@ abstract class SbController extends Controller
         if (isset($this->para['filtre'])) {
             foreach ($this->para['filtre'] as  $filtre => $infos) {
                 $ret[$filtre] = DB::table($this->para['filtre'][$filtre]['table'])->select($this->para['filtre'][$filtre]['champ'], $this->para['filtre'][$filtre]['champToStr'])->orderBy($this->para['filtre'][$filtre]['affichage_order'], $this->para['filtre'][$filtre]['affichage_by'])->get()->toArray();
+                // $ret[$filtre] = DB::table($this->para['filtre'][$filtre]['table'])->select($this->para['filtre'][$filtre]['champ'], $this->para['filtre'][$filtre]['champToStr'])->orderBy($this->para['filtre'][$filtre]['affichage_order'], $this->para['filtre'][$filtre]['affichage_by'])->get()->toArray();
             }
         }
         return $ret;
