@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-class MenuPageController 
+class MenuPage
 {
 
 

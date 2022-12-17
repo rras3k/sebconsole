@@ -376,19 +376,12 @@ abstract class SbController extends Controller
     public function filtreToString()
     {
         $ret = '';
-        // if (isset($_GET['filtre_fixe'])) {
-        //     foreach ($_GET['filtre_fixe'] as $filtre => $value) {
-        //         $where = $where ? $where . ' && ' : $where;
-        //         $where .= $this->para['filtre_fixe'][$filtre] . '=' . $value;
-        //     }
-        // }
         if (isset($_GET['filtre'])) {
             foreach ($_GET['filtre'] as $filtre => $value) {
                 $requete = '';
                 $join = '';
                 if ($value) {
                     $res = DB::table($this->para['filtre'][$filtre]['table'])->where($this->para['filtre'][$filtre]['champ'], '=', $value)->pluck($this->para['filtre'][$filtre]['champToStr']);
-                    // dd($res[0]);
                     $ret = $ret ? ', ' . $res[0] : $res[0];
                 }
             }
@@ -407,13 +400,7 @@ abstract class SbController extends Controller
         $ret = [];
         if (isset($this->para['filtre'])) {
             foreach ($this->para['filtre'] as  $filtre => $infos) {
-                // dump( $this->para['filtre']);
-                // dd($filtre);
-                // dd( $this->para['filtre'][$filtre]['table']);
-                // dd( $this->para['filtre'][$filtre]['champ']);
-                // dd($this->para['filtre'][$filtre]['champToStr']);
                 $ret[$filtre] = DB::table($this->para['filtre'][$filtre]['table'])->select($this->para['filtre'][$filtre]['champ'], $this->para['filtre'][$filtre]['champToStr'])->orderBy($this->para['filtre'][$filtre]['affichage_order'], $this->para['filtre'][$filtre]['affichage_by'])->get()->toArray();
-                // dump($ret[$filtre]);
             }
         }
         return $ret;

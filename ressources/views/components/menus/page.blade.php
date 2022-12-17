@@ -1,3 +1,9 @@
+    {{-- 
+    liste[]['class']
+    liste[]['url']
+    liste[]['classIcon']
+    liste[]['titre'] 
+    --}}
     @foreach ($liste as $elt)
         @if (!isset($elt['class']))
             <?php $elt['class'] = ''; ?>
