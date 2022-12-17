@@ -85,7 +85,7 @@ class SebconsoleServiceProvider extends ServiceProvider
     php artisan vendor:publish
     php artisan vendor:publish --force --tag=rras3k-force
     php artisan vendor:publish --force --tag=rras3k-config
-    php artisan vendor:publish --force --tag=rras3k-install
+    
     */
     {
         // dd("oo");
@@ -96,22 +96,22 @@ class SebconsoleServiceProvider extends ServiceProvider
             __DIR__ . '/../../ressources/sass/_rras3k/def.scss' => resource_path('/sass/_rras3k/def.scss'),
             __DIR__ . '/../../ressources/sass/_rras3k/panel.scss' => resource_path('/sass/_rras3k/panel.scss'),
             __DIR__ . '/../../ressources/sass/_rras3k/sidebar.scss' => resource_path('/sass/_rras3k/sidebar.scss'),
-            __DIR__ . '/../../ressources/sass/_variables.scss' => resource_path('/sass/_variables.example.scss'),
             __DIR__ . '/../../ressources/views/pasgit' => resource_path('views/page-dev'),
             __DIR__ . '/../../database/seeders/RoleSeeder.php' => database_path('seeders/RoleSeeder.php'),
         ], 'rras3k-force');
-
         
-
+        
+        
         $this->publishes([
             __DIR__ . '/../../config/sebconsole.php' => config_path('sebconsole.php'),
+            __DIR__ . '/../../ressources/sass/_variables.scss' => resource_path('/sass/_variables.example.scss'),
+            __DIR__ . '/../../ressources/views/footer.blade.php' => resource_path('views/footer.blade.php'),
+            __DIR__ . '/../../ressources/sass/ajout.scss' => resource_path('/sass/ajout.scss'),
         ],'rras3k-config');
 
-        $this->publishes([
-            __DIR__ . '/../../ressources/sass/ajout.scss' => resource_path('/sass/ajout.scss'),
-            // __DIR__ . '/../../database/migrations/' => database_path('migrations')
-            __DIR__ . '/../../ressources/views/footer.blade.php' => resource_path('views/footer.blade.php'),
-        ], 'rras3k-install');
+        // $this->publishes([
+        //     // __DIR__ . '/../../database/migrations/' => database_path('migrations')
+        // ], 'rras3k-install');
 
     }
 }
