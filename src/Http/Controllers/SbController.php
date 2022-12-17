@@ -13,33 +13,37 @@ use Illuminate\Support\Facades\Route;
 
 /*
 
+// -- Paramètres
 [
-            'table_principale' => 'users',
-            'jointure' => [
-            ],
-            'champs' => [
-                'id' => ['table' => 'users', 'champ_table' => 'id'],
-                'name' => ['table' => 'users', 'champ_table' => 'name']
-            ],
-            'filtre' => [
-                'role' => [
-                    'table' => 'roles',
-                    'champ' => 'roles.id',
-                    'affichage_order' => 'roles.fonction',
-                    'affichage_by' => 'asc',
-                    'champToStr' => 'roles.fonction',
-                    'jointure'=>[
-                        ['type' => 'left join', 'table' => 'role_user', 'on' => 'role_user.user_id', 'cible' => 'users.id'],
-                        ['type' => 'left join', 'table' => 'roles', 'on' => 'roles.id', 'cible' => 'role_user.role_id'],
-                    ]
-                ]
-            ],
-            'filtre_fixe' => [],
-            'sort_defaut' => 'id',
-            'order_defaut' => 'asc',
+    'table_principale' => 'users',
+    'jointure' => [
+    ],
+    'champs' => [
+        'id' => ['table' => 'users', 'champ_table' => 'id'],
+        'name' => ['table' => 'users', 'champ_table' => 'name']
+    ],
+    'filtre' => [
+        'role' => [
+            'table' => 'roles',
+            'champ' => 'roles.id',
+            'affichage_order' => 'roles.fonction',
+            'affichage_by' => 'asc',
+            'champToStr' => 'roles.fonction',
+            'jointure'=>[
+                ['type' => 'left join', 'table' => 'role_user', 'on' => 'role_user.user_id', 'cible' => 'users.id'],
+                ['type' => 'left join', 'table' => 'roles', 'on' => 'roles.id', 'cible' => 'role_user.role_id'],
+            ]
         ]
+    ],
+    'filtre_fixe' => [],
+    'sort_defaut' => 'id',
+    'order_defaut' => 'asc',
+ ]
 
-
+// -- rras3k 
+['rras3k']['menu_page'] // liste des mneus de la page
+['rras3k']['form']['nom du formulaire']['nom du champ'] // Liste des champs avec leur valeur
+['rras3k']['liste'] // Liste des listes (foreignId ...)
 
 */
 

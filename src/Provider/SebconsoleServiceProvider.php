@@ -4,14 +4,9 @@ namespace Rras3k\Sebconsole\Provider;
 
 use Rras3k\Sebconsole\Lib\RoleUser;
 use Rras3k\Sebconsole\Lib\MenuMaker;
-use Rras3k\Sebconsole\Lib\MenuPage;
 use Rras3k\Sebconsole\Models\Role;
 use Rras3k\Sebconsole\Models\LogDetail;
-use Illuminate\Support\Facades\Auth;
-use Rras3k\SebconsoleRoot\commands\Console; 
 use Rras3k\SebconsoleRoot\commands\Menu;
-use Rras3k\SebconsoleRoot\commands\Choix;
-use Illuminate\Contracts\Http\Kernel;
 use Rras3k\Sebconsole\Http\Middleware\EnsureUserHasRole;
 use Illuminate\Routing\Router;
 
@@ -36,9 +31,6 @@ class SebconsoleServiceProvider extends ServiceProvider
         });
         $this->app->bind('MenuMaker', function ($app) {
             return new MenuMaker();
-        });
-        $this->app->bind('MenuPage', function ($app) {
-            return new MenuPage();
         });
 
     }
