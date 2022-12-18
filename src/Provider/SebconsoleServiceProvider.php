@@ -78,18 +78,21 @@ class SebconsoleServiceProvider extends ServiceProvider
         // $this->loadViewsFrom(__DIR__ . '/../../resources/views/components', 'forms.input');
 
         $this->loadBladeDirectives();
-        Blade::directive('isCreate', function () {
-            return true;
-            /*
-            return '<php if(isset($data["isCreate"] && $data["isCreate"]):  ?>';
-                */
-        });        
+         
         
     }
 
     private function loadBladeDirectives()
     {
-
+        Blade::directive('isCreate', function () {
+            return '<?php if (isset($data["isCreate"]) && $data["isCreate"]) { ?>';
+        });
+        Blade::directive('elseis', function () {
+            return "<?php }else{ ?>";
+        });
+        Blade::directive('endisCreate', function () {
+            return "<?php } ?>";
+        });
         
     }
     
