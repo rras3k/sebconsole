@@ -9,6 +9,9 @@ use Rras3k\Sebconsole\Models\LogDetail;
 use Rras3k\SebconsoleRoot\commands\Menu;
 use Rras3k\Sebconsole\Http\Middleware\EnsureUserHasRole;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Blade;
+
+
 
 
 
@@ -32,7 +35,6 @@ class SebconsoleServiceProvider extends ServiceProvider
         $this->app->bind('MenuMaker', function ($app) {
             return new MenuMaker();
         });
-
     }
     public function boot()
     {
@@ -58,7 +60,7 @@ class SebconsoleServiceProvider extends ServiceProvider
 
         $this->app->booted(function () {
             $router = $this->app->make(Router::class);
-            $router->aliasMiddleware('role',EnsureUserHasRole::class);            
+            $router->aliasMiddleware('role', EnsureUserHasRole::class);
             $router->pushMiddleWareToGroup('role', EnsureUserHasRole::class);
         });
 
@@ -75,10 +77,22 @@ class SebconsoleServiceProvider extends ServiceProvider
         // composants view
         // $this->loadViewsFrom(__DIR__ . '/../../resources/views/components', 'forms.input');
 
-
+        $this->loadBladeDirectives();
+        Blade::directive('isCreate', function () {
+            return true;
+            /*
+            return '<php if(isset($data["isCreate"] && $data["isCreate"]):  ?>';
+                */
+        });        
+        
     }
 
+    private function loadBladeDirectives()
+    {
 
+        
+    }
+    
     private function importPublishOnce()
     /*
     php artisan db:seed --class=RoleSeeder
@@ -99,15 +113,15 @@ class SebconsoleServiceProvider extends ServiceProvider
             __DIR__ . '/../../ressources/views/pasgit' => resource_path('views/page-dev'),
             __DIR__ . '/../../database/seeders/RoleSeeder.php' => database_path('seeders/RoleSeeder.php'),
         ], 'rras3k-force');
-        
-        
-        
+
+
+
         $this->publishes([
             __DIR__ . '/../../config/sebconsole.php' => config_path('sebconsole.php'),
             __DIR__ . '/../../ressources/sass/_variables.scss' => resource_path('/sass/_variables.example.scss'),
             __DIR__ . '/../../ressources/views/footer.blade.php' => resource_path('views/footer.blade.php'),
             __DIR__ . '/../../ressources/sass/ajout.scss' => resource_path('/sass/ajout.scss'),
-        ],'rras3k-config');
+        ], 'rras3k-config');
 
         // $this->publishes([
         //     // __DIR__ . '/../../database/migrations/' => database_path('migrations')
