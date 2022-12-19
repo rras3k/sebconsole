@@ -29,7 +29,7 @@
             <option selected value="">Choisir...</option>
         @endif
     </select>
-    <label for="input-{{ $nom }}" class="form-label">{{ $label }}</label>
+    <label for="input-{{ $nom }}" class="form-label label_form">{{ $label }}</label>
 
     @error($nom)
         <span class="invalid-feedback" role="alert">

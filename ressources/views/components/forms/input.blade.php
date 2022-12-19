@@ -24,7 +24,7 @@
     @if ($type == 'radio' || $type == 'checkbox')
         <div class="form-check form-check-inline">
             @if ($label)
-                <label class="form-check-label" for="input-{{ $nom }}">
+                <label class="form-check-label label_form" for="input-{{ $nom }}">
                     {{ $label }}
                 </label>
             @endif
