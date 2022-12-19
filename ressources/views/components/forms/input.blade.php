@@ -12,18 +12,13 @@
     'col' => 12,
     'type' => 'text',
     'nom',
-    'error' => '',
     'label',
     'value',
     'readonly'=> isset($readonly) && $readonly=="true" ? true : false,
-    'message',
     'required' => isset($required) && $required=="false" ? false : true,
     'placeholder',
 ])
-@if ($error == '')
-    <?php $error = $nom;
-    ?>
-@endif
+{{--  --}}
 {{-- <div class="col-{{ $col }} position-relative" id="entree-{{ $nom }}"> --}}
 
     @if ($type == 'radio' || $type == 'checkbox')
@@ -39,7 +34,7 @@
         </div>
     @else
         <div class="form-floating mb-1" id="entree-{{ $nom }}"">
-            <input type="{{ $type }}" class="form-control @if ($readonly) input-readonly @endif @if ($required) input-required @endif @error($error) is-invalid @enderror "
+            <input type="{{ $type }}" class="form-control @if ($readonly) input-readonly @endif @if ($required) input-required @endif @error($nom) is-invalid @enderror "
                 id="input-{{ $nom }}" placeholder=" " name="{{ $nom }}"
                 value="{{ $value }}" @if (isset($readonly) && $readonly) readonly @endif>
             @if ($label)
@@ -50,7 +45,7 @@
         </div>
     @endif
 
-    @error($error)
+    @error($nom)
         <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
         </span>

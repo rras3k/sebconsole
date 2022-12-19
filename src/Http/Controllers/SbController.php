@@ -56,6 +56,7 @@ abstract class SbController extends Controller
 
     private $menus;
     private $para;
+    private $hiddens;
 
     /**
      * Update the specified resource in storage.
@@ -152,6 +153,16 @@ abstract class SbController extends Controller
     }
 
     // -------------------------------------------------------- Formulaire --------------------------------------------------------
+    /**
+     * 
+     *
+     * @param  
+     * @return 
+     */
+    public function creation_setHiddenValues($hiddens)
+    {
+        $this->hiddens = $hiddens;
+    }
 
     /**
      * Update the specified resource in storage.
@@ -193,7 +204,7 @@ abstract class SbController extends Controller
     public function getInfoTable($table)
     {
         $ret = [];
-//        dd("SELECT COLUMN_NAME,COLUMN_DEFAULT,COLUMN_COMMENT FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '" . env('DB_DATABASE') . "' AND TABLE_NAME = '" . $table . "' ORDER BY ORDINAL_POSITION");
+        //        dd("SELECT COLUMN_NAME,COLUMN_DEFAULT,COLUMN_COMMENT FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '" . env('DB_DATABASE') . "' AND TABLE_NAME = '" . $table . "' ORDER BY ORDINAL_POSITION");
         $colomns = DB::select("SELECT COLUMN_NAME,COLUMN_DEFAULT,COLUMN_COMMENT FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '" . env('DB_DATABASE') . "' AND TABLE_NAME = '" . $table . "' ORDER BY ORDINAL_POSITION");
         // dd($colomns);
         foreach ($colomns as $ind => $column) {
@@ -399,7 +410,7 @@ abstract class SbController extends Controller
      * @param  none
      * @return tableau avec les datas
      */
-    public function listForFiltre()
+    public function listForFiltre() 
     {
         $ret = [];
         if (isset($this->para['filtre'])) {
@@ -423,6 +434,7 @@ abstract class SbController extends Controller
         $ret = [];
         $ret['filtreToString'] = $this->filtreToString();
         $ret['listForFiltre'] = $this->listForFiltre();
+        $ret['hiddens'] = $this->hiddens;
         return $ret;
     }
 }

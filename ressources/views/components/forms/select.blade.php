@@ -1,6 +1,13 @@
-{{-- 'required' => isset($required) && $required=="false" ? false : true, --}}
-@props(['col', 'nom', 'label', 'required' => isset($required) && $required == 'false' ? false : true, 'liste', 'listeId', 'value', 'listeValue'])
-{{-- <div class="col-{{ $col }}" id="entree-{{ $nom }}"> --}}
+@props([
+    'col',
+    'nom',
+    'label',
+    'required' => isset($required) && $required == 'false' ? false : true,
+    'liste',
+    'listeId',
+    'value',
+    'listeValue'
+    ])
 
 <div class="form-floating mb-1">
     <select id="input-{{ $nom }}"
