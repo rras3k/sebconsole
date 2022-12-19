@@ -115,13 +115,13 @@ class SebconsoleServiceProvider extends ServiceProvider
             __DIR__ . '/../../ressources/sass/_rras3k/sidebar.scss' => resource_path('/sass/_rras3k/sidebar.scss'),
             __DIR__ . '/../../ressources/views/pasgit' => resource_path('views/page-dev'),
             __DIR__ . '/../../database/seeders/RoleSeeder.php' => database_path('seeders/RoleSeeder.php'),
+            __DIR__ . '/../../ressources/sass/_variables.scss' => resource_path('/sass/_variables.example.scss'),
         ], 'rras3k-force');
 
 
 
         $this->publishes([
             __DIR__ . '/../../config/sebconsole.php' => config_path('sebconsole.php'),
-            __DIR__ . '/../../ressources/sass/_variables.scss' => resource_path('/sass/_variables.example.scss'),
             __DIR__ . '/../../ressources/views/footer.blade.php' => resource_path('views/footer.blade.php'),
             __DIR__ . '/../../ressources/sass/ajout.scss' => resource_path('/sass/ajout.scss'),
         ], 'rras3k-config');

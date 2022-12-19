@@ -12,7 +12,7 @@
 @section('content')
     <div class="zm-header">
         <div class="zmh-titre">Edition du role: {{ $data['form']['role']['nom'] }}</div>
-        <div class=" menu_page-SB">
+        <div class="zmh-menus">
             <x-sebconsoleviews::menus.page :liste="$data['menu_page']"></x-sebconsoleviews::menus.page>
         </div>
     </div>
