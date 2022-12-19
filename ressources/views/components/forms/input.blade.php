@@ -38,7 +38,7 @@
                 id="input-{{ $nom }}" placeholder=" " name="{{ $nom }}"
                 value="{{ $value }}" @if (isset($readonly) && $readonly) readonly @endif>
             @if ($label)
-                <label for="input-{{ $nom }}">
+                <label for="input-{{ $nom }}" class="label_form">
                     {{ $label }}
                 </label>
             @endif

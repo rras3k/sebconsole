@@ -40,7 +40,7 @@ use Illuminate\Support\Facades\Route;
     'order_defaut' => 'asc',
  ]
 
-// -- rras3k 
+// -- rras3k
 ['rras3k']['menu_page'] // liste des mneus de la page
 ['rras3k']['form']['nom du formulaire']['nom du champ'] // Liste des champs avec leur valeur
 ['rras3k']['liste'] // Liste des listes (foreignId ...)
@@ -154,10 +154,10 @@ abstract class SbController extends Controller
 
     // -------------------------------------------------------- Formulaire --------------------------------------------------------
     /**
-     * 
      *
-     * @param  
-     * @return 
+     *
+     * @param
+     * @return
      */
     public function creation_setHiddenValues($hiddens)
     {
@@ -410,7 +410,7 @@ abstract class SbController extends Controller
      * @param  none
      * @return tableau avec les datas
      */
-    public function listForFiltre() 
+    public function listForFiltre()
     {
         $ret = [];
         if (isset($this->para['filtre'])) {
@@ -435,6 +435,7 @@ abstract class SbController extends Controller
         $ret['filtreToString'] = $this->filtreToString();
         $ret['listForFiltre'] = $this->listForFiltre();
         $ret['hiddens'] = $this->hiddens;
+        $ret['forms'][$this->para['table_principale']] = $this->PrepareToCreate($this->para['table_principale']);
         return $ret;
     }
 }
