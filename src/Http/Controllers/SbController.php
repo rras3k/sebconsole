@@ -55,85 +55,117 @@ abstract class SbController extends Controller
     abstract public function getPara();
 
     private $menus;
-    private $para;
-    private $hiddens;
+    private $paras;
+    // private $hiddens;
+    // private $formPara;
+    private $entree;
+    private $entites = [];
+
 
     /**
-     * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
+     * @param
+     * @return
      */
     public function __construct()
     {
         $this->menus = config('sebconsole.menu_page');
-        $this->para = $this->getPara();
-        // dd($this->para);
+        $this->paras = $this->getPara();
+    }
+    
+
+    public function setEntree($entree)
+    {
+        $this->entree = $entree;
+        if (!isset($this->entites[$this->entree])) $this->entites[$this->entree] = [];
+        if (!isset($this->entites[$this->entree]['form'])) $this->entites[$this->entree]['form'] = [];
+        if (!isset($this->entites[$this->entree]['menu']))  $this->entites[$this->entree]['menu'] = [];
+        $this->entites[$this->entree]['menu']['values'] = [];
+        $this->entites[$this->entree]['menu']['liste'] = [];
     }
 
+    private function loadPara()
+    {
+    }
+
+
+    // -------------------------------------------------------- Page -------------------------------------------------------------
+
+    /**
+     *
+     * @param
+     * @return
+     */
+    public function page_setTitre($titre)
+    {
+        $this->entites[$this->entree]['titre'] = $titre;
+    }
+
+    // /**
+    //  *
+    //  * @param
+    //  * @return
+    //  */
+    // private function page_getTitre($entite)
+    // {
+    //     return $this->entites[$this->entree]['titre'];
+    // }
 
     // -------------------------------------------------------- Menu page --------------------------------------------------------
 
     /**
-     * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
+     * @param
+     * @return
      */
     private $values = []; // TODO
 
     /**
-     * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
+     * @param
+     * @return
      */
     public function menuPage_add($champId, $value, $para_url = null)
     {
-        $this->values[$champId] = ['value_para' => $para_url, 'value_code' => $value];
+        $this->entites[$this->entree]['menu']['values'][$champId] = ['value_para' => $para_url, 'value_code' => $value];
+        // $this->values[$champId] = ['value_para' => $para_url, 'value_code' => $value];
     }
 
     /**
-     * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
+     * @param
+     * @return
      */
-    public static function menuPage_addEntree($champId, $route, $titre, $icon)
+    public function menuPage_addEntree($champId, $route, $titre, $icon)
     {
-        self::$menus[] = ['champ_id' => $champId, 'route' => $route, 'titre' => $titre, 'icon' => $icon];
+        $this->entites[$this->entree]['menu']['liste'] = ['champ_id' => $champId, 'route' => $route, 'titre' => $titre, 'icon' => $icon];
     }
 
     /**
-     * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
+     * @param
+     * @return
      */
     public function menuPage_get()
     {
         $ret = [];
-        foreach ($this->menus as $menu) {
-            if (Route::currentRouteName() != $menu['route'] && (isset($this->values[$menu['champ_id']]['value_code']) || isset($this->values[$menu['champ_id']]['value_para']))) {
+        // dd($this->menus);
+        foreach ($this->entites[$this->entree]['menu']['liste'] as $menu) {
+            if (Route::currentRouteName() != $menu['route'] && (isset($this->entites[$this->entree]['menu']['values'][$menu['champ_id']]['value_code']) || isset($this->entites[$this->entree]['menu']['values'][$menu['champ_id']]['value_para']))) {
                 $para = '';
-                if ($this->values[$menu['champ_id']]['value_para']) {
-                    $para = '/' .  $this->values[$menu['champ_id']]['value_para'];
+                if ($this->entites[$this->entree]['menu']['values'][$menu['champ_id']]['value_para']) {
+                    $para = '/' .  $this->entites[$this->entree]['menu']['values'][$menu['champ_id']]['value_para'];
                 }
-                if (isset($menu['condition']) && isset($this->values[$menu['condition']['champ']]['value_code'])) {
+                if (isset($menu['condition']) && isset($this->entites[$this->entree]['menu']['values'][$menu['condition']['champ']]['value_code'])) {
                     switch ($menu['condition']['operateur']) {
                         case '==':
-                            if ($this->values[$menu['condition']['champ']]['value_code'] == $menu['condition']['value']) {
-                                $ret[] = ['titre' => $menu['titre'], 'url' => route($menu['route'], $this->values[$menu['champ_id']]['value_code']) . $para, 'classIcon' => 'fa-solid' . $menu['icon'], 'class' => isset($menu['class']) ? $menu['class'] : ''];
+                            if ($this->entites[$this->entree]['menu']['values'][$menu['condition']['champ']]['value_code'] == $menu['condition']['value']) {
+                                $ret[] = ['titre' => $menu['titre'], 'url' => route($menu['route'], $this->entites[$this->entree]['menu']['values'][$menu['champ_id']]['value_code']) . $para, 'classIcon' => 'fa-solid' . $menu['icon'], 'class' => isset($menu['class']) ? $menu['class'] : ''];
                             }
                             break;
                     }
                 } else {
-                    $ret[] = ['titre' => $menu['titre'], 'url' => route($menu['route'], $this->values[$menu['champ_id']]['value_code']) . $para, 'classIcon' => 'fa-solid ' . $menu['icon'], 'class' => isset($menu['class']) ? $menu['class'] : ''];
+                    $ret[] = ['titre' => $menu['titre'], 'url' => route($menu['route'], $this->entites[$this->entree]['menu']['values'][$menu['champ_id']]['value_code']) . $para, 'classIcon' => 'fa-solid ' . $menu['icon'], 'class' => isset($menu['class']) ? $menu['class'] : ''];
                 }
             }
         }
@@ -141,11 +173,9 @@ abstract class SbController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
+     * @param
+     * @return
      */
     public function aff($texte)
     {
@@ -153,91 +183,138 @@ abstract class SbController extends Controller
     }
 
     // -------------------------------------------------------- Formulaire --------------------------------------------------------
+
     /**
      *
      *
      * @param
      * @return
      */
-    public function creation_setHiddenValues($hiddens)
+    public function form_setIsCreate($isCreate)
     {
-        $this->hiddens = $hiddens;
+        $this->entites[$this->entree]['form']['isCreate'] = $isCreate;
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
-     */
-    public function PrepareToEdit($list)
-    {
-        $ret = [];
-        $list = $list->toArray();
-        if ($list) {
-            foreach ($list as $key => $elt) {
-                $ret[$key] = old($key) ? old($key) : $elt;
-            }
-        }
-        return $ret;
-    }
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
-     */
-    public function getDataSet($list)
-    {
-        $ret = [];
-        $list = $list->toArray();
-        if ($list) {
-            foreach ($list as $key => $elt) {
-                $ret[$key] = old($key) ? old($key) : $elt;
-            }
-        }
-        return $ret;
-    }
+    // /**
+    //  *
+    //  *
+    //  * @param
+    //  * @return
+    //  */
+    // public function form_isCreate($entree){
+    //     return $this->entites[$this->entree]['form']['isCreate'] ;
+    // }
 
-    public function getInfoTable($table)
+    /**
+     *
+     *
+     * @param
+     * @return
+     */
+    public function form_setHiddenValues($hiddens)
+    {
+        $this->entites[$this->entree]['form']['hiddens'] = $hiddens;
+    }
+    // /**
+    //  *
+    //  *
+    //  * @param
+    //  * @return
+    //  */
+    // public function form_getHiddenValues($entree)
+    // {
+    //     if (isset($this->paras[$entree]['form']['hiddens'])) {
+    //         return $this->paras[$entree]['form']['hiddens'];
+    //     } else return null;
+    // }
+
+    /**
+     *
+     *
+     * @param
+     * @return
+     */
+    public function form_buildData()
     {
         $ret = [];
-        //        dd("SELECT COLUMN_NAME,COLUMN_DEFAULT,COLUMN_COMMENT FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '" . env('DB_DATABASE') . "' AND TABLE_NAME = '" . $table . "' ORDER BY ORDINAL_POSITION");
+        $table = $this->getTablePrincipale();
         $colomns = DB::select("SELECT COLUMN_NAME,COLUMN_DEFAULT,COLUMN_COMMENT FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '" . env('DB_DATABASE') . "' AND TABLE_NAME = '" . $table . "' ORDER BY ORDINAL_POSITION");
-        // dd($colomns);
-        foreach ($colomns as $ind => $column) {
-            $ret[$column->COLUMN_NAME] = $colomns[$ind];
-        }
-        // dd($ret['id']);
-        return $ret;
-    }
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
-     */
-    public function PrepareToCreate($table)
-    {
-        $ret = [];
-        $colomns = DB::select("SELECT COLUMN_NAME,COLUMN_DEFAULT FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'coquinland-v2-dev' AND TABLE_NAME = 'urls' ORDER BY ORDINAL_POSITION");
         foreach ($colomns as $ind => $column) {
             $ret[$column->COLUMN_NAME] = $column->COLUMN_DEFAULT;
         }
-        return $ret;
+        $this->form_setData($ret);
     }
+
+
+
+    /**
+     *
+     * @return
+     */
+    public function form_setData($list)
+    {
+        // dd($list);
+        $ret = [];
+        if ($list != null) {
+
+            $list = is_array($list) ? $list : $list->toArray();
+            if ($list) {
+                foreach ($list as $key => $elt) {
+                    $ret[$key] = old($key) ? old($key) : $elt;
+                }
+            }
+        } else {
+            dd("erreur");
+        }
+        // if (!isset($this->paras[$this->entree]['form'])) $this->paras[$this->entree]['form'] = [];
+        $this->entites[$this->entree]['form']['datas'] = $ret;
+    }
+
+    // /**
+    //  *
+    //  * @return
+    //  */
+    // public function form_getData($entree)
+    // {
+    //     return $this->paras[$entree]['form']['datas'];
+    // }
+
+    // /**
+    //  *
+    //  * @param
+    //  * @return
+    //  */
+    // public function getDataSet($list)
+    // {
+    //     $ret = [];
+    //     $list = $list->toArray();
+    //     if ($list) {
+    //         foreach ($list as $key => $elt) {
+    //             $ret[$key] = old($key) ? old($key) : $elt;
+    //         }
+    //     }
+    //     return $ret;
+    // }
+
+    // public function getInfoTable($table)
+    // {
+    //     $ret = [];
+    //     //        dd("SELECT COLUMN_NAME,COLUMN_DEFAULT,COLUMN_COMMENT FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '" . env('DB_DATABASE') . "' AND TABLE_NAME = '" . $table . "' ORDER BY ORDINAL_POSITION");
+    //     $colomns = DB::select("SELECT COLUMN_NAME,COLUMN_DEFAULT,COLUMN_COMMENT FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '" . env('DB_DATABASE') . "' AND TABLE_NAME = '" . $table . "' ORDER BY ORDINAL_POSITION");
+    //     // dd($colomns);
+    //     foreach ($colomns as $ind => $column) {
+    //         $ret[$column->COLUMN_NAME] = $colomns[$ind];
+    //     }
+    //     // dd($ret['id']);
+    //     return $ret;
+    // }
 
     // -------------------------------------------------------- Liste data --------------------------------------------------------
 
     /**
-     * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
+     * @param
+     * @return
      */
     private function getRealArray($tmp)
     {
@@ -249,11 +326,9 @@ abstract class SbController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
+     * @param
+     * @return
      */
     public function filtreUrl()
     {
@@ -268,17 +343,15 @@ abstract class SbController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
+     * @param
+     * @return
      */
-    public function listeBootstrapTable($showRequete = false)
+    public function listeBootstrapTable($entree, $showRequete = false)
     {
-        $requetePara = $this->getRequete(false);
+        $requetePara = $this->getRequete($entree, false);
         if ($showRequete) dump($requetePara);
-        $requeteNb = $this->getRequete(true);
+        $requeteNb = $this->getRequete($entree, true);
         $table = DB::select($requetePara['requete']);
         $nbRecords = DB::select($requeteNb['requete'])[0]->nb;
         return response()->json(array('total' => $nbRecords, 'totalNotFiltered' => $nbRecords, 'rows' => $this->getRealArray($table)));
@@ -287,52 +360,50 @@ abstract class SbController extends Controller
 
 
     /**
-     * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
+     * @param
+     * @return
      */
-    public function getRequete($isForCount = false)
+    public function getRequete($entree, $isForCount = false)
     {
-            // dd($para);
-        ;
+        // dd($para);
+        // dd($this->para);
 
-        $limit = isset($_GET['limit']) ? $_GET['limit'] : (isset($this->para['limit']) ? $_GET['limit'] : 25);
+        $limit = isset($_GET['limit']) ? $_GET['limit'] : (isset($this->paras[$entree]['limit']) ? $_GET['limit'] : 25);
 
         // Récupération de la chaine pour la revherche
         $search = isset($_GET['search']) && $_GET['search'] ?  '%' . $_GET['search'] . '%' : '';
 
         // Création SELECT
         $select = '';
-        foreach ($this->para['champs'] as $champ => $infoChamp) {
+        foreach ($this->paras[$entree]['champs'] as $champ => $infoChamp) {
             $select .= $select ? ',' : '';
-            $select .= isset($infoChamp['table']) ? $infoChamp['table'] . '.' . $infoChamp['champ_table'] . ' as ' . $champ : $this->para['table_principale'] . '.' . $champ . ' as ' . $champ;
+            $select .= isset($infoChamp['table']) ? $infoChamp['table'] . '.' . $infoChamp['champ_table'] . ' as ' . $champ : $this->paras[$entree]['table_principale'] . '.' . $champ . ' as ' . $champ;
         }
 
         $offset = isset($_GET['offset']) ?  $_GET['offset'] : 0;
         // Création Sort
         if (isset($_GET['sort']) && $_GET['sort']) {
-            $sort = isset($this->para['champs'][$_GET['sort']]['table']) ? $this->para['champs'][$_GET['sort']]['table'] . '.' . $this->para['champs'][$_GET['sort']]['champ_table'] : $this->para['table_principale'] . '.' . $_GET['sort'];
+            $sort = isset($this->paras[$entree]['champs'][$_GET['sort']]['table']) ? $this->paras[$entree]['champs'][$_GET['sort']]['table'] . '.' . $this->paras[$entree]['champs'][$_GET['sort']]['champ_table'] : $this->paras[$entree]['table_principale'] . '.' . $_GET['sort'];
         } else {
-            // echo $this->para['champs'][$this->para['sort_defaut']]['table'];
-            $sort = isset($this->para['champs'][$this->para['sort_defaut']]['table']) ? $this->para['champs'][$this->para['sort_defaut']]['table'] . '.' . $this->para['champs'][$this->para['sort_defaut']]['champ_table'] : $this->para['table_principale'] . '.' . $this->para['sort_defaut'];
+            // echo $this->paras['champs'][$this->paras['sort_defaut']]['table'];
+            $sort = isset($this->paras[$entree]['champs'][$this->paras[$entree]['sort_defaut']]['table']) ? $this->paras[$entree]['champs'][$this->paras[$entree]['sort_defaut']]['table'] . '.' . $this->paras[$entree]['champs'][$this->paras[$entree]['sort_defaut']]['champ_table'] : $this->paras[$entree]['table_principale'] . '.' . $this->paras[$entree]['sort_defaut'];
         }
         // Création Order
-        $order = isset($_GET['order']) && $_GET['order'] ? $_GET['order'] : $this->para['order_defaut'];
+        $order = isset($_GET['order']) && $_GET['order'] ? $_GET['order'] : $this->paras[$entree]['order_defaut'];
 
 
         // Création JOIN
         $join = '';
-        foreach ($this->para['jointure'] as $jointure) {
+        foreach ($this->paras[$entree]['jointure'] as $jointure) {
             $join .= ' ' . $jointure['type'] . ' ' . $jointure['table'] . ' on ' . $jointure['on'] . ' = ' . $jointure['cible'];
         }
 
         // Création orWhere  pour search
         $orWheres = '';
         if ($search) {
-            foreach ($this->para['champs'] as $champ => $infoChamp) {
-                $orWhereChamp = isset($infoChamp['table']) ? $infoChamp['table'] . '.' . $infoChamp['champ_table'] : $this->para['table_principale'] . '.' . $champ;
+            foreach ($this->paras[$entree]['champs'] as $champ => $infoChamp) {
+                $orWhereChamp = isset($infoChamp['table']) ? $infoChamp['table'] . '.' . $infoChamp['champ_table'] : $this->paras[$entree]['table_principale'] . '.' . $champ;
                 $orWheres .= $orWheres ? ' || ' : $orWheres;
                 $orWheres .= $orWhereChamp . ' like "' . $search . '"';
             }
@@ -345,13 +416,13 @@ abstract class SbController extends Controller
         if (isset($_GET['filtre'])) {
             foreach ($_GET['filtre'] as $filtre => $value) {
                 if ($value) {
-                    if (isset($this->para['filtre'][$filtre]['jointure']) && $this->para['filtre'][$filtre]['jointure']) {
-                        foreach ($this->para['filtre'][$filtre]['jointure'] as $jointure) {
+                    if (isset($this->paras[$entree]['filtre'][$filtre]['jointure']) && $this->paras[$entree]['filtre'][$filtre]['jointure']) {
+                        foreach ($this->paras[$entree]['filtre'][$filtre]['jointure'] as $jointure) {
                             $join .= ' ' . $jointure['type'] . ' ' . $jointure['table'] . ' on ' . $jointure['on'] . ' = ' . $jointure['cible'];
                         }
                     }
                     $where = $where ? $where . ' && ' : $where;
-                    $where .= $this->para['filtre'][$filtre]['champ'] . '=' . $value;
+                    $where .= $this->paras[$entree]['filtre'][$filtre]['champ'] . '=' . $value;
                 }
             }
         }
@@ -360,7 +431,7 @@ abstract class SbController extends Controller
         if (isset($_GET['filtre_fixe'])) {
             foreach ($_GET['filtre_fixe'] as $filtre => $value) {
                 $where = $where ? $where . ' && ' : $where;
-                $where .= $this->para['filtre_fixe'][$filtre] . '=' . $value;
+                $where .= $this->paras[$entree]['filtre_fixe'][$filtre] . '=' . $value;
             }
         }
         $where = $where ? ' ( ' . $where . ' ) ' : '';
@@ -374,21 +445,19 @@ abstract class SbController extends Controller
         $where = $where ? ' where ' . $where : '';
 
         if ($isForCount) {
-            $requete = 'select count(*) as nb from ' . $this->para['table_principale'] . ' ' . $join . $where;
+            $requete = 'select count(*) as nb from ' . $this->paras[$entree]['table_principale'] . ' ' . $join . $where;
         } else {
-            $requete = 'select ' . $select . ' from ' . $this->para['table_principale'] . ' ' . $join . $where . ' order by ' . $sort . ' ' . $order . ' limit ' . $limit . ' offset ' . $offset;
+            $requete = 'select ' . $select . ' from ' . $this->paras[$entree]['table_principale'] . ' ' . $join . $where . ' order by ' . $sort . ' ' . $order . ' limit ' . $limit . ' offset ' . $offset;
         }
         return  ['requete' => $requete, 'offset' => $offset, 'limit' => $limit];
     }
 
     /**
-     * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
+     * @param
+     * @return
      */
-    public function filtreToString()
+    public function filtreToString($para)
     {
         $ret = '';
         if (isset($_GET['filtre'])) {
@@ -396,7 +465,7 @@ abstract class SbController extends Controller
                 $requete = '';
                 $join = '';
                 if ($value) {
-                    $res = DB::table($this->para['filtre'][$filtre]['table'])->where($this->para['filtre'][$filtre]['champ'], '=', $value)->pluck($this->para['filtre'][$filtre]['champToStr']);
+                    $res = DB::table($para['filtre'][$filtre]['table'])->where($para['filtre'][$filtre]['champ'], '=', $value)->pluck($para['filtre'][$filtre]['champToStr']);
                     $ret = $ret ? ', ' . $res[0] : $res[0];
                 }
             }
@@ -410,13 +479,12 @@ abstract class SbController extends Controller
      * @param  none
      * @return tableau avec les datas
      */
-    public function listForFiltre()
+    public function listForFiltre($para)
     {
         $ret = [];
-        if (isset($this->para['filtre'])) {
-            foreach ($this->para['filtre'] as  $filtre => $infos) {
-                $ret[$filtre] = DB::table($this->para['filtre'][$filtre]['table'])->select($this->para['filtre'][$filtre]['champ'], $this->para['filtre'][$filtre]['champToStr'])->orderBy($this->para['filtre'][$filtre]['affichage_order'], $this->para['filtre'][$filtre]['affichage_by'])->get()->toArray();
-                // $ret[$filtre] = DB::table($this->para['filtre'][$filtre]['table'])->select($this->para['filtre'][$filtre]['champ'], $this->para['filtre'][$filtre]['champToStr'])->orderBy($this->para['filtre'][$filtre]['affichage_order'], $this->para['filtre'][$filtre]['affichage_by'])->get()->toArray();
+        if (isset($para['filtre'])) {
+            foreach ($para['filtre'] as  $filtre => $infos) {
+                $ret[$filtre] = DB::table($para['filtre'][$filtre]['table'])->select($para['filtre'][$filtre]['champ'], $para['filtre'][$filtre]['champToStr'])->orderBy($para['filtre'][$filtre]['affichage_order'], $para['filtre'][$filtre]['affichage_by'])->get()->toArray();
             }
         }
         return $ret;
@@ -431,11 +499,33 @@ abstract class SbController extends Controller
 
     public function dataToView()
     {
-        $ret = [];
-        $ret['filtreToString'] = $this->filtreToString();
-        $ret['listForFiltre'] = $this->listForFiltre();
-        $ret['hiddens'] = $this->hiddens;
-        $ret['forms'][$this->para['table_principale']] = $this->PrepareToCreate($this->para['table_principale']);
-        return $ret;
+        // $ret = [];
+        // // dump($this->paras);
+        // foreach ($this->paras as $entite => $value) {
+        //     //  dump($entite);
+        //     $ret[$entite] = [];
+        //     $ret[$entite]['filtreToString'] = $this->filtreToString($value);
+        //     $ret[$entite]['listForFiltre'] = $this->listForFiltre($value);
+        //     $ret[$entite]['menu_page'] = $this->menuPage_get($entite);
+        //     // Form
+        //     $ret[$entite]['form'] = [];
+        //     $ret[$entite]['form']['hiddens'] = $this->form_getHiddenValues($entite);
+        //     $ret[$entite]['form']['data'] = $this->form_getData($entite);
+        //     $ret[$entite]['form']['isCreate'] = $this->form_isCreate($entite);
+        //     // Page
+        //     $ret[$entite]['page'] = [];
+        //     $ret[$entite]['page']['titre'] = $this->page_getTitre($entite);
+
+        // }
+        // dd('FIN', $this->entites);
+        return $this->entites;
+        // return $ret;
+    }
+
+
+    // -----------------------
+    private function getTablePrincipale()
+    {
+        return $this->paras[$this->entree]['table_principale'];
     }
 }

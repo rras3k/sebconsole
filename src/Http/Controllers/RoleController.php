@@ -14,22 +14,30 @@ use Rras3k\Sebconsole\Http\Controllers\SbController;
 
 class RoleController extends SbController
 {
+    public function __construct()
+    {
+        $this->setEntree('main');
+        parent::__construct();
+    }
+
     public function getPara()
     {
         return
-        [
-            'table_principale' => 'roles',
-            'jointure' => [],
-            'champs' => [
-                'id' => ['table' => 'roles', 'champ_table' => 'id'],
-                'name' => ['table' => 'roles', 'champ_table' => 'nom'],
-                'fonction' => ['table' => 'roles', 'champ_table' => 'fonction']
-            ],
-            'filtre' => [],
-            'filtre_fixe' => [],
-            'sort_defaut' => 'id',
-            'order_defaut' => 'asc',
-        ];
+            [
+                'main' => [
+                    'table_principale' => 'roles',
+                    'jointure' => [],
+                    'champs' => [
+                        'id' => ['table' => 'roles', 'champ_table' => 'id'],
+                        'name' => ['table' => 'roles', 'champ_table' => 'nom'],
+                        'fonction' => ['table' => 'roles', 'champ_table' => 'fonction']
+                    ],
+                    'filtre' => [],
+                    'filtre_fixe' => [],
+                    'sort_defaut' => 'id',
+                    'order_defaut' => 'asc',
+                ]
+            ];
     }
     /**
      * Display a listing of the resource.
@@ -38,16 +46,15 @@ class RoleController extends SbController
      */
     public function index()
     {
-        //
-        // $this->getInfoTable('roles');
         View::addNamespace('sebconsoleviews', 'Rras3k/SebconsoleRoot/ressources/views');
-        $data = array();       
+        $data = array();
+        $data['rras3k'] = $this->dataToView();
         return view('sebconsoleviews::role-index', compact('data'));
     }
+
     public function listeBt()
     {
-
-        return $this->listeBootstrapTable();
+        return $this->listeBootstrapTable('main');
     }
 
     /**
@@ -93,12 +100,23 @@ class RoleController extends SbController
         //
         View::addNamespace('sebconsoleviews', 'Rras3k/SebconsoleRoot/ressources/views');
         $data = array();
-        $data['form'] = [];
-        $data['isCreate'] = false;
-        $data['form']['role'] = $this->PrepareToEdit($role);
+        // $data['form'] = [];
+        // $data['isCreate'] = false;
+        // $data['form']['role'] = $this->PrepareToEdit($role);
 
-        $this->menuPage_add('role_id', null, '?filtre[role]=' . $role->id);
-        $data['menu_page'] = $this->menuPage_get();
+        // $this->menuPage_add('role_id', null, '?filtre[role]=' . $role->id);
+        // $data['menu_page'] = $this->menuPage_get();
+
+
+        $this->page_setTitre("Edition du rôle: " . $role->nom);
+        $this->form_setIsCreate(false);
+        $this->form_setData($role);
+
+        // dd($pageDetail, $pageDetail->formulairePage->nom, $pageDetail->formulairePage->formulaire->nom);
+        $data['rras3k'] = $this->dataToView();
+
+
+
 
         return view('sebconsoleviews::role-edit', compact('data'));
     }

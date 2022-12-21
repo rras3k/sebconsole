@@ -1,8 +1,12 @@
 <?php
+use Rras3k\SebconsoleRoot\facades\ViewData;
+ViewData::setEntites($data['rras3k']);
+
 // dd();
 // $data['alerts']=[
 //     ['texte'=>"coucou","type"=>"danger"],
 // ];
+
 ?>
 @extends('sebconsoleviews::layouts.app')
 
@@ -11,7 +15,8 @@
 
 @section('content')
     <div class="zm-header">
-        <div class="zmh-titre">Edition du role: {{ $data['form']['role']['nom'] }}</div>
+        
+        <div class="zmh-titre">{{ ViewData::page_getTitre() }}</div>
         <div class="zmh-menus">
             <x-sebconsoleviews::menus.page :liste="$data['menu_page']"></x-sebconsoleviews::menus.page>
         </div>
@@ -75,13 +80,12 @@
     </div>
     <style>
         /* .spinable>.spinner-border {
-            display: none;
-        } */
-        
+                display: none;
+            } */
     </style>
     <script>
-        function test(pthis) { 
-            
+        function test(pthis) {
+
             alerte("ça commence")
             rras3k_xhr("GET", "{{ route('user.listeBt') }}", "", 'application/json', testCallback)
         }
