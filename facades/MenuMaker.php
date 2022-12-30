@@ -9,7 +9,6 @@ class MenuMaker extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        // dd('yy');
         return 'MenuMaker';
     }
 }

@@ -97,30 +97,29 @@ class RoleController extends SbController
      */
     public function edit(Role $role)
     {
-        //
-        View::addNamespace('sebconsoleviews', 'Rras3k/SebconsoleRoot/ressources/views');
+        // View::addNamespace('sebconsoleviews', 'Rras3k/SebconsoleRoot/ressources/views');
         $data = array();
-        // $data['form'] = [];
-        // $data['isCreate'] = false;
-        // $data['form']['role'] = $this->PrepareToEdit($role);
+        $data['route'] = route('role.update', $role->id);
 
-        // $this->menuPage_add('role_id', null, '?filtre[role]=' . $role->id);
-        // $data['menu_page'] = $this->menuPage_get();
-
-
+        // dd($data);
         $this->page_setTitre("Edition du rôle: " . $role->nom);
+        $this->form_setHiddenValues([
+            'formulaire_page_id' => $role->id
+        ]);
         $this->form_setIsCreate(false);
         $this->form_setData($role);
-
-        // dd($pageDetail, $pageDetail->formulairePage->nom, $pageDetail->formulairePage->formulaire->nom);
         $data['rras3k'] = $this->dataToView();
-
-
-
 
         return view('sebconsoleviews::role-edit', compact('data'));
     }
 
+    private function PersonaliseErreur()
+    {
+        return [
+            'nom.required' => 'Ce champ est obligatoire',
+            'fonction.required' => 'Ce champ est obligatoire',
+        ];
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -131,8 +130,15 @@ class RoleController extends SbController
     public function update(Request $request, Role $role)
     {
         //
-        dump($role);
-        dd($request);
+        $validated = $request->validate([
+            'nom' => 'required',
+            'fonction' => 'required',
+
+        ], $this->PersonaliseErreur());
+        $role->nom = $request->nom;
+        $role->fonction = $request->fonction;
+        $role->save();
+         return redirect()->route('role.index');
     }
 
     /**

@@ -59,7 +59,7 @@ abstract class SbController extends Controller
     // private $hiddens;
     // private $formPara;
     private $entree;
-    private $entites = [];
+    private $entites = ['page' => []];
 
 
     /**
@@ -71,24 +71,38 @@ abstract class SbController extends Controller
     {
         $this->menus = config('sebconsole.menu_page');
         $this->paras = $this->getPara();
+        $this->setEntree('main');
     }
-    
+
 
     public function setEntree($entree)
     {
         $this->entree = $entree;
+
         if (!isset($this->entites[$this->entree])) $this->entites[$this->entree] = [];
+
+        // Form
         if (!isset($this->entites[$this->entree]['form'])) $this->entites[$this->entree]['form'] = [];
+        $this->entites[$this->entree]['form']['isCreate'] = false;
+
+        // Menu
         if (!isset($this->entites[$this->entree]['menu']))  $this->entites[$this->entree]['menu'] = [];
         $this->entites[$this->entree]['menu']['values'] = [];
         $this->entites[$this->entree]['menu']['liste'] = [];
+
+        // lists
+        if (!isset($this->entites[$this->entree]['lists']))  $this->entites[$this->entree]['lists'] = [];
     }
 
     private function loadPara()
     {
     }
 
-
+    public function nav_setBreadCombre($breadcombreListe)
+    {
+        if (!isset($this->entites['page'])) $this->entites['page'] = ['nav' => ['breadcombre' => []]];
+        $this->entites['page']['nav']['breadcombre'] = $breadcombreListe;
+    }
     // -------------------------------------------------------- Page -------------------------------------------------------------
 
     /**
@@ -125,21 +139,36 @@ abstract class SbController extends Controller
      * @param
      * @return
      */
-    public function menuPage_add($champId, $value, $para_url = null)
+    public function menuPage_add($label, $url, $icon, $class = null)
     {
-        $this->entites[$this->entree]['menu']['values'][$champId] = ['value_para' => $para_url, 'value_code' => $value];
+        $this->paras[$this->entree]['menu'][] = ["label" => $label, "url" => $url, "icon" => $icon, "class" => $class];
+        // dd($this->paras);
+        // $this->entites[$this->entree]['menu']['values'][$champId] = ['value_para' => $para_url, 'value_code' => $value];
         // $this->values[$champId] = ['value_para' => $para_url, 'value_code' => $value];
     }
 
-    /**
-     *
-     * @param
-     * @return
-     */
-    public function menuPage_addEntree($champId, $route, $titre, $icon)
-    {
-        $this->entites[$this->entree]['menu']['liste'] = ['champ_id' => $champId, 'route' => $route, 'titre' => $titre, 'icon' => $icon];
-    }
+
+    // /**
+    //  *
+    //  * @param
+    //  * @return
+    //  */
+    // public function menuPage_setValues($nom, $values = null, $url_paras = null)
+    // {
+    //     $this->paras[$this->entree]['menu']['values'][$nom] = ['value_para' => $url_paras, 'values' => $values];
+    //     // $this->entites[$this->entree]['menu']['values'][$champId] = ['value_para' => $para_url, 'value_code' => $value];
+    //     // $this->values[$champId] = ['value_para' => $para_url, 'value_code' => $value];
+    // }
+
+    // /**
+    //  *
+    //  * @param
+    //  * @return
+    //  */
+    // public function menuPage_addEntree($nom, $route, $titre, $icon)
+    // {
+    //     $this->menu[] = ['champ_id' => $champId, 'route' => $route, 'titre' => $titre, 'icon' => $icon];
+    // }
 
     /**
      *
@@ -148,30 +177,43 @@ abstract class SbController extends Controller
      */
     public function menuPage_get()
     {
-        $ret = [];
-        // dd($this->menus);
-        foreach ($this->entites[$this->entree]['menu']['liste'] as $menu) {
-            if (Route::currentRouteName() != $menu['route'] && (isset($this->entites[$this->entree]['menu']['values'][$menu['champ_id']]['value_code']) || isset($this->entites[$this->entree]['menu']['values'][$menu['champ_id']]['value_para']))) {
-                $para = '';
-                if ($this->entites[$this->entree]['menu']['values'][$menu['champ_id']]['value_para']) {
-                    $para = '/' .  $this->entites[$this->entree]['menu']['values'][$menu['champ_id']]['value_para'];
-                }
-                if (isset($menu['condition']) && isset($this->entites[$this->entree]['menu']['values'][$menu['condition']['champ']]['value_code'])) {
-                    switch ($menu['condition']['operateur']) {
-                        case '==':
-                            if ($this->entites[$this->entree]['menu']['values'][$menu['condition']['champ']]['value_code'] == $menu['condition']['value']) {
-                                $ret[] = ['titre' => $menu['titre'], 'url' => route($menu['route'], $this->entites[$this->entree]['menu']['values'][$menu['champ_id']]['value_code']) . $para, 'classIcon' => 'fa-solid' . $menu['icon'], 'class' => isset($menu['class']) ? $menu['class'] : ''];
-                            }
-                            break;
-                    }
-                } else {
-                    $ret[] = ['titre' => $menu['titre'], 'url' => route($menu['route'], $this->entites[$this->entree]['menu']['values'][$menu['champ_id']]['value_code']) . $para, 'classIcon' => 'fa-solid ' . $menu['icon'], 'class' => isset($menu['class']) ? $menu['class'] : ''];
+        // dd($this->paras);
+        foreach ($this->paras as $entree => $paraEntree) {
+            $ret = [];
+            if (isset($paraEntree['menu'])) {
+                foreach ($paraEntree['menu'] as $ind => $menu) {
+                    $this->entites[$entree]['menu_page'][] = ['titre' => $menu['label'], 'url' => $menu['url'],  'classIcon' =>  $menu['icon'], 'class' => $menu['class']];
                 }
             }
         }
-        return $ret;
+        return true;
     }
-
+    /*
+foreach ($this->paras as $entree => $paraEntree) {
+            $ret = [];
+            foreach ($this->menus as $ind => $menu) {
+                if (Route::currentRouteName() != $menu['route'] && (isset($paraEntree['menu']['values'][$menu['champ_id']]['value_code']) || isset($paraEntree['menu']['values'][$menu['champ_id']]['value_para']))) {
+                    $para = '';
+                    // if ($paraEntree['menu']['values'][$menu['champ_id']]['value_para']) {
+                    //     $para = '/' .  $paraEntree['values'][$menu['champ_id']]['value_para'];
+                    // }
+                    dd("-- menu --", $menu, '-- paraEntree --', $paraEntree, $menu['champ_id'], $paraEntree['menu']['values'][$menu['champ_id']]['value_para']);
+                    if (isset($menu['condition']) && isset($paraEntree['menu']['values'][$menu['condition']['champ']]['value_code'])) {
+                        switch ($menu['condition']['operateur']) {
+                            case '==':
+                                if ($paraEntree['menu']['values'][$menu['condition']['champ']]['value_code'] == $menu['condition']['value']) {
+                                    $ret[] = ['titre' => $menu['titre'], 'url' => route($menu['route'], $paraEntree['menu']['values'][$menu['champ_id']]['value_code']) . $para, 'classIcon' => 'fa-solid' . $menu['icon'], 'class' => isset($menu['class']) ? $menu['class'] : ''];
+                                }
+                                break;
+                        }
+                    } else {
+                        if (!isset($ret[$entree])) $ret[$entree] = [];
+                        $ret[$entree][] = ['titre' => $menu['titre'], 'url' => route($menu['route'], $paraEntree['menu']['values'][$menu['champ_id']]['value_code']) . $para, 'classIcon' => 'fa-solid ' . $menu['icon'], 'class' => isset($menu['class']) ? $menu['class'] : ''];
+                    }
+                }
+            }
+            $this->entites[$entree]['menu_page'] = $ret;
+*/
     /**
      *
      * @param
@@ -215,18 +257,7 @@ abstract class SbController extends Controller
     {
         $this->entites[$this->entree]['form']['hiddens'] = $hiddens;
     }
-    // /**
-    //  *
-    //  *
-    //  * @param
-    //  * @return
-    //  */
-    // public function form_getHiddenValues($entree)
-    // {
-    //     if (isset($this->paras[$entree]['form']['hiddens'])) {
-    //         return $this->paras[$entree]['form']['hiddens'];
-    //     } else return null;
-    // }
+
 
     /**
      *
@@ -347,7 +378,7 @@ abstract class SbController extends Controller
      * @param
      * @return
      */
-    public function listeBootstrapTable($entree, $showRequete = false)
+    public function listeBootstrapTable($entree = 'main', $showRequete = false)
     {
         $requetePara = $this->getRequete($entree, false);
         if ($showRequete) dump($requetePara);
@@ -474,21 +505,32 @@ abstract class SbController extends Controller
     }
 
     /**
-     * Retourne les datas pour la view
      *
-     * @param  none
-     * @return tableau avec les datas
+     * @param
+     * @return
      */
-    public function listForFiltre($para)
+    public function data_setList($listNom, $listData)
     {
-        $ret = [];
-        if (isset($para['filtre'])) {
-            foreach ($para['filtre'] as  $filtre => $infos) {
-                $ret[$filtre] = DB::table($para['filtre'][$filtre]['table'])->select($para['filtre'][$filtre]['champ'], $para['filtre'][$filtre]['champToStr'])->orderBy($para['filtre'][$filtre]['affichage_order'], $para['filtre'][$filtre]['affichage_by'])->get()->toArray();
-            }
-        }
-        return $ret;
+        $this->entites[$this->entree]['lists'][$listNom] = $listData;
     }
+
+
+    // /**
+    //  * Retourne les datas pour la view
+    //  *
+    //  * @param  none
+    //  * @return tableau avec les datas
+    //  */
+    // public function listForFiltre($para)
+    // {
+    //     $ret = [];
+    //     if (isset($para['filtre'])) {
+    //         foreach ($para['filtre'] as  $filtre => $infos) {
+    //             $ret[$filtre] = DB::table($para['filtre'][$filtre]['table'])->select($para['filtre'][$filtre]['champ'], $para['filtre'][$filtre]['champToStr'])->orderBy($para['filtre'][$filtre]['affichage_order'], $para['filtre'][$filtre]['affichage_by'])->get()->toArray();
+    //         }
+    //     }
+    //     return $ret;
+    // }
 
     /**
      * Retourne les datas pour la view
@@ -499,27 +541,8 @@ abstract class SbController extends Controller
 
     public function dataToView()
     {
-        // $ret = [];
-        // // dump($this->paras);
-        // foreach ($this->paras as $entite => $value) {
-        //     //  dump($entite);
-        //     $ret[$entite] = [];
-        //     $ret[$entite]['filtreToString'] = $this->filtreToString($value);
-        //     $ret[$entite]['listForFiltre'] = $this->listForFiltre($value);
-        //     $ret[$entite]['menu_page'] = $this->menuPage_get($entite);
-        //     // Form
-        //     $ret[$entite]['form'] = [];
-        //     $ret[$entite]['form']['hiddens'] = $this->form_getHiddenValues($entite);
-        //     $ret[$entite]['form']['data'] = $this->form_getData($entite);
-        //     $ret[$entite]['form']['isCreate'] = $this->form_isCreate($entite);
-        //     // Page
-        //     $ret[$entite]['page'] = [];
-        //     $ret[$entite]['page']['titre'] = $this->page_getTitre($entite);
-
-        // }
-        // dd('FIN', $this->entites);
+        $this->menuPage_get();
         return $this->entites;
-        // return $ret;
     }
 
 

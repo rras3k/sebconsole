@@ -9,7 +9,6 @@ class ViewData extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        // dd('yy');
         return 'ViewData';
     }
 }

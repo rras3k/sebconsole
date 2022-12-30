@@ -40,9 +40,7 @@ class Menu extends Command
             "Publication après l'installation",
             'Ajouter RoleSeeder dans la base de données: ' . env('DB_DATABASE'),
         ];
-        $eltsFct = [
-
-        ];
+        $eltsFct = [];
 
         $choix = $this->choice(
             'Saisir votre choix?',

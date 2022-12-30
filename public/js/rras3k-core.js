@@ -34,18 +34,18 @@ function spin(pthis) {
 /*
 contentType = "text/plain",'application/json'
 */
-function rras3k_xhr(type, url, data, contentType = "text/plain", fctCallback = null) {	
+function rras3k_xhr(type, url, data, contentType = "text/plain", fctCallback = null) {
 	para = {
 		method: type,
 		headers: {
 			"Content-type": contentType
 		}
-		}
-	if(type == "POST") {
+	}
+	if (type == "POST") {
 		para['body'] = JSON.stringify(data)
 	}
-	
-	fetch(url, {para})
+
+	fetch(url, { para })
 		.then((response) => response.json())
 		.then((data) => {
 			if (fctCallback != null) {
@@ -54,14 +54,28 @@ function rras3k_xhr(type, url, data, contentType = "text/plain", fctCallback = n
 			else {
 				alerte("réponse ok")
 				alerte(JSON.stringify(data))
-				
+
 			}
-			
+
 		})
-		.catch((erreur) => { 
+		.catch((erreur) => {
 			alerte(erreur)
 		}
 		);
-	
-	
+
+
+}
+function route(routeStr, values) {
+	var routeRet = ''
+	var indice = 0
+	var posit
+	var PARA_ROUTE = '999'
+	var indcideValues = 0
+	while ((posit = routeStr.indexOf(PARA_ROUTE, indice)) > -1) {
+		routeRet += routeStr.substring(indice, posit) + values[indcideValues]
+		indice = posit + PARA_ROUTE.length
+		indcideValues++
+	}
+	routeRet += routeStr.substring(indice)
+	return routeRet
 }

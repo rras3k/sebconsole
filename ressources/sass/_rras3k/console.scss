@@ -408,7 +408,14 @@ main {
     font-size: xx-large;
     width: 100%;
 }
-
+.zmh-nav {
+    flex: 0 0 auto;
+    padding-top: 3px;
+    width: 100%;
+    padding-bottom: 10px;
+    text-align: left;
+    padding-left: 10px;
+}
 // @media (min-width: 0px) {
 //     .zmh-titre {
 //     }
