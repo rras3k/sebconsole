@@ -1,6 +1,4 @@
 <?php
-
-// use Rras3k\Console\app\Models\AuthRole;
 use Rras3k\SebconsoleRoot\facades\MenuMaker;
 
 $menus = MenuMaker::get();
