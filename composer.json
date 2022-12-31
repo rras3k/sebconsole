@@ -2,7 +2,7 @@
     "name": "rras3k/sebconsole",
     "description": "console",
     "type": "library",
-    "license": "MIT",
+    "license": "MIT", 
     "autoload": {
         "psr-4": {
             "Rras3k\\Sebconsole\\": "src/",
