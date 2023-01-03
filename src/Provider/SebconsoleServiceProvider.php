@@ -4,7 +4,7 @@ namespace Rras3k\Sebconsole\Provider;
 
 use Rras3k\Sebconsole\Lib\RoleUser;
 use Rras3k\Sebconsole\Lib\MenuMaker;
-use Rras3k\Sebconsole\Lib\Viewdata;
+use Rras3k\Sebconsole\Lib\ViewData;
 use Rras3k\Sebconsole\Models\Role;
 use Rras3k\Sebconsole\Models\LogDetail;
 use Rras3k\SebconsoleRoot\commands\Menu;
@@ -60,7 +60,7 @@ class SebconsoleServiceProvider extends ServiceProvider
         // $kernel->pushMiddleware(EnsureUserHasRole::class);
 
         // $router = $this->app->make(Router::class);
-        // $router->pushMiddlewareToGroup('web', EnsureUserHasRole::class);        
+        // $router->pushMiddlewareToGroup('web', EnsureUserHasRole::class);
 
         $this->app->booted(function () {
             $router = $this->app->make(Router::class);
@@ -82,8 +82,8 @@ class SebconsoleServiceProvider extends ServiceProvider
         // $this->loadViewsFrom(__DIR__ . '/../../resources/views/components', 'forms.input');
 
         $this->loadBladeDirectives();
-         
-        
+
+
     }
 
     private function loadBladeDirectives()
@@ -97,16 +97,16 @@ class SebconsoleServiceProvider extends ServiceProvider
         Blade::directive('endisCreate', function () {
             return "<?php } ?>";
         });
-        
+
     }
-    
+
     private function importPublishOnce()
     /*
     php artisan db:seed --class=RoleSeeder
     php artisan vendor:publish
     php artisan vendor:publish --force --tag=rras3k-force
     php artisan vendor:publish --force --tag=rras3k-config
-    
+
     */
     {
         // dd("oo");
