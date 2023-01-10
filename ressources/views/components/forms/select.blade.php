@@ -9,7 +9,7 @@
     'listeValue'
     ])
 
-<div class="form-floating mb-1">
+<div class="form-floating mb-1" id="entree-{{ $nom }}">
     <select id="input-{{ $nom }}"
         class="form-select @if ($required) input-required @endif @error($nom) is-invalid @enderror"
         name="{{ $nom }}">

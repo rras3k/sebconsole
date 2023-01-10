@@ -33,7 +33,7 @@
                 @if ($value != '' && $value != '0') checked="true" @endif>
         </div>
     @else
-        <div class="form-floating mb-1" id="entree-{{ $nom }}"">
+        <div class="form-floating mb-1" id="entree-{{ $nom }}">
             <input type="{{ $type }}" class="form-control @if ($readonly) input-readonly @endif @if ($required) input-required @endif @error($nom) is-invalid @enderror "
                 id="input-{{ $nom }}" placeholder=" " name="{{ $nom }}"
                 value="{{ $value }}" @if (isset($readonly) && $readonly) readonly @endif>
