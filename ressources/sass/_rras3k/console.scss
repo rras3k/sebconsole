@@ -492,6 +492,14 @@ main {
 .label_form{
     color:blue;
 }
+
+
+.zm-bande {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
 //===================== BOOTSTRAP-TABLE
 
 .th-inner {
@@ -506,3 +514,7 @@ main {
 .bootstrap-table tr:nth-child(odd) {
     background: rgb(227, 233, 242);
 }
+
+ .fixed-table-body {
+     overflow: visible !important;
+ }
