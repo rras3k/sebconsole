@@ -1,5 +1,4 @@
 <?php
-// use App\Models\Role;
 // use Rras3k\Sebconsole\app\Models\Role;
 // use Rras3k\Sebconsole\Lib\RoleUser;
 use Rras3k\Sebconsole\Models\Role;
