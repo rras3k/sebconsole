@@ -22,6 +22,9 @@ class UserController extends SbController
         View::addNamespace('sebconsoleviews', 'Rras3k/SebconsoleRoot/ressources/views');
 
         $data = array();
+        $this->page_setTitre('liste des utilisateurs');
+        $this->menuPage_addRetour();
+
         $data['route'] = route('user.listeBt');
         $data['rras3k'] = $this->dataToView();
         return view('sebconsoleviews::user-index', compact('data'));

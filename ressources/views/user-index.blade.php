@@ -1,7 +1,6 @@
 <?php
-// dd($data['rras3k']['filtreToString']);
-
-$menuPage = [['titre' => 'Menu1', 'url' => '#', 'classIcon' => 'fa-solid fa-building'], ['titre' => 'Menu2', 'url' => '#', 'classIcon' => 'fa-solid fa-building']];
+use Rras3k\SebconsoleRoot\facades\ViewData;
+ViewData::setEntites($data['rras3k']);
 ?>
 @extends('sebconsoleviews::layouts.app')
 
@@ -10,10 +9,15 @@ $menuPage = [['titre' => 'Menu1', 'url' => '#', 'classIcon' => 'fa-solid fa-buil
 
 @section('content')
     <div class="zm-header">
-        <div class="zmh-titre">Utilisateurs {{ $data['rras3k']['filtreToString'] }}</div>
-        <div class=" menu_page-SB">
-            {{-- <x-menus.page :liste="$menuPage"></x-menus.page> --}}
+        <div class="zmh-titre">{{ ViewData::page_getTitre() }}</div>
+        <div class="zmh-menus">
+            <x-sebconsoleviews::menus.page :liste="ViewData::menuPage_get()"></x-sebconsoleviews::menus.page>
         </div>
+
+        {{-- <div class="zmh-titre">Utilisateurs {{ $data['rras3k']['filtreToString'] }}</div> --}}
+        {{-- <div class=" menu_page-SB">
+            <x-menus.page :liste="$menuPage"></x-menus.page>
+        </div> --}}
     </div>
 
     <div class="zm-content">
@@ -21,12 +25,12 @@ $menuPage = [['titre' => 'Menu1', 'url' => '#', 'classIcon' => 'fa-solid fa-buil
         <div class="panel">
             <div class="panel-content">
                 <div id="toolbar" class="col text-start">
-                    <select class="form-control width-auto" name="filtre[role]" id="filtre_role">
+                    {{-- <select class="form-control width-auto" name="filtre[role]" id="filtre_role">
                         <option value="">Tous les rôles</option>
                         @foreach ($data['rras3k']['listForFiltre']['role'] as $key => $role)
                             <option value="{{ $role->id }}">{{ $role->fonction }}</option>
                         @endforeach
-                    </select>
+                    </select> --}}
                 </div>
                 <table id="table" data-toolbar="#toolbar" data-toolbar="#toolbar" data-toolbar="#toolbar"
                     class="table-striped" data-page-size="25" data-show-toggle="true" data-show-columns-toggle-all="true"
@@ -53,11 +57,12 @@ $menuPage = [['titre' => 'Menu1', 'url' => '#', 'classIcon' => 'fa-solid fa-buil
             btAddTable('table')
             btAddFiltreSelect('table', 'filtre_role')
 
-            // showAlertes(<?php if (isset($data['alerts'])) echo json_encode($data['alerts']); else ""; ?>)
+            // showAlertes(<?php if (isset($data['alerts'])) {
+                echo json_encode($data['alerts']);
+            } else {
+                '';
+            } ?>)
         }
-
-
- 
     </script>
 @endsection
 @section('foot-link')

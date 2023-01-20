@@ -34,18 +34,29 @@ function spin(pthis) {
 /*
 contentType = "text/plain",'application/json'
 */
-function rras3k_xhr(type, url, data, contentType = "text/plain", fctCallback = null) {
-	para = {
-		method: type,
-		headers: {
-			"Content-type": contentType
-		}
-	}
-	if (type == "POST") {
+function rras3k_xhr(method, url, data, contentType = "text/plain", fctCallback = null, token = null) {
+	console.log(method)
+	// para = {
+	//     method: method,
+	// 	headers: {
+	// 		"Content-type": contentType
+	// 	}
+	// }
+	// data["_token"] =  token
+
+	if (method == "POST") {
 		para['body'] = JSON.stringify(data)
 	}
+	console.log(data)
+	fetch(url, {
+		method: method,
+		headers: {
+			"Content-type": contentType,
+			'X-CSRF-TOKEN': token
 
-	fetch(url, { para })
+		},
+		body: JSON.stringify(data)
+	})
 		.then((response) => response.json())
 		.then((data) => {
 			if (fctCallback != null) {

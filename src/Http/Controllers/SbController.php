@@ -139,12 +139,16 @@ abstract class SbController extends Controller
      * @param
      * @return
      */
-    public function menuPage_add($label, $url, $icon, $class = null)
+    public function menuPage_add($label, $url, $icon, $class = null, $onclick = null)
     {
-        $this->paras[$this->entree]['menu'][] = ["label" => $label, "url" => $url, "icon" => $icon, "class" => $class];
+        $this->paras[$this->entree]['menu'][] = ["label" => $label, "url" => $url, "icon" => $icon, "class" => $class,"onclick"=> $onclick];
         // dd($this->paras);
         // $this->entites[$this->entree]['menu']['values'][$champId] = ['value_para' => $para_url, 'value_code' => $value];
         // $this->values[$champId] = ['value_para' => $para_url, 'value_code' => $value];
+    }
+
+    public function menuPage_addRetour(){
+        $this->menuPage_add("Retour", "#", "bi bi-arrow-return-left",null,'history.back();');
     }
 
 
@@ -182,38 +186,13 @@ abstract class SbController extends Controller
             $ret = [];
             if (isset($paraEntree['menu'])) {
                 foreach ($paraEntree['menu'] as $ind => $menu) {
-                    $this->entites[$entree]['menu_page'][] = ['titre' => $menu['label'], 'url' => $menu['url'],  'classIcon' =>  $menu['icon'], 'class' => $menu['class']];
+                    $this->entites[$entree]['menu_page'][] = ['titre' => $menu['label'], 'url' => $menu['url'],  'classIcon' =>  $menu['icon'], 'class' => $menu['class'], 'onclick' => $menu['onclick']];
                 }
             }
         }
         return true;
     }
-    /*
-foreach ($this->paras as $entree => $paraEntree) {
-            $ret = [];
-            foreach ($this->menus as $ind => $menu) {
-                if (Route::currentRouteName() != $menu['route'] && (isset($paraEntree['menu']['values'][$menu['champ_id']]['value_code']) || isset($paraEntree['menu']['values'][$menu['champ_id']]['value_para']))) {
-                    $para = '';
-                    // if ($paraEntree['menu']['values'][$menu['champ_id']]['value_para']) {
-                    //     $para = '/' .  $paraEntree['values'][$menu['champ_id']]['value_para'];
-                    // }
-                    dd("-- menu --", $menu, '-- paraEntree --', $paraEntree, $menu['champ_id'], $paraEntree['menu']['values'][$menu['champ_id']]['value_para']);
-                    if (isset($menu['condition']) && isset($paraEntree['menu']['values'][$menu['condition']['champ']]['value_code'])) {
-                        switch ($menu['condition']['operateur']) {
-                            case '==':
-                                if ($paraEntree['menu']['values'][$menu['condition']['champ']]['value_code'] == $menu['condition']['value']) {
-                                    $ret[] = ['titre' => $menu['titre'], 'url' => route($menu['route'], $paraEntree['menu']['values'][$menu['champ_id']]['value_code']) . $para, 'classIcon' => 'fa-solid' . $menu['icon'], 'class' => isset($menu['class']) ? $menu['class'] : ''];
-                                }
-                                break;
-                        }
-                    } else {
-                        if (!isset($ret[$entree])) $ret[$entree] = [];
-                        $ret[$entree][] = ['titre' => $menu['titre'], 'url' => route($menu['route'], $paraEntree['menu']['values'][$menu['champ_id']]['value_code']) . $para, 'classIcon' => 'fa-solid ' . $menu['icon'], 'class' => isset($menu['class']) ? $menu['class'] : ''];
-                    }
-                }
-            }
-            $this->entites[$entree]['menu_page'] = $ret;
-*/
+
     /**
      *
      * @param
