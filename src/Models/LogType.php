@@ -1,6 +1,8 @@
 <?php
 
-namespace Rras3k\Sebconsole\Models;
+namespace App\Models;
+
+// namespace Rras3k\Sebconsole\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,5 +13,8 @@ class LogType extends Model
     public static function liste()
     {
         return LogType::get();
+    }
+    public function toStr(){
+        return $this->nom;
     }
 }

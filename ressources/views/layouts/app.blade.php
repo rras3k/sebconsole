@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="{{ asset('/img/favicon.png')}}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('/img/favicon.png') }}" type="image/x-icon">
 
 
     <!-- CSRF Token -->
@@ -16,26 +16,33 @@ use Illuminate\Support\Facades\Auth;
 
     <title>{{ config('app.name', 'Laravel') }}</title>
     {{-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> --}}
-
     <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+
+    
+        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"
+            integrity="sha512-6UofPqm0QupIL0kzS/UIzekR73/luZdC6i/kXDbWnLOJoqwklBK6519iUnShaYceJ0y4FaiPtX/hRnV/X/xlUQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-    </script>
 
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.2/font/bootstrap-icons.min.css"
         integrity="sha512-YFENbnqHbCRmJt5d+9lHimyEMt8LKSNTMLSaHjvsclnZGICeY/0KYEeiHwD1Ux4Tcao0h60tdcMv+0GljvWyHg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+{{-- 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"
+        integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+
     @yield('head-link')
 
     @vite(['resources/js/app.js'])
-    <script src="{{asset('js/rras3k-core.js')}}"></script>
+    <script src="{{ asset('js/rras3k-core.js') }}"></script>
     {{-- @vite(['resources/js/sb/bt.js']) --}}
 </head>
 
@@ -112,8 +119,11 @@ use Illuminate\Support\Facades\Auth;
 </style>
 <script>
     // chargement des messages
-showAlertes(<?php if (isset($data['alerts'])) echo json_encode($data['alerts']); else ""; ?>)
-
+    showAlertes(<?php if (isset($data['alerts'])) {
+        echo json_encode($data['alerts']);
+    } else {
+        '';
+    } ?>)
 </script>
 
 </html>

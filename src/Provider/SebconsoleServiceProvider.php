@@ -4,10 +4,12 @@ namespace Rras3k\Sebconsole\Provider;
 
 use Rras3k\Sebconsole\Lib\RoleUser;
 use Rras3k\Sebconsole\Lib\MenuMaker;
+use Rras3k\Sebconsole\Lib\RapportSimple;
 use Rras3k\Sebconsole\Lib\ViewData;
 use Rras3k\Sebconsole\Models\Role;
 use Rras3k\Sebconsole\Models\LogDetail;
 use Rras3k\SebconsoleRoot\commands\Menu;
+use Rras3k\SebconsoleRoot\commands\GeneratorMvcCommands;
 use Rras3k\Sebconsole\Http\Middleware\EnsureUserHasRole;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Blade;
@@ -35,6 +37,9 @@ class SebconsoleServiceProvider extends ServiceProvider
         });
         $this->app->bind('MenuMaker', function ($app) {
             return new MenuMaker();
+        });
+        $this->app->bind('RapportSimple', function ($app) {
+            return new RapportSimple();
         });
         $this->app->bind('ViewData', function ($app) {
             return new ViewData();
@@ -76,6 +81,7 @@ class SebconsoleServiceProvider extends ServiceProvider
 
             $this->commands([
                 Menu::class, // registering the new command
+                GeneratorMvcCommands::class, // registering the new command
             ]);
         }
         // composants view
@@ -116,10 +122,13 @@ class SebconsoleServiceProvider extends ServiceProvider
             __DIR__ . '/../../ressources/sass/_rras3k/console.scss' => resource_path('/sass/_rras3k/console.scss'),
             __DIR__ . '/../../ressources/sass/_rras3k/def.scss' => resource_path('/sass/_rras3k/def.scss'),
             __DIR__ . '/../../ressources/sass/_rras3k/panel.scss' => resource_path('/sass/_rras3k/panel.scss'),
+            __DIR__ . '/../../ressources/sass/_rras3k/mvc_saisie.scss' => resource_path('/sass/_rras3k/mvc_saisie.scss'),
+            __DIR__ . '/../../ressources/sass/_rras3k/panel2.scss' => resource_path('/sass/_rras3k/panel2.scss'),
             __DIR__ . '/../../ressources/sass/_rras3k/sidebar.scss' => resource_path('/sass/_rras3k/sidebar.scss'),
             __DIR__ . '/../../ressources/views/pasgit' => resource_path('views/page-dev'),
             __DIR__ . '/../../database/seeders/RoleSeeder.php' => database_path('seeders/RoleSeeder.php'),
             __DIR__ . '/../../ressources/sass/_variables.scss' => resource_path('/sass/_variables.example.scss'),
+            // __DIR__ . '/../Models/LogType.php' => app_path('Models/LogType.php'),
         ], 'rras3k-force');
 
 

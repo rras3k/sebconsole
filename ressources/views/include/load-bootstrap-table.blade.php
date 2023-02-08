@@ -16,5 +16,6 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.20.2/extensions/mobile/bootstrap-table-mobile.min.js"
         integrity="sha512-toeBVwgLo5HT4kMaP5wmR33XATxvuaAqNtzmYNvnU/OsocnTNWuXJw9n7o6H23hH3goD114qic/O6IfNDH7X6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js" ></script>
     <script src="{{asset('js/rras3k-bt.js')}}"></script>

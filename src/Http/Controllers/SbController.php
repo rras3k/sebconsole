@@ -444,6 +444,15 @@ abstract class SbController extends Controller
                 $where .= $this->paras[$entree]['filtre_fixe'][$filtre] . '=' . $value;
             }
         }
+        
+        // Filtre permanent
+        if (isset($this->paras[$entree]['filtre_permanent'])) {
+            foreach ($this->paras[$entree]['filtre_permanent'] as $champ => $value) {
+                $where = $where ? $where . ' && ' : $where;
+                $where .= $champ . '=' . $value;
+            }
+        }
+
         $where = $where ? ' ( ' . $where . ' ) ' : '';
 
         // Jonction where et orWhere

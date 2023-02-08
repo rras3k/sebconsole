@@ -37,6 +37,7 @@ class Menu extends Command
         $eltsLibelle = [
             "Quitter",
             "Afficher les actions possibles",
+            "Génerer MVC",
             "Publication après l'installation",
             'Ajouter RoleSeeder dans la base de données: ' . env('DB_DATABASE'),
         ];
@@ -58,6 +59,12 @@ class Menu extends Command
                 return Command::SUCCESS;
                 break;
 
+            case "Génerer MVC": //
+                $this->info("php artisan sebconsole:mvc {model} {table} {themeCode} {themeUrl} {--prefix1=} {--prefix2=}");
+                $this->info("Exempe :");
+                $this->info("php artisan sebconsole:mvc Formulaire formulaires mes_formulaires mes-formulaires --prefix1=console --prefix2=affilies");
+                return Command::SUCCESS;
+                break;
             case "Publication après l'installation": //
                 $this->publishAfterInstall();
                 return Command::SUCCESS;

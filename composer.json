@@ -23,7 +23,8 @@
             ],
             "aliases": {
                 "RoleUser": "Rras3k\\SebconsoleRoot\\facades\\RoleUser",
-                "MenuMaker": "Rras3k\\SebconsoleRoot\\facades\\MenuMaker"
+                "MenuMaker": "Rras3k\\SebconsoleRoot\\facades\\MenuMaker",
+                "RapportSimple": "Rras3k\\SebconsoleRoot\\facades\\RapportSimple"
             }
         }
     }

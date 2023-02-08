@@ -1,7 +1,7 @@
 
 // -------------------------------- alerte
-
-const alerte = (message, type = "success") => {
+var alerte_delai =2000
+const alerte = (message, type = "success", delai=2000) => {
 	console.log(type)
 	const wrapper = document.createElement('div')
 	wrapper.innerHTML = [
@@ -10,7 +10,15 @@ const alerte = (message, type = "success") => {
 		'   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
 		'</div>'
 	].join('')
-	document.getElementById('rras3k-alerte').append(wrapper)
+	sucessElt = document.querySelector('#rras3k-alerte')
+	sucessElt.append(wrapper)
+
+	if (delai != 0) {
+		alerte_delai = delai
+		setTimeout(function () {
+			document.querySelector('#rras3k-alerte').lastChild.remove()
+		}, alerte_delai)
+	}
 }
 function showAlertes(alertes = null) {
 	if (alertes) {
@@ -35,46 +43,80 @@ function spin(pthis) {
 contentType = "text/plain",'application/json'
 */
 function rras3k_xhr(method, url, data, contentType = "text/plain", fctCallback = null, token = null) {
-	console.log(method)
-	// para = {
-	//     method: method,
-	// 	headers: {
-	// 		"Content-type": contentType
-	// 	}
-	// }
-	// data["_token"] =  token
+
 
 	if (method == "POST") {
-		para['body'] = JSON.stringify(data)
-	}
-	console.log(data)
-	fetch(url, {
-		method: method,
-		headers: {
-			"Content-type": contentType,
-			'X-CSRF-TOKEN': token
 
-		},
-		body: JSON.stringify(data)
-	})
-		.then((response) => response.json())
-		.then((data) => {
-			if (fctCallback != null) {
-				fctCallback(data)
-			}
-			else {
-				alerte("réponse ok")
-				alerte(JSON.stringify(data))
 
-			}
+		console.log(data)
+		fetch(url, {
+			method: method,
+			headers: {
+				"Content-type": contentType,
+				'X-CSRF-TOKEN': token
 
+			},
+			body: JSON.stringify(data)
 		})
-		.catch((erreur) => {
-			alerte(erreur)
+			.then((response) => response.json())
+			.then((data) => {
+				if (fctCallback != null) {
+					fctCallback(data)
+				}
+				else {
+					alerte("réponse ok")
+					alerte(JSON.stringify(data))
+
+				}
+
+			})
+			.catch((erreur) => {
+				alerte(erreur)
+			}
+			);
+
+
+	}
+
+	if (method == "GET") {
+		console.log(data)
+		fetch(url + arrayToPara(data), {
+			method: method,
+			headers: {
+				"Content-type": contentType,
+				'X-CSRF-TOKEN': token
+
+			},
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				if (fctCallback != null) {
+					fctCallback(data)
+				}
+				else {
+					alerte("réponse ok")
+					alerte(JSON.stringify(data))
+
+				}
+
+			})
+			.catch((erreur) => {
+				alerte(erreur)
+			}
+			);
+	}
+}
+function arrayToPara(data) {
+	var ret = ''
+	for (var element in data) {
+		if (ret == "") {
+			ret += '?' + element + "=" + data[element]
 		}
-		);
-
-
+		else {
+			ret += '&' + element + "=" + data[element]
+		}
+	}
+	return ret
 }
 function route(routeStr, values) {
 	var routeRet = ''
