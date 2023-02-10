@@ -124,27 +124,10 @@ class GeneratorMvc
 	public $callView_create;
 	public $callView_show;
 
-	// public function	setInfo($model, $table, $themeCode, $themeUrl, $prefix1, $prefix2, $force)
-	// {
-	// 	$this->showArg($model, $table, $themeCode, $themeUrl, $prefix1, $prefix2, $force);
-	// 	$this->setArgument($model, $table, $themeCode, $themeUrl, $prefix1, $prefix2);
-	// 	$this->champs = $this->analyseTable($this->table);
-	// 	if (!$this->setFilesNames()) {
-	// 		if (!$force) {
-	// 			return false;
-	// 		}
-	// 	}
-	// 	$this->setInfoMainModel();
-	// 	$this->setRouteName();
-	// 	$this->setCallViews();
-	// 	$this->setFunctionNameController();
-	// 	return $this->champs;
-	// }
 
 	public function genere()
 	{
 		$ret = ["toConfig"=>"", 'texte'=>[]];
-		// $this->setInfoMainModel();
 		$this->setRouteName();
 		$this->setFilesNames();
 		$this->setCallViews();
@@ -171,26 +154,6 @@ class GeneratorMvc
 	{
 		$this->champs = $this->analyseTable($table);
 	}
-
-
-	// private function setInfoMainModel()
-	// {
-	// 	$this->label = $this->getLinkLabel($this->props['model']);
-	// 	$this->champStr = $this->getModelStr($this->props['model']);
-	// }
-
-	// private function showArg($model, $table, $themeCode, $themeUrl, $prefix1, $prefix2, $force)
-	// {
-	// 	dump('----------------------------------');
-	// 	dump('model: ' . $model);
-	// 	dump('table: ' . $table);
-	// 	dump('themeCode: ' . $themeCode);
-	// 	dump('themeUrl: ' . $themeUrl);
-	// 	dump('prefix1: ' . $prefix1);
-	// 	dump('prefix2: ' . $prefix2);
-	// 	dump('force: ' . $force);
-	// 	dump('----------------------------------');
-	// }
 
 	public function analyseTable($table)
 	{
@@ -222,7 +185,6 @@ class GeneratorMvc
 		}
 		return $ret;
 	}
-
 
 
 	private  function snakeToCamel($input)
@@ -278,10 +240,9 @@ class GeneratorMvc
 		return [
 			'table' => $table,
 			'model' => $this->getLinkModel($table),
-			'themeCode' => 'mes_' . $table,
-			'label' => $table,
-			'themeUrl' => 'mes-' . $table,
-			'label' => 'mes-' . $table,
+			'themeCode' => $this->getLinkModel($table).'_console_admin',
+			'label' => $this->getClassName($this->getLinkModel($table))::getLabel(),
+			'themeUrl' => $table,
 			'prefix1' => 'console',
 			'prefix2' => 'admin',
 		];
@@ -296,10 +257,10 @@ class GeneratorMvc
 
 		$pathView = $this->getPathView();
 
-		$this->fileNameView_index = $pathView . $this->props['themeCode'] . '-index.blade.php';
-		$this->fileNameView_edit = $pathView . $this->props['themeCode'] . '-edit.blade.php';
-		$this->fileNameView_create = $pathView . $this->props['themeCode'] . '-create.blade.php';
-		$this->fileNameView_show = $pathView . $this->props['themeCode'] . '-show.blade.php';
+		$this->fileNameView_index = $pathView .  '-index.blade.php';
+		$this->fileNameView_edit = $pathView .  '-edit.blade.php';
+		$this->fileNameView_create = $pathView .  '-create.blade.php';
+		$this->fileNameView_show = $pathView .  '-show.blade.php';
 		return true;
 	}
 
@@ -307,7 +268,7 @@ class GeneratorMvc
 	{
 		$prefix = '';
 		if ($this->props['prefix2']) $prefix = $this->props['prefix2'] . '/';
-		return base_path() . '/resources/views/' . $prefix;
+		return base_path() . '/resources/views/' . $this->props['model'] . '__' . $this->props['themeCode'];
 	}
 
 	public function check()

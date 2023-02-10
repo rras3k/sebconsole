@@ -43,9 +43,10 @@
                                         value="{{ $data['infoEntite']['model'] }}" />
                                 </div>
                                 <div>
-                                    Préfixe/suffixe du nom des fichiers (controllers et blade) <input type="text" id="themeCode"
-                                        name="props[themeCode]" value="{{ $data['infoEntite']['themeCode'] }}" />
+                                    Controller: app/Http/Controllers/<input type="text" id="themeCode"
+                                        name="props[themeCode]" value="{{ $data['infoEntite']['themeCode'] }}" />.php
                                 </div>
+                                
                                 <div>
                                     Label sur une page <input type="text" id="label" name="props[label]"
                                         value="{{ $data['infoEntite']['label'] }}" />
