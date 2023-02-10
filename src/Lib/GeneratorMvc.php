@@ -387,14 +387,22 @@ class GeneratorMvc
 
 	private function setFunctionNameController()
 	{
-		$this->functionNameController_index = $this->props['themeCode'] . '_index';
-		$this->functionNameController_listeBt = $this->props['themeCode'] . '_listeBt';
-		$this->functionNameController_edit = $this->props['themeCode'] . '_edit';
-		$this->functionNameController_create = $this->props['themeCode'] . '_create';
-		$this->functionNameController_store = $this->props['themeCode'] . '_store';
-		$this->functionNameController_update = $this->props['themeCode'] . '_update';
-		$this->functionNameController_show = $this->props['themeCode'] . '_show';
-		$this->functionNameController_destroy = $this->props['themeCode'] . '_destroy';
+		$this->functionNameController_index =  'index';
+		$this->functionNameController_listeBt = 'listeBt';
+		$this->functionNameController_edit = 'edit';
+		$this->functionNameController_create = 'create';
+		$this->functionNameController_store = 'store';
+		$this->functionNameController_update = 'update';
+		$this->functionNameController_show = 'show';
+		$this->functionNameController_destroy = 'destroy';
+		// $this->functionNameController_index = $this->props['themeCode'] . '_index';
+		// $this->functionNameController_listeBt = $this->props['themeCode'] . '_listeBt';
+		// $this->functionNameController_edit = $this->props['themeCode'] . '_edit';
+		// $this->functionNameController_create = $this->props['themeCode'] . '_create';
+		// $this->functionNameController_store = $this->props['themeCode'] . '_store';
+		// $this->functionNameController_update = $this->props['themeCode'] . '_update';
+		// $this->functionNameController_show = $this->props['themeCode'] . '_show';
+		// $this->functionNameController_destroy = $this->props['themeCode'] . '_destroy';
 	}
 
 	private function genereRoute()

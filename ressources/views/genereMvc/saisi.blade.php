@@ -43,7 +43,7 @@
                                         value="{{ $data['infoEntite']['model'] }}" />
                                 </div>
                                 <div>
-                                    Préfixe du nom des fonctions <input type="text" id="themeCode"
+                                    Préfixe/suffixe du nom des fichiers (controllers et blade) <input type="text" id="themeCode"
                                         name="props[themeCode]" value="{{ $data['infoEntite']['themeCode'] }}" />
                                 </div>
                                 <div>
