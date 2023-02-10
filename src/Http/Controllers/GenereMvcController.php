@@ -31,7 +31,7 @@ class GenereMvcController extends Controller
 
     public function getTables(){ 
         $ret=[];
-        $champName = 'Tables_in_package';
+        $champName = 'Tables_in_'.env('DB_DATABASE');
         $tables = DB::select("show tables");
         foreach ($tables as $ind => $table) {
             if($table->$champName != 'failed_jobs' 
