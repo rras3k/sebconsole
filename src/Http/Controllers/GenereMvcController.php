@@ -29,7 +29,7 @@ class GenereMvcController extends Controller
         return view('sebconsoleviews::genereMvc.saisi', compact('data'));
     }
 
-    public function getTables(){
+    public function getTables(){ 
         $ret=[];
         $champName = 'Tables_in_package';
         $tables = DB::select("show tables");
