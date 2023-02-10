@@ -13,15 +13,12 @@ return [
 
 
 
-        // Root
-        // ['rubrique' => 'Root', 'nom' => 'Générations', 'route' => 'generation.index', 'icon' => 'fa-solid fa-arrows-spin', 'droits' => [Role::ROOT]],
+        // System
+        ['rubrique' => 'Système', 'nom' => 'Génération MVC', 'route' => 'genereMvc.show', 'icon' => 'bi bi-person', 'droits' => [Role::ROOT]],
+
 
         // dev
         ['rubrique' => 'Dev', 'nom' => 'Pages dev', 'route' => 'page-pasgit.index', 'icon' => 'fa-solid fa-city', 'droits' => [Role::ADMIN]],
 
     ],
-    // 'menu_page' => [
-    //     ['champ_id' => 'role_id', 'route' => 'user.index', 'titre' => 'Users même rôle', 'icon' => 'fa-plus', 'sans-val' => true, 'para_url' => ''],  // Liste des users ayant ce role
-
-    // ]
 ];

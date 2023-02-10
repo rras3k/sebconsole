@@ -31,14 +31,15 @@ class GenereMvcController extends Controller
 
     public function getTables(){
         $ret=[];
+        $champName = 'Tables_in_package';
         $tables = DB::select("show tables");
         foreach ($tables as $ind => $table) {
-            if($table->Tables_in_package != 'failed_jobs' 
-            && $table->Tables_in_package != 'migrations'
-            && $table->Tables_in_package != 'password_resets'
-            && $table->Tables_in_package != 'personal_access_tokens'
+            if($table->$champName != 'failed_jobs' 
+            && $table->$champName != 'migrations'
+            && $table->$champName != 'password_resets'
+            && $table->$champName != 'personal_access_tokens'
             ){
-                $ret[$table->Tables_in_package] = $table->Tables_in_package;
+                $ret[$table->$champName] = $table->$champName;
             }
         }
         return $ret;
