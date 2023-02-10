@@ -60,8 +60,21 @@ use Rras3k\SebconsoleRoot\facades\RapportSimple;
 
 class GeneratorMvc
 {
+	const MODE_CREATION_FICHIER = 1;
+	const MODE_CREATION_ = 1;
 	public $champs = [];
 	public $props = [];
+	// public $mvc = [
+	// 	'route'=>[
+	// 		'mode-creation' => 'fichier', // ou 'insertion'
+	// 	],
+	// 	'controller'=>[
+	// 		'mode-creation' => 'fichier', // ou 'insertion'
+	// 	],
+	// 	'route'=>[
+	// 		'mode-creation' => 'fichier', // ou 'insertion'
+	// 	],
+	// ];
 
 	// Arguments & options
 	// public $model;
@@ -94,9 +107,12 @@ class GeneratorMvc
 	public $functionNameController_show;
 	public $functionNameController_destroy;
 
+	// ControllerName
+	public $fileNameController;
+
 	// fileName
 	public $fileNameRoute;
-	public $fileNameController;
+	public $filePathController;
 	public $fileNameView_index;
 	public $fileNameView_edit;
 	public $fileNameView_create;
@@ -125,6 +141,22 @@ class GeneratorMvc
 	// 	return $this->champs;
 	// }
 
+	public function genere()
+	{
+		$ret = ["toConfig"=>"", 'texte'=>[]];
+		// $this->setInfoMainModel();
+		$this->setRouteName();
+		$this->setFilesNames();
+		$this->setCallViews();
+		$this->setFunctionNameController();
+		//a remettre pour ecrire dans web.php  $this->genereRoute();
+		// $this->genereRoute();
+		$this->genereController();
+		$this->genereView();
+		$ret["toConfig"] = "[ 'rubrique' => 'Nouvel ajout', 'nom' => '". $this->props['label']."', 'route' => '".$this->routeName_index."', 'icon' => 'fa-solid fa-city', 'droits'=> [Role::ADMIN]],";
+
+		return $ret;
+	}
 	public function setProps($props)
 	{
 		$this->props = $props;
@@ -140,20 +172,6 @@ class GeneratorMvc
 		$this->champs = $this->analyseTable($table);
 	}
 
-	public function genere()
-	{
-		$ret = [];
-		// $this->setInfoMainModel();
-		$ret['route_name'] = $this->setRouteName();
-		$this->setFilesNames();
-		$this->setCallViews();
-		$this->setFunctionNameController();
-
-		$ret['route_name'] = $this->genereRoute();
-		$this->genereController();
-		$this->genereView();
-		return $ret;
-	}
 
 	// private function setInfoMainModel()
 	// {
@@ -271,8 +289,10 @@ class GeneratorMvc
 
 	public function setFilesNames()
 	{
-		$this->fileNameRoute = base_path().'/routes/' . $this->props['themeUrl'] . '_web.php.gMVC';
-		$this->fileNameController = base_path() . '/app/Http/Controllers/' . $this->props['model'] . 'Controller.php';
+		// $this->fileNameRoute = base_path() . '/routes/' . $this->props['themeUrl'] . '_web.php.gMVC';
+		$this->fileNameRoute = base_path() . '/routes/web.php';
+		$this->fileNameController = $this->props['model'] . '__' . $this->props['themeCode'] . 'Controller';
+		$this->filePathController = base_path() . '/app/Http/Controllers/' . $this->fileNameController.'.php';
 
 		$pathView = $this->getPathView();
 
@@ -293,45 +313,49 @@ class GeneratorMvc
 	public function check()
 	{
 		$ok = true;
-		$ok = $this->checkExistFiles() ? true :false;
-
-
-		return RapportSimple::getHtml();
-
+		$ok = $this->checkExistFiles() ? true : false;
+		return ['titre' => RapportSimple::getTitre(), 'messages' => RapportSimple::getHtml()];
 	}
 
 	public function checkExistFiles()
 	{
 		// return RapportSimple::test();
 		$processOk = true;
-		RapportSimple::add("Test de présence des fichiers", "", 2);
-		if (file_exists($this->fileNameRoute)) {
-			$processOk = false;
-			RapportSimple::add($this->fileNameRoute . " existe !","danger",1);
-		}
-		if (file_exists($this->fileNameController)) {
-			$ret['ok'] = false;
-			RapportSimple::add($this->fileNameController . " existe !", "danger", 1);
-		}
-		if (file_exists($this->fileNameView_index)) {
-			$processOk = false;
-			RapportSimple::add($this->fileNameView_index . " existe !", "danger", 1);
-		}
-		if (file_exists($this->fileNameView_edit)) {
-			$processOk = false;
-			RapportSimple::add($this->fileNameView_edit . " existe !", "danger", 1);
-		}
-		if (file_exists($this->fileNameView_create)) {
-			$processOk = false;
-			RapportSimple::add($this->fileNameView_create . " existe !", "danger", 1);
-		}
+		RapportSimple::addTitle("Vérification avant génération VMC");
 
-		if (file_exists($this->fileNameView_show)) {
-			$processOk = false;
-			RapportSimple::add($this->fileNameView_show . " existe !", "danger", 1);
-		}
-		if ($processOk){
-			RapportSimple::add(" ok !", "success", 1);
+		// RouteName
+		// RapportSimple::add("Route", 3);
+		// $isFileExists = file_exists($this->fileNameRoute);
+		// $processOk = $processOk && !$isFileExists;
+		// RapportSimple::add($this->fileNameRoute, 1, !$isFileExists);
+
+		// Controller
+		RapportSimple::add("Controller", 3);
+		$isFileExists = file_exists($this->filePathController);
+		$processOk = $processOk && !$isFileExists;
+		RapportSimple::add($this->filePathController, 1, !$isFileExists);
+
+		// View
+		RapportSimple::add("View",  3);
+
+		$isFileExists = file_exists($this->fileNameView_index);
+		$processOk = $processOk && !$isFileExists;
+		RapportSimple::add($this->fileNameView_index, 1, !$isFileExists);
+
+		$isFileExists = file_exists($this->fileNameView_edit);
+		$processOk = $processOk && !$isFileExists;
+		RapportSimple::add($this->fileNameView_edit, 1, !$isFileExists);
+
+		$isFileExists = file_exists($this->fileNameView_create);
+		$processOk = $processOk && !$isFileExists;
+		RapportSimple::add($this->fileNameView_create, 1, !$isFileExists);
+
+		$isFileExists = file_exists($this->fileNameView_show);
+		$processOk = $processOk && !$isFileExists;
+		RapportSimple::add($this->fileNameView_show, 1, !$isFileExists);
+
+		if ($processOk) {
+			RapportSimple::add("Vérification Ok",  1, 1);
 		}
 		return $processOk;
 	}
@@ -386,35 +410,38 @@ class GeneratorMvc
 		elseif (!$this->props['prefix1'] && $this->props['prefix2'])
 			$prefix = $this->props['prefix2'] . '/';
 		$prefix .=  $this->props['themeUrl'];
+		$controllerName = $this->props['model'].'__'. $this->props['themeCode'];
 
 		// $file = 'routes/' . $this->props['themeUrl'] . '_web.php.gMVC';
+		$content .= "\r\n";
+		$content .= "\r\n";
+		$content .= "// ". $this->props['model'];
+		$content .= "\r\n";
+		$content .= 'Route::get(\'' . $prefix .  '\', [' . $patController . $controllerName . 'Controller::class,\'' . $this->functionNameController_index . '\'])->name(\'' . $this->routeName_index . '\');';
+		$content .= "\r\n";
+		$content .= 'Route::get(\'' . $prefix .  '/listeBt\', [' . $patController . $controllerName . 'Controller::class,\'' . $this->functionNameController_listeBt . '\'])->name(\'' . $this->routeName_listeBt . '\');';
+		$content .= "\r\n";
+		$content .= 'Route::get(\'' . $prefix .  '/create\', [' . $patController . $controllerName . 'Controller::class,\'' . $this->functionNameController_create . '\'])->name(\'' . $this->routeName_create . '\');';
+		$content .= "\r\n";
+		$content .= 'Route::post(\'' . $prefix .  '/store\', [' . $patController . $controllerName . 'Controller::class,\'' . $this->functionNameController_store . '\'])->name(\'' . $this->routeName_store . '\');';
+		$content .= "\r\n";
+		$content .= 'Route::get(\'' . $prefix .  '/{id}/edit\', [' . $patController . $controllerName . 'Controller::class,\'' . $this->functionNameController_edit . '\'])->name(\'' . $this->routeName_edit . '\');';
+		$content .= "\r\n";
+		$content .= 'Route::put(\'' . $prefix .  '/{id}\', [' . $patController . $controllerName . 'Controller::class,\'' . $this->functionNameController_update . '\'])->name(\'' . $this->routeName_update . '\');';
+		$content .= "\r\n";
+		$content .= 'Route::get(\'' . $prefix .  '/{id}\', [' . $patController . $controllerName . 'Controller::class,\'' . $this->functionNameController_show . '\'])->name(\'' . $this->routeName_show . '\');';
+		$content .= "\r\n";
+		$content .= 'Route::delete(\'' . $prefix .  '/{id}\', [' . $patController . $controllerName . 'Controller::class,\'' . $this->functionNameController_destroy . '\'])->name(\'' . $this->routeName_destroy . '\');';
 
-		$content .= 'Route::get(\'' . $prefix .  '\', [' . $patController . $this->props['model'] . 'Controller::class,\'' . $this->functionNameController_index . '\'])->name(\'' . $this->routeName_index . '\');';
-		$content .= "\r\n";
-		$content .= 'Route::get(\'' . $prefix .  '/listeBt\', [' . $patController . $this->props['model'] . 'Controller::class,\'' . $this->functionNameController_listeBt . '\'])->name(\'' . $this->routeName_listeBt . '\');';
-		$content .= "\r\n";
-		$content .= 'Route::get(\'' . $prefix .  '/create\', [' . $patController . $this->props['model'] . 'Controller::class,\'' . $this->functionNameController_create . '\'])->name(\'' . $this->routeName_create . '\');';
-		$content .= "\r\n";
-		$content .= 'Route::post(\'' . $prefix .  '/store\', [' . $patController . $this->props['model'] . 'Controller::class,\'' . $this->functionNameController_store . '\'])->name(\'' . $this->routeName_store . '\');';
-		$content .= "\r\n";
-		$content .= 'Route::get(\'' . $prefix .  '/{id}/edit\', [' . $patController . $this->props['model'] . 'Controller::class,\'' . $this->functionNameController_edit . '\'])->name(\'' . $this->routeName_edit . '\');';
-		$content .= "\r\n";
-		$content .= 'Route::put(\'' . $prefix .  '/{id}\', [' . $patController . $this->props['model'] . 'Controller::class,\'' . $this->functionNameController_update . '\'])->name(\'' . $this->routeName_update . '\');';
-		$content .= "\r\n";
-		$content .= 'Route::get(\'' . $prefix .  '/{id}\', [' . $patController . $this->props['model'] . 'Controller::class,\'' . $this->functionNameController_show . '\'])->name(\'' . $this->routeName_show . '\');';
-		$content .= "\r\n";
-		$content .= 'Route::delete(\'' . $prefix .  '/{id}\', [' . $patController . $this->props['model'] . 'Controller::class,\'' . $this->functionNameController_destroy . '\'])->name(\'' . $this->routeName_destroy . '\');';
-
-
-		$this->writeFic($this->fileNameRoute, $content);
+		$this->writeFic($this->fileNameRoute, $content, "a");
 		return $content;
 	}
 
 
-	private function writeFic($pathFic, $content)
+	private function writeFic($pathFic, $content, $modeOuverture = "w")
 	{
 		// dd(getcwd(), base_path());
-		$handle = fopen($pathFic, "w");
+		$handle = fopen($pathFic, $modeOuverture);
 		fwrite($handle, $content);
 		fclose($handle);
 	}
@@ -455,7 +482,7 @@ class GeneratorMvc
 
 
 
-		$this->writeFic($this->fileNameController, $codeController);
+		$this->writeFic($this->filePathController, $codeController);
 	}
 
 	private function genereView()

@@ -53,7 +53,7 @@ class GenereMvcController extends Controller
         $genMvc->initTable($request->props['table']);
         $genMvc->setProps($request->props);
         $genMvc->mergeChamps($request->champs);
-        $genMvc->genere();
+        $data = $genMvc->genere();
         return view('sebconsoleviews::genereMvc.resultat', compact('data'));
 
     }

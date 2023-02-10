@@ -1,3 +1,6 @@
+<?php
+// dd($data);
+?>
 <{{$data['php']}}
 use Rras3k\SebconsoleRoot\facades\ViewData;
 ViewData::setEntites($data['rras3k']);
@@ -21,7 +24,7 @@ ViewData::setEntites($data['rras3k']);
 
             <div class="panel sb-w-600">
                 <div class="panel-header">
-                    {!! '{' !!}{ ViewData::form_getData('{{$data['this']->champStr}}') }}
+                    {!! '{' !!}{ ViewData::form_getData('{{$data['this']->props['label']}}') }}
                 </div>
 
                 <div class="panel-content">
@@ -77,6 +80,8 @@ ViewData::setEntites($data['rras3k']);
                                 class="btn btn-secondary">Rafraichir</a>
                         {!! '@' !!}endif                        
                         <button form="role" type="submit" class="btn btn-primary">Enregistrer</button>
+                        <a role="button" onclick="history.back()" class="btn btn-secondary">Annuler</a>
+
                     </div>
                 </div>
             </div>

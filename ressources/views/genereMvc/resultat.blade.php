@@ -21,7 +21,9 @@
                 <div class="panel-rubrique">
                     A insérer dans le tableau du menu du fichier config
                 </div>
-
+                <div>
+                    {{$data['toConfig']}}
+                </div
             </div>
             <div class="panel-footer">
                 <div class="col-12">

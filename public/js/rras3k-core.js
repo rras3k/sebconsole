@@ -2,7 +2,7 @@
 // -------------------------------- alerte
 var alerte_delai =2000
 const alerte = (message, type = "success", delai=2000) => {
-	console.log(type)
+	// console.log(type)
 	const wrapper = document.createElement('div')
 	wrapper.innerHTML = [
 		`<div class="alert alert-${type} alert-dismissible" role="alert">`,
@@ -79,7 +79,7 @@ function rras3k_xhr(method, url, data, contentType = "text/plain", fctCallback =
 	}
 
 	if (method == "GET") {
-		console.log(data)
+		// console.log(data)
 		fetch(url + arrayToPara(data), {
 			method: method,
 			headers: {

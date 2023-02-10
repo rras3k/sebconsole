@@ -150,14 +150,16 @@
         }
 
         function fctCallback(data) {
-            // console.log(data)
+             console.log(data)
             // alerte(data["message"],'success',2000)
-            modalShow("Rapport de vérification avant génération",data["message"])
+            modalShow(data['titre'],data['messages'])
         }
 
-        function modalShow(titre,textes) {
+        function modalShow(titre,texte) {
             elt = document.querySelector('#myModal .modal-body')
             elt.innerHTML = texte 
+            elt = document.querySelector('#exampleModalLabel')
+            elt.innerHTML = titre 
             myModal = new bootstrap.Modal(document.getElementById('myModal'), {})
             myModal.show()
         }

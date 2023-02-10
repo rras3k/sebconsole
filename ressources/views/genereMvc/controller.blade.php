@@ -9,7 +9,7 @@
 	use Illuminate\Http\Request; use Illuminate\Support\Facades\Auth; 
 	use Rras3k\Sebconsole\Http\Controllers\SbController;
 
-    class {{ $data['this']->props['model'] }}Controller extends SbController 
+    class {{ $data['this']->fileNameController }} extends SbController 
 	{ 
 		/** * * * @return */ 
 		public function __construct()
@@ -202,6 +202,12 @@
         $data = array();
         $this->page_setTitre('Création {{ $data['this']->props['model'] }}');
         $this->form_setIsCreate(true);
+		@foreach ($data['this']->champs as $key => $value)
+		    @if($value['link']['enable'])
+	       		$this->data_setList('{{ $value['link']['table'] }}', {{ $value['link']['model'] }}::getList());
+			@endif
+        @endforeach
+
         $data['rras3k'] = $this->dataToView();
         return view('{{$data['this']->callView_edit}}', compact('data'));	
 	}

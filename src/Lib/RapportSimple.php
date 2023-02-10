@@ -9,9 +9,14 @@ use Illuminate\Support\Facades\Auth;
 class RapportSimple
 {
 	public const TYPE_LIGNE_SIMPLE = 1;
-	// const TYPE_LIGNE_SIMPLE = 1;
+	public const TYPE_LIGNE_H1 = 2;
+	public const TYPE_LIGNE_H2 = 3;
+
+	public const BADGE_TYPE_ERROR = 0;
+	public const BADGE_TYPE_OK = 1;
 
 	private $lignes = [];
+	private $titre = "";
 	public  function test()
 	{
 		return "ppppp";
@@ -20,10 +25,19 @@ class RapportSimple
 	public function __construct()
 	{
 	}
-	public function add($ligne, $badgeType, $ligneType)
+	public function add($ligne, $ligneType, $badgeType = null, $badgeLibelle = null)
 	{
-		$this->lignes[] = ['ligne' => $ligne, 'badgeType' => $badgeType, 'ligneType' => $ligneType];
+		$this->lignes[] = ['ligne' => $ligne, 'badgeType' => $badgeType, 'message_badge' => $badgeLibelle, 'ligneType' => $ligneType];
 	}
+	public function addTitle($titre)
+	{
+		$this->titre = $titre;
+	}
+	public function getTitre()
+	{
+		return $this->titre;
+	}
+
 	public function get()
 	{
 		return $this->lignes;
@@ -31,33 +45,43 @@ class RapportSimple
 	public function getHtml()
 	{
 		$ret = "";
-		$finLigne = "";
+
 		foreach ($this->lignes as  $value) {
 			$finLigne = "";
+
+			// Type de ligne normal, H1, H2
 			switch ($value['ligneType']) {
-				case 2:
-					$ret = "<h1>";
+				case self::TYPE_LIGNE_H1:
+					$ret .= "<h1>";
 					$finLigne = "</h1>";
 					break;
-				default:
+				case self::TYPE_LIGNE_H2:
+					$ret .= "<h2>";
+					$finLigne = "</h2>";
 					break;
 			}
 
-			switch ($value['badgeType']) {
-				case 2:
-					$ret .= '<span class="badge bg-' . $value['badgeType'] . '">';
-					$finLigne = "</h1>";
-					break;
-				default:
-					break;
-			}
-
-			$ret.= $value['ligne'];
-			if ($value['badgeType']) {
-				$ret .='</span>';
-			}
+			// Texte 
+			$ret .= $value['ligne'];
+			// $ret .=' badge='.$value['badgeType'].' ';
 			$ret .= $finLigne;
-			
+
+			// Badge
+			if ($value['badgeType'] !== null) {
+				switch ($value['badgeType']) {
+					case self::BADGE_TYPE_ERROR:
+						$message = $value['message_badge'] ? $value['message_badge'] : "Erreur";
+						$ret .= ' <span class="badge bg-danger">' . $message . '</span>';
+						break;
+					case self::BADGE_TYPE_OK:
+						$message = $value['message_badge'] ? $value['message_badge'] : "Ok";
+						$ret .= ' <span class="badge bg-success">' . $message . '</span>';
+						break;
+				}
+			}
+			if ($value['ligneType'] == self::TYPE_LIGNE_SIMPLE) {
+				$ret .= "<br/>";
+			}
 		}
 		return $ret;
 	}
