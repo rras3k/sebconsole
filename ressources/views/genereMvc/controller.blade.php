@@ -1,19 +1,19 @@
 <{{$data['php']}}
-	namespace App\Http\Controllers; 
-	use App\Models\{{ $data['this']->props['model'] }}; 
+	namespace App\Http\Controllers;
+	use App\Models\{{ $data['this']->props['model'] }};
 	@foreach ($data['this']->champs as $key => $value)
 		    @if($value['link']['enable'])
-				use App\Models\{{ $value['link']['model'] }}; 
+				use App\Models\{{ $value['link']['model'] }};
 			@endif
         @endforeach
-	use Illuminate\Http\Request; use Illuminate\Support\Facades\Auth; 
+	use Illuminate\Http\Request; use Illuminate\Support\Facades\Auth;
 	use Rras3k\Sebconsole\Http\Controllers\SbController;
 
-    class {{ $data['this']->fileNameController }} extends SbController 
-	{ 
-		/** * * * @return */ 
+    class {{ $data['this']->fileNameController }} extends SbController
+	{
+		/** * * * @return */
 		public function __construct()
-    	{ 
+    	{
 			$this->setEntree('main');
     		parent::__construct();
     	}
@@ -63,7 +63,7 @@
     *
     * @return \Illuminate\Http\Response
     */
-    public function {{ $data['this']->props['themeCode'] }}_index()
+    public function index()
     {
 		$data = array();
 		$this->page_setTitre('{{ $data['this']->props['themeCode'] }}');
@@ -73,7 +73,7 @@
 		return view('{{ $data['this']->callView_index }}', compact('data'));
     }
 
-    public function {{ $data['this']->props['themeCode'] }}_listeBt()
+    public function listeBt()
     {
 	    return $this->listeBootstrapTable('main');
     }
@@ -81,10 +81,10 @@
 	/**
      * Show the form for editing the specified resource.
      *
-     * @param  
+     * @param
      * @return \Illuminate\Http\Response
      */
-    public function {{ $data['this']->props['themeCode'] }}_edit( $modelId)
+    public function edit( $modelId)
     {
         //
         $data = array();
@@ -104,23 +104,23 @@
         $data['rras3k'] = $this->dataToView();
 
         return view('{{$data['this']->callView_edit}}', compact('data'));
-    }	
+    }
 
 	/**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  
+     * @param
      * @return \Illuminate\Http\Response
      */
-    public function {{ $data['this']->props['themeCode'] }}_update(Request $request,  $modelId)
+    public function update(Request $request,  $modelId)
     {
         // dd($request);
         $validated = $request->validate([
 			@foreach ($data['this']->champs as $key => $value)
-			@php 
+			@php
 			 if($value['form']['visible']){
-			@endphp 
+			@endphp
             '{{$key}}' => 'required',
 			@php
 				}
@@ -129,9 +129,9 @@
         ], $this->PersonaliseErreur());
 		$model = {{$data['this']->props['model']}}::find($modelId);
 		@foreach ($data['this']->champs as $key => $value)
-		@php 
+		@php
 			 if($value['form']['visible']){
-			@endphp 
+			@endphp
 		$model->{{$key}} = $request->{{$key}};
 		 @php
 				}
@@ -144,17 +144,17 @@
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  
+     * @param
      * @return \Illuminate\Http\Response
      */
-    public function {{ $data['this']->props['themeCode'] }}_store(Request $request)
+    public function store(Request $request)
     {
         // dd($request);
         $validated = $request->validate([
 			@foreach ($data['this']->champs as $key => $value)
-			@php 
+			@php
 			 if($value['form']['visible']){
-			@endphp 
+			@endphp
             '{{$key}}' => 'required',
 			@php
 				}
@@ -164,9 +164,9 @@
 
 		$model = new {{$data['this']->props['model']}}();
 		@foreach ($data['this']->champs as $key => $value)
-		@php 
+		@php
 			 if($value['form']['visible']){
-			@endphp 
+			@endphp
 		$model->{{$key}} = $request->{{$key}};
 		 @php
 				}
@@ -180,9 +180,9 @@
     {
         return [
 			@foreach ($data['this']->champs as $key => $value)
-		@php 
+		@php
 			 if($value['form']['visible']){
-			@endphp 
+			@endphp
 		'{{$key}}.required' => 'Ce champ est obligatoire',
 		 @php
 				}
@@ -194,10 +194,10 @@
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  
+     * @param
      * @return \Illuminate\Http\Response
      */
-    public function {{ $data['this']->props['themeCode'] }}_create()
+    public function create()
 	{
         $data = array();
         $this->page_setTitre('Création {{ $data['this']->props['model'] }}');
@@ -209,16 +209,16 @@
         @endforeach
 
         $data['rras3k'] = $this->dataToView();
-        return view('{{$data['this']->callView_edit}}', compact('data'));	
+        return view('{{$data['this']->callView_edit}}', compact('data'));
 	}
 /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  
+     * @param
      * @return \Illuminate\Http\Response
      */
-   public function {{ $data['this']->props['themeCode'] }}_destroy($modelId) 
+   public function destroy($modelId)
     {
 		$model = {{$data['this']->props['model']}}::find($modelId);
 		$model->enable = 0;

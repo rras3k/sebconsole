@@ -15,7 +15,7 @@
         <div class="panel">
             <div class="panel-header">
                 Saisie des paramètres
-                <x-sebconsoleviews::composants.badge texte="Rapport" type="success"/>
+                <x-sebconsoleviews::composants.badge texte="Rapport" type="success" />
 
             </div>
             <div class="panel-content">
@@ -44,22 +44,23 @@
                                 </div>
                                 <div>
                                     Controller: app/Http/Controllers/<input type="text" id="themeCode"
-                                        name="props[themeCode]" value="{{ $data['infoEntite']['themeCode'] }}" />.php
+                                        name="props[themeCode]"
+                                        value="{{ $data['infoEntite']['themeCode'] }}" style="width:300px;"/>Controller.php
                                 </div>
-                                
+
                                 <div>
                                     Label sur une page <input type="text" id="label" name="props[label]"
                                         value="{{ $data['infoEntite']['label'] }}" />
                                 </div>
                                 <div>
 
-                                    {{ env('APP_URL') }} / <input type="text" id="prefix1" name="props[prefix1]"
-                                        value="{{ $data['infoEntite']['prefix1'] }}" />
-                                    / <input type="text" id="prefix2" name="props[prefix2]"
-                                        value="{{ $data['infoEntite']['prefix2'] }}" />
-                                    / <input type="text" id="themeUrl" name="props[themeUrl]"
-                                        value="{{ $data['infoEntite']['themeUrl'] }}" />
+                                    {{ env('APP_URL') }} / <input type="text" id="themeUrl" name="props[themeUrl]"
+                                        value="{{ $data['infoEntite']['themeUrl'] }}" style="width:300px;"/>
                                     / ...
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="genereRoute" name="genereRoute" value="1">
+                                    <label for="genereRoute">Ecrire les routes dans web.php</label>
                                 </div>
                             </div>
                             <div>
@@ -116,10 +117,9 @@
     </div>
     {{-- Modalƒ
          --}}
-    <x-sebconsoleviews::composants.modal titre="Rapport" texte="zz"
-        :boutons="[
-            'Fermer' => ['action' => 'ANNULER', 'class' => 'secondary'],
-        ]" />
+    <x-sebconsoleviews::composants.modal titre="Rapport" texte="zz" :boutons="[
+        'Fermer' => ['action' => 'ANNULER', 'class' => 'secondary'],
+    ]" />
     <style>
 
     </style>
@@ -142,25 +142,24 @@
             ret = {
                 'model': document.querySelector('#model').value,
                 'table': document.querySelector('#table').value,
+                'label': document.querySelector('#label').value,
                 'themeCode': document.querySelector('#themeCode').value,
-                'prefix1': document.querySelector('#prefix1').value,
-                'prefix2': document.querySelector('#prefix2').value,
                 'themeUrl': document.querySelector('#themeUrl').value
             }
             return ret
         }
 
         function fctCallback(data) {
-             console.log(data)
+            console.log(data)
             // alerte(data["message"],'success',2000)
-            modalShow(data['titre'],data['messages'])
+            modalShow(data['titre'], data['messages'])
         }
 
-        function modalShow(titre,texte) {
+        function modalShow(titre, texte) {
             elt = document.querySelector('#myModal .modal-body')
-            elt.innerHTML = texte 
+            elt.innerHTML = texte
             elt = document.querySelector('#exampleModalLabel')
-            elt.innerHTML = titre 
+            elt.innerHTML = titre
             myModal = new bootstrap.Modal(document.getElementById('myModal'), {})
             myModal.show()
         }
