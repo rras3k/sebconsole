@@ -51,7 +51,7 @@
                                 data-align="{{$dataAlign}}" data-sortable="true" {{!! $formatter !!}}>{{ $value['link']['label'] }}</th>
                                 @else
                                 <th data-halign="center" data-field="{{ $value['name'] }}" data-width="10"
-                                data-align="{{$dataAlign}}" data-sortable="true" {{!! $formatter !!}}>{{ $value['name'] }}</th>
+                                data-align="{{$dataAlign}}" data-sortable="true" {{!! $formatter !!}}>{{ $value['grille']['label'] }}</th>
                                 @endif
                             @endif
                         @endforeach
@@ -78,8 +78,8 @@
 
 <script>
 
-    
-    // --- modal suppression    
+
+    // --- modal suppression
     function del_enreg() {
         if (modal_function_values) {
              const myUrl = '{{$data['aco']}}{ route('{{$data['this']->routeName_destroy}}', ':id') }}'.replace(':id', modal_function_values)
@@ -110,7 +110,7 @@
     }
 
     function getModelStr(row) {
-                return row['model_str'] 
+                return row['model_str']
     }
 
     function actionFormatter(value, row) {
@@ -125,10 +125,10 @@
                 ',\'' + getModelStr(row) + '\')"><i class="bi bi-x-circle"></i> Supprimer</a></li>' +
                 '</ul>' +
                 '</div>'
-        }    
+        }
     @foreach ($data['this']->champs as $key => $value)
         @php
-            
+
             switch($value['type']){
                 case 'tinyint': // boolean
                 @endphp
