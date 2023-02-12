@@ -181,6 +181,7 @@ class GeneratorMvc
 		if (substr($typeMysql,0,4) == 'text') return 'text';
 		if (substr($typeMysql,0,6) == 'bigint') return 'numeric';
 		if (substr($typeMysql,0,7) == 'integer') return 'numeric';
+		if (substr($typeMysql,0,7) == 'tinyint') return 'numeric';
 
 		// switch($typeMysql){
 		// 	case 
