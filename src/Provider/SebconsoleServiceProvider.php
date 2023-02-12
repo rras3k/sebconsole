@@ -121,7 +121,7 @@ class SebconsoleServiceProvider extends ServiceProvider
         // Asset
         $this->publishes([
             __DIR__ . '/../../public/js' => public_path('js'),
-            __DIR__ . '/../Models' => app_path('Models'),
+            __DIR__ . '/../ModelsToCopy' => app_path('Models'),
             __DIR__ . '/../../ressources/sass/_rras3k/console.scss' => resource_path('/sass/_rras3k/console.scss'),
             __DIR__ . '/../../ressources/sass/_rras3k/def.scss' => resource_path('/sass/_rras3k/def.scss'),
             __DIR__ . '/../../ressources/sass/_rras3k/panel.scss' => resource_path('/sass/_rras3k/panel.scss'),
