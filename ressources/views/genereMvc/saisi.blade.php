@@ -44,8 +44,8 @@
                                 </div>
                                 <div>
                                     Controller: app/Http/Controllers/<input type="text" id="themeCode"
-                                        name="props[themeCode]"
-                                        value="{{ $data['infoEntite']['themeCode'] }}" style="width:300px;"/>Controller.php
+                                        name="props[themeCode]" value="{{ $data['infoEntite']['themeCode'] }}"
+                                        style="width:300px;" />Controller.php
                                 </div>
 
                                 <div>
@@ -55,7 +55,7 @@
                                 <div>
 
                                     {{ env('APP_URL') }} / <input type="text" id="themeUrl" name="props[themeUrl]"
-                                        value="{{ $data['infoEntite']['themeUrl'] }}" style="width:300px;"/>
+                                        value="{{ $data['infoEntite']['themeUrl'] }}" style="width:300px;" />
                                     / ...
                                 </div>
                                 <div>
@@ -85,18 +85,19 @@
                                     {{ $value['name'] }}
                                 </div>
                                 <div class="col-1 text-center align-self-center">
-                                    <input type="hidden" name="champs[{{ $value['name'] }}][grille][visible]" value="0" />
+                                    <input type="hidden" name="champs[{{ $value['name'] }}][grille][visible]"
+                                        value="0" />
 
                                     <input type="checkbox" name="champs[{{ $value['name'] }}][grille][visible]"
-                                        value="1"
-                                        @if ($value['grille']['visible'] == 1) checked @endif>
+                                        value="1" @if ($value['grille']['visible'] == 1) checked @endif>
                                 </div>
                                 <div class="col-2 align-self-center">
                                     <input class="w-100" type="text" name="champs[{{ $value['name'] }}][grille][label]"
                                         value="{{ $value['name'] }}" />
                                 </div>
                                 <div class="col-1 text-center align-self-center">
-                                    <input type="hidden" name="champs[{{ $value['name'] }}][form][visible]" value="0" />
+                                    <input type="hidden" name="champs[{{ $value['name'] }}][form][visible]"
+                                        value="0" />
 
                                     <input type="checkbox" name="champs[{{ $value['name'] }}][form][visible]"
                                         value="{{ $value['form']['visible'] }}"
@@ -113,9 +114,11 @@
                 </form>
             </div>
             <div class="panel-footer">
-                <div class="col-12">
-                    <button form="genereVmc" type="submit" class="btn btn-primary">Générez</button>
-                </div>
+                @if (isset($data['infoEntite']['table']))
+                    <div class="col-12">
+                        <button form="genereVmc" type="submit" class="btn btn-primary">Générez</button>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
