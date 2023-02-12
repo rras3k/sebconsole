@@ -85,8 +85,10 @@
                                     {{ $value['name'] }}
                                 </div>
                                 <div class="col-1 text-center align-self-center">
+                                    <input type="hidden" name="champs[{{ $value['name'] }}][grille][visible]" value="0" />
+
                                     <input type="checkbox" name="champs[{{ $value['name'] }}][grille][visible]"
-                                        value="{{ $value['grille']['visible'] }}"
+                                        value="1"
                                         @if ($value['grille']['visible'] == 1) checked @endif>
                                 </div>
                                 <div class="col-2 align-self-center">
@@ -94,6 +96,8 @@
                                         value="{{ $value['name'] }}" />
                                 </div>
                                 <div class="col-1 text-center align-self-center">
+                                    <input type="hidden" name="champs[{{ $value['name'] }}][form][visible]" value="0" />
+
                                     <input type="checkbox" name="champs[{{ $value['name'] }}][form][visible]"
                                         value="{{ $value['form']['visible'] }}"
                                         @if ($value['form']['visible'] == 1) checked @endif>

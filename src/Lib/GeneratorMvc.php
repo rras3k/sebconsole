@@ -124,7 +124,10 @@ class GeneratorMvc
 
 	public function mergeChamps($champs)
 	{
+		// dump($this->champs);
+		// dump($champs);
 		$this->champs = array_replace_recursive($this->champs, $champs);
+		// dd($this->champs);
 	}
 
 	public function initTable($table)

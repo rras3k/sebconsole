@@ -52,7 +52,7 @@ class GenereMvcController extends Controller
     {
         View::addNamespace('sebconsoleviews', 'Rras3k/SebconsoleRoot/ressources/views');
         $data = [];
-
+// dump($request);
         $genMvc = new GeneratorMvc();
         $genMvc->initTable($request->props['table']);
         $genMvc->setProps($request->props);

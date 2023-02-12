@@ -22,6 +22,6 @@ class LogType extends SbModel
     }
     public static function getList()
     {
-        return LogHead::select(['id', 'nom as label'])->where('enable', '=', 1)->orderBy('nom', 'asc')->get();
+        return LogType::select(['id', 'nom as label'])->where('enable', '=', 1)->orderBy('nom', 'asc')->get();
     }
 }
