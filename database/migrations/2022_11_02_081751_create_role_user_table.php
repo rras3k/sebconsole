@@ -21,6 +21,8 @@ return new class extends Migration
             $table->unique(['user_id','role_id']);
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Role::class);
+            $table->boolean('enable')->default(true);
+
             $table->timestamps();
         });
     }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->char('nom',20);
             $table->String('fonction');
+            $table->boolean('enable')->default(true);
             $table->timestamps();
         });
     }

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('texte');
             $table->integer('num_error')->default(0)->nullable();
             $table->foreignId('user_id');
+            $table->boolean('enable')->default(true);
             $table->timestamps();
         });
     }
