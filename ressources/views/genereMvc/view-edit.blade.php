@@ -6,7 +6,7 @@ use Rras3k\SebconsoleRoot\facades\ViewData;
 ViewData::setEntites($data['rras3k']);
 ?>
 
-{{ '@' }}extends('sebconsoleviews::layouts.app')
+{{ '@' }}extends('sebconsoleviews::layouts.console')
 
 {{ '@' }}section('head-link')
 {{ '@' }}endsection
