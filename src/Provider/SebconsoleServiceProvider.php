@@ -121,6 +121,7 @@ class SebconsoleServiceProvider extends ServiceProvider
         // Asset
         $this->publishes([
             __DIR__ . '/../../public/js' => public_path('js'),
+            __DIR__ . '/../../public/img' => public_path('img'),
             __DIR__ . '/../ModelsToCopy' => app_path('Models'),
             __DIR__ . '/../../ressources/sass/_rras3k/console.scss' => resource_path('/sass/_rras3k/console.scss'),
             __DIR__ . '/../../ressources/sass/_rras3k/def.scss' => resource_path('/sass/_rras3k/def.scss'),
@@ -131,6 +132,7 @@ class SebconsoleServiceProvider extends ServiceProvider
             __DIR__ . '/../../ressources/views/pasgit' => resource_path('views/page-dev'),
             __DIR__ . '/../../database/seeders/FirstSeeder.php' => database_path('seeders/FirstSeeder.php'),
             __DIR__ . '/../../ressources/sass/_variables.scss' => resource_path('/sass/_variables.example.scss'),
+            __DIR__ . '/../../ressources/sass/_variables.scss' => resource_path('/sass/_variables.scss'),
             // __DIR__ . '/../Models/LogType.php' => app_path('Models/LogType.php'),
         ], 'rras3k-force');
 
