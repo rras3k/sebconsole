@@ -40,7 +40,7 @@ $panel-footer-color: $panel-content-color !default;
 	background: $panel-background;
 	border-color: $panel-border-color;
 	color: $panel-color;
-	border: 1px solid lightgrey;
+	// border: 1px solid lightgrey;
 	// border-radius: $panel-border-radius;
 	vertical-align: top;
 
@@ -116,12 +116,12 @@ $panel-footer-color: $panel-content-color !default;
 	color: $panel-rubrique-color;
 	text-align: start;
 	background: $panel-rubrique-backgroundcolor;
-	border-style: solid;
-	border-color: $border-color;
-	border-left-width: 0;
-	border-right-width: 0;
-	border-top-width: 1px;
-	border-bottom-width: 1px;
+	// border-style: solid;
+	// border-color: $border-color;
+	// border-left-width: 0;
+	// border-right-width: 0;
+	// border-top-width: 1px;
+	// border-bottom-width: 1px;
 }
 
 .panel-content {
@@ -130,12 +130,12 @@ $panel-footer-color: $panel-content-color !default;
 	text-align: start;
 	background: $panel-content-backgroundcolor;
 	color: $panel-content-color;
-	border-style: solid;
-	border-color: $border-color;
-	border-left-width: 0;
-	border-right-width: 0;
-	border-top-width: 1px;
-	border-bottom-width: 1px;
+	// border-style: solid;
+	// border-color: $border-color;
+	// border-left-width: 0;
+	// border-right-width: 0;
+	// border-top-width: 1px;
+	// border-bottom-width: 1px;
 }
 
 .panel-footer {

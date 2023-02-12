@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('log_heads', function (Blueprint $table) {
             $table->id();
             $table->string('texte');
+            $table->boolean('enable')->default(true);
             $table->bigInteger('duree')->nullable();
             $table->integer('num_error')->nullable();
             $table->foreignId('log_type_id');

@@ -16,9 +16,7 @@
         <a class="btn btn-primary" href="{{$data['aco']}}{ route('{{ $data['this']->routeName_create }}') }}" role="button">Ajouter {{ $data['this']->props['label'] }}</a>
     </div>
     <div class="panel">
-        <div class="panel-header">
-            Liste : {{ $data['this']->props['label'] }}
-        </div>
+        
         <div class="panel-content">
             <table id="table" data-toolbar="#toolbar" data-toolbar="#toolbar" class="table-striped" data-page-size="25"
                 data-show-toggle="true" data-show-columns-toggle-all="true" data-show-columns="true"

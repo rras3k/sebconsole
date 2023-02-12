@@ -6,41 +6,34 @@ use Rras3k\Sebconsole\Models\Role;
 Route::group(
     [
         'namespace' => 'Rras3k\Sebconsole\Http\Controllers',
-        'middleware' => ['web','auth', 'role:'.Role::ADMIN]
+        'middleware' => ['web', 'auth', 'role:' . Role::ADMIN]
     ],
     function () {
 
         // Route::middleware(['auth', 'role:1'])->group(
         //     function () {
-                $prefix = '/console';
+        $prefix = '/console';
 
-                // Pages Pasgit
-                Route::get($prefix . '/pages-pasgit', [Rras3k\Sebconsole\Http\Controllers\PagePasgitController::class, 'index'])->name('page-pasgit.index');
-                Route::get($prefix . '/pages-pasgit/page/{nompage}', [Rras3k\Sebconsole\Http\Controllers\PagePasgitController::class, 'getPage']);
+        // Pages Pasgit
+        Route::get($prefix . '/pages-pasgit', [Rras3k\Sebconsole\Http\Controllers\PagePasgitController::class, 'index'])->name('page-pasgit.index');
+        Route::get($prefix . '/pages-pasgit/page/{nompage}', [Rras3k\Sebconsole\Http\Controllers\PagePasgitController::class, 'getPage']);
 
 
-                // Console
-                Route::get($prefix, [Rras3k\Sebconsole\Http\Controllers\ConsoleController::class, 'show'])->name('console.show');
+        // Console
+        Route::get($prefix, [Rras3k\Sebconsole\Http\Controllers\ConsoleController::class, 'show'])->name('console.show');
 
-                // Users
-                Route::get($prefix . '/user-listeBt', [Rras3k\Sebconsole\Http\Controllers\UserController::class, 'listeBt'])->name('user.listeBt');
-                Route::resource($prefix . "/user", Rras3k\Sebconsole\Http\Controllers\UserController::class);
 
-                // Roles
-                Route::get($prefix . '/role-listeBt', [Rras3k\Sebconsole\Http\Controllers\RoleController::class, 'listeBt'])->name('role.listeBt');
-                Route::resource($prefix . "/role", Rras3k\Sebconsole\Http\Controllers\RoleController::class);
+    }
+);
 
-                // LogHeads
-                Route::get($prefix . '/logHead-listeBt', [Rras3k\Sebconsole\Http\Controllers\LogHeadController::class, 'listeBt'])->name('logHead.listeBt');
-                Route::get($prefix . '/logHead', [Rras3k\Sebconsole\Http\Controllers\LogHeadController::class, 'index'])->name('logHead.index');
-
-                // LogDetails
-                Route::get($prefix . '/logDetail-listeBt', [Rras3k\Sebconsole\Http\Controllers\LogDetailController::class, 'listeBt'])->name('logDetail.listeBt');
-                Route::get($prefix . '/logDetail', [Rras3k\Sebconsole\Http\Controllers\LogDetailController::class, 'index'])->name('logDetail.index');
-
-                // Génération
-                Route::get($prefix . '/generation', [Rras3k\Sebconsole\Http\Controllers\GenerationController::class, 'index'])->name('generation.index');
-        //     }
-        // );
+Route::group(
+    [
+        'namespace' => 'Rras3k\Sebconsole\Http\Controllers',
+        'middleware' => ['web', 'auth', 'role:' . Role::ROOT]
+    ],
+    function () {
+        Route::get('rras3k/genere-mvc', [\Rras3k\Sebconsole\Http\Controllers\genereMvcController::class, 'show'])->name('genereMvc.show');
+        Route::get('rras3k/genere-check', [\Rras3k\Sebconsole\Http\Controllers\genereMvcController::class, 'check'])->name('genereMvc.check');
+        Route::post('rras3k/genere-run', [\Rras3k\Sebconsole\Http\Controllers\genereMvcController::class, 'run'])->name('genereMvc.run');
     }
 );

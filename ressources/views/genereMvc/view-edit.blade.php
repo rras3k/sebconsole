@@ -23,10 +23,7 @@ ViewData::setEntites($data['rras3k']);
         <div class="panel-group ">
 
             <div class="panel sb-w-600">
-                <div class="panel-header">
-                    {!! '{' !!}{ ViewData::form_getData('{{$data['this']->props['label']}}') }}
-                </div>
-
+                
                 <div class="panel-content">
 
                         {!! '@' !!}if (ViewData::form_isCreate())
@@ -42,30 +39,28 @@ ViewData::setEntites($data['rras3k']);
                     {!! '@' !!}csrf
                     <div class="row">
 						@foreach ($data['this']->champs as $key => $value)
-                            @php
-								if($value['form']['visible']){
+                            @if($value['form']['visible'])
 
-                                switch($value['type']){
-                                    case 'tinyint': // boolean
-                                        $isFormatter =true;
-                                        $dataAlign= "center";
-                                        break;
-									default:
-									break;
-                                }
+                                    @if($value['link']['enable'])
+                                        {!! '<' !!}x-sebconsoleviews::forms.select :value="ViewData::form_getData('{{$key}}')" :liste="ViewData::data_getList('{{$value['link']['table']}}')" listeId="id" listeValue="label" nom="{{$key}}" label="{{$value['link']['label']}}" placeholder=""/>
+                                    
+                                    @elseif ($value['type'] == 'boolean')
+                                                {!! '<' !!}x-sebconsoleviews::forms.checkbox  :value="ViewData::form_getData('sys')" nom="sys" label="Système"
+                                                    placeholder="" />
+
+                                    @elseif ($value['type'] == 'text')
+
+                                    @elseif ($value['type'] == 'numeric')
+                                        {!! '<' !!}x-sebconsoleviews::forms.input type="text" :value="ViewData::form_getData('{{$key}}')" nom="{{$key}}" label="{{$value['form']['label']}}"
+                                            placeholder=""/>
+
+                                    @else
+                                        {!! '<' !!}x-sebconsoleviews::forms.input type="text" :value="ViewData::form_getData('{{$key}}')" nom="{{$key}}" label="{{$value['form']['label']}}"
+                                            placeholder=""/>
+                                    @endif
 								
-                            @endphp
 
-              				@if($value['link']['enable'])
-                              {!! '<' !!}x-sebconsoleviews::forms.select :value="ViewData::form_getData('{{$key}}')" :liste="ViewData::data_getList('{{$value['link']['table']}}')" listeId="id" listeValue="label" nom="{{$key}}" label="{{$value['link']['label']}}" placeholder=""/>
-                            @else  
-							    {!! '<' !!}x-sebconsoleviews::forms.input type="text" :value="ViewData::form_getData('{{$key}}')" nom="{{$key}}" label="{{$value['form']['label']}}"
-							placeholder=""/>
                             @endif
-
-							@php
-								}
-                            @endphp
 
                         @endforeach
 

@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('log_types', function (Blueprint $table) {
             $table->id();
             $table->String('nom');
+            $table->boolean('enable')->default(true);
+            $table->boolean('sys')->default(false);
             $table->timestamps();
         });
     }

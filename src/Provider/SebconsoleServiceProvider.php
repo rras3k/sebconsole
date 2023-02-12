@@ -50,17 +50,19 @@ class SebconsoleServiceProvider extends ServiceProvider
         // Migration
         $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
 
-        // Routes
-        $this->loadRoutesFrom(__DIR__ . '/../../routes/web.php');
-
-        // Views
-        $this->loadViewsFrom(__DIR__ . '/../../ressources/views', 'sebconsoleviews');
-
         // config
         $this->mergeConfigFrom(
             __DIR__ . '/../../config/sebconsole.php',
             'sebconsole'
         );
+        
+        // Views
+        $this->loadViewsFrom(__DIR__ . '/../../ressources/views', 'sebconsoleviews');
+        
+        
+        // Routes
+        $this->loadRoutesFrom(__DIR__ . '/../../routes/web.php');
+
         // Middleware
         // $kernel->pushMiddleware(EnsureUserHasRole::class);
 
@@ -126,7 +128,7 @@ class SebconsoleServiceProvider extends ServiceProvider
             __DIR__ . '/../../ressources/sass/_rras3k/panel2.scss' => resource_path('/sass/_rras3k/panel2.scss'),
             __DIR__ . '/../../ressources/sass/_rras3k/sidebar.scss' => resource_path('/sass/_rras3k/sidebar.scss'),
             __DIR__ . '/../../ressources/views/pasgit' => resource_path('views/page-dev'),
-            __DIR__ . '/../../database/seeders/RoleSeeder.php' => database_path('seeders/RoleSeeder.php'),
+            __DIR__ . '/../../database/seeders/FirstSeeder.php' => database_path('seeders/FirstSeeder.php'),
             __DIR__ . '/../../ressources/sass/_variables.scss' => resource_path('/sass/_variables.example.scss'),
             // __DIR__ . '/../Models/LogType.php' => app_path('Models/LogType.php'),
         ], 'rras3k-force');

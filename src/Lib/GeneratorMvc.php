@@ -135,32 +135,54 @@ class GeneratorMvc
 	public function analyseTable($table)
 	{
 		$ret = [];
-		$colomns = DB::select("SELECT data_type, COLUMN_NAME,COLUMN_DEFAULT,COLUMN_COMMENT FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '" . env('DB_DATABASE') . "'  AND TABLE_NAME = '" . $table . "' ORDER BY ORDINAL_POSITION");
+		// $colomns = DB::select("SELECT data_type, COLUMN_NAME,COLUMN_DEFAULT,COLUMN_COMMENT FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '" . env('DB_DATABASE') . "'  AND TABLE_NAME = '" . $table . "' ORDER BY ORDINAL_POSITION");
+		$colomns = DB::select("SHOW COLUMNS FROM " . $table );
 		foreach ($colomns as $ind => $column) {
-			$ret[$column->COLUMN_NAME] = [];
-			$ret[$column->COLUMN_NAME]['name'] = $column->COLUMN_NAME;
-			$ret[$column->COLUMN_NAME]['type'] = $column->DATA_TYPE;
 
-			$ret[$column->COLUMN_NAME]['form'] = [];
-			$ret[$column->COLUMN_NAME]['form']['label'] = $column->COLUMN_NAME;
-			$ret[$column->COLUMN_NAME]['form']['visible'] = $this->isSavable($column->COLUMN_NAME);
+			$colonneNom = $column->Field;
+			$colonneTypeMysql = $column->Type;
 
-			$ret[$column->COLUMN_NAME]['grille'] = [];
-			$ret[$column->COLUMN_NAME]['grille']['label'] = $column->COLUMN_NAME;
-			$ret[$column->COLUMN_NAME]['grille']['visible'] = $this->isSavable($column->COLUMN_NAME);
+			// $colonneNom = $column->COLUMN_NAME;
+			// $colonneTypeMysql = $column->DATA_TYPE;
 
-			$ret[$column->COLUMN_NAME]['link'] = ['enable' => false];
-			if (substr($column->COLUMN_NAME, -3) == "_id") {
-				$ret[$column->COLUMN_NAME]['link']['enable'] = true;
-				$aroundLinkTable = substr($column->COLUMN_NAME, 0, strlen($column->COLUMN_NAME) - 3);
-				$ret[$column->COLUMN_NAME]['link']['model'] = $this->getLinkModel($aroundLinkTable);
-				$ret[$column->COLUMN_NAME]['link']['table'] = $this->getLinkTable($aroundLinkTable);
-				$ret[$column->COLUMN_NAME]['link']['str'] = $this->getModelStr($ret[$column->COLUMN_NAME]['link']['model']);
-				$ret[$column->COLUMN_NAME]['link']['label'] = $this->getLinkLabel($ret[$column->COLUMN_NAME]['link']['model']);
-				// $ret[$column->COLUMN_NAME]['label'] = $ret[$column->COLUMN_NAME]['link']['label'];
+			$ret[$colonneNom] = [];
+			$ret[$colonneNom]['name'] = $colonneNom;
+			$ret[$colonneNom]['type_mysql'] = $colonneTypeMysql;
+			$ret[$colonneNom]['type'] = $this->getType($colonneTypeMysql);
+
+			$ret[$colonneNom]['form'] = [];
+			$ret[$colonneNom]['form']['label'] = $colonneNom;
+			$ret[$colonneNom]['form']['visible'] = $this->isSavable($colonneNom);
+
+			$ret[$colonneNom]['grille'] = [];
+			$ret[$colonneNom]['grille']['label'] = $colonneNom;
+			$ret[$colonneNom]['grille']['visible'] = $this->isSavable($colonneNom);
+
+			$ret[$colonneNom]['link'] = ['enable' => false];
+			if (substr($colonneNom, -3) == "_id") {
+				$ret[$colonneNom]['link']['enable'] = true;
+				$aroundLinkTable = substr($colonneNom, 0, strlen($colonneNom) - 3);
+				$ret[$colonneNom]['link']['model'] = $this->getLinkModel($aroundLinkTable);
+				$ret[$colonneNom]['link']['table'] = $this->getLinkTable($aroundLinkTable);
+				$ret[$colonneNom]['link']['str'] = $this->getModelStr($ret[$colonneNom]['link']['model']);
+				$ret[$colonneNom]['link']['label'] = $this->getLinkLabel($ret[$colonneNom]['link']['model']);
+				// $ret[$colonneNom]['label'] = $ret[$colonneNom]['link']['label'];
 			}
 		}
 		return $ret;
+	}
+
+	private function getType($typeMysql){
+		if ($typeMysql == 'tinyint(1)') return 'boolean';
+		if (substr($typeMysql,0,7) == 'varchar') return 'varchar';
+		if (substr($typeMysql,0,4) == 'text') return 'text';
+		if (substr($typeMysql,0,6) == 'bigint') return 'numeric';
+		if (substr($typeMysql,0,7) == 'integer') return 'numeric';
+
+		// switch($typeMysql){
+		// 	case 
+		// }
+		return 'varchar';
 	}
 
 
@@ -208,9 +230,9 @@ class GeneratorMvc
 		return [
 			'table' => $table,
 			'model' => $this->getLinkModel($table),
-			'themeCode' => $this->getLinkModel($table).'_console_admin_',
+			'themeCode' => $this->getLinkModel($table).'_console_',
 			'label' => $this->getClassName($this->getLinkModel($table))::getLabel(),
-			'themeUrl' => 'console/admin/'.$table,
+			'themeUrl' => 'console/'.$table,
 		];
 	}
 

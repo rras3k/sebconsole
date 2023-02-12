@@ -1,3 +1,6 @@
+<?php
+// dd($data);
+?>
 <{{$data['php']}}
 	namespace App\Http\Controllers;
 	use App\Models\{{ $data['this']->props['model'] }};
@@ -89,10 +92,12 @@
         //
         $data = array();
 		$model= {{ $data['this']->props['model'] }}::find($modelId);
-        $this->page_setTitre('Edition: {{ $data['this']->label }}');
+		
+        $this->page_setTitre('{{$data['this']->props['label']}}: Edition de '.$model->{{$data['strName']}});
         // $this->form_setHiddenValues([
         //     'formulaire_id' => $formulaire->_id
         // ]);
+
 		@foreach ($data['this']->champs as $key => $value)
 		    @if($value['link']['enable'])
 	       		$this->data_setList('{{ $value['link']['table'] }}', {{ $value['link']['model'] }}::getList());
