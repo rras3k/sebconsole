@@ -33,9 +33,12 @@
                                     $dataAlign= "left";
                                     $formatter="";
                                     switch($value['type']){
-                                        case 'tinyint': // boolean
+                                        case 'boolean': 
                                             $isFormatter =true;
                                             $dataAlign= "center";
+                                            break;
+                                        case 'numeric': 
+                                            $dataAlign= "right";
                                             break;
                                     }
                                     if ($isFormatter){
