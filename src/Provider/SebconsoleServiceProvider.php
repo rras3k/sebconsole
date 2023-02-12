@@ -110,7 +110,7 @@ class SebconsoleServiceProvider extends ServiceProvider
 
     private function importPublishOnce()
     /*
-    php artisan db:seed --class=RoleSeeder
+    php artisan db:seed --class=FirstSeeder
     php artisan vendor:publish
     php artisan vendor:publish --force --tag=rras3k-force
     php artisan vendor:publish --force --tag=rras3k-config
@@ -121,6 +121,7 @@ class SebconsoleServiceProvider extends ServiceProvider
         // Asset
         $this->publishes([
             __DIR__ . '/../../public/js' => public_path('js'),
+            __DIR__ . '/../Models' => app_path('Models'),
             __DIR__ . '/../../ressources/sass/_rras3k/console.scss' => resource_path('/sass/_rras3k/console.scss'),
             __DIR__ . '/../../ressources/sass/_rras3k/def.scss' => resource_path('/sass/_rras3k/def.scss'),
             __DIR__ . '/../../ressources/sass/_rras3k/panel.scss' => resource_path('/sass/_rras3k/panel.scss'),

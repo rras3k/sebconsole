@@ -2,13 +2,15 @@
 
 namespace Rras3k\Sebconsole\Models;
 
+use  Rras3k\Sebconsole\Models\SbModel;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 
-class Role extends Model
+class Role extends SbModel
 {
     use HasFactory;
 
@@ -29,5 +31,18 @@ class Role extends Model
         return $this->belongsToMany(User::class);
     }
 
+    //--- Mvc
+    public static function getStrName()
+    {
+        return 'nom';
+    }
+    public static function getLabel()
+    {
+        return 'Role';
+    }
+    public static function getList()
+    {
+        return Role::select(['id', 'nom as label'])->where('enable', '=', 1)->orderBy('nom', 'asc')->get();
+    }
 
 }

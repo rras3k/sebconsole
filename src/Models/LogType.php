@@ -2,19 +2,26 @@
 
 namespace App\Models;
 
-// namespace Rras3k\Sebconsole\Models;
+use  Rras3k\Sebconsole\Models\SbModel;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LogType extends Model
+class LogType extends SbModel
 {
     use HasFactory;
-    public static function liste()
+
+    //--- Mvc
+    public static function getStrName()
     {
-        return LogType::get();
+        return 'nom';
     }
-    public function toStr(){
-        return $this->nom;
+    public static function getLabel()
+    {
+        return 'Type log';
+    }
+    public static function getList()
+    {
+        return LogHead::select(['id', 'nom as label'])->where('enable', '=', 1)->orderBy('nom', 'asc')->get();
     }
 }

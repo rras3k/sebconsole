@@ -2,10 +2,12 @@
 
 namespace Rras3k\Sebconsole\Models;
 
+use  Rras3k\Sebconsole\Models\SbModel;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LogHead extends Model
+class LogHead extends SbModel
 {
     use HasFactory;
     const TYPE_DEFAULT = 1;
@@ -13,4 +15,17 @@ class LogHead extends Model
     //--CONSTANTE Constantes générées
     //--CONSTANTE-END
 
+    //--- Mvc
+    public static function getStrName()
+    {
+        return 'texte';
+    }
+    public static function getLabel()
+    {
+        return 'Entête log';
+    }
+    public static function getList()
+    {
+        return LogHead::select(['id', 'texte as label'])->where('enable', '=', 1)->orderBy('texte', 'asc')->get();
+    }
 }
