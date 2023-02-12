@@ -45,7 +45,7 @@ ViewData::setEntites($data['rras3k']);
                                         {!! '<' !!}x-sebconsoleviews::forms.select :value="ViewData::form_getData('{{$key}}')" :liste="ViewData::data_getList('{{$value['link']['table']}}')" listeId="id" listeValue="label" nom="{{$key}}" label="{{$value['link']['label']}}" placeholder=""/>
                                     
                                     @elseif ($value['type'] == 'boolean')
-                                                {!! '<' !!}x-sebconsoleviews::forms.checkbox  :value="ViewData::form_getData('sys')" nom="sys" label="Système"
+                                                {!! '<' !!}x-sebconsoleviews::forms.checkbox  :value="ViewData::form_getData('{{$key}}')" nom="{{$key}}" label="{{$value['form']['label']}}"
                                                     placeholder="" />
 
                                     @elseif ($value['type'] == 'text')
