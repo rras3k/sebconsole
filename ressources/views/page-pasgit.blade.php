@@ -1,4 +1,4 @@
-@extends('sebconsoleviews::layouts.app')
+@extends('sebconsoleviews::layouts.console')
 
 
 @section('head-link')
