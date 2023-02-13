@@ -1,5 +1,7 @@
 <?php
-use Rras3k\Sebconsole\Models\Role;
+// use Rras3k\Sebconsole\Models\Role;
+use App\Models\Role;
+
 
 return [
     'affiche_logo' => true,         // Affichage du logo /public/img/logo.png
