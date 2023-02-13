@@ -22,7 +22,7 @@
                 data-show-toggle="true" data-show-columns-toggle-all="true" data-show-columns="true"
                 data-buttons="buttons" data-side-pagination="server" data-row-style="rowStyle" data-pagination="true"
                 data-unique-id="id" data-mobile-responsive="false" data-locale="fr-FR" data-toggle="table"
-                data-search="true" data-show-refresh="true" data-url="{{$data['aco']}}{route('{{$data['this']->routeName_listeBt}}')}}">
+                data-search="true" data-show-refresh="true" data-url="{{$data['aco']}}{$data['route']}}">
                 <thead>
                     <tr>
                         @foreach ($data['this']->champs as $key => $value)
