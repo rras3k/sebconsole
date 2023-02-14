@@ -26,7 +26,7 @@ Route::group(
     ['middleware' => 'auth'],
     function () {
         Route::redirect('/home', '/console');
-        Route::get('console', [App\Http\Controllers\ConsoleController::class, 'show'])->name('console.show');
+        Route::get('console', [App\Http\Controllers\DashboardController::class, 'show'])->name('dashboard.show');
     }
 );
 
