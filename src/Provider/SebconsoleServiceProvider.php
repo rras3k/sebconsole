@@ -46,6 +46,9 @@ class SebconsoleServiceProvider extends ServiceProvider
     }
     public function boot()
     {
+
+        $this->loadBladeDirectives();
+
         // Migration
         $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
 
@@ -88,7 +91,6 @@ class SebconsoleServiceProvider extends ServiceProvider
         // composants view
         // $this->loadViewsFrom(__DIR__ . '/../../resources/views/components', 'forms.input');
 
-        $this->loadBladeDirectives();
 
 
     }
