@@ -47,37 +47,37 @@ class SebconsoleServiceProvider extends ServiceProvider
     public function boot()
     {
 
-        $this->loadBladeDirectives();
-
+        $this->importPublishOnce();
+        
         // Migration
         $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
-
+        
         // config
         $this->mergeConfigFrom(
             __DIR__ . '/../../config/sebconsole.php',
             'sebconsole'
         );
-
+        
         // Views
         $this->loadViewsFrom(__DIR__ . '/../../ressources/views', 'sebconsoleviews');
-
-
+        
+        
         // Routes
         $this->loadRoutesFrom(__DIR__ . '/../../routes/web.php');
-
+        
         // Middleware
         // $kernel->pushMiddleware(EnsureUserHasRole::class);
-
+        
         // $router = $this->app->make(Router::class);
         // $router->pushMiddlewareToGroup('web', EnsureUserHasRole::class);
-
+        
         $this->app->booted(function () {
             $router = $this->app->make(Router::class);
             $router->aliasMiddleware('role', EnsureUserHasRole::class);
             $router->pushMiddleWareToGroup('role', EnsureUserHasRole::class);
         });
-
-        $this->importPublishOnce();
+        
+        $this->loadBladeDirectives();
 
         // Console
         if ($this->app->runningInConsole()) {
