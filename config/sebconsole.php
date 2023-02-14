@@ -1,6 +1,4 @@
 <?php
-// use Rras3k\Sebconsole\Models\Role;
-use App\Models\Role;
 
 
 return [
@@ -11,13 +9,13 @@ return [
     'menu' => [ // Menu de la sidebar. Role::ROOT, Role::ADMIN, Role::MEMBRE_1, Role::MEMBRE_2, ...
 
         // System
-        ['rubrique' => 'Système', 'nom' => 'Génération MVC', 'route' => 'genereMvc.show', 'icon' => 'bi bi-person', 'droits' => [Role::ROOT]],
+        // ['rubrique' => 'Système', 'nom' => 'Génération MVC', 'route' => 'genereMvc.show', 'icon' => 'bi bi-person', 'droits' => [Role::ROOT]],
 
 
         
 
         // dev
-        ['rubrique' => 'Dev', 'nom' => 'Pages dev', 'route' => 'page-pasgit.index', 'icon' => 'fa-solid fa-city', 'droits' => [Role::ADMIN]],
+        // ['rubrique' => 'Dev', 'nom' => 'Pages dev', 'route' => 'page-pasgit.index', 'icon' => 'fa-solid fa-city', 'droits' => [Role::ADMIN]],
 
 
 
