@@ -121,7 +121,7 @@ class SebconsoleServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__ . '/../../toCopy/public' => public_path(),
-            __DIR__ . '/../../toCopy/Models' => app_path('Models'),
+            __DIR__ . '/../../toCopy/app' => app_path(),
             __DIR__ . '/../../toCopy/resources' => resource_path(),
             __DIR__ . '/../../toCopy/routes' => base_path('routes'),
             __DIR__ . '/../../toCopy/config' => config_path(),
