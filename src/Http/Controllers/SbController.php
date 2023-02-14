@@ -141,14 +141,15 @@ abstract class SbController extends Controller
      */
     public function menuPage_add($label, $url, $icon, $class = null, $onclick = null)
     {
-        $this->paras[$this->entree]['menu'][] = ["label" => $label, "url" => $url, "icon" => $icon, "class" => $class,"onclick"=> $onclick];
+        $this->paras[$this->entree]['menu'][] = ["label" => $label, "url" => $url, "icon" => $icon, "class" => $class, "onclick" => $onclick];
         // dd($this->paras);
         // $this->entites[$this->entree]['menu']['values'][$champId] = ['value_para' => $para_url, 'value_code' => $value];
         // $this->values[$champId] = ['value_para' => $para_url, 'value_code' => $value];
     }
 
-    public function menuPage_addRetour(){
-        $this->menuPage_add("Retour", "#", "bi bi-arrow-return-left",null,'history.back();');
+    public function menuPage_addRetour()
+    {
+        $this->menuPage_add("Retour", "#", "bi bi-arrow-return-left", null, 'history.back();');
     }
 
 
@@ -182,11 +183,13 @@ abstract class SbController extends Controller
     public function menuPage_get()
     {
         // dd($this->paras);
-        foreach ($this->paras as $entree => $paraEntree) {
-            $ret = [];
-            if (isset($paraEntree['menu'])) {
-                foreach ($paraEntree['menu'] as $ind => $menu) {
-                    $this->entites[$entree]['menu_page'][] = ['titre' => $menu['label'], 'url' => $menu['url'],  'classIcon' =>  $menu['icon'], 'class' => $menu['class'], 'onclick' => $menu['onclick']];
+        if ($this->paras) {
+            foreach ($this->paras as $entree => $paraEntree) {
+                $ret = [];
+                if (isset($paraEntree['menu'])) {
+                    foreach ($paraEntree['menu'] as $ind => $menu) {
+                        $this->entites[$entree]['menu_page'][] = ['titre' => $menu['label'], 'url' => $menu['url'],  'classIcon' =>  $menu['icon'], 'class' => $menu['class'], 'onclick' => $menu['onclick']];
+                    }
                 }
             }
         }
@@ -444,7 +447,7 @@ abstract class SbController extends Controller
                 $where .= $this->paras[$entree]['filtre_fixe'][$filtre] . '=' . $value;
             }
         }
-        
+
         // Filtre permanent
         if (isset($this->paras[$entree]['filtre_permanent'])) {
             foreach ($this->paras[$entree]['filtre_permanent'] as $champ => $value) {
