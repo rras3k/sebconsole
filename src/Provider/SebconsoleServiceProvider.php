@@ -29,7 +29,6 @@ class SebconsoleServiceProvider extends ServiceProvider
             return new RoleUser();
         });
         $this->app->bind('Role', function ($app) {
-            // dd("ooo1");
             return new Role();
         });
         $this->app->bind('Log', function ($app) {

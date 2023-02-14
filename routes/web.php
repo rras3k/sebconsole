@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Rras3k\Sebconsole\Models\Role;
+// use Rras3k\Sebconsole\Models\Role;
+
+use App\Models\Role;
+
 
 Route::group(
     [

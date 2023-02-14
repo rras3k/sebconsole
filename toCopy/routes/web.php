@@ -32,6 +32,7 @@ Route::group(
 
 //------------------------------- ROOT
 Route::middleware(['auth', 'role:' . Role::ROOT])->group(function () {
+   
 });
 
 //------------------------------- ADMIN
@@ -41,5 +42,6 @@ Route::middleware(['auth', 'role:' . Role::ADMIN])->group(function () {
 
 //------------------------------- AFFILIE = member1
 // Route::middleware(['auth', 'role:' . Role::MEMBRE_1])->group(function () {
-//     // dump('affilie');
+//     
 // });
+
