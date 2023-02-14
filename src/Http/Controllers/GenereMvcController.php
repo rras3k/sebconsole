@@ -55,6 +55,7 @@ class GenereMvcController extends Controller
 // dump($request);
         $genMvc = new GeneratorMvc();
         $genMvc->initTable($request->props['table']);
+        // dd($request->props);
         $genMvc->setProps($request->props);
         $genMvc->mergeChamps($request->champs);
         $data = $genMvc->genere($request->genereRoute);

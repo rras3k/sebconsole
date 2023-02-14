@@ -47,7 +47,7 @@
 					'{{ $value['name'] }}_str'=> ['table' => '{{$value['link']['table']}}', 'champ_table' => '{{ $value['link']['str'] }}'],
 				@endif
 				@endforeach
-				'model_str'=> ['table' => '{{ $data['this']->props['table'] }}', 'champ_table' => '{{$data['strName']}}'],
+				'model_str'=> ['table' => '{{ $data['this']->props['table'] }}', 'champ_table' => '{{$data['this']->props['champStr']}}'],
 					],
 					// 'filtre' => [],
 					'filtre_fixe' => [
@@ -93,7 +93,7 @@
         $data = array();
 		$model= {{ $data['this']->props['model'] }}::find($modelId);
 		
-        $this->page_setTitre('{{$data['this']->props['label']}}: Edition de '.$model->{{$data['strName']}});
+        $this->page_setTitre('{{$data['this']->props['label']}}: Edition de '.$model->{{$data['this']->props['champStr']}});
         // $this->form_setHiddenValues([
         //     'formulaire_id' => $formulaire->_id
         // ]);

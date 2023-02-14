@@ -6,7 +6,7 @@ use Rras3k\SebconsoleRoot\facades\ViewData;
 ViewData::setEntites($data['rras3k']);
 ?>
 
-{{ '@' }}extends('sebconsoleviews::layouts.console')
+{{ '@' }}extends('layouts.console')
 
 {{ '@' }}section('head-link')
 {{ '@' }}endsection
@@ -23,7 +23,7 @@ ViewData::setEntites($data['rras3k']);
         <div class="panel-group ">
 
             <div class="panel sb-w-600">
-                
+
                 <div class="panel-content">
 
                         {!! '@' !!}if (ViewData::form_isCreate())
@@ -43,7 +43,7 @@ ViewData::setEntites($data['rras3k']);
 
                                     @if($value['link']['enable'])
                                         {!! '<' !!}x-sebconsoleviews::forms.select :value="ViewData::form_getData('{{$key}}')" :liste="ViewData::data_getList('{{$value['link']['table']}}')" listeId="id" listeValue="label" nom="{{$key}}" label="{{$value['link']['label']}}" placeholder=""/>
-                                    
+
                                     @elseif ($value['type'] == 'boolean')
                                                 {!! '<' !!}x-sebconsoleviews::forms.checkbox  :value="ViewData::form_getData('{{$key}}')" nom="{{$key}}" label="{{$value['form']['label']}}"
                                                     placeholder="" />
@@ -58,7 +58,7 @@ ViewData::setEntites($data['rras3k']);
                                         {!! '<' !!}x-sebconsoleviews::forms.input type="text" :value="ViewData::form_getData('{{$key}}')" nom="{{$key}}" label="{{$value['form']['label']}}"
                                             placeholder=""/>
                                     @endif
-								
+
 
                             @endif
 
@@ -73,7 +73,7 @@ ViewData::setEntites($data['rras3k']);
 						{!! '@' !!}if (!ViewData::form_isCreate())
                             <a href="{!! '{' !!}{ route('{{$data['this']->routeName_edit}}', ViewData::form_getData('id')) }}"
                                 class="btn btn-secondary">Rafraichir</a>
-                        {!! '@' !!}endif                        
+                        {!! '@' !!}endif
                         <button form="role" type="submit" class="btn btn-primary">Enregistrer</button>
                         <a role="button" onclick="history.back()" class="btn btn-secondary">Annuler</a>
 

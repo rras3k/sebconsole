@@ -9,15 +9,9 @@ Route::group(
         'middleware' => ['web', 'auth', 'role:' . Role::ADMIN]
     ],
     function () {
-
-
         // Pages Pasgit
         Route::get('rras3k/pages-pasgit', [Rras3k\Sebconsole\Http\Controllers\PagePasgitController::class, 'index'])->name('page-pasgit.index');
         Route::get('rras3k/pages-pasgit/page/{nompage}', [Rras3k\Sebconsole\Http\Controllers\PagePasgitController::class, 'getPage']);
-
-
-        // Console
-        //Route::get('console', [Rras3k\Sebconsole\Http\Controllers\ConsoleController::class, 'show'])->name('console.show');
     }
 );
 

@@ -1,7 +1,7 @@
 <?php
 // dd($data);
 ?>
-@extends('sebconsoleviews::layouts.console')
+@extends('layouts.console')
 
 @section('head-link')
 @endsection

@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Auth;
     {{-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
 
-    
-        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"
+
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"
             integrity="sha512-6UofPqm0QupIL0kzS/UIzekR73/luZdC6i/kXDbWnLOJoqwklBK6519iUnShaYceJ0y4FaiPtX/hRnV/X/xlUQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
 
@@ -34,7 +34,7 @@ use Illuminate\Support\Facades\Auth;
         integrity="sha512-YFENbnqHbCRmJt5d+9lHimyEMt8LKSNTMLSaHjvsclnZGICeY/0KYEeiHwD1Ux4Tcao0h60tdcMv+0GljvWyHg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-{{-- 
+    {{--
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"
         integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
@@ -50,11 +50,13 @@ use Illuminate\Support\Facades\Auth;
 
     <header class="navbar sticky-top flex-md-nowrap p-0  pt-1 pb-1 ">
         <div class="navbar-brand text-light col-md-3 col-lg-2 me-0 px-3 fs-6 text-center">
-            @if (config('sebconsole.affiche_logo'))
-                <img src="/img/logo.png">
-            @else
-                {{ env('APP_NAME') }}
-            @endif
+            <a href="{{ route('home') }}">
+                @if (config('sebconsole.affiche_logo'))
+                    <img src="/img/logo.png">
+                @else
+                    {{ env('APP_NAME') }}
+                @endif
+            </a>
         </div>
         {{-- <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
             data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"

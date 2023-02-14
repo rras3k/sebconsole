@@ -1,7 +1,7 @@
 <?php
 // dd($data);
 ?>
-@extends('sebconsoleviews::layouts.console')
+@extends('layouts.console')
 
 @section('head-link')
 @endsection
@@ -45,7 +45,7 @@
                                 <div>
                                     Controller: app/Http/Controllers/<input type="text" id="themeCode"
                                         name="props[themeCode]" value="{{ $data['infoEntite']['themeCode'] }}"
-                                        style="width:300px;" />Controller.php
+                                        style="width:300px;" />_Controller.php
                                 </div>
 
                                 <div>
@@ -67,35 +67,41 @@
                                 <button type="button" class="btn btn-primary" onclick="check()">Check</button>
                             </div>
                         </div>
-                        <div class="row text-center">
-                            <div class="col-1"></div>
+                        <div class="row g-0 text-center">
+                            <div class="col-2"></div>
                             <div class="col-3 text-bg-success">Grille</div>
                             <div class="col-3 text-bg-danger">Formulaire</div>
-                        </div>
-                        <div class="row text-center">
+                            <div class="col-4"></div>
+
                             <div class="col-1">Nom du champ</div>
+                            <div class="col-1">Str</div>
                             <div class="col-1 text-bg-success">Visible</div>
                             <div class="col-2 text-bg-success">Libellé</div>
                             <div class="col-1 text-bg-danger">Visible</div>
                             <div class="col-2 text-bg-danger">Libellé</div>
+                            <div class="col-4"></div>
                         </div>
                         @foreach ($data['infoChamps'] as $key => $value)
-                            <div class="row bg-warning rounded" style="height:40px;">
-                                <div class="col-1  align-self-center rounded ps-2" style="background:antiquewhite;">
+                            <div class="row g-0 bg-warning rounded" style="height:40px;">
+                                <div class="col-1  ligne-champ align-self-center rounded ps-2"
+                                    style="background:antiquewhite;">
                                     {{ $value['name'] }}
                                 </div>
-                                <div class="col-1 text-center align-self-center">
+                                <div class="col-1  ligne-champ text-center align-self-center">
+                                    <input type="radio" value="{{ $key }}" name="props[champStr]" />
+                                </div>
+                                <div class="col-1 ligne-champ text-center align-self-center">
                                     <input type="hidden" name="champs[{{ $value['name'] }}][grille][visible]"
                                         value="0" />
 
                                     <input type="checkbox" name="champs[{{ $value['name'] }}][grille][visible]"
                                         value="1" @if ($value['grille']['visible'] == 1) checked @endif>
                                 </div>
-                                <div class="col-2 align-self-center">
+                                <div class="col-2 ligne-champ align-self-center">
                                     <input class="w-100" type="text" name="champs[{{ $value['name'] }}][grille][label]"
                                         value="{{ $value['name'] }}" />
                                 </div>
-                                <div class="col-1 text-center align-self-center">
+                                <div class="col-1 ligne-champ text-center align-self-center">
                                     <input type="hidden" name="champs[{{ $value['name'] }}][form][visible]"
                                         value="0" />
 
@@ -103,12 +109,14 @@
                                         value="{{ $value['form']['visible'] }}"
                                         @if ($value['form']['visible'] == 1) checked @endif>
                                 </div>
-                                <div class="col-2 align-self-center">
+                                <div class="col-2 ligne-champ align-self-center">
                                     <input class="w-100" type="text" name="champs[{{ $value['name'] }}][form][label]"
                                         value="{{ $value['name'] }}" />
                                 </div>
+                                <div class="col-4 ligne-champ "></div>
                             </div>
                         @endforeach
+                        {{-- </div> --}}
                     @endif
 
                 </form>
@@ -127,8 +135,12 @@
     <x-sebconsoleviews::composants.modal titre="Rapport" texte="zz" :boutons="[
         'Fermer' => ['action' => 'ANNULER', 'class' => 'secondary'],
     ]" />
-    <style>
 
+    <style>
+        .ligne-champ {
+            /* background:rgb(245, 229, 10);
+                height:40px; */
+        }
     </style>
 
     <script>

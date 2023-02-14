@@ -91,6 +91,7 @@ class GeneratorMvc
 	// fileName
 	public $fileNameRoute;
 	public $filePathController;
+	public $filePathModel;
 	public $fileNameView_index;
 	public $fileNameView_edit;
 	public $fileNameView_create;
@@ -111,6 +112,7 @@ class GeneratorMvc
 		$this->setCallViews();
 		$this->setFunctionNameController();
         if ($genereRoute) $this->genereRoute();
+		$this->genereModel();
 		$this->genereController();
 		$this->genereView();
 		$ret["toConfig"] = "[ 'rubrique' => 'Nouvel ajout', 'nom' => '". $this->props['label']."', 'route' => '".$this->routeName_index."', 'icon' => 'fa-solid fa-city', 'droits'=> [Role::ADMIN]],";
@@ -182,6 +184,7 @@ class GeneratorMvc
 		if (substr($typeMysql,0,6) == 'bigint') return 'numeric';
 		if (substr($typeMysql,0,7) == 'integer') return 'numeric';
 		if (substr($typeMysql,0,7) == 'tinyint') return 'numeric';
+		if (substr($typeMysql,0,3) == 'int') return 'numeric';
 
 		// switch($typeMysql){
 		// 	case 
@@ -234,8 +237,9 @@ class GeneratorMvc
 		return [
 			'table' => $table,
 			'model' => $this->getLinkModel($table),
-			'themeCode' => $this->getLinkModel($table).'_console_',
-			'label' => $this->getClassName($this->getLinkModel($table))::getLabel(),
+			'themeCode' => $this->getLinkModel($table).'_console',
+			'label' => $table,
+			// 'label' => $this->getClassName($this->getLinkModel($table))::getLabel(),
 			'themeUrl' => 'console/'.$table,
 		];
 	}
@@ -244,15 +248,16 @@ class GeneratorMvc
 	{
 		// $this->fileNameRoute = base_path() . '/routes/' . $this->props['themeUrl'] . '_web.php.gMVC';
 		$this->fileNameRoute = base_path() . '/routes/web.php';
-		$this->fileNameController =  $this->props['themeCode'] . 'Controller';
+		$this->fileNameController =  $this->props['themeCode'] . '_Controller';
 		$this->filePathController = base_path() . '/app/Http/Controllers/' . $this->fileNameController.'.php';
+		$this->filePathModel = base_path() . '/app/Models/' . $this->props['model'] . '.php';
 
 		$pathView = $this->getPathView();
 
-		$this->fileNameView_index = $pathView .  'index.blade.php';
-		$this->fileNameView_edit = $pathView .  'edit.blade.php';
-		$this->fileNameView_create = $pathView .  'create.blade.php';
-		$this->fileNameView_show = $pathView .  'show.blade.php';
+		$this->fileNameView_index = $pathView .  '_index.blade.php';
+		$this->fileNameView_edit = $pathView .  '_edit.blade.php';
+		$this->fileNameView_create = $pathView .  '_create.blade.php';
+		$this->fileNameView_show = $pathView .  '_show.blade.php';
 		return true;
 	}
 
@@ -315,10 +320,10 @@ class GeneratorMvc
 	{
 
 
-		$this->callView_index = $this->props['themeCode'] . 'index';
-		$this->callView_edit = $this->props['themeCode'] . 'edit';
-		$this->callView_create = $this->props['themeCode'] . 'create';
-		$this->callView_show = $this->props['themeCode'] . 'show';
+		$this->callView_index = $this->props['themeCode'] . '_index';
+		$this->callView_edit = $this->props['themeCode'] . '_edit';
+		$this->callView_create = $this->props['themeCode'] . '_create';
+		$this->callView_show = $this->props['themeCode'] . '_show';
 	}
 
 	private function setRouteName()
@@ -358,21 +363,21 @@ class GeneratorMvc
 		$content .= "\r\n";
 		$content .= "// ". $this->props['model'];
 		$content .= "\r\n";
-		$content .= 'Route::get(\'' . $prefix .  '\', [' . $patController . $controllerName . 'Controller::class,\'' . $this->functionNameController_index . '\'])->name(\'' . $this->routeName_index . '\');';
+		$content .= 'Route::get(\'' . $prefix .  '\', [' . $patController . $controllerName . '_Controller::class,\'' . $this->functionNameController_index . '\'])->name(\'' . $this->routeName_index . '\');';
 		$content .= "\r\n";
-		$content .= 'Route::get(\'' . $prefix .  '/listeBt\', [' . $patController . $controllerName . 'Controller::class,\'' . $this->functionNameController_listeBt . '\'])->name(\'' . $this->routeName_listeBt . '\');';
+		$content .= 'Route::get(\'' . $prefix .  '/listeBt\', [' . $patController . $controllerName . '_Controller::class,\'' . $this->functionNameController_listeBt . '\'])->name(\'' . $this->routeName_listeBt . '\');';
 		$content .= "\r\n";
-		$content .= 'Route::get(\'' . $prefix .  '/create\', [' . $patController . $controllerName . 'Controller::class,\'' . $this->functionNameController_create . '\'])->name(\'' . $this->routeName_create . '\');';
+		$content .= 'Route::get(\'' . $prefix .  '/create\', [' . $patController . $controllerName . '_Controller::class,\'' . $this->functionNameController_create . '\'])->name(\'' . $this->routeName_create . '\');';
 		$content .= "\r\n";
-		$content .= 'Route::post(\'' . $prefix .  '/store\', [' . $patController . $controllerName . 'Controller::class,\'' . $this->functionNameController_store . '\'])->name(\'' . $this->routeName_store . '\');';
+		$content .= 'Route::post(\'' . $prefix .  '/store\', [' . $patController . $controllerName . '_Controller::class,\'' . $this->functionNameController_store . '\'])->name(\'' . $this->routeName_store . '\');';
 		$content .= "\r\n";
-		$content .= 'Route::get(\'' . $prefix .  '/{id}/edit\', [' . $patController . $controllerName . 'Controller::class,\'' . $this->functionNameController_edit . '\'])->name(\'' . $this->routeName_edit . '\');';
+		$content .= 'Route::get(\'' . $prefix .  '/{id}/edit\', [' . $patController . $controllerName . '_Controller::class,\'' . $this->functionNameController_edit . '\'])->name(\'' . $this->routeName_edit . '\');';
 		$content .= "\r\n";
-		$content .= 'Route::put(\'' . $prefix .  '/{id}\', [' . $patController . $controllerName . 'Controller::class,\'' . $this->functionNameController_update . '\'])->name(\'' . $this->routeName_update . '\');';
+		$content .= 'Route::put(\'' . $prefix .  '/{id}\', [' . $patController . $controllerName . '_Controller::class,\'' . $this->functionNameController_update . '\'])->name(\'' . $this->routeName_update . '\');';
 		$content .= "\r\n";
-		$content .= 'Route::get(\'' . $prefix .  '/{id}\', [' . $patController . $controllerName . 'Controller::class,\'' . $this->functionNameController_show . '\'])->name(\'' . $this->routeName_show . '\');';
+		$content .= 'Route::get(\'' . $prefix .  '/{id}\', [' . $patController . $controllerName . '_Controller::class,\'' . $this->functionNameController_show . '\'])->name(\'' . $this->routeName_show . '\');';
 		$content .= "\r\n";
-		$content .= 'Route::delete(\'' . $prefix .  '/{id}\', [' . $patController . $controllerName . 'Controller::class,\'' . $this->functionNameController_destroy . '\'])->name(\'' . $this->routeName_destroy . '\');';
+		$content .= 'Route::delete(\'' . $prefix .  '/{id}\', [' . $patController . $controllerName . '_Controller::class,\'' . $this->functionNameController_destroy . '\'])->name(\'' . $this->routeName_destroy . '\');';
 
 		$this->writeFic($this->fileNameRoute, $content, "a");
 		return $content;
@@ -412,17 +417,22 @@ class GeneratorMvc
 		return $myClass::getStrName();
 	}
 
+	private function genereModel()
+	{
+		$data = ["this" => $this, 'php' => '?php'];
+		View::addNamespace('sebconsoleviews', 'Rras3k/SebconsoleRoot/ressources/views');
+		$code = View('sebconsoleviews::genereMvc.model', compact('data'))->render();
+		$this->writeFic($this->filePathModel, $code);
+
+	}
+
 	private function genereController()
 	{
-		$strName = $this->getModelStr($this->props['model']);
+		// $strName = $this->getModelStr($this->props['model']);
 
-		$data = ["this" => $this, 'php' => '?php', 'strName' => $strName];
+		$data = ["this" => $this, 'php' => '?php'];
 		View::addNamespace('sebconsoleviews', 'Rras3k/SebconsoleRoot/ressources/views');
-		// $codeController = View('sebconsoleviews::genereMvc.controller', compact(['data']))->render();
 		$codeController = View('sebconsoleviews::genereMvc.controller', compact('data'))->render();
-
-
-
 		$this->writeFic($this->filePathController, $codeController);
 	}
 

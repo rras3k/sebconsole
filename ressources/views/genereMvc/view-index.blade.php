@@ -1,4 +1,4 @@
-{{ '@' }}extends('sebconsoleviews::layouts.console')
+{{ '@' }}extends('layouts.console')
 
 {{ '@' }}section('head-link')
 {{ '@' }}endsection
@@ -16,7 +16,7 @@
         <a class="btn btn-primary" href="{{$data['aco']}}{ route('{{ $data['this']->routeName_create }}') }}" role="button">Ajouter {{ $data['this']->props['label'] }}</a>
     </div>
     <div class="panel">
-        
+
         <div class="panel-content">
             <table id="table" data-toolbar="#toolbar" data-toolbar="#toolbar" class="table-striped" data-page-size="25"
                 data-show-toggle="true" data-show-columns-toggle-all="true" data-show-columns="true"
@@ -32,31 +32,33 @@
                                     $isFormatter =false;
                                     $dataAlign= "left";
                                     $formatter="";
-                                    switch($value['type']){
-                                        case 'boolean': 
-                                            $isFormatter =true;
-                                            $dataAlign= "center";
-                                            break;
-                                        case 'numeric': 
-                                            $dataAlign= "right";
-                                            break;
-                                    }
-                                    if ($isFormatter){
-                                        $formatter =' data-formatter="'.$value['name'].'_Formatter" ';
+                                    if(!$value['link']['enable']){
+                                        switch($value['type']){
+                                            case 'boolean':
+                                                $isFormatter =true;
+                                                $dataAlign= "center";
+                                                break;
+                                            case 'numeric':
+                                                $dataAlign= "right";
+                                                break;
+                                        }
+                                        if ($isFormatter){
+                                            $formatter =' data-formatter="'.$value['name'].'_Formatter" ';
+                                        }
                                     }
                                 }
                             @endphp
                             @if($value['grille']['visible'])
                             	@if($value['link']['enable'])
                                 <th data-halign="center" data-field="{{ $value['name'] }}_str" data-width="10"
-                                data-align="{{$dataAlign}}" data-sortable="true" {{!! $formatter !!}}>{{ $value['link']['label'] }}</th>
+                                data-align="{{$dataAlign}}" data-sortable="true" {!! $formatter !!}>{{ $value['link']['label'] }}</th>
                                 @else
                                 <th data-halign="center" data-field="{{ $value['name'] }}" data-width="10"
-                                data-align="{{$dataAlign}}" data-sortable="true" {{!! $formatter !!}}>{{ $value['grille']['label'] }}</th>
+                                data-align="{{$dataAlign}}" data-sortable="true" {!! $formatter !!}>{{ $value['grille']['label'] }}</th>
                                 @endif
                             @endif
                         @endforeach
-                            <th data-halign="center" data-field="part_marche" data-width="50" data-align="center"
+                            <th data-halign="center" data-field="action" data-width="50" data-align="center"
                                 data-sortable="false" data-formatter="actionFormatter">Action</th>
 
                     </tr>
@@ -127,20 +129,23 @@
                 '</ul>' +
                 '</div>'
         }
-    @foreach ($data['this']->champs as $key => $value)
-        @php
 
-            switch($value['type']){
-                case 'tinyint': // boolean
-                @endphp
-                    function {{$value['name']}}_Formatter(value, row) {
-                        if(value) return "Oui"
-                        else return "Faux"
-                    }
-                @php
-                    break;
-            }
-        @endphp
+    // Formatter
+    @foreach ($data['this']->champs as $key => $value)
+        @if ($value['grille']['visible'])
+            @php
+                switch($value['type']){
+                    case 'boolean': // boolean
+                    @endphp
+                        function {{$value['name']}}_Formatter(value, row) {
+                            if(value) return "Oui"
+                            else return "Faux"
+                        }
+                    @php
+                        break;
+                }
+            @endphp
+        @endif
     @endforeach
 
 
