@@ -13,7 +13,7 @@ ViewData::setEntites($data['rras3k']);
 
 {{ '@' }}section('content')
 	<div class="zm-header">
-		<div class="zmh-titre">{!! '{' !!}{ ViewData::page_getTitre() }} </div>
+    <div class="zmh-titre">{!! '{' !!}{ $data['label_titre'] }}</div>
         <div class="zmh-menus">
             {!! '<' !!}x-sebconsoleviews::menus.page :liste="ViewData::menuPage_get()"/>
 		</div>
@@ -33,7 +33,7 @@ ViewData::setEntites($data['rras3k']);
                             <form id="role" method="POST"
                                 action="{!! '{' !!}{ route('{{$data['this']->routeName_update}}', ViewData::form_getData('id')) }}"
                                 enctype="multipart/form-data" name="role">
-                                {{-- <x-sebconsoleviews::forms.hidden :liste="ViewData::form_getHiddenValues()" /> --}}
+                                {!! '<' !!}x-sebconsoleviews::forms.hidden :liste="ViewData::form_getHiddenValues()" />
                                 {!! '@' !!}method('PUT')
                     {!! '@' !!}endif
                     {!! '@' !!}csrf

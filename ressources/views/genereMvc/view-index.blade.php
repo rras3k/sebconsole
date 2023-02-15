@@ -5,7 +5,7 @@
 
 {{ '@' }}section('content')
 <div class="zm-header">
-    <div class="zmh-titre">{{ $data['this']->props['label'] }}</div>
+    <div class="zmh-titre">{!! '{' !!}{ $data['label_titre'] }}</div>
     <div class=" menu_page-SB">
         {{-- <x-menus.page :liste="$menuPage"></x-menus.page> --}}
     </div>
@@ -13,7 +13,7 @@
 
 <div class="zm-content">
     <div class="zm-bande">
-        <a class="btn btn-primary" href="{{$data['aco']}}{ route('{{ $data['this']->routeName_create }}') }}" role="button">Ajouter {{ $data['this']->props['label'] }}</a>
+        <a class="btn btn-primary" href="{!! '{' !!}{ $data['route_bouton_creer'] }}" role="button">Ajouter {{ $data['this']->props['label'] }}</a>
     </div>
     <div class="panel">
 
@@ -22,7 +22,7 @@
                 data-show-toggle="true" data-show-columns-toggle-all="true" data-show-columns="true"
                 data-buttons="buttons" data-side-pagination="server" data-row-style="rowStyle" data-pagination="true"
                 data-unique-id="id" data-mobile-responsive="false" data-locale="fr-FR" data-toggle="table"
-                data-search="true" data-show-refresh="true" data-url="{{$data['aco']}}{$data['route']}}">
+                data-search="true" data-show-refresh="true" data-url="{!! '{' !!}{$data['route_bt']}}">
                 <thead>
                     <tr>
                         @foreach ($data['this']->champs as $key => $value)

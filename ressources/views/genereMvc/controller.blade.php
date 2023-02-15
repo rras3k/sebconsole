@@ -69,8 +69,12 @@
     public function index()
     {
 		$data = array();
-		$this->page_setTitre('{{ $data['this']->props['themeCode'] }}');
-		$data['route'] = route('{{ $data['this']->routeName_listeBt }}');
+		// Label
+		$data['label_titre'] = "{{ $data['this']->props['label'] }}";
+		$data['label_bouton_creer'] = "Ajouter {{ $data['this']->props['label'] }}";
+		$data['route_bt'] = route('{{ $data['this']->routeName_listeBt }}');
+		$data['route_bouton_creer'] = route('{{ $data['this']->routeName_create }}');
+
 		{{-- $this->menuPage_add('formulaire', route('formulaire.create'), 'bi bi-plus-circle'); --}}
 		$data['rras3k'] = $this->dataToView();
 		return view('{{ $data['this']->callView_index }}', compact('data'));
@@ -93,7 +97,12 @@
         $data = array();
 		$model= {{ $data['this']->props['model'] }}::find($modelId);
 		
-        $this->page_setTitre('{{$data['this']->props['label']}}: Edition de '.$model->{{$data['this']->props['champStr']}});
+        {{-- $this->page_setTitre('{{$data['this']->props['label']}}: Edition de '.$model->{{$data['this']->props['champStr']}}); --}}
+
+		$data['label_titre'] = "{{$data['this']->props['label']}}: Edition de $model->{{$data['this']->props['champStr']}}";
+
+
+
         // $this->form_setHiddenValues([
         //     'formulaire_id' => $formulaire->_id
         // ]);
