@@ -78,6 +78,7 @@ header {
 
     }
 }
+
 #rras3k-alerte {
     position: fixed;
     right: 0;
@@ -87,6 +88,7 @@ header {
     padding-right: 20px;
     padding-left: 20px;
 }
+
 footer {
     height: $footer-height;
     z-index: 200;
@@ -225,6 +227,52 @@ main {
     border-left: 35px solid red;
 }
 
+
+// -------------  <button> ou <a> as <button>
+a.§-btn,
+button.§-btn {
+    display: inline-block;
+    padding: 0.45rem;
+    margin: 0rem;
+    text-decoration: none;
+    border-radius: 0.3rem;
+    border: 0;
+
+    &:hover,
+    button.§-btn:hover {
+        opacity: 0.7;
+    }
+
+    & i:before {
+        font-weight: 900;
+        font-family: "Font Awesome 6 Free";
+        -webkit-font-smoothing: antialiased;
+        display: var(--fa-display, inline-block);
+        font-style: normal;
+        font-variant: normal;
+        line-height: 1;
+        text-rendering: auto;
+    }
+
+    &.§-nav {
+        background: gold;
+        color: black;
+
+        & i:before {
+            content: "\f053";
+        }
+    }
+
+    &.§-ajout {
+        background: rgba(0, 60, 255, 0.778);
+        color: rgb(255, 252, 252);
+
+        & i:before {
+            content: "\2b";
+        }
+    }
+
+}
 
 // ----------------------- General ------------------------
 
@@ -429,6 +477,7 @@ main {
     padding-top: 7px;
     background: $zmheader-backgroundcolor;
     flex-direction: column;
+    
 }
 
 // @media (min-width: 0px) {
@@ -447,7 +496,12 @@ main {
     color: $color1;
     font-size: xx-large;
     width: 100%;
+    & a {
+            float: left;
+            margin-left: 10px;
+        }
 }
+
 .zmh-nav {
     flex: 0 0 auto;
     padding-top: 3px;
@@ -456,6 +510,7 @@ main {
     text-align: left;
     padding-left: 10px;
 }
+
 // @media (min-width: 0px) {
 //     .zmh-titre {
 //     }
@@ -473,8 +528,8 @@ main {
     width: 100%;
     padding-bottom: 10px;
     text-align: left;
-    padding-left:10px;
-    
+    padding-left: 10px;
+
 }
 
 // @media (min-width: 0px) {
@@ -526,11 +581,12 @@ main {
     }
 }
 
-.spinOff { 
+.spinOff {
     display: none;
 }
-.label_form{
-    color:blue;
+
+.label_form {
+    color: blue;
 }
 
 
@@ -555,6 +611,6 @@ main {
     background: rgb(227, 233, 242);
 }
 
- .fixed-table-body {
-     overflow: visible !important;
- }
+.fixed-table-body {
+    overflow: visible !important;
+}
