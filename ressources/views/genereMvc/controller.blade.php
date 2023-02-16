@@ -202,7 +202,7 @@
 				}
 			@endphp
         @endforeach 
-        ];
+        ]; 
     }
 	/**
      * Update the specified resource in storage.
