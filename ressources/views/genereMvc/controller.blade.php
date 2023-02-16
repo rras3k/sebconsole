@@ -201,7 +201,7 @@
 		 @php
 				}
 			@endphp
-        @endforeach
+        @endforeach 
         ];
     }
 	/**
