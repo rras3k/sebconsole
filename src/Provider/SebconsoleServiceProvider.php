@@ -113,7 +113,7 @@ class SebconsoleServiceProvider extends ServiceProvider
     /*
     php artisan db:seed --class=FirstSeeder
     php artisan vendor:publish --force --tag=rras3k-once
-    php artisan vendor:publish --force --tag=rras3k-maj
+    php artisan vendor:publish --force --tag=rras3k-maj 
 
     */
     {
