@@ -128,7 +128,7 @@ class SebconsoleServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__ . '/../../toCopy/resources/sass/rras3k' => resource_path('/sass/rras3k'),
-            __DIR__ . '/../../toCopy/resources/sass/variables.scss' => resource_path('/sass/variables-rras3k.exemple.scss'),
+            __DIR__ . '/../../toCopy/resources/sass/theme/default/variables.scss' => resource_path('/sass/theme/default/variables.exemple.scss'),
         ], 'rras3k-maj');
     }
 }

@@ -99,7 +99,7 @@
 		
         {{-- $this->page_setTitre('{{$data['this']->props['label']}}: Edition de '.$model->{{$data['this']->props['champStr']}}); --}}
 
-		$data['label_titre'] = "{{$data['this']->props['label']}}: Edition de $model->{{$data['this']->props['champStr']}}";
+		$data['label_titre'] = "{{$data['this']->props['label']}}: Edition de ".$model->{{$data['this']->props['champStr']}};
 
 
 
@@ -214,7 +214,7 @@
     public function create()
 	{
         $data = array();
-        $this->page_setTitre('Création {{ $data['this']->props['model'] }}');
+		$data['label_titre'] = 'Création {{ $data['this']->props['model'] }}';
         $this->form_setIsCreate(true);
 		@foreach ($data['this']->champs as $key => $value)
 		    @if($value['link']['enable'])
