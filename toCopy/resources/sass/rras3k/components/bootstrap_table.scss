@@ -1,0 +1,16 @@
+.th-inner {
+    background: #e3f1fb79 !important; // entete de colonne
+}
+
+.bootstrap-table tr:nth-child(even) {
+    background: white;
+}
+
+.bootstrap-table tr:nth-child(odd) {
+    background: rgba(18, 18, 18, 0.017);
+
+}
+
+.fixed-table-body {
+    overflow: visible !important;
+}

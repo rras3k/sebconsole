@@ -112,10 +112,8 @@ class SebconsoleServiceProvider extends ServiceProvider
     private function importPublishOnce()
     /*
     php artisan db:seed --class=FirstSeeder
-    php artisan vendor:publish
     php artisan vendor:publish --force --tag=rras3k-once
-    php artisan vendor:publish --force --tag=rras3k-force
-    php artisan vendor:publish --force --tag=rras3k-config
+    php artisan vendor:publish --force --tag=rras3k-maj
 
     */
     {
@@ -129,29 +127,8 @@ class SebconsoleServiceProvider extends ServiceProvider
         ], 'rras3k-once');
 
         $this->publishes([
-            // __DIR__ . '/../../ressources/sass/_rras3k/console.scss' => resource_path('/sass/_rras3k/console.scss'),
-            // __DIR__ . '/../../ressources/sass/_rras3k/def.scss' => resource_path('/sass/_rras3k/def.scss'),
-            // __DIR__ . '/../../ressources/sass/_rras3k/panel.scss' => resource_path('/sass/_rras3k/panel.scss'),
-            // __DIR__ . '/../../ressources/sass/_rras3k/mvc_saisie.scss' => resource_path('/sass/_rras3k/mvc_saisie.scss'),
-            // __DIR__ . '/../../ressources/sass/_rras3k/panel2.scss' => resource_path('/sass/_rras3k/panel2.scss'),
-            // __DIR__ . '/../../ressources/sass/_rras3k/sidebar.scss' => resource_path('/sass/_rras3k/sidebar.scss'),
-            // __DIR__ . '/../../ressources/sass/_variables.scss' => resource_path('/sass/_variables.example.scss'),
-            // __DIR__ . '/../../ressources/sass/_variables.scss' => resource_path('/sass/_variables.scss'),
-            // __DIR__ . '/../../ressources/views/pasgit' => resource_path('views/page-dev'),
-            // __DIR__ . '/../../database/seeders/FirstSeeder.php' => database_path('seeders/FirstSeeder.php'),
-            // __DIR__ . '/../Models/LogType.php' => app_path('Models/LogType.php'),
-        ], 'rras3k-force');
-
-
-
-        $this->publishes([
-            // __DIR__ . '/../../ressources/views/footer.blade.php' => resource_path('views/footer.blade.php'),
-            // __DIR__ . '/../../ressources/sass/ajout.scss' => resource_path('/sass/ajout.scss'),
-        ], 'rras3k-config');
-
-        // $this->publishes([
-        //     // __DIR__ . '/../../database/migrations/' => database_path('migrations')
-        // ], 'rras3k-install');
-
+            __DIR__ . '/../../toCopy/resources/sass/rras3k' => resource_path('/sass/rras3k'),
+            __DIR__ . '/../../toCopy/resources/sass/variables.scss' => resource_path('/sass/variables-rras3k.exemple.scss'),
+        ], 'rras3k-maj');
     }
 }

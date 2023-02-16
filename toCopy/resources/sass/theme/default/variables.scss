@@ -1,0 +1,128 @@
+// sidebar
+$sideBar-color : #6c757d;
+$sideBar-backgroundcolor:  #274cac;
+$sideBar-border-color: none;
+$sideBar-header-icon-color: white;
+
+
+
+
+
+
+
+
+
+
+
+//11:12
+// Body
+$body-bg: #f8fafc;
+
+// Typography
+$font-family-sans-serif: 'Nunito', sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+// color for rras3k
+$color1: #6c757d;
+$color2: #f8f9fa;
+$color3: white;
+$color4: whitesmoke;
+$color5: #f5f6fa;
+$color6: rgb(241, 240, 246);
+$color7: white;
+$color8: #274cac;
+
+// Body
+$body-bg: $color3;
+
+// Sidebar
+$sideBar-color: $color3;
+$sideBar-backgroundcolor: $color8;
+
+// Header
+$header-backgroundcolor: $color7;
+$header-height: 50px;
+
+// // Barre titre page
+// $zmheader-backgroundcolor : $color2;
+
+
+
+
+
+// ------------------------ Bootstrap modifiable
+$white: #fff;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$black: #000;
+$gray: gray;
+
+$primary: #0d6efd;
+$secondary: $gray-600;
+$success: #198754;
+$info: #0dcaf0;
+$warning: #ffc107;
+$danger: #dc3545;
+$light: $gray-100;
+$dark: $gray-900;
+
+
+// ------ Couleur par défaut
+// $panel-header-backgroundcolor: green !default;
+// all: initial;
+
+// @import 'def';
+// @import 'panel2';
+// @import 'sidebar';
+// @import 'mvc_saisie';
+
+$_color_fond_1: #f5f6fa;
+$_body_color: black;
+
+// $panel-background: rgb(246, 216, 216);
+// -------------------- modifiable dans _varisables.scss
+
+// Variables par défaut
+$color1: if(variable-exists(color1), $color1, #6c757d);
+$color2: if(variable-exists(color2), $color2, #f8f9fa);
+$color3: if(variable-exists(color3), $color3, white);
+$color4: if(variable-exists(color4), $color4, whitesmoke);
+$color5: if(variable-exists(color5), $color5, #f5f6fa);
+$color6: if(variable-exists(color6), $color6, #f5f6fa);
+$color7: if(variable-exists(color7), $color7, white);
+$color8: if(variable-exists(color8), $color8, whitesmoke);
+// $color9: if(variable-exists(color9), $color9, whitesmoke);
+
+
+
+
+$body_color: $_body_color !default;
+
+
+
+
+
+
+
+$header-backgroundcolor : if(variable-exists(header-backgroundcolor), $header-backgroundcolor, $color3);
+$header-height: 50px !default;
+
+$zmheader-backgroundcolor: $_color_fond_1 !default;
+
+$footer-height : 100px !default;
+// -------------------- Fin modifiable
+
+
+// @debug "header-height" $header-height;
+
+
+
+$border-color: #acaeaf;

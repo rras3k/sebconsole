@@ -1,6 +1,10 @@
-/*
-   * Sidebar
-   */
+// ----- DEFAULT -----
+$sideBar-backgroundcolor: blue !default;
+$sideBar-color: white !default;
+$sideBar-border-color: black !default;
+$sideBar-header-icon-color: white !default;
+
+
 
 .sidebar {
 	position: fixed;
@@ -12,17 +16,22 @@
 	background: $sideBar-backgroundcolor;
 	border-right-width: 1px;
 	border-right-style: solid;
-	border-right-color: $border-color;
+	border-right-color: $sideBar-border-color;
 
 	& #liste-icons i {
-		color: white;
+		color: $sideBar-header-icon-color;
 	}
 
 	& .accordeion-body {
-		background: red;
+		background: rgb(230, 228, 228);
 	}
 }
 
+// @media (max-width: 768px) {
+//     .sidebar {
+//         top: $header-height;
+//     }
+// }
 @media (max-width: 767.98px) {
 	.sidebar {
 		top: $header-height;
@@ -36,7 +45,6 @@
 	padding-top: .5rem;
 	overflow-x: hidden;
 	overflow-y: auto;
-	/* Scrollable contents if viewport is shorter than content. */
 }
 
 .sidebar .nav-link {
