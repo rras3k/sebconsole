@@ -20,7 +20,6 @@
 ])
 {{--  --}}
 {{-- <div class="col-{{ $col }} position-relative" id="entree-{{ $nom }}"> --}}
-
     @if ($type == 'radio' || $type == 'checkbox')
         <div class="form-check form-check-inline">
             @if ($label)

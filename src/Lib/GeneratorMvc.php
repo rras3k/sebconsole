@@ -106,16 +106,16 @@ class GeneratorMvc
 
 	public function genere($genereRoute = false)
 	{
-		$ret = ["toConfig"=>"", 'texte'=>[]];
+		$ret = ["toConfig" => "", 'texte' => []];
 		$this->setRouteName();
 		$this->setFilesNames();
 		$this->setCallViews();
 		$this->setFunctionNameController();
-        if ($genereRoute) $this->genereRoute();
+		if ($genereRoute) $this->genereRoute();
 		$this->genereModel();
 		$this->genereController();
 		$this->genereView();
-		$ret["toConfig"] = "[ 'rubrique' => 'Nouvel ajout', 'nom' => '". $this->props['label']."', 'route' => '".$this->routeName_index."', 'icon' => 'fa-solid fa-city', 'droits'=> [Role::ADMIN]],";
+		$ret["toConfig"] = "[ 'rubrique' => 'Nouvel ajout', 'nom' => '" . $this->props['label'] . "', 'route' => '" . $this->routeName_index . "', 'icon' => 'fa-solid fa-city', 'droits'=> [Role::ADMIN]],";
 
 		return $ret;
 	}
@@ -141,7 +141,7 @@ class GeneratorMvc
 	{
 		$ret = [];
 		// $colomns = DB::select("SELECT data_type, COLUMN_NAME,COLUMN_DEFAULT,COLUMN_COMMENT FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '" . env('DB_DATABASE') . "'  AND TABLE_NAME = '" . $table . "' ORDER BY ORDINAL_POSITION");
-		$colomns = DB::select("SHOW COLUMNS FROM " . $table );
+		$colomns = DB::select("SHOW COLUMNS FROM " . $table);
 		foreach ($colomns as $ind => $column) {
 
 			$colonneNom = $column->Field;
@@ -177,14 +177,15 @@ class GeneratorMvc
 		return $ret;
 	}
 
-	private function getType($typeMysql){
+	private function getType($typeMysql)
+	{
 		if ($typeMysql == 'tinyint(1)') return 'boolean';
-		if (substr($typeMysql,0,7) == 'varchar') return 'varchar';
-		if (substr($typeMysql,0,4) == 'text') return 'text';
-		if (substr($typeMysql,0,6) == 'bigint') return 'numeric';
-		if (substr($typeMysql,0,7) == 'integer') return 'numeric';
-		if (substr($typeMysql,0,7) == 'tinyint') return 'numeric';
-		if (substr($typeMysql,0,3) == 'int') return 'numeric';
+		if (substr($typeMysql, 0, 7) == 'varchar') return 'varchar';
+		if (substr($typeMysql, 0, 4) == 'text') return 'text';
+		if (substr($typeMysql, 0, 6) == 'bigint') return 'numeric';
+		if (substr($typeMysql, 0, 7) == 'integer') return 'numeric';
+		if (substr($typeMysql, 0, 7) == 'tinyint') return 'numeric';
+		if (substr($typeMysql, 0, 3) == 'int') return 'numeric';
 
 		// switch($typeMysql){
 		// 	case 
@@ -237,10 +238,10 @@ class GeneratorMvc
 		return [
 			'table' => $table,
 			'model' => $this->getLinkModel($table),
-			'themeCode' => $this->getLinkModel($table).'_console',
+			'themeCode' => $this->getLinkModel($table) . '_console',
 			'label' => $table,
 			// 'label' => $this->getClassName($this->getLinkModel($table))::getLabel(),
-			'themeUrl' => 'console/'.$table,
+			'themeUrl' => 'console/' . $table,
 		];
 	}
 
@@ -249,7 +250,7 @@ class GeneratorMvc
 		// $this->fileNameRoute = base_path() . '/routes/' . $this->props['themeUrl'] . '_web.php.gMVC';
 		$this->fileNameRoute = base_path() . '/routes/web.php';
 		$this->fileNameController =  $this->props['themeCode'] . '_Controller';
-		$this->filePathController = base_path() . '/app/Http/Controllers/' . $this->fileNameController.'.php';
+		$this->filePathController = base_path() . '/app/Http/Controllers/' . $this->fileNameController . '.php';
 		$this->filePathModel = base_path() . '/app/Models/' . $this->props['model'] . '.php';
 
 		$pathView = $this->getPathView();
@@ -361,7 +362,7 @@ class GeneratorMvc
 		// $file = 'routes/' . $this->props['themeUrl'] . '_web.php.gMVC';
 		$content .= "\r\n";
 		$content .= "\r\n";
-		$content .= "// ". $this->props['model'];
+		$content .= "// " . $this->props['model'];
 		$content .= "\r\n";
 		$content .= 'Route::get(\'' . $prefix .  '\', [' . $patController . $controllerName . '_Controller::class,\'' . $this->functionNameController_index . '\'])->name(\'' . $this->routeName_index . '\');';
 		$content .= "\r\n";
@@ -419,11 +420,12 @@ class GeneratorMvc
 
 	private function genereModel()
 	{
-		$data = ["this" => $this, 'php' => '?php'];
-		View::addNamespace('sebconsoleviews', 'Rras3k/SebconsoleRoot/ressources/views');
-		$code = View('sebconsoleviews::genereMvc.model', compact('data'))->render();
-		$this->writeFic($this->filePathModel, $code);
-
+		if (!file_exists($this->filePathModel)) {
+			$data = ["this" => $this, 'php' => '?php'];
+			View::addNamespace('sebconsoleviews', 'Rras3k/SebconsoleRoot/ressources/views');
+			$code = View('sebconsoleviews::genereMvc.model', compact('data'))->render();
+			$this->writeFic($this->filePathModel, $code);
+		}
 	}
 
 	private function genereController()
