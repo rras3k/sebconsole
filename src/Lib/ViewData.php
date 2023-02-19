@@ -93,6 +93,11 @@ class ViewData
 		return (isset($this->entites[$this->entree]['form']['hiddens'])) ? $this->entites[$this->entree]['form']['hiddens'] : null;
 	}
 
+	// -------------------------------------------------------- BreadCrumb -------------------------------------------------------------
+	public function breadcrumb_get()
+	{
+		return (isset($this->entites[$this->entree]['breadcrumb'])) ? $this->entites[$this->entree]['breadcrumb'] : null;
+	}
 
 	// -------------------------------------------------------- Nav -------------------------------------------------------------
 

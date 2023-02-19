@@ -4,7 +4,7 @@
 
 {{-- <div class="breadcomb"> --}}
 
-    <nav aria-label="breadcrumb">
+    <nav aria-label="breadcrumb" class="ms-1">
         <ol class="breadcrumb">
             @foreach ($datas as $key => $value)
                 <li class="breadcrumb-item">

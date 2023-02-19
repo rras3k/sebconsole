@@ -103,6 +103,12 @@ abstract class SbController extends Controller
         if (!isset($this->entites['page'])) $this->entites['page'] = ['nav' => ['breadcombre' => []]];
         $this->entites['page']['nav']['breadcombre'] = $breadcombreListe;
     }
+
+    // -------------------------------------------------------- BreadCrumb -------------------------------------------------------------
+    public function breadcrumb_set($breadcrumb){
+        $this->entites[$this->entree]['breadcrumb'] = $breadcrumb;
+    }
+
     // -------------------------------------------------------- Page -------------------------------------------------------------
 
     /**
