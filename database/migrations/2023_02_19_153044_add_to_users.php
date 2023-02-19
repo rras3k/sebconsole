@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->Boolean('enable')->default(true);
-
+            $table->Boolean('is_enable')->default(true);
+            $table->Boolean('is_favori')->default(false);
+            $table->dateTime('date_favori')->nullable();
         });
     }
 

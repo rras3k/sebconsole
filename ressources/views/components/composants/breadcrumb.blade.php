@@ -3,7 +3,7 @@
 ])
 
 {{-- <div class="breadcomb"> --}}
-
+@if($datas)
     <nav aria-label="breadcrumb" class="ms-1">
         <ol class="breadcrumb">
             @foreach ($datas as $key => $value)
@@ -47,7 +47,7 @@
         </ol>
     </nav>
 {{-- </div> --}}
-
+@endif
 
 <style>
     .breadcrumb{

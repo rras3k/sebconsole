@@ -25,6 +25,6 @@ class {{$data['this']->props['model']}} extends SbModel
     }
     public static function getList()
     {
-        return {{$data['this']->props['model']}}::select(['id', '{{$data['this']->props['champStr']}} as label'])->where('enable', '=', 1)->orderBy('{{$data['this']->props['champStr']}}', 'asc')->get();
+        return {{$data['this']->props['model']}}::select(['id', '{{$data['this']->props['champStr']}} as label'])->where('is_enable', '=', 1)->orderBy('{{$data['this']->props['champStr']}}', 'asc')->get();
     }
 }

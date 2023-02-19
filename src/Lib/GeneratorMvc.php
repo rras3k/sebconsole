@@ -226,7 +226,7 @@ class GeneratorMvc
 
 	private function isSavable($champNom)
 	{
-		if ($champNom == 'enable' || $champNom == 'id' || $champNom == 'created_at' || $champNom == 'updated_at') {
+		if ($champNom == 'is_enable'  || $champNom == 'id' || $champNom == 'created_at' || $champNom == 'updated_at') {
 			return 0;
 		}
 		return 1;

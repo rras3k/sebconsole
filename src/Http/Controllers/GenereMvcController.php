@@ -21,7 +21,7 @@ class GenereMvcController extends Controller
         $data['tables'] = $this->getTables();
         $data['table_select'] = "";
 
-        if (isset($_GET['table'])) {
+        if (isset($_GET['table']) && $_GET['table']) {
             $data['table_select'] = $_GET['table'];
             $genMvc = new GeneratorMvc();
             $data['infoChamps'] = $genMvc->analyseTable($_GET['table']);

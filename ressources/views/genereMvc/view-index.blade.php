@@ -1,3 +1,12 @@
+<?php
+// use Rras3k\SebconsoleRoot\facades\ViewData;
+// ViewData::setEntites($data['rras3k']);
+?>
+<{{$data['php']}}
+use Rras3k\SebconsoleRoot\facades\ViewData;
+ViewData::setEntites($data['rras3k']);
+?>
+
 {{ '@' }}extends('layouts.console')
 
 {{ '@' }}section('head-link')
@@ -5,7 +14,10 @@
 
 {{ '@' }}section('content')
 <div class="zm-header">
-    <div class="zmh-titre">{!! '{' !!}{ $data['label_titre'] }}</div>
+    {!! '<' !!}x-sebconsoleviews::composants.breadcrumb :datas="ViewData::breadcrumb_get()" />
+    <div class="zmh-titre">
+        {!! '{' !!}{ $data['label_titre'] }}
+    </div>
     <div class=" menu_page-SB">
         {{-- <x-menus.page :liste="$menuPage"></x-menus.page> --}}
     </div>
@@ -25,8 +37,11 @@
                 data-search="true" data-show-refresh="true" data-url="{!! '{' !!}{$data['route_bt']}}">
                 <thead>
                     <tr>
+                        <th data-halign="center" data-field="is_favori" data-width="10"
+                                data-align="center" data-sortable="true" data-formatter="is_favori_Formatter">Favori</th>
                         @foreach ($data['this']->champs as $key => $value)
                             @php
+                            if ($key == 'is_favori') continue;
                             // dump($key,$value);
                                 if ($value['grille']['visible']){
                                     $isFormatter =false;
@@ -130,9 +145,18 @@
                 '</div>'
         }
 
+    function is_favori_Formatter(value, row){
+        if(value == 1){
+            return '<i class="fa-solid fa-star"></i>'
+        }
+        else{
+            return '<i class="fa-regular fa-star"></i>'
+        }
+        return 
+    }
     // Formatter
     @foreach ($data['this']->champs as $key => $value)
-        @if ($value['grille']['visible'])
+        @if ($key !='is_favori' && $value['grille']['visible'])
             @php
                 switch($value['type']){
                     case 'boolean': // boolean

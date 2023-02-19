@@ -58,6 +58,6 @@ class User extends Authenticatable
         return 'utilisateur';
     }
     public static function  getList(){
-        return User::select(['id','name as label'])->where('enable','=',1)->orderBy('name','asc')->get();
+        return User::select(['id','name as label'])->where('is_enable','=',1)->orderBy('name','asc')->get();
     }
 }

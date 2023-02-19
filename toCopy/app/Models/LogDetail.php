@@ -27,6 +27,6 @@ class LogDetail extends SbModel
     }
     public static function getList()
     {
-        return LogDetail::select(['id', 'texte as label'])->where('enable', '=', 1)->orderBy('texte', 'asc')->get();
+        return LogDetail::select(['id', 'texte as label'])->where('is_enable', '=', 1)->orderBy('texte', 'asc')->get();
     }
 }

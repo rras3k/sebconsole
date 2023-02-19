@@ -13,7 +13,9 @@ ViewData::setEntites($data['rras3k']);
 
 {{ '@' }}section('content')
 	<div class="zm-header">
-    <div class="zmh-titre">{!! '{' !!}{ $data['label_titre'] }}</div>
+        {!! '<' !!}x-sebconsoleviews::composants.breadcrumb :datas="ViewData::breadcrumb_get()" />
+
+        <div class="zmh-titre">{!! '{' !!}{ $data['label_titre'] }}</div>
         <div class="zmh-menus">
             {!! '<' !!}x-sebconsoleviews::menus.page :liste="ViewData::menuPage_get()"/>
 		</div>

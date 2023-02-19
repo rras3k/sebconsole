@@ -1,5 +1,10 @@
 <?php
 // dd($data);
+function getFunctionName($champName){
+    
+    if ($champName == 'is_favori') return 'favori';
+    return $champName;
+}
 ?>
 @extends('layouts.console')
 
@@ -19,8 +24,12 @@
 
             </div>
             <div class="panel-content">
+
+                {{-- Choix de la table --}}
                 <div style="text-align: center;">
                     <select id="selectId" name="select_table" style="font-size: 20px;width:300px;">
+                        <option value="" >Choisir une table</option>
+
                         @foreach ($data['tables'] as $key => $value)
                             @php $selected = ""; @endphp
                             @if ($value == $data['table_select'])
@@ -30,12 +39,15 @@
                         @endforeach
                     </select>
                 </div>
+
                 <form id="genereVmc" method="POST" action="{{ route('genereMvc.run') }}" enctype="multipart/form-data"
                     name="genereVmc">
                     @csrf
                     @if (isset($data['infoEntite']['table']))
                         <input type="hidden" id="table" name="props[table]"
                             value="{{ $data['infoEntite']['table'] }}" />
+
+                        {{-- Saisi des propriétés --}}
                         <div class="class-prop">
                             <div>
                                 <div>
@@ -67,6 +79,8 @@
                                 <button type="button" class="btn btn-primary" onclick="check()">Check</button>
                             </div>
                         </div>
+
+                        {{-- Saisi des informations sur chaque champ --}}
                         <div class="row g-0 text-center">
                             <div class="col-2"></div>
                             <div class="col-3 text-bg-success">Grille</div>
@@ -99,7 +113,7 @@
                                 </div>
                                 <div class="col-2 ligne-champ align-self-center">
                                     <input class="w-100" type="text" name="champs[{{ $value['name'] }}][grille][label]"
-                                        value="{{ $value['name'] }}" />
+                                        value="{{ getFunctionName($value['name']) }}" />
                                 </div>
                                 <div class="col-1 ligne-champ text-center align-self-center">
                                     <input type="hidden" name="champs[{{ $value['name'] }}][form][visible]"
@@ -111,7 +125,7 @@
                                 </div>
                                 <div class="col-2 ligne-champ align-self-center">
                                     <input class="w-100" type="text" name="champs[{{ $value['name'] }}][form][label]"
-                                        value="{{ $value['name'] }}" />
+                                        value="{{ getFunctionName($value['name'])  }}" />
                                 </div>
                                 <div class="col-4 ligne-champ "></div>
                             </div>

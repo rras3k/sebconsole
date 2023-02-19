@@ -22,6 +22,6 @@ class Role_user extends SbModel
     }
     public static function getList()
     {
-        return LogHead::select(['id', 'id as label'])->where('enable', '=', 1)->orderBy('id', 'asc')->get();
+        return LogHead::select(['id', 'id as label'])->where('is_enable', '=', 1)->orderBy('id', 'asc')->get();
     }
 }

@@ -53,7 +53,7 @@
 					'filtre_fixe' => [
 					],
 					'filtre_permanent' => [
-                        '{{ $data['this']->props['table'] }}.enable' => 1
+                        '{{ $data['this']->props['table'] }}.is_enable' => 1
                     ],
 					'sort_defaut' => 'id',
 					'order_defaut' => 'asc',
@@ -235,7 +235,7 @@
    public function destroy($modelId)
     {
 		$model = {{$data['this']->props['model']}}::find($modelId);
-		$model->enable = 0;
+		$model->is_enable = 0;
         $model->save();
         return redirect(route('{{$data['this']->routeName_index}}'));
     }
