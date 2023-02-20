@@ -93,6 +93,10 @@ $panel-footer-color: $panel-content-color !default;
 		margin-top: 0.4rem;
 		--bs-gutter-x: 0;
 	}
+		box-shadow: #00000040 0px 10px 10px 0px;
+		margin-left: 10px;
+		margin-right: 10px;
+		padding-bottom: 10px;
 }
 
 .panel-header {
