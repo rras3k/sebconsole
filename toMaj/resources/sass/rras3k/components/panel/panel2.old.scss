@@ -1,31 +1,27 @@
-// -- valeurs par défaut
 
-// -------------------- panel
 // général
-$panel-color: DarkSlateGray !default;
-$panel-background: white !default;
-$panel-border-color : gray !default;
-$panel-border-radius: 10px !default;
+$panel_color: DarkSlateGray !default;
+$panel_background: white !default;
+$panel_border-color : gray !default;
+$panel_border-radius: 10px !default;
 
 // header
-$panel-header-backgroundcolor: Silver !default;
-$panel-header-color: DarkSlateGray !default;
+$panel_header-backgroundcolor: Silver !default;
+$panel_header-color: DarkSlateGray !default;
 
 //  rubrique
-$panel-rubrique-backgroundcolor: Beige !default;
-$panel-rubrique-color: DarkSlateGray !default;
+$panel_rubrique-backgroundcolor: Beige !default;
+$panel_rubrique-color: DarkSlateGray !default;
 
 // content
-$panel-content-backgroundcolor: white;
-$panel-content-color: DarkSlateGray !default;
+$panel_content-backgroundcolor: white;
+$panel_content-color: DarkSlateGray !default;
 
 // footer
-$panel-footer-backgroundcolor: $panel-content-backgroundcolor !default;
-$panel-footer-color: $panel-content-color !default;
+$panel_footer-backgroundcolor: $panel_content-backgroundcolor !default;
+$panel_footer-color: $panel_content-color !default;
 
 // -- fin valeurs par défaut
-
-
 
 .panel-group {
 	display: flex;
@@ -37,25 +33,25 @@ $panel-footer-color: $panel-content-color !default;
 }
 
 %panel-base {
-	background: $panel-background;
-	border-color: $panel-border-color;
-	color: $panel-color;
+	background: $panel_background;
+	border-color: $panel_border-color;
+	color: $panel_color;
 	// border: 1px solid lightgrey;
-	// border-radius: $panel-border-radius;
+	// border-radius: $panel_border-radius;
 	vertical-align: top;
 
 	&>div:last-child {
 		// border-style: solid;
 		// border-color: $border-color;
-		// border-bottom-left-radius: $panel-border-radius;
-		// border-bottom-right-radius: $panel-border-radius;
+		// border-bottom-left-radius: $panel_border-radius;
+		// border-bottom-right-radius: $panel_border-radius;
 	}
 
 	&>div:first-child {
 		// border-style: solid;
 		// border-color: $border-color;
-		// border-top-left-radius: $panel-border-radius;
-		// border-top-right-radius: $panel-border-radius;
+		// border-top-left-radius: $panel_border-radius;
+		// border-top-right-radius: $panel_border-radius;
 	}
 
 	@include media-max("md") {
@@ -100,15 +96,15 @@ $panel-footer-color: $panel-content-color !default;
 }
 
 .panel-header {
-	background: $panel-header-backgroundcolor;
-	color: $panel-header-color;
+	background: $panel_header-backgroundcolor;
+	color: $panel_header-color;
 	text-align: center;
 	height: 50px;
 	margin-top: 0px;
 	// margin-bottom: 10px;
 	font-size: xx-large;
-	// border-top-left-radius: $panel-border-radius;
-	// border-top-right-radius: $panel-border-radius;
+	// border-top-left-radius: $panel_border-radius;
+	// border-top-right-radius: $panel_border-radius;
 }
 
 
@@ -117,9 +113,9 @@ $panel-footer-color: $panel-content-color !default;
 	padding: 5px;
 	padding-left: 10px;
 	padding-right: 10px;
-	color: $panel-rubrique-color;
+	color: $panel_rubrique-color;
 	text-align: start;
-	background: $panel-rubrique-backgroundcolor;
+	background: $panel_rubrique-backgroundcolor;
 	// border-style: solid;
 	// border-color: $border-color;
 	// border-left-width: 0;
@@ -132,8 +128,8 @@ $panel-footer-color: $panel-content-color !default;
 	padding-left: 10px;
 	padding-right: 10px;
 	text-align: start;
-	background: $panel-content-backgroundcolor;
-	color: $panel-content-color;
+	background: $panel_content-backgroundcolor;
+	color: $panel_content-color;
 	// border-style: solid;
 	// border-color: $border-color;
 	// border-left-width: 0;
@@ -145,6 +141,6 @@ $panel-footer-color: $panel-content-color !default;
 .panel-footer {
 	padding: 10px;
 	text-align: center;
-	background: $panel-footer-backgroundcolor;
-	color: $panel-footer-color;
+	background: $panel_footer-backgroundcolor;
+	color: $panel_footer-color;
 }

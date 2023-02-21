@@ -13,9 +13,9 @@ ViewData::setEntites($data['rras3k']);
 {{ '@' }}endsection
 
 {{ '@' }}section('content')
-<div class="zm-header">
+<div class="§_header">
     {!! '<' !!}x-sebconsoleviews::composants.breadcrumb :datas="ViewData::breadcrumb_get()" />
-    <div class="zmh-titre">
+    <div class="§_titre">
         {!! '{' !!}{ $data['label_titre'] }}
     </div>
     <div class=" menu_page-SB">
@@ -27,9 +27,9 @@ ViewData::setEntites($data['rras3k']);
     <div class="zm-bande">
         <a class="btn btn-primary" href="{!! '{' !!}{ $data['route_bouton_creer'] }}" role="button">Ajouter {{ $data['this']->props['label'] }}</a>
     </div>
-    <div class="panel">
+    <div class="§_panel">
 
-        <div class="panel-content">
+        <div class="§_content">
             <table id="table" data-toolbar="#toolbar" data-toolbar="#toolbar" class="table-striped" data-page-size="25"
                 data-show-toggle="true" data-show-columns-toggle-all="true" data-show-columns="true"
                 data-buttons="buttons" data-side-pagination="server" data-row-style="rowStyle" data-pagination="true"
@@ -152,7 +152,7 @@ ViewData::setEntites($data['rras3k']);
         else{
             return '<i class="fa-regular fa-star"></i>'
         }
-        return 
+        return
     }
     // Formatter
     @foreach ($data['this']->champs as $key => $value)

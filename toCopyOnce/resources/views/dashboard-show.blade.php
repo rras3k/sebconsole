@@ -8,11 +8,11 @@ ViewData::setEntites($data['rras3k']);
 @endsection
 
 @section('content')
-    <div class="zm-header">
+    <div class="§_header">
         <div class="zmh-nav">
             <x-sebconsoleviews::nav.breadcombre :liste="ViewData::nav_getPage()" />
         </div>
-        <div class="zmh-titre">{{ ViewData::page_getTitre() }}</div>
+        <div class="§_titre">{{ ViewData::page_getTitre() }}</div>
 
         <div class="zmh-menus">
             <x-sebconsoleviews::menus.page :liste="ViewData::menuPage_get()"></x-sebconsoleviews::menus.page>

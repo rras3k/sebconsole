@@ -1,14 +1,33 @@
-// sidebar
+// ------------------------------------------------------------------------ Sidebar
 $sideBar-color : #6c757d;
 $sideBar-backgroundcolor:  #274cac;
 $sideBar-border-color: none;
 $sideBar-header-icon-color: white;
 
+// ------------------------------------------------------------------------ Panel
+// général
+$panel_color: DarkSlateGray !default;
+$panel_background: Gainsboro !default;
+$panel_border_color : gray !default;
+$panel_border_radius: 10px !default;
+// header
+$panel_header_backgroundcolor: Silver !default;
+$panel_header_color: DarkSlateGray !default;
+//  rubrique
+$panel_rubrique_backgroundcolor: Beige !default;
+$panel_rubrique_color: DarkSlateGray !default;
+// content
+$panel_content_backgroundcolor: whitesmoke !default;
+$panel_content_color: DarkSlateGray !default;
+// footer
+$panel_footer_backgroundcolor: $panel_content_backgroundcolor !default;
+$panel_footer_color: $panel_content_color !default;
 
+$panel_margin_right : 0px;
+$panel_margin_left : 0px;
 
-
-
-
+$panel_padding_bottom: 0px;
+$panel_box_shadow:none;
 
 
 

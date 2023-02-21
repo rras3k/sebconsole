@@ -84,8 +84,8 @@ main {
 }
 
 // -------------  <button> ou <a> as <button>
-a.§-btn,
-button.§-btn {
+a.§_btn,
+button.§_btn {
     display: inline-block;
     padding: 0.45rem;
     margin: 0rem;
@@ -96,7 +96,7 @@ button.§-btn {
     margin-left:5px;
 
     &:hover,
-    button.§-btn:hover {
+    button.§_btn:hover {
         opacity: 0.7;
     }
 
@@ -111,7 +111,7 @@ button.§-btn {
         text-rendering: auto;
     }
 
-    &.§-nav {
+    &.§_nav {
         background: gold;
         color: black;
 
@@ -120,7 +120,7 @@ button.§-btn {
         }
     }
 
-    &.§-ajout {
+    &.§_ajout {
         background: rgba(0, 60, 255, 0.778);
         color: rgb(255, 252, 252);
 

@@ -112,23 +112,22 @@ class SebconsoleServiceProvider extends ServiceProvider
     private function importPublishOnce()
     /*
     php artisan db:seed --class=FirstSeeder
-    php artisan vendor:publish --force --tag=rras3k-once
+    php artisan vendor:publish --tag=rras3k-once
     php artisan vendor:publish --force --tag=rras3k-maj 
-
     */
     {
         $this->publishes([
-            __DIR__ . '/../../toCopy/public' => public_path(),
-            __DIR__ . '/../../toCopy/app' => app_path(),
-            __DIR__ . '/../../toCopy/resources' => resource_path(),
-            __DIR__ . '/../../toCopy/routes' => base_path('routes'),
-            __DIR__ . '/../../toCopy/config' => config_path(),
-            __DIR__ . '/../../toCopy/database' => database_path(),
+            __DIR__ . '/../../toCopyOnce/public' => public_path(),
+            __DIR__ . '/../../toCopyOnce/app' => app_path(),
+            __DIR__ . '/../../toCopyOnce/resources' => resource_path(),
+            __DIR__ . '/../../toCopyOnce/routes' => base_path('routes'),
+            __DIR__ . '/../../toCopyOnce/config' => config_path(),
+            __DIR__ . '/../../toCopyOnce/database' => database_path(),
         ], 'rras3k-once');
 
         $this->publishes([
-            __DIR__ . '/../../toCopy/resources/sass/rras3k' => resource_path('/sass/rras3k'),
-            __DIR__ . '/../../toCopy/resources/sass/theme/default/variables.scss' => resource_path('/sass/theme/default/variables.exemple.scss'),
+            __DIR__ . '/../../toMaj/public' => public_path(),
+            __DIR__ . '/../../toMaj/resources' => resource_path(),
         ], 'rras3k-maj');
     }
 }

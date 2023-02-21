@@ -18,7 +18,7 @@ class Role_user extends SbModel
     }
     public static function getLabel()
     {
-        return 'Role par utilisateur';
+        return 'Rôle par utilisateur';
     }
     public static function getList()
     {

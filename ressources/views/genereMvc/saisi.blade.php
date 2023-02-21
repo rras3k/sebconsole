@@ -1,7 +1,7 @@
 <?php
 // dd($data);
 function getFunctionName($champName){
-    
+
     if ($champName == 'is_favori') return 'favori';
     return $champName;
 }
@@ -12,8 +12,8 @@ function getFunctionName($champName){
 @endsection
 
 @section('content')
-    <div class="zm-header">
-        <div class="zmh-titre">Génération VMC</div>
+    <div class="§_header">
+        <div class="§_titre">Génération VMC</div>
     </div>
 
     <div class="zm-content">

@@ -5,8 +5,8 @@
 @endsection
 
 @section('content')
-    <div class="zm-header">
-        <div class="zmh-titre">Utilisateurs</div>
+    <div class="§_header">
+        <div class="§_titre">Utilisateurs</div>
         <div class=" menu_page-SB">
             {{-- <x-menus.page :liste="$menuPage"></x-menus.page> --}}
         </div>
@@ -17,7 +17,7 @@
             <div class="row">
 				@foreach($data['pages'] as $key => $value)
 				<a href="{{asset('console/pages-pasgit/page/').'/'.$value}}">{{$value}}</a>
-					
+
 				@endforeach
 
             </div>

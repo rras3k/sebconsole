@@ -26,14 +26,14 @@ $input_textarea = "La Déclaration des droits de l'homme et du citoyen est née 
 @section('content')
 
 
-    <div class="zm-header">
-        <div class="zmh-titre">Page exemple</div>
+    <div class="§_header">
+        <div class="§_titre">Page exemple</div>
         <div class="zmh-menus">
             {{-- @if (!$data['isCreate'])
                 <x-menus.page :liste="$data['menu_page']"></x-menus.page>
             @endif --}}
         </div>
-    </div> 
+    </div>
 
     <div class="zm-content">
 

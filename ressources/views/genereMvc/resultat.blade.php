@@ -7,8 +7,8 @@
 @endsection
 
 @section('content')
-    <div class="zm-header">
-        <div class="zmh-titre">Génération VMC: Résultat</div>
+    <div class="§_header">
+        <div class="§_titre">Génération VMC: Résultat</div>
     </div>
 
     <div class="zm-content">
