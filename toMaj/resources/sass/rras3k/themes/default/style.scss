@@ -68,7 +68,7 @@ main {
     padding-left: 10px;
 
 }
-.zm-content {
+.§_content {
     margin-top: 1rem;
     padding-left: 20px;
     padding-right: 20px;
@@ -78,7 +78,7 @@ main {
     display: none;
 }
 
-.zm-bande {
+.§_bande {
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -129,4 +129,19 @@ button.§_btn {
         }
     }
 
+}
+
+
+// ----------------------------- Menus
+
+// ----- liste_icons_1
+.§_menu_liste_icons_1{
+    font-size:1.2rem;
+    &>div{
+        display: flex;
+        gap: 10px;
+    }
+    &>div>span{
+        color:white;
+    }
 }

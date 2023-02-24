@@ -10,6 +10,12 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use Rras3k\SebconsoleRoot\facades\RoleUser;
+use Illuminate\Support\Facades\Auth;
+use Rras3k\Sebconsole\Lib\GeneratorMenu;
+
+
+
 
 /*
 
@@ -52,14 +58,16 @@ abstract class SbController extends Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    abstract public function getPara();
+    // abstract public function getPara();
 
     private $menus;
     private $paras;
     // private $hiddens;
     // private $formPara;
     private $entree;
-    private $entites = ['page' => []];
+    private $entites = ['page' => [],'entites'=>[],'props'=>[]];
+    private $liste_nom_type_menu= [];
+
 
 
     /**
@@ -72,6 +80,8 @@ abstract class SbController extends Controller
         $this->menus = config('sebconsole.menu_page');
         $this->paras = $this->getPara();
         $this->setEntree('main');
+
+        // $this->liste_nom_type_menu = $this->getMenuName();
     }
 
 
@@ -132,6 +142,18 @@ abstract class SbController extends Controller
     // }
 
     // -------------------------------------------------------- Menu page --------------------------------------------------------
+
+    /**
+     *
+     * @param
+     * @return
+     */
+    public function getMenuName(){
+        $listeRole = RoleUser::liste();
+        // vérification de l'existence des fichiers de menu selon la configuration
+        $genMenu = new GeneratorMenu();
+        $this->entites['props']['prefix_menu'] = $genMenu->checkMenusForRoles($listeRole);
+    }
 
     /**
      *
@@ -539,6 +561,8 @@ abstract class SbController extends Controller
     public function dataToView()
     {
         $this->menuPage_get();
+        $this->getMenuName();
+        // dd($this->entites);
         return $this->entites;
     }
 

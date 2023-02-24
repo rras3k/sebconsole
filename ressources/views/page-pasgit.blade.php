@@ -5,14 +5,14 @@
 @endsection
 
 @section('content')
-    <div class="§_header">
+    <div class="§_page_header">
         <div class="§_titre">Utilisateurs</div>
         <div class=" menu_page-SB">
             {{-- <x-menus.page :liste="$menuPage"></x-menus.page> --}}
         </div>
     </div>
 
-    <div class="zm-content">
+    <div class="§_content">
         <div class="panel">
             <div class="row">
 				@foreach($data['pages'] as $key => $value)

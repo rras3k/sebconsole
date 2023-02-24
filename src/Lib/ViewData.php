@@ -42,6 +42,10 @@ class ViewData
 		return isset($this->entites[$this->entree]['menu_page']) ? $this->entites[$this->entree]['menu_page'] : null;
 	}
 
+    public function menu_is_enable($nonMenu){
+        dd($this->entites);
+
+    }
 	// -------------------------------------------------------- Page -------------------------------------------------------------
 
 	/**

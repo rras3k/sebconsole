@@ -3,13 +3,12 @@
 namespace Rras3k\Sebconsole\Provider;
 
 use Rras3k\Sebconsole\Lib\RoleUser;
-use Rras3k\Sebconsole\Lib\MenuMaker;
 use Rras3k\Sebconsole\Lib\RapportSimple;
-use Rras3k\Sebconsole\Lib\ViewData;
+use Rras3k\Sebconsole\Lib\Core;
+use Rras3k\Sebconsole\Lib\Menu;
+use Rras3k\SebconsoleRoot\commands\MenuCommande;
+
 use Rras3k\Sebconsole\Models\Role;
-use Rras3k\Sebconsole\Models\LogDetail;
-use Rras3k\SebconsoleRoot\commands\Menu;
-use Rras3k\SebconsoleRoot\commands\GeneratorMvcCommands;
 use Rras3k\Sebconsole\Http\Middleware\EnsureUserHasRole;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Blade;
@@ -31,52 +30,52 @@ class SebconsoleServiceProvider extends ServiceProvider
         $this->app->bind('Role', function ($app) {
             return new Role();
         });
-        $this->app->bind('Log', function ($app) {
-            return new LogDetail();
-        });
-        $this->app->bind('MenuMaker', function ($app) {
-            return new MenuMaker();
-        });
+        // $this->app->bind('Log', function ($app) {
+        //     return new LogDetail();
+        // });
         $this->app->bind('RapportSimple', function ($app) {
             return new RapportSimple();
         });
-        $this->app->bind('ViewData', function ($app) {
-            return new ViewData();
+        $this->app->bind('Core', function ($app) {
+            return new Core();
+        });
+        $this->app->bind('Menu', function ($app) {
+            return new Menu();
         });
     }
     public function boot()
     {
 
         $this->importPublishOnce();
-        
+
         // Migration
         $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
-        
+
         // config
         $this->mergeConfigFrom(
             __DIR__ . '/../../config/sebconsole.php',
             'sebconsole'
         );
-        
+
         // Views
         $this->loadViewsFrom(__DIR__ . '/../../ressources/views', 'sebconsoleviews');
-        
-        
+
+
         // Routes
         $this->loadRoutesFrom(__DIR__ . '/../../routes/web.php');
-        
+
         // Middleware
         // $kernel->pushMiddleware(EnsureUserHasRole::class);
-        
+
         // $router = $this->app->make(Router::class);
         // $router->pushMiddlewareToGroup('web', EnsureUserHasRole::class);
-        
+
         $this->app->booted(function () {
             $router = $this->app->make(Router::class);
             $router->aliasMiddleware('role', EnsureUserHasRole::class);
             $router->pushMiddleWareToGroup('role', EnsureUserHasRole::class);
         });
-        
+
         $this->loadBladeDirectives();
 
         // Console
@@ -84,10 +83,13 @@ class SebconsoleServiceProvider extends ServiceProvider
             // publish config file
 
             $this->commands([
-                Menu::class, // registering the new command
-                GeneratorMvcCommands::class, // registering the new command
+                MenuCommande::class, // registering the new command
             ]);
         }
+
+
+
+
         // composants view
         // $this->loadViewsFrom(__DIR__ . '/../../resources/views/components', 'forms.input');
 
@@ -113,7 +115,7 @@ class SebconsoleServiceProvider extends ServiceProvider
     /*
     php artisan db:seed --class=FirstSeeder
     php artisan vendor:publish --tag=rras3k-once
-    php artisan vendor:publish --force --tag=rras3k-maj 
+    php artisan vendor:publish --force --tag=rras3k-maj
     */
     {
         $this->publishes([

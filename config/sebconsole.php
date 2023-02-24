@@ -1,26 +1,21 @@
 <?php
 
+use App\Models\Role;
+
 
 return [
-    'affiche_logo' => true,         // Affichage du logo /public/img/logo.png
-    'affiche_icon_libre' => true,  // Affichage des icons des menus de façon inline
-    'menu_accordeon' => true,      // Affichage des rubriques avec accordeon
-    'url_doc' => "",
-    'menu' => [ // Menu de la sidebar. Role::ROOT, Role::ADMIN, Role::MEMBRE_1, Role::MEMBRE_2, ...
+    'menu_affichage_liste_icons' => 'liste_icons_1',
+    'menu_affichage_vertical' => 'vertical_1',
+    'menu_affichage_horizontal' => 'horizontal_1',
+    'menu' => [
+        // Menu de la sidebar. Role::ROOT, Role::ADMIN, Role::MEMBRE_1, Role::MEMBRE_2, ...
+        ['label' => 'Système', 'route' => '', 'icon' => '', 'droits' => null, 'items' => [
+            ['label' => 'Génération MVC', 'route' => 'genereMvc.show', 'icon' => 'bi bi-person', 'droits' => [Role::ROOT]],
+        ]],
+        ['label' => 'Développement', 'route' => '', 'icon' => '', 'droits' => null, 'items' => [
+            ['label' => 'Pages dev', 'route' => 'page-pasgit.index', 'icon' => 'fa-solid fa-city', 'droits' => [Role::ADMIN]],
 
-        // System
-        // ['rubrique' => 'Système', 'nom' => 'Génération MVC', 'route' => 'genereMvc.show', 'icon' => 'bi bi-person', 'droits' => [Role::ROOT]],
-
-
-        
-
-        // dev
-        // ['rubrique' => 'Dev', 'nom' => 'Pages dev', 'route' => 'page-pasgit.index', 'icon' => 'fa-solid fa-city', 'droits' => [Role::ADMIN]],
-
-
-
-
-
-
-    ],
+        ]],
+        ['label' => 'Nouvel ajout', 'route' => '', 'icon' => '', 'droits' => null, 'items' => []]
+    ]
 ];

@@ -8,7 +8,7 @@ ViewData::setEntites($data['rras3k']);
 @endsection
 
 @section('content')
-    <div class="§_header">
+    <div class="§_page_header">
         <div class="zmh-nav">
             <x-sebconsoleviews::nav.breadcombre :liste="ViewData::nav_getPage()" />
         </div>
@@ -22,7 +22,7 @@ ViewData::setEntites($data['rras3k']);
 
     </div>
 
-    <div class="zm-content">
+    <div class="§_content">
         <div class="panel2">
 
         </div>

@@ -2,7 +2,7 @@
     "name": "rras3k/sebconsole",
     "description": "console",
     "type": "library",
-    "license": "MIT", 
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "Rras3k\\Sebconsole\\": "src/",
@@ -23,7 +23,8 @@
             ],
             "aliases": {
                 "RoleUser": "Rras3k\\SebconsoleRoot\\facades\\RoleUser",
-                "MenuMaker": "Rras3k\\SebconsoleRoot\\facades\\MenuMaker",
+                "Core": "Rras3k\\SebconsoleRoot\\facades\\Core",
+                "Menu": "Rras3k\\SebconsoleRoot\\facades\\Menu",
                 "RapportSimple": "Rras3k\\SebconsoleRoot\\facades\\RapportSimple"
             }
         }

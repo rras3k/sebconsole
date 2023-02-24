@@ -2,19 +2,21 @@
 use Rras3k\SebconsoleRoot\facades\MenuMaker;
 
 $menus = MenuMaker::get();
-
+// dd($menus);
 ?>
 
 <div class="position-sticky pt-3">
     <ul class="nav flex-column">
 
-        @if (config('sebconsole.affiche_icon_libre'))
+
+
+        {{-- @if (config('sebconsole.affiche_icon_libre'))
             <div id="liste-icons" class="row w-100 ms-auto me-auto">
-                @foreach ($menus as $fav)
-                    @if ($fav['enable'])
+                @foreach ($menus as $items)
+                    @if ($items['is_enable'])
                         <div class="col-xxl-2 col-md-3  container-fav">
-                            <a href="{{ route($fav['route']) }}" class="a-icon-fav" title="{{ $fav['nom'] }}">
-                                <i class="icon-fav fa-xl fa-solid {{ $fav['icon'] }}"></i>
+                            <a href="{{ route($items['route']) }}" class="a-icon-fav" title="{{ $items['nom'] }}">
+                                <i class="icon-fav fa-xl fa-solid {{ $items['icon'] }}"></i>
                             </a>
                         </div>
                     @endif
@@ -30,25 +32,27 @@ $menus = MenuMaker::get();
                 </div>
 
             </div>
-        @endif
+        @endif --}}
 
 
-        @php
+
+        {{-- Menu accordion --}}
+        {{-- @php
             $ctp = 1;
             $accordeonAuMoinsUn = false;
             $rubriqueLive = '';
         @endphp
         @foreach ($menus as $menu)
             @if ($menu['enable'])
-
                 @if (config('sebconsole.menu_accordeon', false))
                     @if ($rubriqueLive != $menu['rubrique'])
                         @if ($accordeonAuMoinsUn)
-</div>
-</div>
-</div>
-@endif
-<div class="accordion accordion-flush" id="accordionMain">
+                            </div>
+                            </div>
+                            </div>
+                        @endif
+
+<div class="accordion" id="accordionMain">
     @php
         $accordeonAuMoinsUn = true;
     @endphp
@@ -66,7 +70,6 @@ $menus = MenuMaker::get();
             <div class="accordeion-body">
                 @endif
 
-                {{-- Element d'une rubrique --}}
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{{ route($menu['route']) }}"
                         sb-route="dashboard.index">
@@ -89,9 +92,8 @@ $menus = MenuMaker::get();
                 @php
                     $rubriqueLive = $menu['rubrique'];
                     $ctp++;
-                    
-                @endphp
 
+                @endphp
                 @endif
                 @endforeach
                 @if (config('sebconsole.menu_accordeon', false))
@@ -101,7 +103,7 @@ $menus = MenuMaker::get();
     @endif
 
 </div>
-
+ --}}
 
 
 <li class="nav-item">

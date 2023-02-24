@@ -1,0 +1,31 @@
+// ------------------------------------------------------------------------ Main
+
+.§_main {
+    display: flex;
+    text-align: center;
+    padding-top: 5px;
+    flex-direction: column;
+
+    margin-left: $main_margin_left;
+    margin-right: $main_margin_right;
+
+    @include media-max("md") {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    & .§_header {
+        background: $_main_header_backgroundcolor;
+        margin-bottom: $_main_header_margin_bottom;
+
+        & .§_titre {
+            color: $_main_header_titre_color;
+            font-size: $_main_header_titre_font_size;
+        }
+    }
+
+    & .§_nav {
+        margin-bottom: $_main_nav_margin_bottom;
+
+    }
+}

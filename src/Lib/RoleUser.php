@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use Rras3k\Sebconsole\Models\Role;
-use Rras3k\Sebconsole\Models\Role_user;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -14,18 +13,22 @@ use Illuminate\Support\Facades\Auth;
 
 class RoleUser extends Model
 {
-    use HasFactory; 
+    use HasFactory;
 
 
     private $listeRoleUser = [];
 
     public function __construct()
     {
-        if (isset(Auth::user()->id))
+
+        if (isset(Auth::user()->id)){
             $this->listeRoleUser = $this->listeInit(Auth::user()->id);
+        }
     }
     public function liste()
     {
+        // dump('RoleUser.liste');
+
         return $this->listeRoleUser;
     }
     public function listeInit($userId)

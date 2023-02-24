@@ -28,7 +28,7 @@ class GenereMvcController extends Controller
             $data['infoEntite'] = $genMvc->getInfoEntiteDefault($_GET['table']);
         }
         //dd($data);
-        return view('sebconsoleviews::genereMvc.saisi', compact('data'));
+        return view('sebconsoleviews::genereSystem.mvc.saisi', compact('data'));
     }
 
     public function getTables()
@@ -59,7 +59,7 @@ class GenereMvcController extends Controller
         $genMvc->setProps($request->props);
         $genMvc->mergeChamps($request->champs);
         $data = $genMvc->genere($request->genereRoute);
-        return view('sebconsoleviews::genereMvc.resultat', compact('data'));
+        return view('sebconsoleviews::genereSystem.mvc.resultat', compact('data'));
     }
 
     public function check()

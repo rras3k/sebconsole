@@ -13,22 +13,19 @@ ViewData::setEntites($data['rras3k']);
 {{ '@' }}endsection
 
 {{ '@' }}section('content')
-<div class="§_header">
-    {!! '<' !!}x-sebconsoleviews::composants.breadcrumb :datas="ViewData::breadcrumb_get()" />
-    <div class="§_titre">
-        {!! '{' !!}{ $data['label_titre'] }}
-    </div>
-    <div class=" menu_page-SB">
-        {{-- <x-menus.page :liste="$menuPage"></x-menus.page> --}}
-    </div>
-</div>
 
-<div class="zm-content">
-    <div class="zm-bande">
+<div class="§_main">
+
+    <div class="§_header">
+        <div class="§_titre">{!! '{' !!}{ $data['label_titre'] }}</div>
+    </div>
+
+    <div class="§_nav">
+        {!! '<' !!}x-sebconsoleviews::composants.breadcrumb :datas="ViewData::breadcrumb_get()" />
         <a class="btn btn-primary" href="{!! '{' !!}{ $data['route_bouton_creer'] }}" role="button">Ajouter {{ $data['this']->props['label'] }}</a>
     </div>
-    <div class="§_panel">
 
+    <div class="§_panel">
         <div class="§_content">
             <table id="table" data-toolbar="#toolbar" data-toolbar="#toolbar" class="table-striped" data-page-size="25"
                 data-show-toggle="true" data-show-columns-toggle-all="true" data-show-columns="true"
@@ -42,7 +39,6 @@ ViewData::setEntites($data['rras3k']);
                         @foreach ($data['this']->champs as $key => $value)
                             @php
                             if ($key == 'is_favori') continue;
-                            // dump($key,$value);
                                 if ($value['grille']['visible']){
                                     $isFormatter =false;
                                     $dataAlign= "left";
@@ -80,7 +76,7 @@ ViewData::setEntites($data['rras3k']);
                 </thead>
             </table>
         </div>
-    </div>
+        </div>
 </div>
 
 {{-- FORM pour la suppression d'un élément --}}

@@ -8,7 +8,7 @@ use Illuminate\Support\ServiceProvider;
 
 use Illuminate\Console\Command;
 
-class Menu extends Command
+class MenuCommande extends Command
 {
 
 

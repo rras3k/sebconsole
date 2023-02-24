@@ -12,18 +12,18 @@ function getFunctionName($champName){
 @endsection
 
 @section('content')
-    <div class="§_header">
-        <div class="§_titre">Génération VMC</div>
-    </div>
 
-    <div class="zm-content">
-        <div class="panel">
-            <div class="panel-header">
+<div class="§_main">
+        <div class="§_header">
+            <div class="§_titre">Génération VMC</div>
+        </div>
+        <div class="§_panel">
+            <div class="§_header">
                 Saisie des paramètres
                 <x-sebconsoleviews::composants.badge texte="Rapport" type="success" />
 
             </div>
-            <div class="panel-content">
+            <div class="§_content">
 
                 {{-- Choix de la table --}}
                 <div style="text-align: center;">
@@ -135,7 +135,7 @@ function getFunctionName($champName){
 
                 </form>
             </div>
-            <div class="panel-footer">
+            <div class="§_footer">
                 @if (isset($data['infoEntite']['table']))
                     <div class="col-12">
                         <button form="genereVmc" type="submit" class="btn btn-primary">Générez</button>

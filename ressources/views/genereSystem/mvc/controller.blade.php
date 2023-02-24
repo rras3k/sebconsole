@@ -10,16 +10,12 @@
 			@endif
         @endforeach
 	use Illuminate\Http\Request; use Illuminate\Support\Facades\Auth;
-	use Rras3k\Sebconsole\Http\Controllers\SbController;
+    use Rras3k\SebconsoleRoot\facades\Core;
 
-    class {{ $data['this']->fileNameController }} extends SbController
+
+    class {{ $data['this']->fileNameController }} extends Controller
 	{
-		/** * * * @return */
-		public function __construct()
-    	{
-			$this->setEntree('main');
-    		parent::__construct();
-    	}
+
 
 		/**
 		*
@@ -30,7 +26,7 @@
     	{
     		return
 			[
-				'main' => [
+
 					'table_principale' => '{{ $data['this']->props['table'] }}',
 					'jointure' => [
 				@foreach ($data['this']->champs as $key => $value)
@@ -57,7 +53,7 @@
                     ],
 					'sort_defaut' => 'id',
 					'order_defaut' => 'asc',
-				]
+
 			];
 		}
 
@@ -68,21 +64,38 @@
     */
     public function index()
     {
-		$data = array();
-		// Label
-		$data['label_titre'] = "{{ $data['this']->props['label'] }}";
-		$data['label_bouton_creer'] = "Ajouter {{ $data['this']->props['label'] }}";
-		$data['route_bt'] = route('{{ $data['this']->routeName_listeBt }}');
-		$data['route_bouton_creer'] = route('{{ $data['this']->routeName_create }}');
+        $data = array();
 
-		{{-- $this->menuPage_add('formulaire', route('formulaire.create'), 'bi bi-plus-circle'); --}}
-		$data['rras3k'] = $this->dataToView();
-		return view('{{ $data['this']->callView_index }}', compact('data'));
+        // initialisation avec le nom de l'entité par défaut: "main"
+        Core::init();
+
+        // Titre
+        Core::setTitre("{{ $data['this']->props['label'] }}");
+
+        // Création boutons
+        Core::button_add(['id' => "Ajouter {{ $data['this']->props['label'] }}", 'label' => "Ajouter {{ $data['this']->props['label'] }}", 'route' => route('{{ $data['this']->routeName_create }}'), 'type' => Core::BUTTON_TYPE_AJOUT,'icon' => '', "class" => ""]);
+
+        // Route pour la grille
+        Core::setRoute('grille', route('{{ $data['this']->routeName_listeBt }}'));
+
+        // Nom des routes destroy, create ...
+        Core::setRouteName('destroy', '{{$data["this"]->routeName_destroy}}');
+        Core::setRouteName('edit', '{{$data["this"]->routeName_edit}}');
+
+        // Paras
+        Core::setParas($this->getPara());
+
+        // Process
+        Core::processForView();
+
+        return view('{{ $data['this']->callView_index }}', compact('data'));
+
     }
 
     public function listeBt()
     {
-	    return $this->listeBootstrapTable('main');
+        Core::setParas($this->getPara());
+        return Core::listeBootstrapTable('main');
     }
 
 	/**
@@ -96,7 +109,7 @@
         //
         $data = array();
 		$model= {{ $data['this']->props['model'] }}::find($modelId);
-		
+
         {{-- $this->page_setTitre('{{$data['this']->props['label']}}: Edition de '.$model->{{$data['this']->props['champStr']}}); --}}
 
 		$data['label_titre'] = "{{$data['this']->props['label']}}: Edition de ".$model->{{$data['this']->props['champStr']}};
@@ -201,8 +214,8 @@
 		 @php
 				}
 			@endphp
-        @endforeach 
-        ]; 
+        @endforeach
+        ];
     }
 	/**
      * Update the specified resource in storage.

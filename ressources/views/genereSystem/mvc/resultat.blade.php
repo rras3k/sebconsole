@@ -7,11 +7,11 @@
 @endsection
 
 @section('content')
-    <div class="§_header">
+    <div class="§_page_header">
         <div class="§_titre">Génération VMC: Résultat</div>
     </div>
 
-    <div class="zm-content">
+    <div class="§_content">
         <div class="panel">
             <div class="panel-header">
                 Saisie des paramètres

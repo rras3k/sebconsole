@@ -1,37 +1,70 @@
+// ------------------------------------------------------------------------ Tag HTML
+
+
 // ------------------------------------------------------------------------ Sidebar
 $sideBar-color : #6c757d;
-$sideBar-backgroundcolor:  #274cac;
+$sideBar-backgroundcolor: #274cac;
 $sideBar-border-color: none;
 $sideBar-header-icon-color: white;
 
 // ------------------------------------------------------------------------ Panel
 // général
 $panel_color: DarkSlateGray !default;
-$panel_background: Gainsboro !default;
+$panel_background: #ececf3 !default;
 $panel_border_color : gray !default;
 $panel_border_radius: 10px !default;
+$panel_border_width: 1px;
+$panel_padding_bottom:10px;
+$panel_box_shadow: none;
+$panel_margin_right : 0px;
+$panel_margin_left : 0px;
+
 // header
 $panel_header_backgroundcolor: Silver !default;
 $panel_header_color: DarkSlateGray !default;
+
 //  rubrique
 $panel_rubrique_backgroundcolor: Beige !default;
 $panel_rubrique_color: DarkSlateGray !default;
+
 // content
-$panel_content_backgroundcolor: whitesmoke !default;
+$panel_content_backgroundcolor: inherit !default;
 $panel_content_color: DarkSlateGray !default;
+$panel_content_border_style: solid;
+
 // footer
 $panel_footer_backgroundcolor: $panel_content_backgroundcolor !default;
 $panel_footer_color: $panel_content_color !default;
 
-$panel_margin_right : 0px;
-$panel_margin_left : 0px;
-
-$panel_padding_bottom: 0px;
-$panel_box_shadow:none;
 
 
 
+// ------------------------------------------------------------------------ Main
+$main_margin_left: 10px;
+$main_margin_right: 10px;
 
+// ----------------------------------- header
+$_main_header_backgroundcolor: inherit;
+$_main_header_margin_bottom: 20px;
+
+// -------------------- header titre
+$_main_header_titre_color: inherit;
+$_main_header_titre_font_size: 1.5rem;
+
+// ----------------------------------- Nav
+$_main_nav_margin_bottom: 20px;
+
+
+
+// // ------------------------------------------------------------------------ Header
+// $-header_titre_margin_left: 0;
+// $-header_titre_margin_right: 0;
+
+// // ------------------------------------------------------------------------ Titre
+// $_titre_text_align: center;
+
+// ------------------------------------------------------------------------ Band
+$_band_height: 20px;
 
 //11:12
 // Body
@@ -69,8 +102,7 @@ $header-height: 50px;
 
 
 
-
-// ------------------------ Bootstrap modifiable
+// ------------------------------------------------------------------------ Bootstrap modifiable
 $white: #fff;
 $gray-100: #f8f9fa;
 $gray-200: #e9ecef;

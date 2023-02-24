@@ -1,3 +1,5 @@
+// ------------------------------------------------------------------------ Def
+
 // =============================== Media querys
 $breakpoints: (
 	"sm": 576px,
@@ -47,57 +49,58 @@ $breakpoints: (
 
 // =============================== Largeur
 
-%sb-w {
+%§_w {
 	@include media-max("md") {
 		width: 100%;
 	}
 }
 
-.sb-w-100 {
+.§_w_100 {
 	width: 100px;
-	@extend %sb-w;
+	@extend %§_w;
 }
 
-.sb-w-200 {
+.§_w_200 {
 	width: 200px;
-	@extend %sb-w;
+	@extend %§_w;
 }
 
-.sb-w-300 {
+.§_w_300 {
 	width: 300px;
-	@extend %sb-w;
+	@extend %§_w;
 }
 
-.sb-w-400 {
+.§_w_400 {
 	width: 400px;
-	@extend %sb-w;
+	@extend %§_w;
 }
 
-.sb-w-500 {
+.§_w_500 {
 	width: 500px;
-	@extend %sb-w;
+	@extend %§_w;
 }
 
-.sb-w-600 {
+.§_w_600 {
 	width: 600px;
-	@extend %sb-w;
+    // max-width: 100%;
+	@extend %§_w;
 }
 
-.sb-w-700 {
+.§_w_700 {
 	width: 700px;
-	@extend %sb-w;
+	@extend %§_w;
 }
 
-.sb-w-800 {
+.§_w_800 {
 	width: 800px;
-	@extend %sb-w;
+	@extend %§_w;
 }
 
-.sb-w-900 {
+.§_w_900 {
 	width: 900px;
-	@extend %sb-w;
+	@extend %§_w;
 }
 
-.sb-w-100pourcent {
+.§_w_100pourcent {
 	width: 100%;
 }

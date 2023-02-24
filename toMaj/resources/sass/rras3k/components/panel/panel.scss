@@ -1,94 +1,107 @@
-// panel
+// ------------------------------------------------------------------------ Panel
 
 .§_panel_group {
-	display: flex;
-	justify-content: space-evenly;
+    display: flex;
+    justify-content: space-evenly;
 
-	@include media-max("md") {
-		display: block;
-	}
+    @include media-max("md") {
+        display: block;
+    }
 }
 
 .§_panel {
-	background: $panel_background;
-	border-color: $panel_border_color;
-	color: $panel_color;
-	border-style: solid;
-	border-width: 1px;
-	border-radius: $panel_border_radius;
-	margin-right: $panel_margin_right;
-	margin-left: $panel_margin_left;
-	vertical-align: top;
-	padding-bottom: $panel_padding_bottom;
-	box-shadow: $panel_box_shadow;
+    background: $panel_background;
+    border-color: $panel_border_color;
+    color: $panel_color;
 
-	&>div:last-child {
-		border-style: solid;
-		border-color: $panel_border_color;
-		border-bottom-left-radius: $panel_border_radius;
-		border-bottom-right-radius: $panel_border_radius;
-	}
+    border-style: $panel_content_border_style;
+    border-width: $panel_border_width;
+    border-radius: $panel_border_radius;
 
-	&>div:first-child {
-		border-style: solid;
-		border-color: $panel_border_color;
-		border-top-left-radius: $panel_border_radius;
-		border-top-right-radius: $panel_border_radius;
-	}
+    margin-right: $panel_margin_right;
+    margin-left: $panel_margin_left;
 
-	@include media-max("md") {
-		width: 100%;
-	}
+    vertical-align: top;
+    padding-bottom: $panel_padding_bottom;
+    box-shadow: $panel_box_shadow;
 
-	& .row {
-		margin-top: 0.4rem;
-		--bs-gutter-x: 0;
-	}
-}
+    // &>div:last-child {
+    //     border-style: $panel_content_border_style;
+    //     border-color: $panel_border_color;
+    //     border-bottom-left-radius: $panel_border_radius;
+    //     border-bottom-right-radius: $panel_border_radius;
+    // }
 
-.panel-header {
-	background: $panel_header_backgroundcolor;
-	color: $panel_header_color;
-	text-align: center;
-	height: 50px;
-	margin-top: 0px;
-	font-size: xx-large;
-}
+    // &>div:first-child {
+    //     border-style: $panel_content_border_style;
+    //     border-color: $panel_border_color;
+    //     border-top-left-radius: $panel_border_radius;
+    //     border-top-right-radius: $panel_border_radius;
+    // }
+
+    & .clearfix {
+        border-style: none !important;
+        border-bottom-left-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+    }
+
+    @include media-max("md") {
+        width: 100%;
+        border-radius: 0;
+        border-left: 0;
+        border-right: 0;
+
+    }
+
+    & .row {
+        margin-top: 0.4rem;
+        --bs-gutter-x: 0;
+    }
+
+    & .§_header {
+        background: $panel_header_backgroundcolor;
+        color: $panel_header_color;
+        text-align: center;
+        height: 50px;
+        margin-top: 0px;
+        font-size: xx-large;
+    }
 
 
-.panel-rubrique {
-	height: 30px;
-	padding: 5px;
-	padding-left: 10px;
-	padding-right: 10px;
-	color: $panel_rubrique_color;
-	text-align: start;
-	background: $panel_rubrique_backgroundcolor;
-	border-style: solid;
-	border-color: $panel_border_color;
-	border-left-width: 0;
-	border-right-width: 0;
-	border-top-width: 1px;
-	border-bottom-width: 1px;
-}
+    & .§_rubrique {
+        height: 30px;
+        padding: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        color: $panel_rubrique_color;
+        text-align: start;
+        background: $panel_rubrique_backgroundcolor;
+        border-style: solid;
+        border-color: $panel_border_color;
+        border-left-width: 0;
+        border-right-width: 0;
+        border-top-width: 1px;
+        border-bottom-width: 1px;
+    }
 
-.panel-content {
-	padding-left: 10px;
-	padding-right: 10px;
-	text-align: start;
-	background: $panel_content_backgroundcolor;
-	color: $panel_content_color;
-	border-style: solid;
-	border-color: $panel_border_color;
-	border-left-width: 0;
-	border-right-width: 0;
-	border-top-width: 1px;
-	border-bottom-width: 1px;
-}
+    & .§_content {
+        padding-left: 10px;
+        padding-right: 10px;
+        text-align: start;
+        background: $panel_content_backgroundcolor;
+        color: $panel_content_color;
+        // border-style: $panel_content_border_style;
+        // border-color: $panel_border_color;
+        // border-left-width: 0;
+        // border-right-width: 0;
+        // border-top-width: 1px;
+        // border-bottom-width: 1px;
+    }
 
-.panel-footer {
-	padding: 10px;
-	text-align: center;
-	background: $panel_footer_backgroundcolor;
-	color: $panel_footer_color;
+    & .§_footer {
+        padding: 10px;
+        text-align: center;
+        background: $panel_footer_backgroundcolor;
+        color: $panel_footer_color;
+    }
 }
