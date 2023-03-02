@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\DB;
 
 class Core
 {
-    const BUTTON_TYPE_AJOUT = 1;
-    const BUTTON_TYPE_ENREGISTRER = 2;
-    const BUTTON_TYPE_ANNULER = 3;
-    const BUTTON_TYPE_SUPPRIMER = 4;
+    private $BUTTON_TYPE_AJOUT = 1;
+    private $BUTTON_TYPE_ENREGISTRER = 2;
+    private $BUTTON_TYPE_ANNULER = 3;
+    private $BUTTON_TYPE_SUPPRIMER = 4;
 
     private $header_barre = [];
     private $menu = [];
@@ -32,6 +32,14 @@ class Core
         $this->userRoles = RoleUser::liste();
         // dd($this->roles);
 
+    }
+
+
+    public function getConst($constante){
+        return $this->$constante;
+    }
+    public function getEntites(){
+        return $this->entites;
     }
 
     /**
@@ -55,7 +63,8 @@ class Core
         $this->menuCheck();
     }
 
-    private function menuCheck(){
+    private function menuCheck()
+    {
         Menu::check($this->userRoles);
     }
 
@@ -109,6 +118,24 @@ class Core
         return  $this->entites[$this->entite]['view']['routeNames'][$cible];
     }
 
+    /**
+     *
+     * @param
+     * @return
+     */
+    public function button_getLabel($id)
+    {
+        return isset($this->entites[$this->entite]['view']['buttons']['id']['label']) ? $this->entites[$this->entite]['view']['buttons']['id']['label'] : '';
+    }
+    /**
+     *
+     * @param
+     * @return
+     */
+    public function button_getRouteName($id)
+    {
+        return isset($this->entites[$this->entite]['view']['buttons'][$id]['routeName']) ? $this->entites[$this->entite]['view']['buttons'][$id]['routeName'] : '';
+    }
     // ------------------------------------------------------- ENTITES
 
     /**
@@ -131,12 +158,13 @@ class Core
         $this->entites[$this->entite]['view']['buttons'][$infos['id']] = $infos;
     }
 
+
     /**
      *
      * @param
      * @return
      */
-    public function setRoute($cible = 'grille', $route)
+    public function route_add($cible = 'grille', $route)
     {
         $this->entites[$this->entite]['view']['routes'][$cible] = $route;
     }
@@ -145,7 +173,7 @@ class Core
      * @param
      * @return
      */
-    public function setRouteName($cible = 'grille', $routeName)
+    public function routeName_add($cible = 'grille', $routeName)
     {
         $this->entites[$this->entite]['view']['routeNames'][$cible] = $routeName;
     }
@@ -160,17 +188,122 @@ class Core
         $this->entites[$this->entite]['paras'] = $paras;
     }
 
+
+    /**
+     *
+     *
+     * @param
+     * @return
+     */
+    public function form_setIsCreate($isCreate)
+    {
+        $this->entites[$this->entite]['form']['isCreate'] = $isCreate;
+    }
+    /**
+     *
+     *
+     * @param
+     * @return
+     */
+    public function form_isCreate()
+    {
+       return $this->entites[$this->entite]['form']['isCreate'] ;
+    }
+
     /**
      *
      * @param
      * @return
      */
-    public function isCreate($bool)
+    public function data_setList($listNom, $listData)
     {
-        $this->entites[$this->entite]['view']['is_create'] = $bool;
+        $this->entites[$this->entite]['lists'][$listNom] = $listData;
     }
 
-    // ---
+    /**
+     *
+     * @param
+     * @return
+     */
+    public function data_getList($nom)
+    {
+        return isset($this->entites[$this->entite]['lists'][$nom]) ? $this->entites[$this->entite]['lists'][$nom] : null;
+    }
+
+    /**
+     *
+     *
+     * @param
+     * @return
+     */
+    public function form_setHiddenValues($hiddens)
+    {
+        $this->entites[$this->entite]['form']['hiddens'] = $hiddens;
+    }
+
+    /**
+     *
+     *
+     * @param
+     * @return
+     */
+    public function form_getHiddenValues()
+    {
+
+        return isset($this->entites[$this->entite]['form']['hiddens']) ? $this->entites[$this->entite]['form']['hiddens'] : null;
+    }
+
+
+    /**
+     *
+     *
+     * @param
+     * @return
+     */
+    public function form_buildData()
+    {
+        $ret = [];
+        $table = $this->getTablePrincipale();
+        $colomns = DB::select("SELECT COLUMN_NAME,COLUMN_DEFAULT,COLUMN_COMMENT FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '" . env('DB_DATABASE') . "' AND TABLE_NAME = '" . $table . "' ORDER BY ORDINAL_POSITION");
+        foreach ($colomns as $ind => $column) {
+            $ret[$column->COLUMN_NAME] = $column->COLUMN_DEFAULT;
+        }
+        $this->form_setData($ret);
+    }
+
+
+
+    /**
+     *
+     * @return
+     */
+    public function form_setData($list)
+    {
+        // dd($list);
+        $ret = [];
+        if ($list != null) {
+
+            $list = is_array($list) ? $list : $list->toArray();
+            if ($list) {
+                foreach ($list as $key => $elt) {
+                    $ret[$key] = old($key) ? old($key) : $elt;
+                }
+            }
+        } else {
+            dd("erreur");
+        }
+        // if (!isset($this->paras[$this->entree]['form'])) $this->paras[$this->entree]['form'] = [];
+        $this->entites[$this->entite]['form']['datas'] = $ret;
+    }
+
+/**
+     *
+     * @return
+     */
+    public function form_getData($champNom){
+        return isset($this->entites[$this->entite]['form']['datas'][$champNom]) ? $this->entites[$this->entite]['form']['datas'][$champNom] : null;
+    }
+
     /**
      *
      * @param
@@ -178,10 +311,18 @@ class Core
      */
     public function processForView()
     {
-        foreach ($this->entites as $entite => $entites) {
-        }
+        // foreach ($this->entites as $entite => $entites) {
+        // }
+        return $this->entites;
+
     }
 
+    // -----------------------
+    private function getTablePrincipale()
+    {
+        // return $this->paras[$this->entite]['table_principale'];
+        return $this->entites[$this->entite]['paras']['table_principale'];
+    }
     /**
      *
      * @param

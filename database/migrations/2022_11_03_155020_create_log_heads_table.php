@@ -21,7 +21,6 @@ return new class extends Migration
             $table->integer('num_error')->nullable();
             $table->foreignId('log_type_id');
             $table->foreignId('user_id');
-            $table->boolean('favori')->default(0);
             $table->timestamps();
         });
     }

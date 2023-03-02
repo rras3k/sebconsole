@@ -73,14 +73,14 @@
         Core::setTitre("{{ $data['this']->props['label'] }}");
 
         // Création boutons
-        Core::button_add(['id' => "Ajouter {{ $data['this']->props['label'] }}", 'label' => "Ajouter {{ $data['this']->props['label'] }}", 'route' => route('{{ $data['this']->routeName_create }}'), 'type' => Core::BUTTON_TYPE_AJOUT,'icon' => '', "class" => ""]);
+        Core::button_add(['id' => "ajouter", 'label' => "Ajouter {{ $data['this']->props['label'] }}", 'routeName' => '{{ $data['this']->routeName_create }}', 'type' => Core::getConst('BUTTON_TYPE_AJOUT'),'icon' => '', "class" => ""]);
 
         // Route pour la grille
-        Core::setRoute('grille', route('{{ $data['this']->routeName_listeBt }}'));
+        Core::routeName_add('grille', '{{ $data['this']->routeName_listeBt }}');
 
         // Nom des routes destroy, create ...
-        Core::setRouteName('destroy', '{{$data["this"]->routeName_destroy}}');
-        Core::setRouteName('edit', '{{$data["this"]->routeName_edit}}');
+        Core::routeName_add('destroy', '{{$data["this"]->routeName_destroy}}');
+        Core::routeName_add('edit', '{{$data["this"]->routeName_edit}}');
 
         // Paras
         Core::setParas($this->getPara());
@@ -106,29 +106,42 @@
      */
     public function edit( $modelId)
     {
-        //
+        // initialisation avec le nom de l'entité par défaut: "main"
+        Core::init();
+
+        // créationdu tableau pour le passage des paramètres annexes
         $data = array();
+
+        // instanciation du modele
 		$model= {{ $data['this']->props['model'] }}::find($modelId);
 
-        {{-- $this->page_setTitre('{{$data['this']->props['label']}}: Edition de '.$model->{{$data['this']->props['champStr']}}); --}}
+        // Titre de la page
+        Core::setTitre("{{$data['this']->props['label']}}: Edition de ".$model->{{$data['this']->props['champStr']}});
 
-		$data['label_titre'] = "{{$data['this']->props['label']}}: Edition de ".$model->{{$data['this']->props['champStr']}};
+        // Route pour update
+        Core::routeName_add('update', '{{$data['this']->routeName_update}}');
 
+        // Route pour update
+        Core::routeName_add('edit', '{{$data['this']->routeName_edit}}');
 
-
-        // $this->form_setHiddenValues([
+        // Core::form_setHiddenValues([
         //     'formulaire_id' => $formulaire->_id
         // ]);
 
 		@foreach ($data['this']->champs as $key => $value)
 		    @if($value['link']['enable'])
-	       		$this->data_setList('{{ $value['link']['table'] }}', {{ $value['link']['model'] }}::getList());
+	       		Core::data_setList('{{ $value['link']['table'] }}', {{ $value['link']['model'] }}::getList());
 			@endif
         @endforeach
 
-        $this->form_setIsCreate(false);
-        $this->form_setData($model);
-        $data['rras3k'] = $this->dataToView();
+        // Indique qu'on est en mode mise à jour
+        Core::form_setIsCreate(false);
+
+        // Passe les datas du modele pour les éditer
+        Core::form_setData($model);
+
+        // Process
+        Core::processForView();
 
         return view('{{$data['this']->callView_edit}}', compact('data'));
     }
@@ -167,6 +180,40 @@
         $model->save();
         return redirect(route('{{$data['this']->routeName_index}}'));
     }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+	{
+        // initialisation avec le nom de l'entité par défaut: "main"
+        Core::init();
+
+        // créationdu tableau pour le passage des paramètres annexes
+        $data = array();
+
+        // Titre de la page
+        Core::setTitre('Création {{ $data['this']->props['model'] }}');
+
+        // Route pour store
+        Core::routeName_add('store', '{{$data['this']->routeName_store}}');
+
+        // Indique qu'on est en mode création
+        Core::form_setIsCreate(true);
+
+		@foreach ($data['this']->champs as $key => $value)
+		    @if($value['link']['enable'])
+	       		Core::data_setList('{{ $value['link']['table'] }}', {{ $value['link']['model'] }}::getList());
+			@endif
+        @endforeach
+
+        return view('{{$data['this']->callView_edit}}', compact('data'));
+	}
+
 	/**
      * Update the specified resource in storage.
      *
@@ -176,7 +223,12 @@
      */
     public function store(Request $request)
     {
+        // initialisation avec le nom de l'entité par défaut: "main"
+        Core::init();
+
         // dd($request);
+
+        // Validation
         $validated = $request->validate([
 			@foreach ($data['this']->champs as $key => $value)
 			@php
@@ -217,27 +269,7 @@
         @endforeach
         ];
     }
-	/**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-	{
-        $data = array();
-		$data['label_titre'] = 'Création {{ $data['this']->props['model'] }}';
-        $this->form_setIsCreate(true);
-		@foreach ($data['this']->champs as $key => $value)
-		    @if($value['link']['enable'])
-	       		$this->data_setList('{{ $value['link']['table'] }}', {{ $value['link']['model'] }}::getList());
-			@endif
-        @endforeach
 
-        $data['rras3k'] = $this->dataToView();
-        return view('{{$data['this']->callView_edit}}', compact('data'));
-	}
 /**
      * Update the specified resource in storage.
      *

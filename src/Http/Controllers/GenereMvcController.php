@@ -5,17 +5,25 @@ namespace Rras3k\Sebconsole\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
-use Rras3k\Sebconsole\Lib\GeneratorMvc;
+use Rras3k\Sebconsole\Lib\Mvc;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Rras3k\Sebconsole\Http\Controllers\SbController;
+use Rras3k\SebconsoleRoot\facades\Core;
+
+
 
 
 class GenereMvcController extends Controller
 {
     //
-
+    public function getPara()
+    {
+    }
     public function show()
     {
+        Core::init();
+
         $data = [];
         View::addNamespace('sebconsoleviews', 'Rras3k/SebconsoleRoot/ressources/views');
         $data['tables'] = $this->getTables();
@@ -23,7 +31,7 @@ class GenereMvcController extends Controller
 
         if (isset($_GET['table']) && $_GET['table']) {
             $data['table_select'] = $_GET['table'];
-            $genMvc = new GeneratorMvc();
+            $genMvc = new Mvc();
             $data['infoChamps'] = $genMvc->analyseTable($_GET['table']);
             $data['infoEntite'] = $genMvc->getInfoEntiteDefault($_GET['table']);
         }
@@ -34,6 +42,7 @@ class GenereMvcController extends Controller
     public function getTables()
     {
         $ret = [];
+
         $champName = 'Tables_in_' . env('DB_DATABASE');
         $tables = DB::select("show tables");
         foreach ($tables as $ind => $table) {
@@ -50,10 +59,12 @@ class GenereMvcController extends Controller
     }
     public function run(Request $request)
     {
+        Core::init();
+
         View::addNamespace('sebconsoleviews', 'Rras3k/SebconsoleRoot/ressources/views');
         $data = [];
 // dump($request);
-        $genMvc = new GeneratorMvc();
+        $genMvc = new Mvc();
         $genMvc->initTable($request->props['table']);
         // dd($request->props);
         $genMvc->setProps($request->props);
@@ -64,7 +75,7 @@ class GenereMvcController extends Controller
 
     public function check()
     {
-        $genMvc = new GeneratorMvc();
+        $genMvc = new Mvc();
         $genMvc->setProps([
             'model' => $_GET['model'],
             'table' => $_GET['table'],

@@ -54,7 +54,7 @@ use Rras3k\SebconsoleRoot\facades\RapportSimple;
 
 
 
-class GeneratorMvc
+class Mvc
 {
     const MODE_CREATION_FICHIER = 1;
     const MODE_CREATION_ = 1;
@@ -228,7 +228,6 @@ class GeneratorMvc
     {
         if (
             $champNom == 'is_enable'  ||
-            $champNom == 'date_favori'  ||
             $champNom == 'id' ||
             $champNom == 'created_at' ||
             $champNom == 'updated_at'

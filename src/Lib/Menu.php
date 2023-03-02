@@ -14,7 +14,7 @@ use App\Models\Role;
 class Menu
 {
     private $menu = [];
-    private $prefix =null;
+    private $prefix = null;
     private $props = [];
     private $droitUser = [];
     private $menuInfos = [];
@@ -70,8 +70,18 @@ class Menu
             }
 
             // A SUPPRIMER après test -> génération forcée
-            $isGeneration = $this->menuInfos[self::MENU_TO_SHOW_LISTE_ICONS]["is_toGenerate"] = true;
+            //$isGeneration = $this->menuInfos[self::MENU_TO_SHOW_LISTE_ICONS]["is_toGenerate"] = true;
 
+        }
+
+        // pour le menu vertical
+        if ($this->menuInfos[self::MENU_TO_SHOW_VERTICAL]["is_enable"]) {
+            if (!Storage::exists($this->menuInfos[self::MENU_TO_SHOW_VERTICAL]["pathFile"])) {
+                $isGeneration = $this->menuInfos[self::MENU_TO_SHOW_VERTICAL]["is_toGenerate"] = true;
+            }
+
+            // A SUPPRIMER après test -> génération forcée
+            $isGeneration = $this->menuInfos[self::MENU_TO_SHOW_VERTICAL]["is_toGenerate"] = true;
         }
 
         // génération si besoin
@@ -81,8 +91,12 @@ class Menu
             $this->initIsEnable($this->menu);
 
             if ($this->menuInfos[self::MENU_TO_SHOW_LISTE_ICONS]["is_toGenerate"]) {
-                $fct = 'genereMenu_'. $this->menuInfos[self::MENU_TO_SHOW_LISTE_ICONS]["view_name"];
+                $fct = 'genereMenu_' . $this->menuInfos[self::MENU_TO_SHOW_LISTE_ICONS]["view_name"];
                 $this->$fct($this->menuInfos[self::MENU_TO_SHOW_LISTE_ICONS]["view_name"], $this->menuInfos[self::MENU_TO_SHOW_LISTE_ICONS]["pathFile"]);
+            }
+            if ($this->menuInfos[self::MENU_TO_SHOW_VERTICAL]["is_toGenerate"]) {
+                $fct = 'genereMenu_' . $this->menuInfos[self::MENU_TO_SHOW_VERTICAL]["view_name"];
+                $this->$fct($this->menuInfos[self::MENU_TO_SHOW_VERTICAL]["view_name"], $this->menuInfos[self::MENU_TO_SHOW_VERTICAL]["pathFile"]);
             }
         }
     }
@@ -98,47 +112,103 @@ class Menu
 
 
 
-    // ----------------------------------------------------------------- Appel Menu
-    public function getMenu_ListeIcons_pathFile(){
-        return storage_path('app').'/'.$this->menuInfos[self::MENU_TO_SHOW_LISTE_ICONS]["pathFile"];
 
+    // ----------------------------------------------------------------- Appel Menu
+    public function getMenu_listeIcons_pathFile()
+    {
+        return storage_path('app') . '/' . $this->menuInfos[self::MENU_TO_SHOW_LISTE_ICONS]["pathFile"];
+    }
+    public function getMenu_vertical_pathFile()
+    {
+        return storage_path('app') . '/' . $this->menuInfos[self::MENU_TO_SHOW_VERTICAL]["pathFile"];
     }
 
     // ----------------------------------------------------------------- Génération Menu
 
-    // ---- liste_icons_1
-    private function genereMenu_liste_icons_1($viewName, $pathFile){
+    // ---- vertical_1
+    private function genereMenu_vertical_1($viewName, $pathFile)
+    {
+        // dd($viewName, $pathFile);
+        $codeHtml = '';
+        $this->genereMenu_vertical_1_prepare($this->menu, $codeHtml);
+        $codeHtml = '<div class="§_vertical_1">' . $codeHtml . '</div>';
+
+        Storage::disk('local')->put($pathFile, $codeHtml);
+    }
+    private function genereMenu_vertical_1_prepare($menu, &$codeHtml)
+    {
+// dd($menu);
+        $this->genereMenu_vertical_1_recursif($menu, $codeHtml);
+        // foreach ($menu as $ind => $elts) {
+        //     if ($elts['is_enable']) {
+        //         $codeHtml .= $codeHtml ? '</div>' : '';
+        //         $codeHtml .= '<div><span>' . $elts['label'] . '</span>';
+        //         if (isset($elts['items']) && $elts['items']) $this->genereMenu_vertical_1_recursif($elts['items'], $codeHtml);
+        //     }
+        // }
+        // $codeHtml .= $codeHtml ? '</div>' : '';
+    }
+    private function genereMenu_vertical_1_recursif($menu, &$codeHtml)
+    {
+        foreach ($menu as $ind => $elts) {
+            if ($elts['is_enable']) {
+
+                if (isset($elts['route']) && $elts['route']) {
+                    $codeHtml .= '<a href="' . route($elts['route']) . '">';
+                    if (isset($elts['icon']) && $elts['icon']) $codeHtml .= '<i class="' . $elts['icon'] . '"></i>';
+                    if (isset($elts['label']) && $elts['label']) $codeHtml .=  $elts['label'];
+                    $codeHtml .= '</a>';
+                }
+
+                if (isset($elts['items']) && $elts['items']) $this->genereMenu_vertical_1_recursif($elts['items'], $codeHtml);
+            }
+        }
+    }
+
+
+
+    // ---- Liste icon : liste_icons_1
+    private function genereMenu_liste_icons_1($viewName, $pathFile)
+    {
         // dd($viewName, $pathFile);
         $codeHtml = '';
         $this->genereMenu_liste_icon_1_prepare($this->menu, $codeHtml);
-        $codeHtml = '<div class="§_menu_liste_icons_1">'. $codeHtml.'</div>';
+        $codeHtml = '<div class="§_menu_liste_icons_1">' . $codeHtml . '</div>';
 
         Storage::disk('local')->put($pathFile, $codeHtml);
-
     }
-    private function genereMenu_liste_icon_1_prepare($menu, &$codeHtml){
+    private function genereMenu_liste_icon_1_prepare($menu, &$codeHtml)
+    {
 
         foreach ($menu as $ind => $elts) {
             if ($elts['is_enable']) {
                 $codeHtml .= $codeHtml ? '</div>' : '';
-                $codeHtml .= '<div><span>' . $elts['label'].'</span>';
-                if (isset($elts['items']) && $elts['items']) $this->genereMenu_liste_icon_1_recursif($elts['items'],$codeHtml);
+                $codeHtml .= '<div><span>' . $elts['label'] . '</span>';
+                if (isset($elts['items']) && $elts['items']) $this->genereMenu_liste_icon_1_recursif($elts['items'], $codeHtml);
             }
         }
         $codeHtml .= $codeHtml ? '</div>' : '';
-
     }
-    private function genereMenu_liste_icon_1_recursif($menu, &$codeHtml){
+    private function genereMenu_liste_icon_1_recursif($menu, &$codeHtml)
+    {
         foreach ($menu as $ind => $elts) {
             if ($elts['is_enable']) {
-                if(isset($elts['route']) && $elts['route']) $codeHtml.= '<a href="'.route($elts['route']).'">';
-                if(isset($elts['icon']) && $elts['icon']) $codeHtml.='<i class="' . $elts['icon'] . '"></i></a>';
-                if(isset($elts['route']) && $elts['route']) $codeHtml.= '</a>';
+                if (isset($elts['route']) && $elts['route']) $codeHtml .= '<a href="' . route($elts['route']) . '">';
+                if (isset($elts['icon']) && $elts['icon']) $codeHtml .= '<i class="' . $elts['icon'] . '"></i></a>';
+                if (isset($elts['route']) && $elts['route']) $codeHtml .= '</a>';
 
                 if (isset($elts['items']) && $elts['items']) $this->genereMenu_liste_icon_1_recursif($elts['items'], $codeHtml);
             }
         }
     }
+
+
+
+
+
+
+
+
 
 
 

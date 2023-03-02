@@ -1,0 +1,12 @@
+.§_vertical_1{
+    display: flex;
+    gap:10px;
+        flex-direction: column;
+        padding: 25px;
+    color:white;
+    & a{
+        color: white;
+        display: flex;
+            gap: 10px;
+    }
+}

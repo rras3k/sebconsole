@@ -3,8 +3,8 @@
 // ViewData::setEntites($data['rras3k']);
 ?>
 <{{$data['php']}}
-use Rras3k\SebconsoleRoot\facades\ViewData;
-ViewData::setEntites($data['rras3k']);
+use Rras3k\SebconsoleRoot\facades\Core;
+Core::setEntite();
 ?>
 
 {{ '@' }}extends('layouts.console')
@@ -17,12 +17,12 @@ ViewData::setEntites($data['rras3k']);
 <div class="§_main">
 
     <div class="§_header">
-        <div class="§_titre">{!! '{' !!}{ $data['label_titre'] }}</div>
+        <div class="§_titre">{!! '{' !!}{ Core::getTitre() }}</div>
     </div>
 
     <div class="§_nav">
-        {!! '<' !!}x-sebconsoleviews::composants.breadcrumb :datas="ViewData::breadcrumb_get()" />
-        <a class="btn btn-primary" href="{!! '{' !!}{ $data['route_bouton_creer'] }}" role="button">Ajouter {{ $data['this']->props['label'] }}</a>
+        {{-- {!! '<' !!}x-sebconsoleviews::composants.breadcrumb :datas="ViewData::breadcrumb_get()" /> --}}
+        <a class="btn btn-primary" href="{!! '{' !!}{  route(Core::button_getRouteName('ajouter'))  }}" role="button">Ajouter {!! '{' !!}{ Core::button_getLabel('ajouter') }}</a>
     </div>
 
     <div class="§_panel">
@@ -31,11 +31,11 @@ ViewData::setEntites($data['rras3k']);
                 data-show-toggle="true" data-show-columns-toggle-all="true" data-show-columns="true"
                 data-buttons="buttons" data-side-pagination="server" data-row-style="rowStyle" data-pagination="true"
                 data-unique-id="id" data-mobile-responsive="false" data-locale="fr-FR" data-toggle="table"
-                data-search="true" data-show-refresh="true" data-url="{!! '{' !!}{$data['route_bt']}}">
+                data-search="true" data-show-refresh="true" data-url="{!! '{' !!}{route(Core::getRouteName('grille'))}}">
                 <thead>
                     <tr>
-                        <th data-halign="center" data-field="is_favori" data-width="10"
-                                data-align="center" data-sortable="true" data-formatter="is_favori_Formatter">Favori</th>
+                        {{-- <th data-halign="center" data-field="is_favori" data-width="10"
+                                data-align="center" data-sortable="true" data-formatter="is_favori_Formatter">Favori</th> --}}
                         @foreach ($data['this']->champs as $key => $value)
                             @php
                             if ($key == 'is_favori') continue;

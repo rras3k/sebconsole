@@ -140,6 +140,7 @@ button.§_btn {
     &>div{
         display: flex;
         gap: 10px;
+                flex-wrap: wrap;
     }
     &>div>span{
         color:white;

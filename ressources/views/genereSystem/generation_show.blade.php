@@ -2,9 +2,7 @@
 // dd($data);
 function getFunctionName($champName)
 {
-    if ($champName == 'is_favori') {
-        return 'favori';
-    }
+
     return $champName;
 }
 ?>
