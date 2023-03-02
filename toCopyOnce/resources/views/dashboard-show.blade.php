@@ -1,6 +1,6 @@
 <?php
-use Rras3k\SebconsoleRoot\facades\ViewData;
-ViewData::setEntites($data['rras3k']);
+use Rras3k\SebconsoleRoot\facades\Core;
+Core::setEntite();
 ?>
 @extends('layouts.console')
 
@@ -8,30 +8,16 @@ ViewData::setEntites($data['rras3k']);
 @endsection
 
 @section('content')
-    <div class="§_page_header">
-        <div class="zmh-nav">
-            <x-sebconsoleviews::nav.breadcombre :liste="ViewData::nav_getPage()" />
-        </div>
-        <div class="§_titre">{{ ViewData::page_getTitre() }}</div>
+    <div class="§_main">
 
-        <div class="zmh-menus">
-            <x-sebconsoleviews::menus.page :liste="ViewData::menuPage_get()"></x-sebconsoleviews::menus.page>
-        </div>
-
-    </div>
-
-    </div>
-
-    <div class="§_content">
-        <div class="panel2">
-
+        <div class="§_header">
+            <div class="§_titre">{{ Core::getTitre() }}</div>
         </div>
     </div>
 
-    <script>
-    </script>
+    <script></script>
 @endsection
 
 @section('foot-link')
-    @include('sebconsoleviews::include.load-bootstrap-table')
+{{-- @include('sebconsoleviews::include.load-bootstrap-table') --}}
 @endsection

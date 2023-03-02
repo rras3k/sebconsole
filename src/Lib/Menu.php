@@ -151,7 +151,7 @@ class Menu
     private function genereMenu_vertical_1_recursif($menu, &$codeHtml)
     {
         foreach ($menu as $ind => $elts) {
-            if ($elts['is_enable']) {
+            if (ISSET($elts['is_enable']) && $elts['is_enable']) {
 
                 if (isset($elts['route']) && $elts['route']) {
                     $codeHtml .= '<a href="' . route($elts['route']) . '">';

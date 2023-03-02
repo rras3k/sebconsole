@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Rras3k\Sebconsole\Http\Controllers\SbController;
+use Rras3k\SebconsoleRoot\facades\Core;
 
 
-class DashboardController extends SbController
+
+
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,13 +17,16 @@ class DashboardController extends SbController
     public function show()
     {
         //
-        $data=[];
-        $this->page_setTitre('Dashoard');
-        $data['rras3k'] = $this->dataToView();
+        $data = [];
+        // initialisation avec le nom de l'entité par défaut: "main"
+        Core::init();
+
+        // Titre
+        Core::setTitre("dashBoard");
 
         return view('dashboard-show', compact('data'));
-
     }
-    public function getPara(){}
-
+    public function getPara()
+    {
+    }
 }
