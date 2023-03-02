@@ -212,7 +212,7 @@ class Core
 
     /**
      *
-     * @param
+     *  @param
      * @return
      */
     public function data_setList($listNom, $listData)
