@@ -181,7 +181,7 @@ class Menu
     {
 
         foreach ($menu as $ind => $elts) {
-            if ($elts['is_enable']) {
+            if (isset($elts['is_enable']) && $elts['is_enable']) {
                 $codeHtml .= $codeHtml ? '</div>' : '';
                 $codeHtml .= '<div><span>' . $elts['label'] . '</span>';
                 if (isset($elts['items']) && $elts['items']) $this->genereMenu_liste_icon_1_recursif($elts['items'], $codeHtml);
@@ -192,7 +192,7 @@ class Menu
     private function genereMenu_liste_icon_1_recursif($menu, &$codeHtml)
     {
         foreach ($menu as $ind => $elts) {
-            if ($elts['is_enable']) {
+            if (isset($elts['is_enable']) && $elts['is_enable']) {
                 if (isset($elts['route']) && $elts['route']) $codeHtml .= '<a href="' . route($elts['route']) . '">';
                 if (isset($elts['icon']) && $elts['icon']) $codeHtml .= '<i class="' . $elts['icon'] . '"></i></a>';
                 if (isset($elts['route']) && $elts['route']) $codeHtml .= '</a>';
