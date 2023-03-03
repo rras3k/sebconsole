@@ -2,12 +2,13 @@
 
 namespace Rras3k\Sebconsole\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Rras3k\Sebconsole\Http\Controllers\SbController;
 use Illuminate\Support\Facades\View;
+use Rras3k\SebconsoleRoot\facades\Core;
 
 
-class PagePasgitController extends SbController
+class PagePasgitController extends Controller
 {
     public function getPara()
     {
@@ -19,28 +20,30 @@ class PagePasgitController extends SbController
      */
     public function index()
     {
+        Core::init();
+
         View::addNamespace('sebconsoleviews', 'Rras3k/SebconsoleRoot/ressources/views');
 
         $data = array();
 
         $data['pages'] = $this->getListePagesPasgit();
         // $data['pages'] = [ 'page-1','page-2'];
-            
-        
+
+
         return view('sebconsoleviews::page-pasgit', compact('data'));
 
     }
     private function getListePagesPasgit(){
         $ret = [];
         $path = resource_path('views/page-dev');
-        
+
         $files = scandir($path);
         foreach ($files as $key => $value) {
             if (strlen($value)>10 && ($ind=stripos($value,'.blade.php'))!==false)    {
                 $ret[] = substr($value,0, $ind);
             }
         }
-        
+
 
         return $ret;
 

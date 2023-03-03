@@ -1,4 +1,4 @@
-@extends('sebconsoleviews::layouts.console')
+@extends('layouts.console')
 
 
 @section('head-link')
@@ -7,13 +7,10 @@
 @section('content')
     <div class="§_page_header">
         <div class="§_titre">Utilisateurs</div>
-        <div class=" menu_page-SB">
-            {{-- <x-menus.page :liste="$menuPage"></x-menus.page> --}}
-        </div>
     </div>
 
     <div class="§_content">
-        <div class="panel">
+        <div class="§_panel">
             <div class="row">
 				@foreach($data['pages'] as $key => $value)
 				<a href="{{asset('console/pages-pasgit/page/').'/'.$value}}">{{$value}}</a>

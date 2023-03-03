@@ -61,6 +61,7 @@ class Menu
     public function checkMenusForRoles($listeRole)
     {
         $isGeneration = false;
+        // $isGeneration = true;
 
 
         // pour le menu sous forme de liste d'icons
@@ -68,10 +69,6 @@ class Menu
             if (!Storage::exists($this->menuInfos[self::MENU_TO_SHOW_LISTE_ICONS]["pathFile"])) {
                 $isGeneration = $this->menuInfos[self::MENU_TO_SHOW_LISTE_ICONS]["is_toGenerate"] = true;
             }
-
-            // A SUPPRIMER après test -> génération forcée
-            //$isGeneration = $this->menuInfos[self::MENU_TO_SHOW_LISTE_ICONS]["is_toGenerate"] = true;
-
         }
 
         // pour le menu vertical
@@ -79,15 +76,13 @@ class Menu
             if (!Storage::exists($this->menuInfos[self::MENU_TO_SHOW_VERTICAL]["pathFile"])) {
                 $isGeneration = $this->menuInfos[self::MENU_TO_SHOW_VERTICAL]["is_toGenerate"] = true;
             }
-
-            // A SUPPRIMER après test -> génération forcée
-            $isGeneration = $this->menuInfos[self::MENU_TO_SHOW_VERTICAL]["is_toGenerate"] = true;
         }
 
         // génération si besoin
         if ($isGeneration) {
             $this->droitUser = $listeRole;
             $this->menu = config('sebconsole.menu');
+            // dd($this->menu);
             $this->initIsEnable($this->menu);
 
             if ($this->menuInfos[self::MENU_TO_SHOW_LISTE_ICONS]["is_toGenerate"]) {
@@ -111,7 +106,9 @@ class Menu
     }
 
 
-
+    public function delMenus(){
+        Storage::deleteDirectory(self::PATH_MENU);
+    }
 
     // ----------------------------------------------------------------- Appel Menu
     public function getMenu_listeIcons_pathFile()
