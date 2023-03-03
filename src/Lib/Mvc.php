@@ -115,7 +115,7 @@ class Mvc
         $this->genereModel();
         $this->genereController();
         $this->genereView();
-        $ret["toConfig"] = "[ 'rubrique' => 'Nouvel ajout', 'nom' => '" . $this->props['label'] . "', 'route' => '" . $this->routeName_index . "', 'icon' => 'fa-solid fa-city', 'droits'=> [Role::ADMIN]],";
+        $ret["toConfig"] = "[  'label' => '" . $this->props['label'] . "', 'route' => '" . $this->routeName_index . "', 'icon' => 'fa-solid fa-city', 'droits'=> [Role::ADMIN],'items' => []],";
 
         return $ret;
     }
