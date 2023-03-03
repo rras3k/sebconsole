@@ -22,7 +22,7 @@ Core::setEntite();
 
     <div class="§_nav">
         {{-- {!! '<' !!}x-sebconsoleviews::composants.breadcrumb :datas="ViewData::breadcrumb_get()" /> --}}
-        <a class="btn btn-primary" href="{!! '{' !!}{  route(Core::button_getRouteName('ajouter'))  }}" role="button">Ajouter {!! '{' !!}{ Core::button_getLabel('ajouter') }}</a>
+        <a class="btn btn-primary" href="{!! '{' !!}{  route(Core::button_getRouteName('ajouter'))  }}" role="button">{!! '{' !!}{ Core::button_getLabel('ajouter') }}</a>
     </div>
 
     <div class="§_panel">

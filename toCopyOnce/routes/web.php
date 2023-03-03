@@ -55,7 +55,12 @@ Route::group(
 );
 
 //-------------------------------  member1
-// Route::middleware(['auth', 'role:' . Role::MEMBRE_1])->group(function () {
-//     
-// });
+Route::group(
+    [
+        'namespace' => 'Rras3k\Sebconsole\Http\Controllers',
+        'middleware' => ['web', 'auth', 'role:' . Role::MEMBRE_1]
+    ],
+    function () {
+    }
+);
 

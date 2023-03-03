@@ -125,7 +125,7 @@ class Core
      */
     public function button_getLabel($id)
     {
-        return isset($this->entites[$this->entite]['view']['buttons']['id']['label']) ? $this->entites[$this->entite]['view']['buttons']['id']['label'] : '';
+        return isset($this->entites[$this->entite]['view']['buttons'][$id]['label']) ? $this->entites[$this->entite]['view']['buttons'][$id]['label'] : '';
     }
     /**
      *
