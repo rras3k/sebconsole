@@ -104,19 +104,24 @@ class Mvc
     public $callView_show;
 
 
-    public function genere($genereRoute = false)
+    public function genere($genereRoute = false, $genereOnlyModel = false)
     {
+        // dd($genereRoute, $genereOnlyModel);
         $ret = ["toConfig" => "", 'texte' => []];
         $this->setRouteName();
         $this->setFilesNames();
         $this->setCallViews();
         $this->setFunctionNameController();
-        if ($genereRoute) $this->genereRoute();
+        if (!$genereOnlyModel) {
+            if ($genereRoute) $this->genereRoute();
+        }
         $this->genereModel();
-        $this->genereController();
-        $this->genereView();
-        $ret["toConfig"] = "[  'label' => '" . $this->props['label'] . "', 'route' => '" . $this->routeName_index . "', 'icon' => 'fa-solid fa-city', 'droits'=> [Role::ADMIN],'items' => []],";
 
+        if (!$genereOnlyModel) {
+            $this->genereController();
+            $this->genereView();
+            $ret["toConfig"] = "[  'nom' => '" . $this->props['label'] . "', 'route' => '" . $this->routeName_index . "', 'icon' => 'fa-solid fa-city', 'droits'=> [Role::ADMIN]],";
+        }
         return $ret;
     }
     public function setProps($props)
@@ -284,12 +289,20 @@ class Mvc
         // return RapportSimple::test();
         $processOk = true;
         RapportSimple::addTitle("Vérification avant génération VMC");
+        RapportSimple::setMessageForBool("N'existe pas", "Existe");
 
         // RouteName
         // RapportSimple::add("Route", 3);
         // $isFileExists = file_exists($this->fileNameRoute);
         // $processOk = $processOk && !$isFileExists;
         // RapportSimple::add($this->fileNameRoute, 1, !$isFileExists);
+
+        // Model
+        RapportSimple::add("Modèles", 3);
+        $isFileExists = file_exists($this->filePathModel);
+        $processOk = $processOk && !$isFileExists;
+        RapportSimple::add($this->filePathModel, 1, !$isFileExists);
+
 
         // Controller
         RapportSimple::add("Controller", 3);

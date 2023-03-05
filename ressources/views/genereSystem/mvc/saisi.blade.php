@@ -1,6 +1,7 @@
 <?php
 // dd($data);
-function getFunctionName($champName){
+function getFunctionName($champName)
+{
     return $champName;
 }
 ?>
@@ -11,7 +12,7 @@ function getFunctionName($champName){
 
 @section('content')
 
-<div class="§_main">
+    <div class="§_main">
         <div class="§_header">
             <div class="§_titre">Génération VMC</div>
         </div>
@@ -26,7 +27,7 @@ function getFunctionName($champName){
                 {{-- Choix de la table --}}
                 <div style="text-align: center;">
                     <select id="selectId" name="select_table" style="font-size: 20px;width:300px;">
-                        <option value="" >Choisir une table</option>
+                        <option value="">Choisir une table</option>
 
                         @foreach ($data['tables'] as $key => $value)
                             @php $selected = ""; @endphp
@@ -42,6 +43,11 @@ function getFunctionName($champName){
                     name="genereVmc">
                     @csrf
                     @if (isset($data['infoEntite']['table']))
+                        <div>
+                            <input type="checkbox" id="genereOnlyModel" name="genereOnlyModel" value="1">
+                            <label for="genereOnlyModel">Ne générer que le modèle</label>
+                        </div>
+
                         <input type="hidden" id="table" name="props[table]"
                             value="{{ $data['infoEntite']['table'] }}" />
 
@@ -123,7 +129,7 @@ function getFunctionName($champName){
                                 </div>
                                 <div class="col-2 ligne-champ align-self-center">
                                     <input class="w-100" type="text" name="champs[{{ $value['name'] }}][form][label]"
-                                        value="{{ getFunctionName($value['name'])  }}" />
+                                        value="{{ getFunctionName($value['name']) }}" />
                                 </div>
                                 <div class="col-4 ligne-champ "></div>
                             </div>
@@ -151,7 +157,7 @@ function getFunctionName($champName){
     <style>
         .ligne-champ {
             /* background:rgb(245, 229, 10);
-                height:40px; */
+                    height:40px; */
         }
     </style>
 

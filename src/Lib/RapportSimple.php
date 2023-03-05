@@ -17,6 +17,9 @@ class RapportSimple
 
 	private $lignes = [];
 	private $titre = "";
+
+    private $message_bool_true = "Oui";
+    private $message_bool_false = "Non";
 	public  function test()
 	{
 		return "ppppp";
@@ -37,6 +40,12 @@ class RapportSimple
 	{
 		return $this->titre;
 	}
+
+    public function setMessageForBool($messageTrue, $messageFalse){
+        $this->message_bool_false = $messageFalse;
+        $this->message_bool_true = $messageTrue;
+
+    }
 
 	public function get()
 	{
@@ -61,7 +70,7 @@ class RapportSimple
 					break;
 			}
 
-			// Texte 
+			// Texte
 			$ret .= $value['ligne'];
 			// $ret .=' badge='.$value['badgeType'].' ';
 			$ret .= $finLigne;
@@ -70,11 +79,11 @@ class RapportSimple
 			if ($value['badgeType'] !== null) {
 				switch ($value['badgeType']) {
 					case self::BADGE_TYPE_ERROR:
-						$message = $value['message_badge'] ? $value['message_badge'] : "Erreur";
+						$message = $value['message_badge'] ? $value['message_badge'] : $this->message_bool_false;
 						$ret .= ' <span class="badge bg-danger">' . $message . '</span>';
 						break;
 					case self::BADGE_TYPE_OK:
-						$message = $value['message_badge'] ? $value['message_badge'] : "Ok";
+						$message = $value['message_badge'] ? $value['message_badge'] : $this->message_bool_true;
 						$ret .= ' <span class="badge bg-success">' . $message . '</span>';
 						break;
 				}

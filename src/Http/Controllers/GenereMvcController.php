@@ -4,8 +4,8 @@ namespace Rras3k\Sebconsole\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\DB;
 use Rras3k\Sebconsole\Lib\Mvc;
+use Rras3k\Sebconsole\Lib\Models;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Rras3k\Sebconsole\Http\Controllers\SbController;
@@ -26,7 +26,7 @@ class GenereMvcController extends Controller
 
         $data = [];
         View::addNamespace('sebconsoleviews', 'Rras3k/SebconsoleRoot/ressources/views');
-        $data['tables'] = $this->getTables();
+        $data['tables'] = Models::getTables();
         $data['table_select'] = "";
 
         if (isset($_GET['table']) && $_GET['table']) {
@@ -39,37 +39,18 @@ class GenereMvcController extends Controller
         return view('sebconsoleviews::genereSystem.mvc.saisi', compact('data'));
     }
 
-    public function getTables()
-    {
-        $ret = [];
 
-        $champName = 'Tables_in_' . env('DB_DATABASE');
-        $tables = DB::select("show tables");
-        foreach ($tables as $ind => $table) {
-            if (
-                $table->$champName != 'failed_jobs'
-                && $table->$champName != 'migrations'
-                && $table->$champName != 'password_resets'
-                && $table->$champName != 'personal_access_tokens'
-            ) {
-                $ret[$table->$champName] = $table->$champName;
-            }
-        }
-        return $ret;
-    }
     public function run(Request $request)
     {
         Core::init();
 
         View::addNamespace('sebconsoleviews', 'Rras3k/SebconsoleRoot/ressources/views');
         $data = [];
-// dump($request);
         $genMvc = new Mvc();
         $genMvc->initTable($request->props['table']);
-        // dd($request->props);
         $genMvc->setProps($request->props);
         $genMvc->mergeChamps($request->champs);
-        $data = $genMvc->genere($request->genereRoute);
+        $data = $genMvc->genere($request->genereRoute, $request->genereOnlyModel );
         return view('sebconsoleviews::genereSystem.mvc.resultat', compact('data'));
     }
 

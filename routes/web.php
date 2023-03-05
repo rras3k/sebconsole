@@ -29,6 +29,7 @@ Route::group(
         Route::post('rras3k/genere-run', [\Rras3k\Sebconsole\Http\Controllers\genereMvcController::class, 'run'])->name('genereMvc.run');
 
         Route::get('rras3k/dashboard', [\Rras3k\Sebconsole\Http\Controllers\DashboardController::class, 'show'])->name('rras3k.dashboard.show');
-        Route::get('rras3k/del-menus', [\Rras3k\Sebconsole\Http\Controllers\DashboardController::class, 'delMenus'])->name('rras3k.del-menus.show');
+        Route::get('rras3k/del-menus', [\Rras3k\Sebconsole\Http\Controllers\DashboardController::class, 'delMenus'])->name('rras3k.del-menus');
+        // Route::post('rras3k/gen-models', [\Rras3k\Sebconsole\Http\Controllers\DashboardController::class, 'genModels'])->name('rras3k.gen-models');
     }
 );

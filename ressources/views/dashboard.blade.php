@@ -1,6 +1,5 @@
 <?php
 // dd($data);
-
 ?>
 @extends('layouts.console')
 
@@ -8,29 +7,29 @@
 @endsection
 
 @section('content')
-
-<div class="§_main">
+    <div class="§_main">
         <div class="§_header">
             <div class="§_titre">Dashboard système</div>
         </div>
 
-        {{-- MENU --}}
-        <div class="§_panel">
-            <div class="§_header">
-                Menus
-            </div>
-            <div class="§_content">
-                <a role="button" href="{{route('rras3k.del-menus.show')}}">Supprimer les fihciers menu ( /storage/app/private/menus/*.html)</a>
-
-
-            </div>
-            <div class="§_footer">
-                @if (isset($data['infoEntite']['table']))
-                    <div class="col-12">
-                        <button form="genereVmc" type="submit" class="btn btn-primary">Générez</button>
+        <div class="§_panel_group">
+            {{-- MENU --}}
+            <div id="menus" class="§_panel §_w_500">
+                <div class="§_header">
+                    Divers
+                </div>
+                <div class="§_content">
+                    <div class="wrap">
+                        <label for="delMenus">Supprimer les fichiers menu</label>
+                        <a role="button" id="delMenus" class="btn btn-primary"
+                            href="{{ route('rras3k.del-menus') }}">Supprimer</a>
                     </div>
-                @endif
+                    (/storage/app/private/menus/*.html)
+                </div>
+
             </div>
+
+
         </div>
     </div>
     {{-- Modalƒ
@@ -40,12 +39,19 @@
     ]" />
 
     <style>
+        #menus .wrap {
+            display: flex;
+            justify-content: space-between;
+        }
 
+        #models {
+            font-size: 17px;
+            width: 300px;
+            height: 250px;
+        }
     </style>
 
-    <script>
-
-    </script>
+    <script></script>
 @endsection
 {{-- @section('foot-link')
     @include('sebconsoleviews::include.load-bootstrap-table')
