@@ -139,6 +139,7 @@ class Core
     {
         return isset($this->entites[$this->entite]['view']['buttons'][$id]['routeName']) ? $this->entites[$this->entite]['view']['buttons'][$id]['routeName'] : '';
     }
+
     /**
      *
      * @param
