@@ -73,7 +73,7 @@
         Core::setTitre("{{ $data['this']->props['label'] }}");
 
         // Création boutons
-        Core::button_add(['id' => "ajouter", 'label' => "Ajouter {{ $data['this']->props['label'] }}", 'routeName' => '{{ $data['this']->routeName_create }}', 'type' => Core::getConst('BUTTON_TYPE_AJOUT'),'icon' => '', "class" => ""]);
+        Core::button_add(['id' => "ajouter", 'label' => "Ajouter {{ $data['this']->props['label'] }}", 'route' => '{{ route($data['this']->routeName_create) }}', 'type' => Core::getConst('BUTTON_TYPE_AJOUT'),'icon' => '', "class" => ""]);
 
         // Route pour la grille
         Core::routeName_add('grille', '{{ $data['this']->routeName_listeBt }}');

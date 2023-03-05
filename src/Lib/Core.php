@@ -118,6 +118,8 @@ class Core
         return  $this->entites[$this->entite]['view']['routeNames'][$cible];
     }
 
+
+
     /**
      *
      * @param
@@ -127,6 +129,7 @@ class Core
     {
         return isset($this->entites[$this->entite]['view']['buttons'][$id]['label']) ? $this->entites[$this->entite]['view']['buttons'][$id]['label'] : '';
     }
+
     /**
      *
      * @param
@@ -135,6 +138,15 @@ class Core
     public function button_getRouteName($id)
     {
         return isset($this->entites[$this->entite]['view']['buttons'][$id]['routeName']) ? $this->entites[$this->entite]['view']['buttons'][$id]['routeName'] : '';
+    }
+    /**
+     *
+     * @param
+     * @return
+     */
+    public function button_getRoute($id)
+    {
+        return isset($this->entites[$this->entite]['view']['buttons'][$id]['route']) ? $this->entites[$this->entite]['view']['buttons'][$id]['route'] : '';
     }
     // ------------------------------------------------------- ENTITES
 

@@ -35,10 +35,9 @@ Core::setEntite();
                         <form id="role" method="POST"
                             action="{!! '{' !!}{ route(Core::getRouteName('update'),Core::form_getData('id')) }}"
                             enctype="multipart/form-data" name="role">
-                            {!! '<' !!}x-sebconsoleviews::forms.hidden
-                            :liste="Core::form_getHiddenValues()" />
                             {!! '@' !!}method('PUT')
                     {!! '@' !!}endif
+                            {!! '<' !!}x-sebconsoleviews::forms.hidden :liste="Core::form_getHiddenValues()" />
                             {!! '@' !!}csrf
                             <div class="row">
                                 @foreach ($data['this']->champs as $key => $value)
