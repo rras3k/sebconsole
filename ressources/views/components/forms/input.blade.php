@@ -30,6 +30,11 @@
             <input class="form-check-input" type="{{ $type }}" name="{{ $nom }}"
                 id="input-{{ $nom }}" @if (isset($readonly) && $readonly) disabled @endif
                 @if ($value != '' && $value != '0') checked="true" @endif>
+                @error($nom)
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror
         </div>
     @else
         <div class="form-floating mb-1" id="entree-{{ $nom }}">
@@ -41,14 +46,15 @@
                     {{ $label }}
                 </label>
             @endif
-        </div>
-    @endif
-
-    @error($nom)
+            @error($nom)
         <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
         </span>
     @enderror
+        </div>
+    @endif
+
+
 
 {{-- </div> --}}
 
