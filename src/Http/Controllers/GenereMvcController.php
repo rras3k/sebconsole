@@ -26,7 +26,7 @@ class GenereMvcController extends Controller
 
         $data = [];
         View::addNamespace('sebconsoleviews', 'Rras3k/SebconsoleRoot/ressources/views');
-        $data['tables'] = Models::getTables();
+        $data['tables'] = Models::getTablesModelsGenerables();
         $data['table_select'] = "";
 
         if (isset($_GET['table']) && $_GET['table']) {
