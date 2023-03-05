@@ -31,10 +31,10 @@ function getFunctionName($champName)
 
                         @foreach ($data['tables'] as $key => $value)
                             @php $selected = ""; @endphp
-                            @if ($value == $data['table_select'])
+                            @if ($key == $data['table_select'])
                                 @php $selected = " selected "; @endphp
                             @endif
-                            <option value="{{ $value }}" {{ $selected }}>{{ $value }}</option>
+                            <option value="{{ $key }}" {{ $selected }}>{{ $value }}</option>
                         @endforeach
                     </select>
                 </div>

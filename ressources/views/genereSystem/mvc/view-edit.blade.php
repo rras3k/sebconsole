@@ -28,17 +28,17 @@ Core::setEntite();
                 <div class="§_content">
 
                     {!! '@' !!}if (Core::form_isCreate())
-                    <form id="role" method="POST"
+                        <form id="role" method="POST"
                         action="{!! '{' !!}{ route(Core::getRouteName('store')) }}"
                         enctype="multipart/form-data" name="role">
-                        {!! '@' !!}else
+                    {!! '@' !!}else
                         <form id="role" method="POST"
                             action="{!! '{' !!}{ route(Core::getRouteName('update'),Core::form_getData('id')) }}"
                             enctype="multipart/form-data" name="role">
                             {!! '<' !!}x-sebconsoleviews::forms.hidden
                             :liste="Core::form_getHiddenValues()" />
                             {!! '@' !!}method('PUT')
-                            {!! '@' !!}endif
+                    {!! '@' !!}endif
                             {!! '@' !!}csrf
                             <div class="row">
                                 @foreach ($data['this']->champs as $key => $value)
@@ -69,8 +69,6 @@ Core::setEntite();
                                         @endif
                                     @endif
                                 @endforeach
-
-
                             </div>
                         </form>
                 </div>
