@@ -120,7 +120,7 @@ class Mvc
         if (!$genereOnlyModel) {
             $this->genereController();
             $this->genereView();
-            $ret["toConfig"] = "[  'label' => '" . $this->props['label'] . "', 'route' => '" . $this->routeName_index . "', 'icon' => 'fa-solid fa-city', 'droits'=> [Role::ADMIN]], 'items'=>[]";
+            $ret["toConfig"] = "[  'label' => '" . $this->props['label'] . "', 'route' => '" . $this->routeName_index . "', 'icon' => 'fa-solid fa-city', 'droits'=> [Role::ADMIN], 'items'=>[] ]";
         }
         return $ret;
     }

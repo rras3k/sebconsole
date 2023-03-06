@@ -171,6 +171,7 @@ class Core
         $this->entites[$this->entite]['view']['buttons'][$infos['id']] = $infos;
     }
 
+    // ----------------- route
 
     /**
      *
