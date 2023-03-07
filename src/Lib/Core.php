@@ -13,6 +13,8 @@ class Core
     private $BUTTON_TYPE_ENREGISTRER = 2;
     private $BUTTON_TYPE_ANNULER = 3;
     private $BUTTON_TYPE_SUPPRIMER = 4;
+    private $BUTTON_TYPE_RETOUR = 5;
+
 
     private $header_barre = [];
     private $menu = [];
