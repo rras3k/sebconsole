@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\View;
 use Rras3k\SebconsoleRoot\facades\Core;
 
 
-class PagePasgitController extends Controller
+class PageDevController extends Controller
 {
     public function getPara()
     {
@@ -30,7 +30,7 @@ class PagePasgitController extends Controller
         // $data['pages'] = [ 'page-1','page-2'];
 
 
-        return view('sebconsoleviews::page-pasgit', compact('data'));
+        return view('sebconsoleviews::page-dev', compact('data'));
 
     }
     private function getListePagesPasgit(){
@@ -50,7 +50,7 @@ class PagePasgitController extends Controller
     }
 
     public function getPage($nomPage){
-        // dd($nomPag);
+        // dd($nomPage);
         return view('page-dev.'.$nomPage);
     }
 

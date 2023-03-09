@@ -12,9 +12,9 @@ Route::group(
         'middleware' => ['web', 'auth', 'role:' . Role::ADMIN]
     ],
     function () {
-        // Pages Pasgit
-        Route::get('rras3k/pages-pasgit', [Rras3k\Sebconsole\Http\Controllers\PagePasgitController::class, 'index'])->name('page-pasgit.index');
-        Route::get('rras3k/pages-pasgit/page/{nompage}', [Rras3k\Sebconsole\Http\Controllers\PagePasgitController::class, 'getPage']);
+        // Pages dev
+        Route::get('rras3k/pages-dev', [Rras3k\Sebconsole\Http\Controllers\PageDevController::class, 'index'])->name('page-dev.index');
+        Route::get('rras3k/pages-dev/page/{nompage}', [Rras3k\Sebconsole\Http\Controllers\PageDevController::class, 'getPage']);
     }
 );
 
