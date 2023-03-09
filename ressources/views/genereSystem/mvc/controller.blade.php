@@ -76,7 +76,7 @@
         Core::button_add(['id' => "ajouter", 'label' => "Ajouter {{ $data['this']->props['label'] }}", 'route' => route('{{$data['this']->routeName_create}}'), 'type' => Core::getConst('BUTTON_TYPE_AJOUT'),'icon' => '', "class" => ""]);
 
         // Route pour la grille
-        Core::route_add('grille', '{{ route($data['this']->routeName_listeBt) }}');
+        Core::route_add('grille', route('{{$data['this']->routeName_listeBt}}'));
 
         // Nom des routes destroy, create ...
         Core::routeName_add('destroy', '{{$data["this"]->routeName_destroy}}');

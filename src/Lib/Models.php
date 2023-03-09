@@ -52,11 +52,11 @@ class Models
         return str_replace('_', '', ucwords($key, '_'));
     }
 
-    public static function getModelFromTableName($aroundLinkTable)
+    public static function getModelFromTableName($tables)
     {
-        $ret = SELF::snakeToPascal($aroundLinkTable);
-        // dump($ret);
-        if (substr($ret, -1) == "s") $ret = substr($ret, 0, strlen($ret) - 1);
+        $ret = SELF::snakeToPascal($tables);
+
+        if (substr($ret, -1) == "s") return substr($ret, 0, strlen($ret) - 1);
         return $ret;
     }
 
