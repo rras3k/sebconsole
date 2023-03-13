@@ -105,5 +105,7 @@
         text-align: center;
         background: $panel_footer_backgroundcolor;
         color: $panel_footer_color;
+        border-bottom-left-radius: $panel_border_radius;
+        border-bottom-right-radius: $panel_border_radius;
     }
 }
