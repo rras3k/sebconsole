@@ -288,7 +288,16 @@ class Core
     }
 
 
-
+    /**
+     *
+     * @return
+     */
+    public function setData($arrayData)
+    {
+        foreach ($arrayData as $key => $value) {
+            $this->entites[$this->entite]['form']['datas'][$key] =  $value;
+        }
+    }
     /**
      *
      * @return
@@ -302,14 +311,16 @@ class Core
             $list = is_array($list) ? $list : $list->toArray();
             if ($list) {
                 foreach ($list as $key => $elt) {
-                    $ret[$key] = old($key) ? old($key) : $elt;
+                    // $ret[$key] = old($key) ? old($key) : $elt;
+                    $this->entites[$this->entite]['form']['datas'][$key] = old($key) ? old($key) : $elt;
+
                 }
             }
         } else {
             dd("erreur");
         }
         // if (!isset($this->paras[$this->entree]['form'])) $this->paras[$this->entree]['form'] = [];
-        $this->entites[$this->entite]['form']['datas'] = $ret;
+        // $this->entites[$this->entite]['form']['datas'] = $ret;
     }
 
 /**
