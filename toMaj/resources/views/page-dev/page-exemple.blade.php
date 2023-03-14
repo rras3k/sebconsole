@@ -17,10 +17,23 @@ Core::setEntite();
         <div class="§_panel_group">
             <div class="§_panel §_w_600">
                 <div class="§_header">
-                    Titre ....
+                    Titre Panel...
                 </div>
-                <div class="§_content">
-                    Content ...
+                <div class="§_rubrique">
+                    Rubrique Panel...
+                </div>
+                <div class="§_content ">
+                    Content ...</br>
+                    Content ...</br>
+                    Content ...</br>
+                </div>
+                <div class="§_rubrique">
+                    Rubrique Panel...
+                </div>
+                <div class="§_content ">
+                    Content ...</br>
+                    Content ...</br>
+                    Content ...</br>
                 </div>
                 <div class="§_footer">
                     Footer ...
@@ -30,7 +43,8 @@ Core::setEntite();
     </div>
 
     <html>
-        {{-- Ici le style et la classe !!!! --}}
+    {{-- Ici le style et la classe !!!! --}}
+
     </html>
     <script>
         // Ici les scripts
