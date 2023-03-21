@@ -45,7 +45,7 @@ contentType = "text/plain",'application/json'
 function rras3k_xhr(method, url, data, contentType = "text/plain", fctCallback = null, token = null) {
 
 
-    if (method == "POST" ||  method == "PUT") {
+    if (method == "POST" ||   method == "PUT") {
 
 		console.log(data)
 		fetch(url, {
