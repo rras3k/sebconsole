@@ -45,8 +45,7 @@ contentType = "text/plain",'application/json'
 function rras3k_xhr(method, url, data, contentType = "text/plain", fctCallback = null, token = null) {
 
 
-	if (method == "POST") {
-
+    if (method == "POST" ||  method == "PUT") {
 
 		console.log(data)
 		fetch(url, {
@@ -66,9 +65,7 @@ function rras3k_xhr(method, url, data, contentType = "text/plain", fctCallback =
 				else {
 					alerte("réponse ok")
 					alerte(JSON.stringify(data))
-
 				}
-
 			})
 			.catch((erreur) => {
 				alerte(erreur)

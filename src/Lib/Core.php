@@ -292,8 +292,9 @@ class Core
      *
      * @return
      */
-    public function setData($arrayData)
+    public function setData($entree,$arrayData)
     {
+        $this->entites[$this->entite]['form']['datas'][$entree] = array();
         foreach ($arrayData as $key => $value) {
             $this->entites[$this->entite]['form']['datas'][$key] =  $value;
         }
