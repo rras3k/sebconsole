@@ -487,4 +487,15 @@ class Core
         }
         return $a;
     }
+
+    /**
+     *
+     * @param
+     * @return
+     */
+    public static function responseJson($message = null, $data = null, $codeRetourHttp = 200)
+    {
+        return response()->json(['message' => $message, 'data' => $data])->setStatusCode($codeRetourHttp);
+    }
+
 }
