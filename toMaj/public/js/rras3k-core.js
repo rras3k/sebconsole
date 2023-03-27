@@ -44,59 +44,69 @@ contentType = "text/plain",'application/json'
 */
 function rras3k_xhr(method, url, data, contentType = "text/plain", fctCallback = null, token = null) {
 
-	if (method == "POST" || method == "PUT") {
 
-		console.log(data)
-		fetch(url, {
-			method: method,
-			headers: {
-				"Content-type": contentType,
-				'X-CSRF-TOKEN': token
-			},
-			body: JSON.stringify(data)
-		})
-			.then((response) => response.json())
-			.then((data) => {
-				if (fctCallback != null) {
-					alerte("réponse ok !!!")
+    if (method == "POST" || method == "PUT") {
 
-					fctCallback(data)
-				}
-				else {
-					alerte("réponse ok")
-					alerte(JSON.stringify(data))
-				}
-			})
-			.catch((erreur) => {
-				alerte(erreur)
-			}
-			);
-	}
+        // console.log(data)
+        fetch(url, {
+            method: method,
+            headers: {
+                "Content-type": contentType,
+                'X-CSRF-TOKEN': token
+            },
+            body: JSON.stringify(data)
+        })
+            .then(r => r.json().then(data => ({ status: r.status, body: data })))
+            .then((newResponse) => {
+                alerteReceptionFetch(newResponse.body, newResponse.status)
+                if (fctCallback != null) {
+                    fctCallback(newResponse.body)
+                }
+            })
+            .catch((erreur) => {
+                console.log("Erreur")
+                alerte(erreur)
+            }
+            );
 
-	if (method == "GET") {
-		// console.log(data)
-		fetch(url + arrayToPara(data), {
-			method: method,
-			headers: {
-				"Content-type": contentType,
-				'X-CSRF-TOKEN': token
-			},
-		})
-			.then((response) => response.json())
-			.then((data) => {
-				if (fctCallback != null) {
-					fctCallback(data)
-				}
-				else {
-					alerte("réponse ok")
-					alerte(JSON.stringify(data))
-				}
-			})
-			.catch((erreur) => {
-				alerte(erreur)
-			}
-			);
-	}
+
+    }
+
+    if (method == "GET") {
+        // console.log(data)
+        fetch(url + arrayToPara(data), {
+            method: method,
+            headers: {
+                "Content-type": contentType,
+                'X-CSRF-TOKEN': token
+
+            },
+        })
+            .then(r => r.json().then(data => ({ status: r.status, body: data })))
+            .then((newResponse) => {
+                alerteReceptionFetch(newResponse.body, newResponse.status)
+                if (fctCallback != null) {
+                    fctCallback(newResponse.body)
+                }
+            })
+            .catch((erreur) => {
+                console.log("Erreur")
+                alerte(erreur)
+            }
+            );
+    }
+}
+function alerteReceptionFetch(data, codeHttp) {
+    if (data['message'] != "undefinied") {
+        if (codeHttp > 199 && codeHttp < 300) {
+            alerte(data['message'])
+
+        }
+        else {
+            alerte(data['message'], 'danger')
+
+        }
+    }
 }
 
 function arrayToPara(data) {
