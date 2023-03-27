@@ -1,7 +1,7 @@
 
 // -------------------------------- alerte
-var alerte_delai =2000
-const alerte = (message, type = "success", delai=2000) => {
+var alerte_delai = 2000
+const alerte = (message, type = "success", delai = 2000) => {
 	// console.log(type)
 	const wrapper = document.createElement('div')
 	wrapper.innerHTML = [
@@ -44,8 +44,7 @@ contentType = "text/plain",'application/json'
 */
 function rras3k_xhr(method, url, data, contentType = "text/plain", fctCallback = null, token = null) {
 
-
-    if (method == "POST" ||   method == "PUT") {
+	if (method == "POST" || method == "PUT") {
 
 		console.log(data)
 		fetch(url, {
@@ -53,13 +52,14 @@ function rras3k_xhr(method, url, data, contentType = "text/plain", fctCallback =
 			headers: {
 				"Content-type": contentType,
 				'X-CSRF-TOKEN': token
-
 			},
 			body: JSON.stringify(data)
 		})
 			.then((response) => response.json())
 			.then((data) => {
 				if (fctCallback != null) {
+					alerte("réponse ok !!!")
+
 					fctCallback(data)
 				}
 				else {
@@ -71,8 +71,6 @@ function rras3k_xhr(method, url, data, contentType = "text/plain", fctCallback =
 				alerte(erreur)
 			}
 			);
-
-
 	}
 
 	if (method == "GET") {
@@ -82,7 +80,6 @@ function rras3k_xhr(method, url, data, contentType = "text/plain", fctCallback =
 			headers: {
 				"Content-type": contentType,
 				'X-CSRF-TOKEN': token
-
 			},
 		})
 			.then((response) => response.json())
@@ -93,9 +90,7 @@ function rras3k_xhr(method, url, data, contentType = "text/plain", fctCallback =
 				else {
 					alerte("réponse ok")
 					alerte(JSON.stringify(data))
-
 				}
-
 			})
 			.catch((erreur) => {
 				alerte(erreur)
@@ -103,6 +98,7 @@ function rras3k_xhr(method, url, data, contentType = "text/plain", fctCallback =
 			);
 	}
 }
+
 function arrayToPara(data) {
 	var ret = ''
 	for (var element in data) {
