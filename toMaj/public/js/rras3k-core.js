@@ -97,7 +97,7 @@ function rras3k_xhr(method, url, data, contentType = "text/plain", fctCallback =
     }
 }
 function alerteReceptionFetch(data, codeHttp) {
-    if (data['message'] != "undefinied") {
+    if (data['message'] !== undefined) {
         if (codeHttp > 199 && codeHttp < 300) {
             alerte(data['message'])
 

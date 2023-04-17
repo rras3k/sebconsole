@@ -9,12 +9,13 @@
     'dataSelected' => '',
     'route' => '',
     'colonnes' => '',
+    'nbLignes' =>10,
     'dataRetour' => '',
     'boutons',
     'btnSelectOnclick' => '',
 ])
 
-<!-- Modal -->
+<!-- Modal pp-->
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
         <div class="modal-content">
@@ -28,7 +29,7 @@
                 <div class="§_panel">
                     <div class="§_content">
                         <table id="tableModal" data-toolbar="#toolbar" data-toolbar="#toolbar" class="table-striped"
-                            data-page-size="25" data-show-toggle="true" data-show-columns-toggle-all="true"
+                            data-page-size="{{$nbLignes}}" data-show-toggle="true" data-show-columns-toggle-all="true"
                             data-show-columns="true" data-buttons="buttons" data-side-pagination="server"
                             data-row-style="rowStyle" data-pagination="true" data-unique-id="id"
                             data-mobile-responsive="false" data-locale="fr-FR" data-toggle="table" data-search="true"
@@ -56,8 +57,18 @@
 </div>
 <script>
     $('#tableModal').on('click-cell.bs.table', function(event, field, value, row) {
-        alert("jjj")
-       // $btnSelectOnclick(data)
+        var dataRetour = {!! json_encode($dataRetour) !!}
+        btnSelectOnclick = {{$btnSelectOnclick}}
+        modal = new rras3k_modal('myModal')
+        modal.dismiss()
+        btnSelectOnclick(prepareToReturn(dataRetour,row))
+    })
+    function prepareToReturn(dataRetour,row){
+        var ret = []
+        dataRetour.forEach(element => {
+            ret[element] = row[element]
+        });
+        return ret
     }
 
 
