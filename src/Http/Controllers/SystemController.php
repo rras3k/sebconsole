@@ -1,0 +1,58 @@
+<?php
+
+namespace Rras3k\Sebconsole\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\DB;
+// use Rras3k\Sebconsole\Lib\Mvc;
+use Illuminate\Http\Request;
+// use Illuminate\Http\Response;
+use Rras3k\SebconsoleRoot\facades\Core;
+use Rras3k\SebconsoleRoot\facades\Menu;
+use Rras3k\Sebconsole\Lib\Models;
+
+
+
+
+
+
+class SystemController extends Controller
+{
+    //
+    public function show()
+    {
+        $data = [];
+        Core::init();
+        View::addNamespace('sebconsoleviews', 'Rras3k/SebconsoleRoot/ressources/views');
+        $data['models'] = Models::getTablesModelsGenerables();
+        return view('sebconsoleviews::system', compact('data'));
+    }
+
+    public function delMenus()
+    {
+        $data = [];
+        Menu::delMenus();
+        Core::init();
+        View::addNamespace('sebconsoleviews', 'Rras3k/SebconsoleRoot/ressources/views');
+        return view('sebconsoleviews::system', compact('data'));
+    }
+
+    // public function genModels(Request $request){
+    //     $data = [];
+    //     dd($request);
+    //     if (isset($request->models) && count($request->models)>0){
+    //         Models::create($request->models);
+    //     }
+    //     Core::init();
+    //     View::addNamespace('sebconsoleviews', 'Rras3k/SebconsoleRoot/ressources/views');
+    //     return view('sebconsoleviews::dashboard', compact('data'));
+    // }
+    public function razBd1()
+    {
+        DB::table('formulaire')->truncate();
+        DB::table('formule')->truncate();
+        DB::table('formule_formulaire')->truncate();
+        DB::table('devis')->truncate();
+    }
+}

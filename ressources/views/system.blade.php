@@ -9,22 +9,28 @@
 @section('content')
     <div class="§_main">
         <div class="§_header">
-            <div class="§_titre">Dashboard système</div>
+            <div class="§_titre">Rrask3 système</div>
         </div>
 
         <div class="§_panel_group">
             {{-- MENU --}}
-            <div id="menus" class="§_panel §_w_500">
+            <div id="menus" class="§_panel §_w_800">
                 <div class="§_header">
                     Divers
                 </div>
                 <div class="§_content">
                     <div class="wrap">
-                        <label for="delMenus">Supprimer les fichiers menu</label>
-                        <a role="button" id="delMenus" class="btn btn-primary"
+                        <label for="delMenus">Supprimer les fichiers menu (/storage/app/private/menus/*.html)</label>
+                        <a role="button" id="delMenus" class="btn btn-primary btn-sm"
                             href="{{ route('rras3k.del-menus') }}">Supprimer</a>
                     </div>
-                    (/storage/app/private/menus/*.html)
+                    <div class="§_br"></div>
+                    <div class="wrap">
+                        <label for="delMenus">Raz 1 base de données (formulaire, formule, formuleFormulaire)</label>
+                        <a role="button" id="delMenus" class="btn btn-primary btn-sm"
+                            href="{{ route('rras3k.del-menus') }}">Raz</a>
+                    </div>
+
                 </div>
 
             </div>

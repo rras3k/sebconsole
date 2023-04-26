@@ -52,11 +52,13 @@
         border-right: 0;
 
     }
-    & >div:first-child{
+
+    &>div:first-child {
         border-top-left-radius: $panel_border_radius;
         border-top-right-radius: $panel_border_radius;
     }
-    & >div:last-child{
+
+    &>div:last-child {
         border-bottom-left-radius: $panel_border_radius;
         border-bottom-right-radius: $panel_border_radius;
     }
@@ -111,6 +113,14 @@
         // border-right-width: 0;
         // border-top-width: 1px;
         // border-bottom-width: 1px;
+
+    }
+
+    & .§_br {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border: 1px;
+        border-style: inset;
 
     }
 
