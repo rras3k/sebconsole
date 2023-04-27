@@ -52,10 +52,10 @@ class SebconsoleServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
 
         // config
-        $this->mergeConfigFrom(
-            __DIR__ . '/../../config/sebconsole.php',
-            'sebconsole'
-        );
+        // $this->mergeConfigFrom(
+        //     __DIR__ . '/../../config/sebconsole.php',
+        //     'sebconsole'
+        // );
 
         // Views
         $this->loadViewsFrom(__DIR__ . '/../../ressources/views', 'sebconsoleviews');
