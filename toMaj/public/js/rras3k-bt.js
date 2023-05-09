@@ -30,9 +30,10 @@ function btBuildUrl(tableHtmlId) {
 
 function btDataUrl(tableHtmlId) {
     let para = btBuildUrl(tableHtmlId)
-    let urlData = btTables[tableHtmlId]['url'] + '?' + para
+    // let urlData = btTables[tableHtmlId]['url'] + '?' + para
+    separateur = (btTables[tableHtmlId]['url'].indexOf('?') > -1) ? '&' : '?'
     btTables[tableHtmlId]['id'].bootstrapTable('refresh', {
-        url: btTables[tableHtmlId]['url'] + '?' + para
+        url: btTables[tableHtmlId]['url'] + separateur + para
     })
 }
 
