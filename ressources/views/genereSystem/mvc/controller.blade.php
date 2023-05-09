@@ -45,7 +45,9 @@
 				@endforeach
 				'model_str'=> ['table' => '{{ $data['this']->props['table'] }}', 'champ_table' => '{{$data['this']->props['champStr']}}'],
 					],
-					// 'filtre' => [],
+					 'filtre' => [
+                        // 'auteur' => auteurs.id
+                     ],
 					'filtre_fixe' => [
 					],
 					'filtre_permanent' => [
@@ -84,6 +86,13 @@
 
         // Paras
         Core::setParas($this->getPara());
+
+        // Option de filtre
+        {{-- Core::setFiltreOption(
+            [
+                ['datas' => Auteur::getList()->toArray(), 'option_do_choice' => 'Tous les auteurs', 'default' => null, 'id'=>'auteurs'],
+            ]
+        );         --}}
 
         // Process
         Core::processForView();
