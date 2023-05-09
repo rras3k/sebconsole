@@ -6,8 +6,8 @@ function btAddTable(tableHtmlId) {
     btTables[tableHtmlId]['url'] = btTables[tableHtmlId]['id'].attr('data-url')
 }
 
-
 function btAddFiltreSelect(tableHtmlId, FiltreSelectHtmlId) {
+    FiltreSelectHtmlId = 'filtre_' + FiltreSelectHtmlId
     if (typeof btTables[tableHtmlId]['filtre'] === 'undefined') btTables[tableHtmlId]['filtre'] = {}
     btTables[tableHtmlId]['filtre'][FiltreSelectHtmlId] = document.querySelector('#' + FiltreSelectHtmlId)
     btTables[tableHtmlId]['filtre'][FiltreSelectHtmlId].addEventListener("change", function () {

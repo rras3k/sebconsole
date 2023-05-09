@@ -23,6 +23,8 @@ class Core
 
     private $entite = 'main';
 
+    private $filtreOptions = null;
+
 
     /**
      *
@@ -424,10 +426,13 @@ class Core
         }
 
         // Création Where FILTRE
+        // dd($this->entites[$this->entite]['paras']);
+
         $where = '';
         // dd($_GET['filtre']);
         if (isset($_GET['filtre'])) {
             foreach ($_GET['filtre'] as $filtre => $value) {
+
                 if ($value) {
                     if (isset($this->entites[$this->entite]['paras']['filtre'][$filtre]['jointure']) && $this->entites[$this->entite]['paras']['filtre'][$filtre]['jointure']) {
                         foreach ($this->entites[$this->entite]['paras']['filtre'][$filtre]['jointure'] as $jointure) {
@@ -435,11 +440,12 @@ class Core
                         }
                     }
                     $where = $where ? $where . ' && ' : $where;
-                    $where .= $this->entites[$this->entite]['paras']['filtre'][$filtre]['champ'] . '=' . $value;
+                    $where .= $this->entites[$this->entite]['paras']['filtre'][$filtre] . '=' . $value;
+                    // $where .= $this->entites[$this->entite]['paras']['filtre'][$filtre]['champ'] . '=' . $value;
+                    // dd($where);
                 }
             }
         }
-
         // Création Where FILTRE FIXE
         if (isset($_GET['filtre_fixe'])) {
             foreach ($_GET['filtre_fixe'] as $filtre => $value) {
@@ -497,5 +503,13 @@ class Core
     {
         return response()->json(['message' => $message, 'data' => $data])->setStatusCode($codeRetourHttp);
     }
+
+    public function setFiltreOption($paras){
+        $this->filtreOptions = $paras;
+    }
+    public function getFiltreOption(){
+        return $this->filtreOptions;
+    }
+
 
 }
