@@ -28,7 +28,7 @@
 
                 <div class="§_panel">
                     <div class="§_content">
-                        <table id="tableModal" data-toolbar="#toolbar" data-toolbar="#toolbar" class="table-striped"
+                        <table id="tableModal"  class="table-striped"
                             data-page-size="{{$nbLignes}}" data-show-toggle="true" data-show-columns-toggle-all="true"
                             data-show-columns="true" data-buttons="buttons" data-side-pagination="server"
                             data-row-style="rowStyle" data-pagination="true" data-unique-id="id"
