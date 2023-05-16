@@ -16,9 +16,8 @@ return new class extends Migration
         Schema::create('log_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('log_head_id')->nullable();
+            $table->foreignId('role_id')->nullable();
             $table->text('texte');
-            $table->integer('num_error')->default(0)->nullable();
-            $table->foreignId('user_id');
             $table->boolean('enable')->default(true);
             $table->timestamps();
         });

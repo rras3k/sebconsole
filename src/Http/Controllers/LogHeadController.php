@@ -70,7 +70,7 @@ class LogHeadController extends Controller
         Core::setTitre("log_heads");
 
         // Création boutons
-        Core::button_add(['id' => "ajouter", 'label' => "Ajouter log_heads", 'route' => route('LogHead_console.create'), 'type' => Core::getConst('BUTTON_TYPE_AJOUT'), 'icon' => '', "class" => ""]);
+        // Core::button_add(['id' => "ajouter", 'label' => "Ajouter log_heads", 'route' => route('LogHead_console.create'), 'type' => Core::getConst('BUTTON_TYPE_AJOUT'), 'icon' => '', "class" => ""]);
 
         // Route pour la grille
         Core::route_add('grille', route('rras3k.LogHead.listeBt'));
