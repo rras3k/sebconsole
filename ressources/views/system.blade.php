@@ -30,6 +30,12 @@
                         <a role="button" id="delMenus" class="btn btn-primary btn-sm"
                             href="{{ route('rras3k.del-menus') }}">Raz</a>
                     </div>
+                    <div class="§_br"></div>
+                    <div class="wrap">
+                        <label for="accesLog">Log</label>
+                        <a role="button" id="accesLog" class="btn btn-primary btn-sm"
+                            href="{{ route('rras3k.LogHead.index') }}">Log</a>
+                    </div>
 
                 </div>
 

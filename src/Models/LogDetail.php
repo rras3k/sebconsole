@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace Rras3k\Sebconsole\Models;
 
 use  Rras3k\Sebconsole\Models\SbModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

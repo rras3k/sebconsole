@@ -12,6 +12,8 @@ use Rras3k\SebconsoleRoot\facades\Core;
 use Rras3k\SebconsoleRoot\facades\Menu;
 use Rras3k\Sebconsole\Lib\Models;
 
+use Rras3k\Sebconsole\Models\Log;
+
 
 
 
@@ -54,5 +56,13 @@ class SystemController extends Controller
         DB::table('formule')->truncate();
         DB::table('formule_formulaire')->truncate();
         DB::table('devis')->truncate();
+    }
+
+
+    public function logTypeGenere(){
+        Log::init();
+        Log::genereLogTypeConst();
+        return $this->show();
+
     }
 }

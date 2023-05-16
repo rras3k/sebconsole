@@ -1,31 +1,27 @@
 <?php
 
-namespace App\Models;
+namespace Rras3k\Sebconsole\Models;
 
 use  Rras3k\Sebconsole\Models\SbModel;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LogHead extends SbModel
+class LogType extends SbModel
 {
     use HasFactory;
-    const TYPE_DEFAULT = 1;
-
-    //--CONSTANTE Constantes générées
-    //--CONSTANTE-END
 
     //--- Mvc
     public static function getStrName()
     {
-        return 'texte';
+        return 'nom';
     }
     public static function getLabel()
     {
-        return 'Entête log';
+        return 'Type log';
     }
     public static function getList()
     {
-        return LogHead::select(['id', 'texte as label'])->where('is_enable', '=', 1)->orderBy('texte', 'asc')->get();
+        return LogType::select(['id', 'nom as label'])->where('is_enable', '=', 1)->orderBy('nom', 'asc')->get();
     }
 }

@@ -9,16 +9,20 @@ use Rras3k\Sebconsole\Lib\Menu;
 use Rras3k\SebconsoleRoot\commands\MenuCommande;
 
 use Rras3k\Sebconsole\Models\Role;
+// use Rras3k\Sebconsole\Models\Log;
 use Rras3k\Sebconsole\Http\Middleware\EnsureUserHasRole;
+use Rras3k\Sebconsole\Http\Middleware\logRoute;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Blade;
+
+use Illuminate\Contracts\Http\Kernel;
+
 
 
 
 
 
 use Illuminate\Support\ServiceProvider;
-
 
 class SebconsoleServiceProvider extends ServiceProvider
 {
@@ -43,7 +47,7 @@ class SebconsoleServiceProvider extends ServiceProvider
             return new Menu();
         });
     }
-    public function boot()
+    public function boot(Kernel $kernel)
     {
 
         $this->importPublishOnce();
@@ -65,6 +69,11 @@ class SebconsoleServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../../routes/web.php');
 
         // Middleware
+        // $kernel->pushMiddleware(LogRoute::class);
+        $router = $this->app->make(Router::class);
+        $router->pushMiddlewareToGroup('web', LogRoute::class);
+
+        // $kernel->pushMiddleware(LogRoute::class);
         // $kernel->pushMiddleware(EnsureUserHasRole::class);
 
         // $router = $this->app->make(Router::class);
@@ -75,6 +84,10 @@ class SebconsoleServiceProvider extends ServiceProvider
             $router->aliasMiddleware('role', EnsureUserHasRole::class);
             $router->pushMiddleWareToGroup('role', EnsureUserHasRole::class);
         });
+
+        // Importation des constantes pour les logs
+        // include(storage_path('app/private/' . Log::NOM_FIC));
+
 
         $this->loadBladeDirectives();
 

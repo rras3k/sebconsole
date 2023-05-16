@@ -28,7 +28,7 @@ Core::setEntite();
     <div class="§_panel">
         <div class="§_content">
             <div id="toolbar" class="col text-start">
-                <x-sebconsoleviews::forms.filtre-option :paras="Core::getFiltreOption()" />
+                {{-- <x-sebconsoleviews::forms.filtre-option :paras="Core::getFiltreOption()" /> --}}
             </div>
 
             <table id="table" data-toolbar="#toolbar" data-toolbar="#toolbar" class="table-striped" data-page-size="25"
