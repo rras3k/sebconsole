@@ -121,7 +121,18 @@ class SebconsoleServiceProvider extends ServiceProvider
         Blade::directive('endisCreate', function () {
             return "<?php } ?>";
         });
-
+        Blade::directive('isRoleAdmin', function () {
+            return "<?php if(Auth::user() && Auth::user()->isAdmin()): ?>";
+        });
+        Blade::directive('endisRoleAdmin', function () {
+            return "<?php endif; ?>";
+        });
+        Blade::directive('isRoleRoot', function () {
+            return "<?php if(Auth::user() && Auth::user()->isRoot()): ?>";
+        });
+        Blade::directive('endisRoleRoot', function () {
+            return "<?php endif; ?>";
+        });
     }
 
     private function importPublishOnce()
