@@ -70,8 +70,8 @@ class SebconsoleServiceProvider extends ServiceProvider
 
         // Middleware
         // $kernel->pushMiddleware(LogRoute::class);
-        $router = $this->app->make(Router::class);
-        $router->pushMiddlewareToGroup('web', LogRoute::class);
+        // $router = $this->app->make(Router::class);
+        // $router->pushMiddlewareToGroup('web', LogRoute::class);
 
         // $kernel->pushMiddleware(LogRoute::class);
         // $kernel->pushMiddleware(EnsureUserHasRole::class);
