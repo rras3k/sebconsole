@@ -393,7 +393,8 @@ class Core
         //  dd($this->entites[$this->entite]['paras']);
         foreach ($this->entites[$this->entite]['paras']['champs'] as $champ => $infoChamp) {
             $select .= $select ? ',' : '';
-            $select .= isset($infoChamp['table']) ? $infoChamp['table'] . '.' . $infoChamp['champ_table'] . ' as ' . $champ : $this->entites[$this->entite]['paras']['table_principale'] . '.' . $champ . ' as ' . $champ;
+            $select .= isset($infoChamp['table']) ? $infoChamp['table'] . '.' . $infoChamp['champ_table'] . ' as `' . $champ . '`' : $this->entites[$this->entite]['paras']['table_principale'] . '.' . $champ . ' as `' . $champ . '`';
+            // $select .= isset($infoChamp['table']) ? $infoChamp['table'] . '.' . $infoChamp['champ_table'] . ' as ' . $champ : $this->entites[$this->entite]['paras']['table_principale'] . '.' . $champ . ' as ' . $champ;
         }
 
         $offset = isset($_GET['offset']) ?  $_GET['offset'] : 0;
