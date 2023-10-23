@@ -78,6 +78,13 @@ class Menu
             }
         }
 
+        // pour le menu horizontal
+        if ($this->menuInfos[self::MENU_TO_SHOW_HORIZONTAL]["is_enable"]) {
+            if (!Storage::exists($this->menuInfos[self::MENU_TO_SHOW_HORIZONTAL]["pathFile"])) {
+                $isGeneration = $this->menuInfos[self::MENU_TO_SHOW_HORIZONTAL]["is_toGenerate"] = true;
+            }
+        }
+
         // génération si besoin
         if ($isGeneration) {
             $this->droitUser = $listeRole;
@@ -93,6 +100,11 @@ class Menu
                 $fct = 'genereMenu_' . $this->menuInfos[self::MENU_TO_SHOW_VERTICAL]["view_name"];
                 $this->$fct($this->menuInfos[self::MENU_TO_SHOW_VERTICAL]["view_name"], $this->menuInfos[self::MENU_TO_SHOW_VERTICAL]["pathFile"]);
             }
+
+            if ($this->menuInfos[self::MENU_TO_SHOW_HORIZONTAL]["is_toGenerate"]) {
+                $fct = 'genereMenu_' . $this->menuInfos[self::MENU_TO_SHOW_HORIZONTAL]["view_name"];
+                $this->$fct($this->menuInfos[self::MENU_TO_SHOW_HORIZONTAL]["view_name"], $this->menuInfos[self::MENU_TO_SHOW_HORIZONTAL]["pathFile"]);
+            }
         }
     }
 
@@ -106,7 +118,8 @@ class Menu
     }
 
 
-    public function delMenus(){
+    public function delMenus()
+    {
         Storage::deleteDirectory(self::PATH_MENU);
     }
 
@@ -118,6 +131,10 @@ class Menu
     public function getMenu_vertical_pathFile()
     {
         return storage_path('app') . '/' . $this->menuInfos[self::MENU_TO_SHOW_VERTICAL]["pathFile"];
+    }
+    public function getMenu_horizontal_pathFile()
+    {
+        return storage_path('app') . '/' . $this->menuInfos[self::MENU_TO_SHOW_HORIZONTAL]["pathFile"];
     }
 
     // ----------------------------------------------------------------- Génération Menu
@@ -134,7 +151,7 @@ class Menu
     }
     private function genereMenu_vertical_1_prepare($menu, &$codeHtml)
     {
-// dd($menu);
+        // dd($menu);
         $this->genereMenu_vertical_1_recursif($menu, $codeHtml);
         // foreach ($menu as $ind => $elts) {
         //     if ($elts['is_enable']) {
@@ -148,16 +165,21 @@ class Menu
     private function genereMenu_vertical_1_recursif($menu, &$codeHtml)
     {
         foreach ($menu as $ind => $elts) {
-            if (ISSET($elts['is_enable']) && $elts['is_enable']) {
+            if (isset($elts['is_enable']) && $elts['is_enable']) {
 
                 if (isset($elts['route']) && $elts['route']) {
-                    $codeHtml .= '<a href="' . route($elts['route']) . '">';
-                    if (isset($elts['icon']) && $elts['icon']) $codeHtml .= '<i class="' . $elts['icon'] . '"></i>';
-                    if (isset($elts['label']) && $elts['label']) $codeHtml .=  $elts['label'];
+                    $href = $elts['route'] ? route($elts['route']) : "#";
+
+                    $codeHtml .= '<a href="' . $href . '">';
+                    if (isset($elts['icon']) && $elts['icon'])
+                        $codeHtml .= '<i class="' . $elts['icon'] . '"></i>';
+                    if (isset($elts['label']) && $elts['label'])
+                        $codeHtml .= $elts['label'];
                     $codeHtml .= '</a>';
                 }
 
-                if (isset($elts['items']) && $elts['items']) $this->genereMenu_vertical_1_recursif($elts['items'], $codeHtml);
+                if (isset($elts['items']) && $elts['items'])
+                    $this->genereMenu_vertical_1_recursif($elts['items'], $codeHtml);
             }
         }
     }
@@ -181,7 +203,8 @@ class Menu
             if (isset($elts['is_enable']) && $elts['is_enable']) {
                 $codeHtml .= $codeHtml ? '</div>' : '';
                 $codeHtml .= '<div><span>' . $elts['label'] . '</span>';
-                if (isset($elts['items']) && $elts['items']) $this->genereMenu_liste_icon_1_recursif($elts['items'], $codeHtml);
+                if (isset($elts['items']) && $elts['items'])
+                    $this->genereMenu_liste_icon_1_recursif($elts['items'], $codeHtml);
             }
         }
         $codeHtml .= $codeHtml ? '</div>' : '';
@@ -190,16 +213,92 @@ class Menu
     {
         foreach ($menu as $ind => $elts) {
             if (isset($elts['is_enable']) && $elts['is_enable']) {
-                if (isset($elts['route']) && $elts['route']) $codeHtml .= '<a href="' . route($elts['route']) . '">';
-                if (isset($elts['icon']) && $elts['icon']) $codeHtml .= '<i class="' . $elts['icon'] . '"></i></a>';
-                if (isset($elts['route']) && $elts['route']) $codeHtml .= '</a>';
+                $href = $elts['route'] ? route($elts['route']) : "#";
 
-                if (isset($elts['items']) && $elts['items']) $this->genereMenu_liste_icon_1_recursif($elts['items'], $codeHtml);
+                if (isset($elts['route']) && $elts['route'])
+                    $codeHtml .= '<a href="' . $href . '">';
+                if (isset($elts['icon']) && $elts['icon'])
+                    $codeHtml .= '<i class="' . $elts['icon'] . '"></i></a>';
+                if (isset($elts['route']) && $elts['route'])
+                    $codeHtml .= '</a>';
+
+                if (isset($elts['items']) && $elts['items'])
+                    $this->genereMenu_liste_icon_1_recursif($elts['items'], $codeHtml);
             }
         }
     }
 
+    // ---- horizontal_1
+    private function genereMenu_horizontal_1($viewName, $pathFile)
+    {
+        // dd($viewName, $pathFile);
+        $codeHtml = '<ul>' . "\n";
+        $this->genereMenu_horizontal_1_prepare($this->menu, $codeHtml);
+        // $codeHtml = '<div class="§_horizopntal_1">' . $codeHtml . '</div>' . "\n";
+        $codeHtml .= $codeHtml;
+        $codeHtml .= '</ul>' . "\n";
 
+        Storage::disk('local')->put($pathFile, $codeHtml);
+    }
+    private function genereMenu_horizontal_1_prepare($menu, &$codeHtml)
+    {
+        // dd($menu);
+        $this->genereMenu_horizontal_1_recursif($menu, $codeHtml);
+        // foreach ($menu as $ind => $elts) {
+        //     if ($elts['is_enable']) {
+        //         $codeHtml .= $codeHtml ? '</div>' : '';
+        //         $codeHtml .= '<div><span>' . $elts['label'] . '</span>';
+        //         if (isset($elts['items']) && $elts['items']) $this->genereMenu_vertical_1_recursif($elts['items'], $codeHtml);
+        //     }
+        // }
+        // $codeHtml .= $codeHtml ? '</div>' : '';
+    }
+    private function genereMenu_horizontal_1_recursif($menu, &$codeHtml)
+    {
+        foreach ($menu as $ind => $elts) {
+            if (isset($elts['is_enable']) && $elts['is_enable']) {
+
+                // if (isset($elts['route']) && $elts['route']) {
+                $codeHtml .= '<li>' . "\n";
+                $href = $elts['route'] ? route($elts['route']) : "#";
+                $codeHtml .= '<a href="' . $href . '">' . "\n";
+                if (isset($elts['icon']) && $elts['icon'])
+                    $codeHtml .= '<i class="' . $elts['icon'] . '"></i>' . "\n";
+                if (isset($elts['label']) && $elts['label'])
+                    $codeHtml .= $elts['label'];
+                $codeHtml .= '</a>' . "\n";
+                // }
+
+                if (isset($elts['items']) && $elts['items']) {
+                    $codeHtml .= '<ul>' . "\n";
+                    $this->genereMenu_horizontal_1_recursif($elts['items'], $codeHtml);
+                    $codeHtml .= '</ul>' . "\n";
+                }
+                $codeHtml .= '<li>' . "\n";
+
+            }
+        }
+    }
+    // private function genereMenu_horizontal_1_recursif($menu, &$codeHtml)
+    // {
+    //     foreach ($menu as $ind => $elts) {
+    //         if (isset($elts['is_enable']) && $elts['is_enable']) {
+
+    //             // if (isset($elts['route']) && $elts['route']) {
+    //                 $href = $elts['route'] ? route($elts['route']) : "#";
+    //                 $codeHtml .= '<a href="' . $href . '">' . "\n";
+    //                 if (isset($elts['icon']) && $elts['icon'])
+    //                     $codeHtml .= '<i class="' . $elts['icon'] . '"></i>' . "\n";
+    //                 if (isset($elts['label']) && $elts['label'])
+    //                     $codeHtml .= $elts['label'];
+    //                 $codeHtml .= '</a>' . "\n";
+    //             // }
+
+    //             if (isset($elts['items']) && $elts['items'])
+    //                 $this->genereMenu_horizontal_1_recursif($elts['items'], $codeHtml);
+    //         }
+    //     }
+    // }
 
 
 
@@ -214,16 +313,16 @@ class Menu
     {
         $is_enable = true;
         foreach ($menu as $ind => &$elts) {
-            if (isset($elts['droits']) && $elts['droits']) {  // cas où il y a des droits
+            if (isset($elts['droits']) && $elts['droits']) { // cas où il y a des droits
                 $elts['is_enable'] = $this->hasRight($elts['droits']);
                 $is_enable = false || $elts['is_enable'];
             }
-            if (isset($elts['items'])  && $elts['items']) {  // pour tous les éléments dans items
-                $is_enable =  $this->initIsEnable($elts['items']);
+            if (isset($elts['items']) && $elts['items']) { // pour tous les éléments dans items
+                $is_enable = $this->initIsEnable($elts['items']);
                 $elts['is_enable'] = $is_enable;
             }
         }
-        return  $is_enable;
+        return $is_enable;
     }
 
 
@@ -253,7 +352,8 @@ class Menu
     private function hasRight($menuDroits)
     {
         foreach ($menuDroits as $roleId) {
-            if (isset($this->droitUser[$roleId]) && $this->droitUser[$roleId]) return true;
+            if (isset($this->droitUser[$roleId]) && $this->droitUser[$roleId])
+                return true;
         }
         return false;
     }
