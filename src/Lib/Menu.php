@@ -235,15 +235,16 @@ class Menu
         $codeHtml = '<ul>' . "\n";
         $this->genereMenu_horizontal_1_prepare($this->menu, $codeHtml);
         // $codeHtml = '<div class="§_horizopntal_1">' . $codeHtml . '</div>' . "\n";
-        $codeHtml .= $codeHtml;
+        // $codeHtml .= $codeHtml;
         $codeHtml .= '</ul>' . "\n";
-
+        // dd($codeHtml);
         Storage::disk('local')->put($pathFile, $codeHtml);
     }
     private function genereMenu_horizontal_1_prepare($menu, &$codeHtml)
     {
         // dd($menu);
-        $this->genereMenu_horizontal_1_recursif($menu, $codeHtml);
+        $niveau = 0;
+        $this->genereMenu_horizontal_1_recursif($menu, $codeHtml, $niveau);
         // foreach ($menu as $ind => $elts) {
         //     if ($elts['is_enable']) {
         //         $codeHtml .= $codeHtml ? '</div>' : '';
@@ -253,30 +254,52 @@ class Menu
         // }
         // $codeHtml .= $codeHtml ? '</div>' : '';
     }
-    private function genereMenu_horizontal_1_recursif($menu, &$codeHtml)
+    private function genereMenu_horizontal_1_recursif($menu, &$codeHtml, &$niveau)
     {
+        // dump($menu);
         foreach ($menu as $ind => $elts) {
             if (isset($elts['is_enable']) && $elts['is_enable']) {
+                $niveau++;
+                // dump($elts['label'], $niveau);
 
                 // if (isset($elts['route']) && $elts['route']) {
                 $codeHtml .= '<li>' . "\n";
                 $href = $elts['route'] ? route($elts['route']) : "#";
                 $codeHtml .= '<a href="' . $href . '">' . "\n";
+                $codeHtml .= '<span>';
                 if (isset($elts['icon']) && $elts['icon'])
                     $codeHtml .= '<i class="' . $elts['icon'] . '"></i>' . "\n";
                 if (isset($elts['label']) && $elts['label'])
                     $codeHtml .= $elts['label'];
-                $codeHtml .= '</a>' . "\n";
+                $codeHtml .= '</span>';
+                // $codeHtml.= '<i class="bi bi-arrow-right-circle-fill"></i>'; // a supprimer
+                // $codeHtml .= '</a>' . "\n";
                 // }
+                $codeHtmlTmp = '';
 
                 if (isset($elts['items']) && $elts['items']) {
-                    $codeHtml .= '<ul>' . "\n";
-                    $this->genereMenu_horizontal_1_recursif($elts['items'], $codeHtml);
-                    $codeHtml .= '</ul>' . "\n";
+                    // dump("sous-menu !!");
+                    $codeHtmlTmp .= '<ul>' . "\n";
+                    $this->genereMenu_horizontal_1_recursif($elts['items'], $codeHtmlTmp, $niveau);
+                    $codeHtmlTmp .= '</ul>' . "\n";
+                    // $codeHtml .= '<ul>' . "\n";
+                    // $this->genereMenu_horizontal_1_recursif($elts['items'], $codeHtml);
+                    // $codeHtml .= '</ul>' . "\n";
                 }
-                $codeHtml .= '<li>' . "\n";
+                if ($codeHtmlTmp && $niveau > 1) {
+                    // if ($codeHtmlTmp  ) {
+                    $codeHtml .= '<i class="bi bi-arrow-right-circle-fill"></i>'; // a supprimer
+                } elseif($codeHtmlTmp) {
+                    // $codeHtml .= '<i class="bi bi-arrow-down-circle-fill"></i>'; // a supprimer
+                }
+                $codeHtml .= '</a>' . "\n";
 
+                $codeHtml .= $codeHtmlTmp;
+                $codeHtml .= '</li>' . "\n";
+
+                $niveau--;
             }
+            // dump($codeHtml);
         }
     }
     // private function genereMenu_horizontal_1_recursif($menu, &$codeHtml)

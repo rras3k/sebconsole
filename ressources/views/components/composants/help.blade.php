@@ -23,5 +23,5 @@
 <div class ="§_info">
     {{ $slot }}
 </br>
-    <a class="btn btn-info" style=""><i class="bi bi-question-circle"></i> Index de l'aide</a>
+    <a class="btn btn-sm btn-info" style=""><i class="bi bi-question-circle"></i> Index de l'aide</a>
 </div>
