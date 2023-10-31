@@ -13,6 +13,7 @@
     'col' => 12,
     'rows' => 10,
     'readonly'=> false,
+    'height'=>'100px',
     'nom',
     'label',
     'value',
@@ -20,7 +21,7 @@
     'required' => isset($required) && $required=="false" ? false : true,
     'placeholder'=> "fefdsfds ",
 ])
-<div class="form-floating" id="entree-{{ $nom }}"" style="height: 100%;" >
+<div class="form-floating" id="entree-{{ $nom }}"" style="height: {{ $height }};" >
     <textarea class="form-control  @error($nom) is-invalid @enderror " id="input-{{ $nom }}" "
      placeholder="{{ $placeholder }}" name="{{ $nom }}" style="height: 100%;">{{ $value }}</textarea>
 
