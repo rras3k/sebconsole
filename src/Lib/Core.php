@@ -330,8 +330,8 @@ class Core
      *
      * @return
      */
-    public function form_getData($champNom){
-        return isset($this->entites[$this->entite]['form']['datas'][$champNom]) ? $this->entites[$this->entite]['form']['datas'][$champNom] : null;
+    public function form_getData($champNom, $retNull = ""){
+        return isset($this->entites[$this->entite]['form']['datas'][$champNom]) ? $this->entites[$this->entite]['form']['datas'][$champNom] : $retNull;
     }
 
     /**

@@ -13,11 +13,12 @@
     'type' => 'text',
     'nom',
     'label',
-    'value',
+    'value' => isset($value) && $value ? $value: "",
     'readonly'=> isset($readonly) && $readonly=="true" ? true : false,
     'required' => isset($required) && $required=="false" ? false : true,
     'placeholder',
 ])
+
 {{--  --}}
 {{-- <div class="col-{{ $col }} position-relative" id="entree-{{ $nom }}"> --}}
     @if ($type == 'radio' || $type == 'checkbox')
@@ -40,7 +41,8 @@
         <div class="form-floating mb-1" id="entree-{{ $nom }}">
             <input type="{{ $type }}" class="form-control @if ($readonly) input-readonly @endif @if ($required) input-required @endif @error($nom) is-invalid @enderror "
                 id="input-{{ $nom }}" placeholder=" " name="{{ $nom }}"
-                value="{{ $value }}" @if (isset($readonly) && $readonly) readonly @endif>
+                value="{{ $value }}" @if ($readonly) readonly @endif>
+                {{-- value="{{ $value }}" @if (isset($readonly) && $readonly) readonly @endif> --}}
             @if ($label)
                 <label for="input-{{ $nom }}" class="label_form">
                     {{ $label }}
