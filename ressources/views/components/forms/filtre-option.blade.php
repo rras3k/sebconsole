@@ -6,7 +6,6 @@
 if ($paras == null) {
     return null;
 }
-// dd($paras);
 ?>
 @foreach ($paras as $key => $para)
     {{-- {{dd($para)}} --}}
