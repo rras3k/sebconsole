@@ -25,6 +25,10 @@ trait User
     {
         return $this->HasRole('root');
     }
+    public function isAdminOrRoot()
+    {
+        return $this->HasRole('root') || $this->HasRole('admin');
+    }
 
     public function isConsole()
     {

@@ -320,7 +320,7 @@ class Core
                 }
             }
         } else {
-            dd("erreur");
+            //dd("erreur");
         }
         // if (!isset($this->paras[$this->entree]['form'])) $this->paras[$this->entree]['form'] = [];
         // $this->entites[$this->entite]['form']['datas'] = $ret;
